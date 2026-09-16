@@ -1,0 +1,10 @@
+#!/bin/sh
+TOPLEVEL=$(git rev-parse --show-toplevel)
+if [ -x "$TOPLEVEL/.venv/Scripts/python.exe" ]; then
+  PY="$TOPLEVEL/.venv/Scripts/python.exe"
+elif [ -x "$TOPLEVEL/.venv/bin/python" ]; then
+  PY="$TOPLEVEL/.venv/bin/python"
+else
+  PY=$(command -v python3 || command -v python || echo python3)
+fi
+"$PY" -m ydk.hooks.commit_msg "$1"
