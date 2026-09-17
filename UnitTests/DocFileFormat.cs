@@ -28,6 +28,16 @@ namespace UnitTests
         }
 
         [Test]
+        public void StreamNamesAreCorrectlyDecoded()
+        {
+            var names = new System.Collections.Generic.List<string>();
+            foreach (var entry in this.reader.AllStreamEntries)
+                names.Add(entry.Name);
+
+            Assert.Contains("WordDocument", names);
+        }
+
+        [Test]
         public void FirstCHPTest()
         {
             var chpx = this.doc.AllChpxFkps[0].grpchpx[0];
