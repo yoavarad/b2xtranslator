@@ -57,9 +57,17 @@ namespace b2xtranslator.StructuredStorage.Common
                 Array.Reverse(value);
             }
 
-            var enc = new UnicodeEncoding();            
+            var enc = new UnicodeEncoding();
             string result = enc.GetString(value);
-            result = result.TrimEnd('\0');
+            // Use the ordinal char overloads here, not the string overloads: on .NET Core's
+            // ICU-based globalization, a culture-aware search for "\0" treats NUL as an
+            // "ignorable" character and matches at index 0 regardless of content, which
+            // truncated every decoded name to an empty string.
+            int nulIndex = result.IndexOf('\0');
+            if (nulIndex >= 0)
+            {
+                result = result.Remove(nulIndex);
+            }
             return result;
         }
 
