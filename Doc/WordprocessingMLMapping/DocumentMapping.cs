@@ -967,6 +967,20 @@ namespace b2xtranslator.WordprocessingMLMapping
 
                     writeTextStart(textType);
                 }
+                else if (char.IsHighSurrogate(c) && i + 1 < chars.Count && char.IsLowSurrogate(chars[i + 1]))
+                {
+                    //a supplementary-plane character (e.g. emoji) is stored as two UTF-16 code units and
+                    //must reach the XmlWriter in a single call - writing each half separately makes it throw
+                    //"The surrogate pair is invalid".
+                    this._writer.WriteChars(new char[] { c, chars[i + 1] }, 0, 2);
+                    i++;
+                    cp++;
+                }
+                else if (char.IsSurrogate(c))
+                {
+                    //unpaired surrogate: not representable in XML, substitute U+FFFD instead of failing the conversion
+                    this._writer.WriteChars(new char[] { '\uFFFD' }, 0, 1);
+                }
                 else if ((int)c > 31 && (int)c != 0xFFFF)
                 {
                     this._writer.WriteChars(new char[] { c }, 0, 1);
