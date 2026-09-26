@@ -50,11 +50,13 @@ namespace b2xtranslator.OpenXmlLib
             get
             {
                 // build complete path name from all parent parts
-                string path = this.TargetDirectory;
+                // TargetDirectory values may hardcode '\' (e.g. SlideLayoutPart's "..\\slideLayouts");
+                // map to the platform separator so GetFullPath below can resolve "..".
+                string path = this.TargetDirectory.Replace('\\', Path.DirectorySeparatorChar);
                 var part = this.Parent;
                 while (part != null)
                 {
-                    path = Path.Combine(part.TargetDirectory, path);
+                    path = Path.Combine(part.TargetDirectory.Replace('\\', Path.DirectorySeparatorChar), path);
                     part = part.Parent;
                 }
 
@@ -68,6 +70,9 @@ namespace b2xtranslator.OpenXmlLib
                         path = resolvedPath.Substring(rootPath.Length + 1);
                     }
                 }
+
+                // the remaps below (and callers) expect '\' separators
+                path = path.Replace(Path.DirectorySeparatorChar, '\\');
 
                 if (path == "ppt\\slides\\media") return "ppt\\media";
                 if (path == "ppt\\slideLayouts\\media") return "ppt\\media";
