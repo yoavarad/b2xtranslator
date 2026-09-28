@@ -295,7 +295,13 @@ namespace b2xtranslator.WordprocessingMLMapping
                 //get the next papx
                 papx = findValidPapx(fcRowEnd);
                 tai = new TableInfo(papx);
+                int previousCp = cp;
                 fcRowEnd = findRowEndFc(cp, out cp, nestingLevel);
+                if (cp <= previousCp)
+                {
+                    //no progress finding the next row end: avoid an infinite loop
+                    break;
+                }
             }
 
             //build the grid based on the boundaries
