@@ -20,3 +20,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# YDK generated local state (machine-specific, not committed)
+.ydk/cache/
+.ydk/proofs/
