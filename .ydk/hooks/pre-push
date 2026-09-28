@@ -1,0 +1,24 @@
+#!/bin/sh
+# Skip verification if ydk task done already ran it recently
+TOPLEVEL=$(git rev-parse --show-toplevel)
+if [ -x "$TOPLEVEL/.venv/Scripts/python.exe" ]; then
+  PY="$TOPLEVEL/.venv/Scripts/python.exe"
+elif [ -x "$TOPLEVEL/.venv/bin/python" ]; then
+  PY="$TOPLEVEL/.venv/bin/python"
+else
+  PY=$(command -v python3 || command -v python || echo python3)
+fi
+VERIFIED_FLAG=".ydk/.verified"
+if [ -f "$VERIFIED_FLAG" ]; then
+  VERIFIED_TS=$(cat "$VERIFIED_FLAG")
+  NOW=$("$PY" -c "import time; print(time.time())")
+  AGE=$("$PY" -c "print(float('$NOW') - float('$VERIFIED_TS'))")
+  EXPIRED=$("$PY" -c "print(1 if float('$AGE') > 300 else 0)")
+  if [ "$EXPIRED" = "0" ]; then
+    echo "Pre-push: skipping verification (ydk task done verified recently)"
+    rm -f "$VERIFIED_FLAG"
+    exit 0
+  fi
+  rm -f "$VERIFIED_FLAG"
+fi
+ydk verify run --trigger pre-push
