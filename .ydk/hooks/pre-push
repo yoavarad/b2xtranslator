@@ -1,13 +1,6 @@
 #!/bin/sh
 # Skip verification if ydk task done already ran it recently
-TOPLEVEL=$(git rev-parse --show-toplevel)
-if [ -x "$TOPLEVEL/.venv/Scripts/python.exe" ]; then
-  PY="$TOPLEVEL/.venv/Scripts/python.exe"
-elif [ -x "$TOPLEVEL/.venv/bin/python" ]; then
-  PY="$TOPLEVEL/.venv/bin/python"
-else
-  PY=$(command -v python3 || command -v python || echo python3)
-fi
+PY="$(uv tool dir --color never)/ydk/Scripts/python.exe"
 VERIFIED_FLAG=".ydk/.verified"
 if [ -f "$VERIFIED_FLAG" ]; then
   VERIFIED_TS=$(cat "$VERIFIED_FLAG")
