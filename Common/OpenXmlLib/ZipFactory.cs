@@ -35,7 +35,7 @@ namespace b2xtranslator.OpenXmlLib
 
             public ZipReader(Stream stream)
             {
-                this.zipArchive = new ZipArchive(stream, ZipArchiveMode.Read);
+                this.zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, leaveOpen: true);
             }
 
             public void Close() {
