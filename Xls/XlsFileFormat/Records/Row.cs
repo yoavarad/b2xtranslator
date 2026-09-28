@@ -55,10 +55,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             /// reserved3 (1 byte): MUST be 1, and MUST be ignored.
             ///
             this.iOutLevel = buffer & 0x0007;
-            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x8); 
-            this.fDyZero = Utils.BitmaskToBool(buffer, 0x10); 
-            this.fUnsynced = Utils.BitmaskToBool(buffer, 0x20);
-            this.fGhostDirty = Utils.BitmaskToBool(buffer, 0x40);
+            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x10); 
+            this.fDyZero = Utils.BitmaskToBool(buffer, 0x20); 
+            this.fUnsynced = Utils.BitmaskToBool(buffer, 0x40);
+            this.fGhostDirty = Utils.BitmaskToBool(buffer, 0x80);
 
             // read 2 byte for some bit operations 
             buffer = reader.ReadUInt16();
