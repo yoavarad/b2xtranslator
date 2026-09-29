@@ -9,7 +9,8 @@ if [ ! -f "$ACTIVE_TASK" ]; then
     exit 0
 fi
 
-TASK_IDS=$(python3 -c "import json; d=json.load(open('$ACTIVE_TASK')); print(','.join(d.get('tasks', {})))" 2>/dev/null)
+PY=$(for p in python3 python py; do "$p" -c "" 2>/dev/null && { echo "$p"; break; }; done)
+TASK_IDS=$("${PY:-python3}" -c "import json; d=json.load(open('$ACTIVE_TASK')); print(','.join(d.get('tasks', {})))" 2>/dev/null)
 
 if [ -z "$TASK_IDS" ]; then
     exit 0
