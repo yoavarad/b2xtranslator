@@ -295,18 +295,7 @@ namespace b2xtranslator.PresentationMLMapping
             if (pr.SpaceBeforePresent)
             {
                 this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                if (pr.SpaceBefore < 0)
-                {
-                    this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (-1 * 12 * pr.SpaceBefore).ToString()); //TODO: the 12 is wrong
-                    this._writer.WriteEndElement(); //spcPct
-                }
-                else
-                {
-                    this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (1000 * pr.SpaceBefore).ToString());
-                    this._writer.WriteEndElement(); //spcPct
-                }
+                Utils.WriteSpacing(this._writer, pr.SpaceBefore.GetValueOrDefault());
                 this._writer.WriteEndElement(); //spcBef
                 this.lastSpaceBefore = (int)pr.SpaceBefore;
             }
@@ -315,18 +304,7 @@ namespace b2xtranslator.PresentationMLMapping
                 if (this.lastSpaceBefore != 0)
                 {
                     this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                    if (this.lastSpaceBefore < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * this.lastSpaceBefore).ToString()); //TODO: the 12 is wrong
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * this.lastSpaceBefore).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, this.lastSpaceBefore);
                     this._writer.WriteEndElement(); //spcBef
                 }
             }
@@ -334,18 +312,7 @@ namespace b2xtranslator.PresentationMLMapping
             if (pr.SpaceAfterPresent)
             {
                 this._writer.WriteStartElement("a", "spcAft", OpenXmlNamespaces.DrawingML);
-                if (pr.SpaceAfter < 0)
-                {
-                    this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (-1 * pr.SpaceAfter).ToString()); //TODO: this has to be verified!
-                    this._writer.WriteEndElement(); //spcPct
-                }
-                else
-                {
-                    this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", pr.SpaceAfter.ToString());
-                    this._writer.WriteEndElement(); //spcPct
-                }
+                Utils.WriteSpacing(this._writer, pr.SpaceAfter.GetValueOrDefault());
                 this._writer.WriteEndElement(); //spcAft
             }
             //EG_TextBulletColor

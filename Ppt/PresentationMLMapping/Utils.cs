@@ -12,7 +12,58 @@ namespace b2xtranslator.PresentationMLMapping
 {
     public static class Utils
     {
+        // EMU per master coordinate: 914400 EMU/inch / 576 master units/inch = 1587.5.
+        // (Name kept for compatibility; the value is EMU per master unit.)
         private static readonly double MC_PER_EMU = 1587.5;
+
+        // Master units (1/576 inch) to DrawingML spcPts (1/100 pt):
+        // 1 pt = 1/72 inch = 8 master units, so 1 master unit = 100 / 8 = 12.5 hundredths of a point.
+        public const double CentipointsPerMasterUnit = 12.5;
+
+        // PPT percentages (100 = 100%) to DrawingML ST_TextSpacingPercent / ST_Percentage (100000 = 100%).
+        public const int OoxmlPercentPerPercent = 1000;
+
+        // Legacy (OfficeArt/VML) shape adjust values span 0..21600 across the shape's extent.
+        public const int LegacyAdjustRange = 21600;
+
+        /// <summary>
+        /// Converts a PPT TextPFException spacing value (lineSpacing, spaceBefore, spaceAfter) into a
+        /// DrawingML spacing child element name and value. Per [MS-PPT] a value >= 0 is a percentage
+        /// of the line height (-> a:spcPct in 1/1000 percent); a value &lt; 0 is an absolute spacing
+        /// in master units given by its absolute value (-> a:spcPts in 1/100 pt).
+        /// </summary>
+        public static int PptSpacingToOoxml(int value, out string element)
+        {
+            if (value < 0)
+            {
+                element = "spcPts";
+                return (int)Math.Round(-value * CentipointsPerMasterUnit, MidpointRounding.AwayFromZero);
+            }
+            element = "spcPct";
+            return value * OoxmlPercentPerPercent;
+        }
+
+        /// <summary>
+        /// Writes the a:spcPct or a:spcPts child of a:lnSpc / a:spcBef / a:spcAft for a PPT spacing value.
+        /// </summary>
+        public static void WriteSpacing(XmlWriter writer, int value)
+        {
+            int val = PptSpacingToOoxml(value, out string element);
+            writer.WriteStartElement("a", element, OpenXmlLib.OpenXmlNamespaces.DrawingML);
+            writer.WriteAttributeString("val", val.ToString());
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Converts a legacy callout adjust value (0..21600, 10800 = shape center) into a DrawingML
+        /// callout adj value, which is an offset from the shape center in 1/1000 percent of the
+        /// shape extent (0 = center, -50000 = left/top edge, 50000 = right/bottom edge).
+        /// </summary>
+        public static int LegacyCalloutAdjustToOoxml(int legacyValue)
+        {
+            decimal percent = (decimal)legacyValue / LegacyAdjustRange * 100;
+            return (int)Math.Round((percent - 50) * OoxmlPercentPerPercent, MidpointRounding.AwayFromZero);
+        }
 
         public static int MasterCoordToEMU(int mc)
         {
@@ -37,7 +88,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public static string SlideSizeTypeToXMLValue(SlideSizeType sst)
         {
-            // OOXML Spec § 4.8.22
+            // OOXML Spec ï¿½ 4.8.22
             switch (sst)
             {
                 case SlideSizeType.A4Paper:

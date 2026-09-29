@@ -2348,6 +2348,10 @@ namespace b2xtranslator.PresentationMLMapping
             if (rec is ShapeContainer)
             {
                 var container = (ShapeContainer)rec;
+                // WordArt text warps: the "adj" values below are fixed DrawingML guide values
+                // (1/1000 percent, or 1/60000 degree for the textArch* angle, e.g. 10800000 = 180 deg)
+                // that reproduce each PowerPoint 2003 WordArt gallery style. They are empirical
+                // per-style values, not derived from the legacy shape's adjustValue.
                 switch (container.FirstChildWithType<Shape>().Instance)
                 {
                     case 0x88: // WordArt 1, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 19, 25, 29, 30
@@ -3550,6 +3554,8 @@ namespace b2xtranslator.PresentationMLMapping
 
                         if (w == 2 && l == 2)
                         {
+                            // preset leftArrow adj values in 1/1000 percent: adj1 = shaft thickness (50% of height),
+                            // adj2 = head length (210% of the shorter side); values are empirical, not from the spec
                             this._writer.WriteStartElement("a", "avLst", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteStartElement("a", "gd", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteAttributeString("name", "adj1");
@@ -3565,18 +3571,8 @@ namespace b2xtranslator.PresentationMLMapping
                     }
                     else if ((prst == "wedgeRectCallout" || prst == "cloudCallout" || prst == "wedgeEllipseCallout") && this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.adjustValue))
                     {
-                        //the following computations are based on experiments using Powerpoint 2003 and are not part of the spec
-                        decimal val = (Decimal)(int)this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op;
-                        decimal percent = val / 21600 * 100;
-                        int newVal = 0;
-                        if (percent >= 50)
-                        {
-                            newVal = (int)(percent - 50) * 1000;
-                        }
-                        else
-                        {
-                            newVal = (int)(50 - percent) * -1000;
-                        }
+                        //the legacy-to-DrawingML mapping is based on experiments using Powerpoint 2003 and is not part of the spec (see Utils.LegacyCalloutAdjustToOoxml)
+                        int newVal = Utils.LegacyCalloutAdjustToOoxml((int)this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op);
 
                         this._writer.WriteStartElement("a", "avLst", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteStartElement("a", "gd", OpenXmlNamespaces.DrawingML);
@@ -3585,17 +3581,7 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.adjust2Value))
                         {
-                            val = (Decimal)(int)this.so.OptionsByID[ShapeOptions.PropertyId.adjust2Value].op;
-                            percent = val / 21600 * 100;
-                            newVal = 0;
-                            if (percent >= 50)
-                            {
-                                newVal = (int)(percent - 50) * 1000;
-                            }
-                            else
-                            {
-                                newVal = (int)(50 - percent) * -1000;
-                            }
+                            newVal = Utils.LegacyCalloutAdjustToOoxml((int)this.so.OptionsByID[ShapeOptions.PropertyId.adjust2Value].op);
                             this._writer.WriteStartElement("a", "gd", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteAttributeString("name", "adj2");
                             this._writer.WriteAttributeString("fmla", "val " + newVal.ToString());
