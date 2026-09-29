@@ -8,7 +8,7 @@ namespace UnitTests
     [TestFixture]
     public class DocFileFormat
     {
-        string file = @"files\simple.doc";
+        string file = @"files/simple.doc";
         StructuredStorageReader reader;
         WordDocument doc;
 

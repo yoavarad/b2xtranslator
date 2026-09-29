@@ -69,7 +69,7 @@ namespace UnitTests
             {
                 StartWord();
             }
-            catch (Exception ex) when (ex is FileNotFoundException || ex is FileLoadException || ex is COMException)
+            catch (Exception ex) when (ex is FileNotFoundException || ex is FileLoadException || ex is COMException || ex is PlatformNotSupportedException)
             {
                 this.wordUnavailableReason = "Microsoft Word (Office 2007 interop) is not available: " + ex.Message;
             }
