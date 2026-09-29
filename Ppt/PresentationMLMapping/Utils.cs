@@ -88,7 +88,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public static string SlideSizeTypeToXMLValue(SlideSizeType sst)
         {
-            // OOXML Spec ï¿½ 4.8.22
+            // OOXML Spec § 4.8.22
             switch (sst)
             {
                 case SlideSizeType.A4Paper:
