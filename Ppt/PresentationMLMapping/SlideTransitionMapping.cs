@@ -24,10 +24,18 @@ namespace b2xtranslator.PresentationMLMapping
 
         public void Apply(SlideShowSlideInfoAtom slideshow)
         {
-            if (slideshow.fAutoAdvance)
+            // effectType 0 is a cut; only "through black" (effectDirection 1) needs writing unless auto-advancing
+            if (slideshow.fAutoAdvance || slideshow.effectType != 0 || slideshow.effectDirection == 1)
             {
                 this._writer.WriteStartElement("p", "transition", OpenXmlNamespaces.PresentationML);
-                this._writer.WriteAttributeString("advTm", slideshow.slideTime.ToString());
+                if (!slideshow.fManualAdvance)
+                {
+                    this._writer.WriteAttributeString("advOnClick", "0");
+                }
+                if (slideshow.fAutoAdvance)
+                {
+                    this._writer.WriteAttributeString("advTm", slideshow.slideTime.ToString());
+                }
 
                 switch (slideshow.speed)
                 {
@@ -119,8 +127,8 @@ namespace b2xtranslator.PresentationMLMapping
                     case 6: //fade
                         this._writer.WriteElementString("p", "fade", OpenXmlNamespaces.PresentationML, "");
                         break;
-                    case 7: //uncover
-                        this._writer.WriteStartElement("p", "push", OpenXmlNamespaces.PresentationML); //TODO
+                    case 7: //uncover (PresentationML "pull")
+                        this._writer.WriteStartElement("p", "pull", OpenXmlNamespaces.PresentationML);
                         switch (slideshow.effectDirection)
                         {
                             case 0:
@@ -281,7 +289,8 @@ namespace b2xtranslator.PresentationMLMapping
                     case 22: //newsflash
                         this._writer.WriteElementString("p", "newsflash", OpenXmlNamespaces.PresentationML, "");
                         break;
-                    case 23: //alphafade TODO
+                    case 23: //alphafade (fade smoothly)
+                        this._writer.WriteElementString("p", "fade", OpenXmlNamespaces.PresentationML, "");
                         break;
                     case 26: //wheel
                         this._writer.WriteStartElement("p", "wheel", OpenXmlNamespaces.PresentationML); //TODO
