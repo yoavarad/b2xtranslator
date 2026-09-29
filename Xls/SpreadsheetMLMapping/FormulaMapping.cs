@@ -243,8 +243,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                             resultStack.Push("'" + refstring + "'" + "!" + cellref);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            // Best-effort: Formula stays valid with #REF!; one bad token must not abort the sheet.
+                            TraceLogger.Warning("FormulaMapping: 3D reference could not be resolved, emitting #REF!: {0}", ex.Message);
                             resultStack.Push("#REF!");
                         }
                     }
@@ -260,8 +262,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                             resultStack.Push("'" + refstring + "'!" + buffer);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            // Best-effort: Formula stays valid with #REF!; one bad token must not abort the sheet.
+                            TraceLogger.Warning("FormulaMapping: 3D reference could not be resolved, emitting #REF!: {0}", ex.Message);
                             resultStack.Push("#REF!");
                         }
 
@@ -292,8 +296,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
                             string refstring = ExcelHelperClass.EscapeFormulaString(xlsContext.XlsDoc.WorkBookData.getIXTIString(ptgreferr3d.ixti));
                             resultStack.Push("'" + refstring + "'" + "!" + ptgreferr3d.getData());
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            // Best-effort: Formula stays valid with #REF!; one bad token must not abort the sheet.
+                            TraceLogger.Warning("FormulaMapping: 3D reference could not be resolved, emitting #REF!: {0}", ex.Message);
                             resultStack.Push("#REF!");
                         }
                     }
@@ -305,8 +311,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
                             string refstring = ExcelHelperClass.EscapeFormulaString(xlsContext.XlsDoc.WorkBookData.getIXTIString(ptgareaerr3d.ixti));
                             resultStack.Push("'" + refstring + "'" + "!" + ptgareaerr3d.getData());
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            // Best-effort: Formula stays valid with #REF!; one bad token must not abort the sheet.
+                            TraceLogger.Warning("FormulaMapping: 3D reference could not be resolved, emitting #REF!: {0}", ex.Message);
                             resultStack.Push("#REF!");
                         }
                     }

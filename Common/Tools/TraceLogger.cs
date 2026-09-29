@@ -34,6 +34,7 @@ namespace b2xtranslator.Tools
                 }
                 catch (Exception)
                 {
+                    // Logger must never throw: fall back to a plain trace line (no TraceLogger call here, avoids recursion).
                     System.Diagnostics.Trace.WriteLine("The tracing of the folloging message throw an error: " + msg);
                 }
             }

@@ -48,9 +48,10 @@ namespace b2xtranslator.PresentationMLMapping
                                 {
                                     lang = System.Globalization.CultureInfo.GetCultureInfo(siea.si.lid).IetfLanguageTag;
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-                                    //ignore
+                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                    TraceLogger.Debug("CharacterRunPropsMapping: language id invalid, omitting lang: {0}", ex.Message);
                                 }
                                 break;
                         }
@@ -78,9 +79,10 @@ namespace b2xtranslator.PresentationMLMapping
                                 {
                                     altLang = System.Globalization.CultureInfo.GetCultureInfo(siea.si.altLid).IetfLanguageTag;
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-                                    //ignore
+                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                    TraceLogger.Debug("CharacterRunPropsMapping: alt language id invalid, omitting altLang: {0}", ex.Message);
                                 }
                                 break;
                         }
@@ -351,9 +353,10 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
             }
             else
@@ -379,9 +382,10 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
 
             }
@@ -406,9 +410,10 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
 
 

@@ -73,7 +73,11 @@ namespace b2xtranslator.Shell
                     s.Close();
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                // Best-effort: Revision info is optional; a missing or malformed file must not abort startup.
+                TraceLogger.Debug("CommandLineTranslator: revision file unreadable, using default revision: {0}", ex.Message);
+            }
 
             return rev;
         }

@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Collections.Generic;
 using b2xtranslator.CommonTranslatorLib;
@@ -399,8 +400,10 @@ namespace b2xtranslator.WordprocessingMLMapping
                         goOn = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    // Best-effort: Loop-termination: any failure ends the walk and the hierarchy collected so far is used.
+                    TraceLogger.Debug("CharacterPropertiesMapping: style hierarchy walk failed, stopping walk: {0}", ex.Message);
                     goOn = false;
                 }
             }

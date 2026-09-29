@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using b2xtranslator.DocFileFormat;
 using b2xtranslator.CommonTranslatorLib;
@@ -44,9 +45,10 @@ namespace b2xtranslator.WordprocessingMLMapping
                     var ci = new CultureInfo((int)lid.Code);
                     langcode = ci.ToString();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //langcode = getLanguageCode(lid);
+                    // Best-effort: Unknown language ids are common; default language is a valid fallback.
+                    TraceLogger.Debug("LanguageIdMapping: culture lookup failed, using default language: {0}", ex.Message);
                 }
 
                 XmlAttribute att;

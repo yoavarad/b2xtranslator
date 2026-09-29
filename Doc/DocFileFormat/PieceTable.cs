@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -116,10 +117,11 @@ namespace b2xtranslator.DocFileFormat
                         goon = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    // Best-effort: Loop-termination: stop reading pieces and keep those already read.
+                    TraceLogger.Debug("PieceTable: piece read failed, stopping: {0}", ex.Message);
                     goon = false;
-
                 }
             }
         }

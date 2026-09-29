@@ -118,7 +118,11 @@ namespace b2xtranslator.WordprocessingMLMapping
                 //skip the terminating zero of the Unicode string
                 reader.ReadBytes(2);
             }
-            catch (StreamNotFoundException) { }
+            catch (StreamNotFoundException ex)
+            {
+                // Best-effort: Optional stream; absence is normal for many OLE objects.
+                TraceLogger.Debug("OleObject: link stream not found, skipping: {0}", ex.Message);
+            }
         }
 
         private void processCompObjStream(string compStream)
@@ -134,7 +138,11 @@ namespace b2xtranslator.WordprocessingMLMapping
                 this.ClipboardFormat = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
                 this.Program = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
             }
-            catch (StreamNotFoundException) { }
+            catch (StreamNotFoundException ex)
+            {
+                // Best-effort: Optional stream; absence is normal for many OLE objects.
+                TraceLogger.Debug("OleObject: CompObj stream not found, skipping: {0}", ex.Message);
+            }
         }
 
         private void processOleStream(string oleStream)
@@ -153,7 +161,11 @@ namespace b2xtranslator.WordprocessingMLMapping
                 //Link update option
                 this.UpdateMode = (LinkUpdateOption)reader.ReadInt32();
             }
-            catch (StreamNotFoundException) { }
+            catch (StreamNotFoundException ex)
+            {
+                // Best-effort: Optional stream; absence is normal for many OLE objects.
+                TraceLogger.Debug("OleObject: OLE stream not found, skipping: {0}", ex.Message);
+            }
         }
 
         private string getOleEntryName(CharacterPropertyExceptions chpx)

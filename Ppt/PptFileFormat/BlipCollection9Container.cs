@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Collections.Generic;
 using b2xtranslator.OfficeDrawing;
@@ -78,9 +79,10 @@ namespace b2xtranslator.PptFileFormat
 
                     this.si = new TextSIException(this.Reader);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //ignore
+                    // Best-effort: Optional trailing data; the record is usable without it.
+                    TraceLogger.Debug("BlipCollection9Container: TextSIException read failed, skipping: {0}", ex.Message);
                 }
 
             }

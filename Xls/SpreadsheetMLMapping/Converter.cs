@@ -1,4 +1,5 @@
-﻿using System;
+﻿using b2xtranslator.Tools;
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -39,8 +40,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Best-effort: Detection is best-guess; default output type is safe.
+                TraceLogger.Debug("Converter: macro/template detection failed, defaulting output type: {0}", ex.Message);
             }
 
             return returnType;
