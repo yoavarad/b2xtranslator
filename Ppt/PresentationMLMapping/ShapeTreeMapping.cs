@@ -2346,9 +2346,9 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 var container = (ShapeContainer)rec;
                 // WordArt text warps: the "adj" values below are fixed DrawingML guide values
-                // (1/1000 percent, or 1/60000 degree for the textArch* angle, e.g. 10800000 = 180 deg)
-                // that reproduce each PowerPoint 2003 WordArt gallery style. They are empirical
-                // per-style values, not derived from the legacy shape's adjustValue.
+                // (1/1000 percent, i.e. 100000 = 100%, or 1/60000 degree for the textArch* angle,
+                // e.g. 10800000 = 180 deg) chosen per legacy WordArt style. They are fixed per-style
+                // values, not derived from the legacy shape's adjustValue.
                 switch (container.FirstChildWithType<Shape>().Instance)
                 {
                     case 0x88: // WordArt 1, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 18, 19, 25, 29, 30
@@ -3549,7 +3549,8 @@ namespace b2xtranslator.PresentationMLMapping
                         if (w == 2 && l == 2)
                         {
                             // preset leftArrow adj values in 1/1000 percent: adj1 = shaft thickness (50% of height),
-                            // adj2 = head length (210% of the shorter side); values are empirical, not from the spec
+                            // adj2 = head length (210% of the shorter side, clamped by the preset's maxAdj2 = 100000*w/ss);
+                            // these values are not derived from the spec
                             this._writer.WriteStartElement("a", "avLst", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteStartElement("a", "gd", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteAttributeString("name", "adj1");

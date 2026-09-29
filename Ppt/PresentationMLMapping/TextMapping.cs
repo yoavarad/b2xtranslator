@@ -721,7 +721,7 @@ namespace b2xtranslator.PresentationMLMapping
                             else if (!defaultStyle.PRuns[tp.indentLevel].BulletCharPresent)
                             {
                                 this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
-                                this._writer.WriteAttributeString("char", "ï¿½");
+                                this._writer.WriteAttributeString("char", "•");
                                 this._writer.WriteEndElement(); //buChar
                             }
 
@@ -1153,7 +1153,7 @@ namespace b2xtranslator.PresentationMLMapping
                             else if (!bulletWritten && !p.BulletCharPresent)
                             {
                                 this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
-                                this._writer.WriteAttributeString("char", "ï¿½");
+                                this._writer.WriteAttributeString("char", "•");
                                 this._writer.WriteEndElement(); //buChar
                             }
                         }
