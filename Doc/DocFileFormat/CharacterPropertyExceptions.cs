@@ -19,7 +19,7 @@ namespace b2xtranslator.DocFileFormat
         /// Parses the bytes to retrieve a CHPX
         /// </summary>
         /// <param name="bytes">The bytes starting with the istd</param>
-        public CharacterPropertyExceptions(byte[] bytes) 
+        public CharacterPropertyExceptions(byte[] bytes)
             : base(bytes)
         {
 

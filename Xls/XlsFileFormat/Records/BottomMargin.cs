@@ -7,7 +7,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     public class BottomMargin : BiffRecord
     {
         public const RecordType ID = RecordType.BottomMargin;
-        public double value; 
+        public double value;
 
         public BottomMargin(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
 
-            this.value = reader.ReadDouble(); 
+            this.value = reader.ReadDouble();
         }
     }
 }

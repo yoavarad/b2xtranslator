@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this.Data = "";
             this.type = PtgType.Operator;
             this.popSize = 1;
-            this.nameindex = this.Reader.ReadInt32(); 
+            this.nameindex = this.Reader.ReadInt32();
         }
     }
 }

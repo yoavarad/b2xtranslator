@@ -20,19 +20,19 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         private ushort itab;
         public ushort ITab
         {
-            get { return this.itab;  }
+            get { return this.itab; }
         }
 
         public XCTData(XCT xct)
         {
             this.itab = xct.itab;
-            this.crnDataList = new LinkedList<CRNData>(); 
+            this.crnDataList = new LinkedList<CRNData>();
         }
 
         public void addCRN(CRN crn)
         {
             var crndata = new CRNData(crn);
-            this.crnDataList.AddLast(crndata); 
+            this.crnDataList.AddLast(crndata);
         }
     }
 }

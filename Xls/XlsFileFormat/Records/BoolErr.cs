@@ -3,7 +3,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.BoolErr)] 
+    [BiffRecord(RecordType.BoolErr)]
     public class BoolErr : AbstractCellContent
     {
         public const RecordType ID = RecordType.BoolErr;
@@ -28,9 +28,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // initialize class members from stream
             this.bBoolErr = reader.ReadByte();
             this.fError = reader.ReadByte() == 0x1;
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

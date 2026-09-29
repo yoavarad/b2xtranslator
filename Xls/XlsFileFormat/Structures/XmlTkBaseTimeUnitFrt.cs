@@ -14,7 +14,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkBaseTimeUnitFrt(IStreamReader reader)
         {
-            this.baseUnit = new XmlTkToken(reader);   
+            this.baseUnit = new XmlTkToken(reader);
         }
     }
 }

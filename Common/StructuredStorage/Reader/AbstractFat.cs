@@ -74,7 +74,7 @@ namespace b2xtranslator.StructuredStorage.Reader
                 {
                     break;
                 }
-                                
+
                 if (immediateCycleCheck)
                 {
                     if (result.Contains(nextSectorInStream))
@@ -84,7 +84,7 @@ namespace b2xtranslator.StructuredStorage.Reader
                 }
 
                 result.Add(nextSectorInStream);
-                
+
                 // Chain too long
                 if ((ulong)(result.Count) > maxCount)
                 {

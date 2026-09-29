@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(68)]
-    public class UpArrowType :ShapeType
+    public class UpArrowType : ShapeType
     {
         public UpArrowType()
         {

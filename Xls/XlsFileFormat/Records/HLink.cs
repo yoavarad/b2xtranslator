@@ -6,7 +6,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.HLink)] 
+    [BiffRecord(RecordType.HLink)]
     public class HLink : BiffRecord
     {
         public const RecordType ID = RecordType.HLink;
@@ -19,22 +19,22 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
         public bool hlstmfIsAbsolute;
 
-        public byte[] hlinkClsid; 
+        public byte[] hlinkClsid;
 
         public string displayName;
         public string targetFrameName;
         public string monikerString;
         public string location;
         public byte[] guid;
-        public byte[] fileTime; 
-        
-        
+        public byte[] fileTime;
+
+
         public HLink(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            
+
             this.rwFirst = this.Reader.ReadUInt16();
             this.rwLast = this.Reader.ReadUInt16();
             this.colFirst = this.Reader.ReadUInt16();
@@ -64,7 +64,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             }
             if (hlstmfHasFrameName)
             {
-                
+
                 this.targetFrameName = ExcelHelperClass.getHyperlinkStringFromBiffRecord(this.Reader);
             }
             if (hlstmfHasMoniker)
@@ -88,7 +88,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     byte Part8MonikerClsid = this.Reader.ReadByte();
                     byte Part9MonikerClsid = this.Reader.ReadByte();
                     byte Part10MonikerClsid = this.Reader.ReadByte();
-                    byte Part11MonikerClsid = this.Reader.ReadByte(); 
+                    byte Part11MonikerClsid = this.Reader.ReadByte();
 
                     // URL Moniker
                     if (Part1MonikerClsid == 0x79EAC9E0)
@@ -108,7 +108,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                             this.Reader.ReadBytes(24);
                         }
                         value = value.Remove(value.Length - 1);
-                        this.monikerString = value; 
+                        this.monikerString = value;
                     }
                     else if (Part1MonikerClsid == 0x00000303)
                     {
@@ -118,14 +118,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                         for (int i = 0; i < ansiLength; i++)
                         {
                             ansiPath += (char)reader.ReadByte();
-                            
+
                         }
 
 
                         ansiPath = ansiPath.Remove(ansiPath.Length - 1);
                         ushort endServer = this.Reader.ReadUInt16();
                         ushort versionNumber = this.Reader.ReadUInt16();
-                        this.monikerString = ansiPath; 
+                        this.monikerString = ansiPath;
                         // read 20 unused bytes 
                         this.Reader.ReadBytes(20);
                         uint cbUnicodePathSize = this.Reader.ReadUInt32();
@@ -138,11 +138,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
                             string value = "";
 
-                            for (int i = 0; i < cbUnicodePathBytes/2; i++)
+                            for (int i = 0; i < cbUnicodePathBytes / 2; i++)
                             {
                                 value += System.BitConverter.ToChar(reader.ReadBytes(2), 0);
                             }
-                            this.monikerString = value; 
+                            this.monikerString = value;
                         }
 
 

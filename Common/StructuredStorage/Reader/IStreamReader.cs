@@ -15,7 +15,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// Closes the current reader and the underlying stream.
         /// </summary>
         void Close();
-        
+
         /// <summary>
         /// Returns the next available character and does not advance the byte or character position.
         /// </summary>
@@ -37,7 +37,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         int Read();
-        
+
         /// <summary>
         /// Reads count bytes from the stream with index as the starting point in the byte array.
         /// </summary>
@@ -53,7 +53,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         int Read(byte[] buffer, int index, int count);
-        
+
         /// <summary>
         /// Reads count characters from the stream with index as the starting point in the character array.
         /// </summary>
@@ -79,7 +79,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         bool ReadBoolean();
-        
+
         /// <summary>
         /// Reads the next byte from the current stream and advances the current position
         ///     of the stream by one byte.
@@ -89,7 +89,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         byte ReadByte();
-        
+
         /// <summary>
         /// Reads count bytes from the current stream into a byte array and advances
         ///     the current position by count bytes.
@@ -114,7 +114,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">count is negative.</exception>
         byte[] ReadBytes(long position, int count);
-        
+
         /// <summary>
         /// Reads the next character from the current stream and advances the current
         ///     position of the stream in accordance with the Encoding used and the specific
@@ -126,7 +126,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         /// <exception cref="System.ArgumentException">A surrogate character was read.</exception>
         char ReadChar();
-        
+
         /// <summary>
         /// Reads count characters from the current stream, returns the data in a character
         ///     array, and advances the current position in accordance with the Encoding
@@ -140,7 +140,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>    
         /// <exception cref="System.ArgumentOutOfRangeException">count is negative.</exception>    
         char[] ReadChars(int count);
-        
+
         /// <summary>
         /// Reads a decimal value from the current stream and advances the current position
         ///     of the stream by sixteen bytes.
@@ -150,7 +150,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         decimal ReadDecimal();
-        
+
         /// <summary>
         /// Reads an 8-byte floating point value from the current stream and advances
         ///     the current position of the stream by eight bytes.
@@ -160,7 +160,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         double ReadDouble();
-        
+
         /// <summary>
         /// Reads a 2-byte signed integer from the current stream and advances the current
         ///     position of the stream by two bytes.
@@ -170,7 +170,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         short ReadInt16();
-        
+
         /// <summary>
         /// Reads a 4-byte signed integer from the current stream and advances the current
         ///    position of the stream by four bytes.
@@ -180,7 +180,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         int ReadInt32();
-        
+
         /// <summary>
         /// Reads an 8-byte signed integer from the current stream and advances the current
         ///     position of the stream by eight bytes.
@@ -190,7 +190,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         long ReadInt64();
-        
+
         /// <summary>
         /// Reads a signed byte from this stream and advances the current position of
         ///     the stream by one byte.
@@ -200,7 +200,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         sbyte ReadSByte();
-        
+
         /// <summary>
         /// Reads a 4-byte floating point value from the current stream and advances
         ///     the current position of the stream by four bytes.
@@ -210,7 +210,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         float ReadSingle();
-        
+
         /// <summary>
         /// Reads a string from the current stream. The string is prefixed with the length,
         ///     encoded as an integer seven bits at a time.
@@ -220,7 +220,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         string ReadString();
-        
+
         /// <summary>
         /// Reads a 2-byte unsigned integer from the current stream using little-endian
         ///     encoding and advances the position of the stream by two bytes.
@@ -230,7 +230,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         ushort ReadUInt16();
-        
+
         /// <summary>
         /// Reads a 4-byte unsigned integer from the current stream and advances the
         ///     position of the stream by four bytes.
@@ -240,7 +240,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <exception cref="System.ObjectDisposedException">The stream is closed.</exception>
         /// <exception cref="System.IO.IOException">An I/O error occurs.</exception>
         uint ReadUInt32();
-        
+
         /// <summary>
         /// Reads an 8-byte unsigned integer from the current stream and advances the
         ///     position of the stream by eight bytes.

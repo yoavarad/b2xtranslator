@@ -24,7 +24,7 @@ namespace b2xtranslator.OfficeDrawing
         /// This is the topmost group shape.<br/>
         /// Exactly one of these per drawing. 
         /// </summary>
-        public bool fPatriarch; 
+        public bool fPatriarch;
 
         /// <summary>
         /// The shape has been deleted 

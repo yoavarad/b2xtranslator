@@ -11,7 +11,7 @@ namespace b2xtranslator.PptFileFormat
     {
         public Theme(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
-        {}
+        { }
 
         /// <summary>
         /// Method that extracts the actual XmlElement that will be used as this XmlContainer's
@@ -43,7 +43,7 @@ namespace b2xtranslator.PptFileFormat
                 this.XmlDocumentElement = null;
                 return null;
             }
-           
+
             if (managerRels.Count != 1)
                 throw new Exception("Expected actly one Relationship for Theme manager");
 
@@ -54,9 +54,9 @@ namespace b2xtranslator.PptFileFormat
             partDoc.Load(partStream);
 
             XmlNode e = partDoc.DocumentElement;
-            
+
             b2xtranslator.Tools.Utils.replaceOutdatedNamespaces(ref e);
-            
+
             return (XmlElement)e;
         }
 

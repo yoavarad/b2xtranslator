@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkNoMultiLvlLbl(IStreamReader reader)
         {
-            this.fNoMultiLvlLbl = new XmlTkBool(reader);   
+            this.fNoMultiLvlLbl = new XmlTkBool(reader);
         }
     }
 }

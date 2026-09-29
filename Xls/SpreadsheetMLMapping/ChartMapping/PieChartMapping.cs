@@ -26,8 +26,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
             var pie = crtSequence.ChartType as Pie;
 
             bool isDoughnutChart = (pie.pcDonut != 0);
-            
-            string chartType = this._is3DChart ? Dml.Chart.ElPie3DChart : Dml.Chart.ElPieChart; 
+
+            string chartType = this._is3DChart ? Dml.Chart.ElPie3DChart : Dml.Chart.ElPieChart;
             if (isDoughnutChart)
             {
                 chartType = Dml.Chart.ElDoughnutChart;
@@ -64,7 +64,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                         {
                             // write a dPt for each SsSequence
                             var sss = seriesFormatSequence.SsSequence[i];
-                            sss.Convert(new DataPointMapping(this.WorkbookContext, this.ChartContext, i-1));
+                            sss.Convert(new DataPointMapping(this.WorkbookContext, this.ChartContext, i - 1));
                         }
 
                         // c:dLbls (Data Labels)

@@ -1,7 +1,7 @@
 namespace b2xtranslator.DocFileFormat
 {
     public class Global
-	{
+    {
         public enum JustificationCode
         {
             left = 0,
@@ -49,7 +49,7 @@ namespace b2xtranslator.DocFileFormat
         }
 
         public enum FarEastLayout
-        { 
+        {
             none,
             tatenakayoko,
             warichu,
@@ -67,7 +67,7 @@ namespace b2xtranslator.DocFileFormat
         }
 
         public enum HyphenationRule
-        { 
+        {
             none,
             normal,
             addLetterBefore,
@@ -143,7 +143,7 @@ namespace b2xtranslator.DocFileFormat
         }
 
         public enum VerticalAlign
-        { 
+        {
             top,
             center,
             bottom
@@ -182,5 +182,5 @@ namespace b2xtranslator.DocFileFormat
             tight,
             through
         }
-	}
+    }
 }

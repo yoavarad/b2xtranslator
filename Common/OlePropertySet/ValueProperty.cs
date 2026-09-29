@@ -91,7 +91,7 @@ namespace b2xtranslator.OlePropertySet
             stream.ReadBytes(2);
 
             //read data
-            if(
+            if (
                 this.Type == PropertyType.SignedInt16 ||
                 this.Type == PropertyType.UnsignedInt16
                 )
@@ -111,7 +111,7 @@ namespace b2xtranslator.OlePropertySet
                 // 4 bytes data
                 this.Data = stream.ReadBytes(4);
             }
-            else if(
+            else if (
                 this.Type == PropertyType.FloatingPoint64 ||
                 this.Type == PropertyType.SignedInt64 ||
                 this.Type == PropertyType.UsignedInt64 ||

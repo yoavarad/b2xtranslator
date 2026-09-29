@@ -11,10 +11,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This class extracts the SST-Record Data from the specific biffrecord 
     /// </summary>
-    [BiffRecord(RecordType.SST)] 
+    [BiffRecord(RecordType.SST)]
     public class SST : BiffRecord
     {
-        public LinkedList<VirtualStreamReader> contStreamlist; 
+        public LinkedList<VirtualStreamReader> contStreamlist;
         /// <summary>
         /// the own record data id 
         /// </summary>
@@ -40,14 +40,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            this.contStreamlist = contstreamlist; 
+            this.contStreamlist = contstreamlist;
             this.StringList = new List<string>();
             this.FormatList = new List<StringFormatAssignment>();
             var buffer = new byte[length];
             int counti = 0;
             this.cstTotal = (uint)this.Reader.ReadUInt32();
             this.cstUnique = this.Reader.ReadUInt32();
-            
+
             try
             {
                 // run over the different strings 
@@ -55,9 +55,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 for (int i = 0; i < this.cstUnique; i++)
                 {
                     counti++;
-                    if (this.Reader.BaseStream.Position == this.Reader.BaseStream.Length )
+                    if (this.Reader.BaseStream.Position == this.Reader.BaseStream.Length)
                     {
-                        this.switchStream(); 
+                        this.switchStream();
                     }
                     // first get the char count of this string 
                     ushort cch = this.Reader.ReadUInt16();
@@ -68,7 +68,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     bool isRichString = false;
 
                     int cRun = 0;
-                    int cbExtRst = 0; 
+                    int cbExtRst = 0;
 
                     // demask the grbit 
                     isCompressedString = !Utils.BitmaskToBool((int)grbit, 0x0001);
@@ -79,12 +79,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
                     if (isRichString)
                     {
-                        cRun = this.Reader.ReadUInt16(); 
+                        cRun = this.Reader.ReadUInt16();
                     }
 
                     if (isExtString)
                     {
-                        cbExtRst = this.Reader.ReadInt32(); 
+                        cbExtRst = this.Reader.ReadInt32();
                     }
 
                     // switch stream  
@@ -124,7 +124,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                         if (grbit2 > 0)
                             isCompressedString = false;
                         else
-                            isCompressedString = true; 
+                            isCompressedString = true;
                     }
 
                     for (int j = 0; j < cch; j++)
@@ -143,7 +143,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     // read formatting runs!! 
                     if (isRichString)
                     {
-                        int countFormatingRuns = cRun; 
+                        int countFormatingRuns = cRun;
                         while (this.Reader.BaseStream.Length < this.Reader.BaseStream.Position + countFormatingRuns * 4)
                         {
                             ushort currentLength = (ushort)(this.Reader.BaseStream.Length - this.Reader.BaseStream.Position);
@@ -177,7 +177,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                             format.FontRecord = this.Reader.ReadUInt16();
 
                             if (format.FontRecord > 4)
-                                format.FontRecord--; 
+                                format.FontRecord--;
 
                             /// ToDo: Check why some charNumbers are greater then string length 
                             if (format.CharNumber < stringbuffer.Length)
@@ -205,7 +205,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                         ExtRst = this.Reader.ReadBytes(cchExtRst);
                     }
 
-                    
+
                 }
             }
             catch (Exception ex)

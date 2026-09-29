@@ -31,7 +31,7 @@ namespace b2xtranslator.OfficeGraph
         /// A string that contains the string constant.
         /// </summary>
         public string stLabel;
-        
+
         public Label(IStreamReader reader, GraphRecordNumber id, ushort length)
             : base(reader, id, length)
         {

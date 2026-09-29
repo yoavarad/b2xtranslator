@@ -85,7 +85,7 @@ namespace b2xtranslator.PptFileFormat
             fAnimateBg = 3
         }
 
-        public enum AnimBuildTypeEnum: byte
+        public enum AnimBuildTypeEnum : byte
         {
             FollowMaster = 0xFE,
 

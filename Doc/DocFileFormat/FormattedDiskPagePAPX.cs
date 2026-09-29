@@ -49,12 +49,12 @@ namespace b2xtranslator.DocFileFormat
             this.rgbx = new BX[this.crun];
             this.grppapx = new ParagraphPropertyExceptions[this.crun];
 
-            j = 4*(this.crun+1);
+            j = 4 * (this.crun + 1);
             for (int i = 0; i < this.rgbx.Length; i++)
             {
                 //read the 12 for PHE
                 var phe = new byte[12];
-                Array.Copy(bytes, j+1, phe, 0, phe.Length);
+                Array.Copy(bytes, j + 1, phe, 0, phe.Length);
 
                 //fill the rgbx array
                 var bx = new BX
@@ -143,15 +143,15 @@ namespace b2xtranslator.DocFileFormat
         public static List<int> GetFileCharacterPositions(
             int fcMin,
             int fcMax,
-            FileInformationBlock fib, 
-            VirtualStream wordStream, 
+            FileInformationBlock fib,
+            VirtualStream wordStream,
             VirtualStream tableStream,
             VirtualStream dataStream)
         {
             var list = new List<int>();
             var fkps = FormattedDiskPagePAPX.GetAllPAPXFKPs(fib, wordStream, tableStream, dataStream);
 
-            for (int i = 0; i < fkps.Count; i++ )
+            for (int i = 0; i < fkps.Count; i++)
             {
                 FormattedDiskPage fkp = fkps[i];
 
@@ -163,7 +163,7 @@ namespace b2xtranslator.DocFileFormat
 
                 for (int j = 0; j < max; j++)
                 {
-                    if(fkp.rgfc[j] >= fcMin && fkp.rgfc[j] < fcMax)
+                    if (fkp.rgfc[j] >= fcMin && fkp.rgfc[j] < fcMax)
                         list.Add(fkp.rgfc[j]);
                 }
             }
@@ -184,8 +184,8 @@ namespace b2xtranslator.DocFileFormat
         public static List<ParagraphPropertyExceptions> GetParagraphPropertyExceptions(
             int fcMin,
             int fcMax,
-            FileInformationBlock fib, 
-            VirtualStream wordStream, 
+            FileInformationBlock fib,
+            VirtualStream wordStream,
             VirtualStream tableStream,
             VirtualStream dataStream)
         {

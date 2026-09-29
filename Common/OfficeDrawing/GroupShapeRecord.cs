@@ -25,7 +25,7 @@ namespace b2xtranslator.OfficeDrawing
 
             this.rcgBounds = new Rectangle(
                 new Point(left, top),
-                new Size(right-left, bottom-top)
+                new Size(right - left, bottom - top)
             );
         }
     }

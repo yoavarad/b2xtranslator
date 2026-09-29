@@ -76,7 +76,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                         this._writer.WriteEndElement(); // c:ser
                     }
                 }
-                
+
                 // c:dLbls
 
                 // dropLines

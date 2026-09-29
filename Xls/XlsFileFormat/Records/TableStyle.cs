@@ -11,7 +11,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record is used for each custom Table style in use in the document.
     /// </summary>
-    [BiffRecord(RecordType.TableStyle)] 
+    [BiffRecord(RecordType.TableStyle)]
     public class TableStyle : BiffRecord
     {
         public const RecordType ID = RecordType.TableStyle;
@@ -94,7 +94,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.rgchName = reader.ReadBytes(this.cchName * 2);
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

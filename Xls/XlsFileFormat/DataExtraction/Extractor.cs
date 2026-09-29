@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
     /// </summary>
     public abstract class Extractor
     {
-        public VirtualStreamReader StreamReader;   
+        public VirtualStreamReader StreamReader;
 
         /// <summary>
         /// Ctor
@@ -35,6 +35,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// <summary>
         /// extracts the data from the given stream !!!
         /// </summary>
-        public abstract void extractData(); 
+        public abstract void extractData();
     }
 }

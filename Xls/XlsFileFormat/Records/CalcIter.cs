@@ -6,7 +6,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// NOTE: This record is named ITERATION in the old version of the specification
     /// </summary>
-    [BiffRecord(RecordType.CalcIter)] 
+    [BiffRecord(RecordType.CalcIter)]
     public class CalcIter : BiffRecord
     {
         public const RecordType ID = RecordType.CalcIter;
@@ -19,9 +19,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

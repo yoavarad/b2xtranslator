@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The PROT4REV  record stores a shared-workbook protection flag.
     /// </summary>
-    [BiffRecord(RecordType.Prot4Rev)] 
+    [BiffRecord(RecordType.Prot4Rev)]
     public class Prot4Rev : BiffRecord
     {
         public const RecordType ID = RecordType.Prot4Rev;
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fRevLock = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

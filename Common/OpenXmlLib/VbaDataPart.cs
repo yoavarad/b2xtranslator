@@ -1,6 +1,6 @@
 namespace b2xtranslator.OpenXmlLib
 {
-    public class VbaDataPart: ContentPart
+    public class VbaDataPart : ContentPart
     {
         internal VbaDataPart(OpenXmlPartContainer parent)
             : base(parent, 0)

@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
         {
             Debug.Assert(this.Id == ID);
             this.Length = 9;
-            this.Data = Convert.ToString(this.Reader.ReadDouble(), CultureInfo.GetCultureInfo("en-US")); 
+            this.Data = Convert.ToString(this.Reader.ReadDouble(), CultureInfo.GetCultureInfo("en-US"));
 
             this.type = PtgType.Operand;
             this.popSize = 1;

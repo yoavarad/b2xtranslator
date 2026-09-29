@@ -16,7 +16,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         {
             get { return this._context.RootDirectoryEntry; }
         }
-        
+
 
         /// <summary>
         /// Constructor.
@@ -37,7 +37,7 @@ namespace b2xtranslator.StructuredStorage.Writer
 
             var allEntries = this._context.RootDirectoryEntry.RecursiveGetAllDirectoryEntries();
             allEntries.Sort(
-                    delegate(BaseDirectoryEntry a, BaseDirectoryEntry b)
+                    delegate (BaseDirectoryEntry a, BaseDirectoryEntry b)
                     { return a.Sid.CompareTo(b.Sid); }
                 );
 

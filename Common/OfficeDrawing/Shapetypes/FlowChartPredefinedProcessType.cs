@@ -1,7 +1,7 @@
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(112)]
-    public class FlowChartPredefinedProcessType :ShapeType
+    public class FlowChartPredefinedProcessType : ShapeType
     {
         public FlowChartPredefinedProcessType()
         {

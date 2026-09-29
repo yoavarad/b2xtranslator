@@ -22,11 +22,11 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.TextboxRectangle = "@31,@33,@32,@34";
 
             this.Formulas = new List<string>();
-            this.Formulas.Add("val #0"); 
-            this.Formulas.Add("prod @0 41 9"); 
+            this.Formulas.Add("val #0");
+            this.Formulas.Add("prod @0 41 9");
             this.Formulas.Add("prod @0 23 9 ");
             this.Formulas.Add("sum 0 0 @2 ");
-            this.Formulas.Add("sum 21600 0 #0"); 
+            this.Formulas.Add("sum 21600 0 #0");
             this.Formulas.Add("sum 21600 0 @1 ");
             this.Formulas.Add("sum 21600 0 @3 ");
             this.Formulas.Add("sum #1 0 10800 ");
@@ -40,7 +40,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("prod #1 2 3 ");
             this.Formulas.Add("prod #1 4 3 ");
             this.Formulas.Add("prod #1 2 1 ");
-            this.Formulas.Add("sum 21600 0 @15"); 
+            this.Formulas.Add("sum 21600 0 @15");
             this.Formulas.Add("sum 21600 0 @16 ");
             this.Formulas.Add("sum 21600 0 @17 ");
             this.Formulas.Add("if @7 @14 0 ");
@@ -56,13 +56,13 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("max @21 @25 ");
             this.Formulas.Add("min @24 @28 ");
             this.Formulas.Add("prod @0 2 1 ");
-            this.Formulas.Add("sum 21600 0 @33"); 
+            this.Formulas.Add("sum 21600 0 @33");
             this.Formulas.Add("mid @26 @27 ");
             this.Formulas.Add("mid @24 @28 ");
             this.Formulas.Add("mid @22 @23 ");
             this.Formulas.Add("mid @21 @25");
 
-            
+
             this.Handles = new List<Handle>();
             var handleOne = new Handle
             {

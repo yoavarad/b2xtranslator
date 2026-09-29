@@ -21,21 +21,21 @@ namespace b2xtranslator.DocFileFormat
             //FSPA has size 26 + 4 byte for the FC = 30 byte
             int n = 0;
             uint startFc = 0;
-            if(type == OfficeDrawingTableType.MainDocument)
+            if (type == OfficeDrawingTableType.MainDocument)
             {
                 startFc = doc.FIB.fcPlcSpaMom;
                 n = (int)Math.Floor((double)doc.FIB.lcbPlcSpaMom / 30);
             }
-            else if(type == OfficeDrawingTableType.Header)
+            else if (type == OfficeDrawingTableType.Header)
             {
                 startFc = doc.FIB.fcPlcSpaHdr;
                 n = (int)Math.Floor((double)doc.FIB.lcbPlcSpaHdr / 30);
             }
-            
+
             //there are n+1 FCs ...
             doc.TableStream.Seek(startFc, System.IO.SeekOrigin.Begin);
-            var fcs = new int[n+1];
-            for (int i = 0; i < (n+1); i++)
+            var fcs = new int[n + 1];
+            for (int i = 0; i < (n + 1); i++)
             {
                 fcs[i] = reader.ReadInt32();
             }

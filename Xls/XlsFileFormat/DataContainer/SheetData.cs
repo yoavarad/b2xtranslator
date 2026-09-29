@@ -12,7 +12,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         // TODO: remove
         public bool emtpyWorksheet;
 
-        
+
         public abstract void Convert<T>(T mapping);
     }
 }

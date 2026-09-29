@@ -14,7 +14,7 @@ namespace b2xtranslator.PptFileFormat
         public FontEntityAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {
-                        
+
             var facename = this.Reader.ReadBytes(64);
             this.TypeFace = Encoding.Unicode.GetString(facename);
             this.TypeFace = this.TypeFace.Substring(0, this.TypeFace.IndexOf("\0"));
@@ -24,7 +24,7 @@ namespace b2xtranslator.PptFileFormat
             byte lfCharSet = this.Reader.ReadByte();
             byte firstbyte = this.Reader.ReadByte();
             byte secondbyte = this.Reader.ReadByte();
-            byte lfPitchAndFamily = this.Reader.ReadByte();           
+            byte lfPitchAndFamily = this.Reader.ReadByte();
         }
 
     }

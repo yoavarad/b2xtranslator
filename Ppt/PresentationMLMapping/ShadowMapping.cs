@@ -54,52 +54,52 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteStartElement("a", "effectLst", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteStartElement("a", "outerShdw", OpenXmlNamespaces.DrawingML);
 
-                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shadowOffsetX))
-                             if (this.so.OptionsByID[ShapeOptions.PropertyId.shadowOffsetX].op != 0)
-                                 writeDistDir();
-                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shadowOriginX))
-                         {
-                             var bytes = BitConverter.GetBytes(this.so.OptionsByID[ShapeOptions.PropertyId.shadowOriginX].op);
-                             int integral = BitConverter.ToInt16(bytes, 0);
-                             uint fractional = BitConverter.ToUInt16(bytes, 2);
-                             if (fractional == 0xffff) integral *= -1;
-                             Decimal origX = integral; // +((decimal)fractional / (decimal)65536);
+                        if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shadowOffsetX))
+                            if (this.so.OptionsByID[ShapeOptions.PropertyId.shadowOffsetX].op != 0)
+                                writeDistDir();
+                        if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shadowOriginX))
+                        {
+                            var bytes = BitConverter.GetBytes(this.so.OptionsByID[ShapeOptions.PropertyId.shadowOriginX].op);
+                            int integral = BitConverter.ToInt16(bytes, 0);
+                            uint fractional = BitConverter.ToUInt16(bytes, 2);
+                            if (fractional == 0xffff) integral *= -1;
+                            Decimal origX = integral; // +((decimal)fractional / (decimal)65536);
 
-                             bytes = BitConverter.GetBytes(this.so.OptionsByID[ShapeOptions.PropertyId.shadowOriginY].op);
-                             integral = BitConverter.ToInt16(bytes, 0);
-                             fractional = BitConverter.ToUInt16(bytes, 2);
-                             if (fractional == 0xffff) integral *= -1;
-                             Decimal origY = integral; // +((decimal)fractional / (decimal)65536);
+                            bytes = BitConverter.GetBytes(this.so.OptionsByID[ShapeOptions.PropertyId.shadowOriginY].op);
+                            integral = BitConverter.ToInt16(bytes, 0);
+                            fractional = BitConverter.ToUInt16(bytes, 2);
+                            if (fractional == 0xffff) integral *= -1;
+                            Decimal origY = integral; // +((decimal)fractional / (decimal)65536);
 
-                             if (origX > 0)
-                             {
-                                 if (origY > 0)
-                                 {
+                            if (origX > 0)
+                            {
+                                if (origY > 0)
+                                {
                                     this._writer.WriteAttributeString("algn", "tl");
-                                 }
-                                 else
-                                 {
+                                }
+                                else
+                                {
                                     this._writer.WriteAttributeString("algn", "b");
-                                 }
-                             }
-                             else
-                             {                                 
-                                 if (origY > 0)
-                                 {
-                                     
-                                 }
-                                 else
-                                 {
-                                    this._writer.WriteAttributeString("algn", "br");
-                                 }
-                             }
-                         }
-                         else
-                         {
-                            this._writer.WriteAttributeString("algn", "b");
-                         }
+                                }
+                            }
+                            else
+                            {
+                                if (origY > 0)
+                                {
 
-                        
+                                }
+                                else
+                                {
+                                    this._writer.WriteAttributeString("algn", "br");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            this._writer.WriteAttributeString("algn", "b");
+                        }
+
+
 
                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shadowScaleXToX))
                         {
@@ -158,7 +158,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            this._writer.WriteAttributeString("sy","50000");
+                            this._writer.WriteAttributeString("sy", "50000");
                         }
 
                         writeColor();
@@ -212,8 +212,8 @@ namespace b2xtranslator.PresentationMLMapping
                 //default is offset
                 writeOffset();
             }
-            
- 
+
+
         }
 
         private void writeOffset()
@@ -286,6 +286,6 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteAttributeString("dist", dist.ToString());
             this._writer.WriteAttributeString("dir", dir);
         }
-                
+
     }
 }

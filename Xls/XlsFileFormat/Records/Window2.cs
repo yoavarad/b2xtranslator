@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// extended properties of an associated Window1 record, and that association is 
     /// specified in Window1.
     /// </summary>
-    [BiffRecord(RecordType.Window2)] 
+    [BiffRecord(RecordType.Window2)]
     public class Window2 : BiffRecord
     {
         public const RecordType ID = RecordType.Window2;
@@ -213,7 +213,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             }
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

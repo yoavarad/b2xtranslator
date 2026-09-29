@@ -60,6 +60,6 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteEndDocument();
 
             this._writer.Flush();
-        }        
+        }
     }
 }

@@ -14,29 +14,29 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas = new List<string>();
 
 
-            this.Formulas.Add("sum 10800 0 #0"); 
-            this.Formulas.Add("prod @0 32488 32768"); 
-            this.Formulas.Add("prod @0 4277 32768"); 
-            this.Formulas.Add("prod @0 30274 32768"); 
-            this.Formulas.Add("prod @0 12540 32768"); 
-            this.Formulas.Add("prod @0 25997 32768"); 
-            this.Formulas.Add("prod @0 19948 32768"); 
-            this.Formulas.Add("sum @1 10800 0"); 
-            this.Formulas.Add("sum @2 10800 0"); 
-            this.Formulas.Add("sum @3 10800 0"); 
-            this.Formulas.Add("sum @4 10800 0"); 
-            this.Formulas.Add("sum @5 10800 0"); 
-            this.Formulas.Add("sum @6 10800 0"); 
-            this.Formulas.Add("sum 10800 0 @1"); 
-            this.Formulas.Add("sum 10800 0 @2"); 
-            this.Formulas.Add("sum 10800 0 @3"); 
-            this.Formulas.Add("sum 10800 0 @4"); 
-            this.Formulas.Add("sum 10800 0 @5"); 
-            this.Formulas.Add("sum 10800 0 @6"); 
-            this.Formulas.Add("prod @0 23170 32768"); 
+            this.Formulas.Add("sum 10800 0 #0");
+            this.Formulas.Add("prod @0 32488 32768");
+            this.Formulas.Add("prod @0 4277 32768");
+            this.Formulas.Add("prod @0 30274 32768");
+            this.Formulas.Add("prod @0 12540 32768");
+            this.Formulas.Add("prod @0 25997 32768");
+            this.Formulas.Add("prod @0 19948 32768");
+            this.Formulas.Add("sum @1 10800 0");
+            this.Formulas.Add("sum @2 10800 0");
+            this.Formulas.Add("sum @3 10800 0");
+            this.Formulas.Add("sum @4 10800 0");
+            this.Formulas.Add("sum @5 10800 0");
+            this.Formulas.Add("sum @6 10800 0");
+            this.Formulas.Add("sum 10800 0 @1");
+            this.Formulas.Add("sum 10800 0 @2");
+            this.Formulas.Add("sum 10800 0 @3");
+            this.Formulas.Add("sum 10800 0 @4");
+            this.Formulas.Add("sum 10800 0 @5");
+            this.Formulas.Add("sum 10800 0 @6");
+            this.Formulas.Add("prod @0 23170 32768");
             this.Formulas.Add("sum @19 10800 0");
             this.Formulas.Add("sum 10800 0 @19");
- 
+
 
             this.AdjustmentValues = "2700";
             this.ConnectorLocations = "Rectangle";

@@ -23,12 +23,12 @@
                 case OpenXmlPackage.DocumentType.MacroEnabledDocument:
                     this.workBookPart = new WorkbookPart(this, SpreadsheetMLContentTypes.WorkbookMacro);
                     break;
-                //case OpenXmlPackage.DocumentType.Template:
-                //    workBookPart = new WorkbookPart(this, WordprocessingMLContentTypes.MainDocumentTemplate);
-                //    break;
-                //case OpenXmlPackage.DocumentType.MacroEnabledTemplate:
-                //    workBookPart = new WorkbookPart(this, WordprocessingMLContentTypes.MainDocumentMacroTemplate);
-                //    break;
+                    //case OpenXmlPackage.DocumentType.Template:
+                    //    workBookPart = new WorkbookPart(this, WordprocessingMLContentTypes.MainDocumentTemplate);
+                    //    break;
+                    //case OpenXmlPackage.DocumentType.MacroEnabledTemplate:
+                    //    workBookPart = new WorkbookPart(this, WordprocessingMLContentTypes.MainDocumentMacroTemplate);
+                    //    break;
             }
             this._documentType = type;
             this.AddPart(this.workBookPart);

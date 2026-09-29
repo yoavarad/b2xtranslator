@@ -11,7 +11,7 @@ namespace b2xtranslator.StructuredStorage.Common
     static internal class MaskingHandler
     {
         static readonly uint[] CharsToMask = { '%', '\\' };
-        
+
 
         /// <summary>
         /// Masks the given string
@@ -20,9 +20,9 @@ namespace b2xtranslator.StructuredStorage.Common
         {
             string result = text;
             foreach (uint character in CharsToMask)
-	        {
-                result = result.Replace(new string((char)character,1), string.Format(CultureInfo.InvariantCulture, "%{0:X4}", character));
-	        }
+            {
+                result = result.Replace(new string((char)character, 1), string.Format(CultureInfo.InvariantCulture, "%{0:X4}", character));
+            }
             return result;
         }
 

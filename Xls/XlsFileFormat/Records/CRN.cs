@@ -6,7 +6,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.CRN)] 
+    [BiffRecord(RecordType.CRN)]
     public class CRN : BiffRecord
     {
         public const RecordType ID = RecordType.CRN;
@@ -16,7 +16,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
         public ushort rw;
 
-        public List<object> oper; 
+        public List<object> oper;
 
 
         public CRN(IStreamReader reader, RecordType id, ushort length)
@@ -24,13 +24,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            this.oper = new List<object>(); 
-            long endposition = this.Reader.BaseStream.Position + this.Length; 
+            this.oper = new List<object>();
+            long endposition = this.Reader.BaseStream.Position + this.Length;
             this.colLast = this.Reader.ReadByte();
             this.colFirst = this.Reader.ReadByte();
             this.rw = this.Reader.ReadUInt16();
 
-            
+
 
 
             while (this.Reader.BaseStream.Position < endposition)
@@ -38,7 +38,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 byte grbit = this.Reader.ReadByte();
                 if (grbit == 0x01)
                 {
-                    this.oper.Add(this.Reader.ReadDouble()); 
+                    this.oper.Add(this.Reader.ReadDouble());
                 }
                 else if (grbit == 0x02)
                 {
@@ -60,12 +60,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                         }
                     }
 
-                    this.oper.Add(Data); 
+                    this.oper.Add(Data);
                 }
                 else if (grbit == 0x00)
                 {
                     this.Reader.ReadBytes(8);
-                    this.oper.Add(" "); 
+                    this.oper.Add(" ");
                 }
                 else if (grbit == 0x04)
                 {
@@ -75,19 +75,19 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     if (boolvalue == 1)
                         value = true;
                     this.oper.Add(value);
-                    this.Reader.ReadBytes(6); 
+                    this.Reader.ReadBytes(6);
                 }
                 else if (grbit == 0x10)
                 {
                     // Error
                     this.Reader.ReadBytes(8);
-                    this.oper.Add("Err"); 
+                    this.oper.Add("Err");
                 }
 
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkMajorUnitTypeFrt(IStreamReader reader)
         {
-            this.majorUnit = new XmlTkToken(reader);   
+            this.majorUnit = new XmlTkToken(reader);
         }
     }
 }

@@ -14,11 +14,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// It is possible to write custom number formats in a file, but they 
     /// should be added at the end of the existing FORMAT records.
     /// </summary>
-    [BiffRecord(RecordType.Format)] 
+    [BiffRecord(RecordType.Format)]
     public class Format : BiffRecord
     {
         public const RecordType ID = RecordType.Format;
-        
+
         /// <summary>
         /// Format index code (for internal use only)
         /// 
@@ -27,22 +27,22 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// 
         /// For more information about built-in formats, see <code>XF</code> Extended Format (E0h). 
         /// </summary>
-        public ushort ifmt;	
+        public ushort ifmt;
 
         /// <summary>
         /// Length of the string
         /// </summary>
-        public ushort cch;	
+        public ushort cch;
 
         /// <summary>
         /// Option Flags (described in Unicode Strings in BIFF8 section) 
         /// </summary>
-        public byte grbit;	
+        public byte grbit;
 
         /// <summary>
         /// Array of string characters
         /// </summary>
-        public string rgb;	
+        public string rgb;
 
 
         public Format(IStreamReader reader, RecordType id, ushort length)
@@ -58,10 +58,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // TODO: place code for interpretation of grbit flag here
             // TODO: possibly define a wrapper class for Unicode strings
 
-            this.rgb = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, this.grbit); 
-            
+            this.rgb = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, this.grbit);
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

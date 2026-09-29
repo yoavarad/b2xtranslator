@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkEnd(IStreamReader reader)
         {
-            this.xtHeader = new XmlTkHeader(reader);   
+            this.xtHeader = new XmlTkHeader(reader);
         }
     }
 }
