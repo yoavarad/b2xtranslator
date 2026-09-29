@@ -282,6 +282,29 @@ namespace b2xtranslator.PresentationMLMapping
             }
         }
 
+        /// <summary>
+        /// Maps a PPT color scheme index (0-7, field order of ColorSchemeAtom) to the
+        /// DrawingML scheme color name. Consistent with ColorSchemeMapping.writeScheme
+        /// (Background=lt1, TextAndLines=dk1, Shadows=lt2, TitleText=dk2, Fills=accent1,
+        /// Accent=accent2, hyperlink colors=hlink/folHlink) and the default p:clrMap.
+        /// Returns "" for indices outside 0-7.
+        /// </summary>
+        public static string getSchemeColorName(byte index)
+        {
+            switch (index)
+            {
+                case 0x00: return "bg1";      // Background
+                case 0x01: return "tx1";      // TextAndLines
+                case 0x02: return "bg2";      // Shadows
+                case 0x03: return "tx2";      // TitleText
+                case 0x04: return "accent1";  // Fills
+                case 0x05: return "accent2";  // Accent
+                case 0x06: return "hlink";    // AccentAndHyperlink
+                case 0x07: return "folHlink"; // AccentAndFollowedHyperlink
+                default: return "";
+            }
+        }
+
         public static string getRGBColorFromOfficeArtCOLORREF(uint value, RegularContainer slide, b2xtranslator.OfficeDrawing.ShapeOptions so)
         {
             string dummy = "";
@@ -447,8 +470,10 @@ namespace b2xtranslator.PresentationMLMapping
                         SchemeType = "tx1";
                         return new RGBColor(MasterScheme.TextAndLines, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x02: //shadow
+                        SchemeType = "bg2";
                         return new RGBColor(MasterScheme.Shadows, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x03: //title
+                        SchemeType = "tx2";
                         return new RGBColor(MasterScheme.TitleText, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x04: //fill
                         SchemeType = "accent1";
@@ -460,6 +485,7 @@ namespace b2xtranslator.PresentationMLMapping
                         SchemeType = "hlink";
                         return new RGBColor(MasterScheme.AccentAndHyperlink, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x07: //accent3
+                        SchemeType = "folHlink";
                         return new RGBColor(MasterScheme.AccentAndFollowedHyperlink, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0xFE: //sRGB
                         return bytes[0].ToString("X").PadLeft(2, '0') + bytes[1].ToString("X").PadLeft(2, '0') + bytes[3].ToString("X").PadLeft(2, '0');
