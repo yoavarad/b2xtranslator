@@ -21,7 +21,7 @@ namespace b2xtranslator.PptFileFormat
         /// Title master slide
         /// </summary>
         TitleMaster = 2,
-        
+
         // 3 is unused
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace b2xtranslator.PptFileFormat
         {
             string s = string.Join(", ",
                 Array.ConvertAll<PlaceholderEnum, string>(this.PlaceholderTypes,
-                delegate(PlaceholderEnum pid) { return pid.ToString(); }));
+                delegate (PlaceholderEnum pid) { return pid.ToString(); }));
 
             return string.Format("SSlideLayoutAtom(Geom = {0}, PlaceholderTypes = [{1}])",
                 this.Geom, s);

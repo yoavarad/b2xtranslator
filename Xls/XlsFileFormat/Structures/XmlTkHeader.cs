@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
             //unused
             reader.ReadByte();
 
-            this.xmlTkTag = reader.ReadUInt16();        
+            this.xmlTkTag = reader.ReadUInt16();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             //StartObject 
             //this.StartObject = (StartObject)BiffRecord.ReadRecord(reader);
-            
+
             //*(Font [Fbi]) 
             this.Fonts = new List<FontFbiGroup>();
             while (BiffRecord.GetNextRecordType(reader) == RecordType.Font)

@@ -28,11 +28,12 @@ namespace b2xtranslator.StructuredStorage.Common
         public string Name
         {
             get { return MaskingHandler.Mask(this._name); }
-            protected set {
+            protected set
+            {
                 this._name = value;
                 if (this._name.Length >= 32)
                 {
-                    throw new InvalidValueInDirectoryEntryException("_ab");                    
+                    throw new InvalidValueInDirectoryEntryException("_ab");
                 }
             }
         }
@@ -49,7 +50,7 @@ namespace b2xtranslator.StructuredStorage.Common
                 }
 
                 // length of name in bytes including unicode 0;
-                this._lengthOfName = (ushort)((this._name.Length + 1)*2);              
+                this._lengthOfName = (ushort)((this._name.Length + 1) * 2);
                 return this._lengthOfName;
             }
         }
@@ -151,7 +152,7 @@ namespace b2xtranslator.StructuredStorage.Common
         }
 
         internal AbstractDirectoryEntry() : this(0x0)
-        {}
+        { }
 
         internal AbstractDirectoryEntry(uint sid)
         {

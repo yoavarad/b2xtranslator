@@ -7,7 +7,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// NOTE: This record is called PRINTHEADERS in the old specification
     /// </summary>
-    [BiffRecord(RecordType.PrintRowCol)] 
+    [BiffRecord(RecordType.PrintRowCol)]
     public class PrintRowCol : BiffRecord
     {
         public const RecordType ID = RecordType.PrintRowCol;
@@ -20,9 +20,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

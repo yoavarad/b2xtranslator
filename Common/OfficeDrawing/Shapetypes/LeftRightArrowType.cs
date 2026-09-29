@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(69)]
-    public class LeftRightArrowType :ShapeType
+    public class LeftRightArrowType : ShapeType
     {
         public LeftRightArrowType()
         {
@@ -22,13 +22,13 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum #0 0 @4");
             this.Formulas.Add("sum 21600 0 @5");
 
-            this.AdjustmentValues="4320,5400";
+            this.AdjustmentValues = "4320,5400";
 
-            this.ConnectorLocations="@2,0;10800,@1;@0,0;0,10800;@0,21600;10800,@3;@2,21600;21600,10800";
+            this.ConnectorLocations = "@2,0;10800,@1;@0,0;0,10800;@0,21600;10800,@3;@2,21600;21600,10800";
 
-            this.ConnectorAngles="270,270,270,180,90,90,90,0";
+            this.ConnectorAngles = "270,270,270,180,90,90,90,0";
 
-            this.TextboxRectangle="@5,@1,@6,@3";
+            this.TextboxRectangle = "@5,@1,@6,@3";
 
             this.Handles = new List<Handle>();
             var HandleOne = new Handle

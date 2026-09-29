@@ -20,7 +20,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             // *Continue
             this.Continues = new List<Continue>();
-            while(BiffRecord.GetNextRecordType(reader) == RecordType.Continue)
+            while (BiffRecord.GetNextRecordType(reader) == RecordType.Continue)
             {
                 this.Continues.Add((Continue)BiffRecord.ReadRecord(reader));
             }

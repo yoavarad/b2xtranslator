@@ -8,7 +8,7 @@ namespace b2xtranslator.OfficeGraph
     {
         public byte[] Content;
 
-        public UnknownGraphRecord(IStreamReader reader, ushort id, ushort length) 
+        public UnknownGraphRecord(IStreamReader reader, ushort id, ushort length)
             : base(reader, (GraphRecordNumber)id, length)
         {
             this.Content = reader.ReadBytes((int)length);

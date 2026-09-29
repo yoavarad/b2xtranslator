@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkFloorThicknessFrt(IStreamReader reader)
         {
-            this.floorThickness = new XmlTkDWord(reader);   
+            this.floorThickness = new XmlTkDWord(reader);
         }
     }
 }

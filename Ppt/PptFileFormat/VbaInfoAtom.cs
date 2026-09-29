@@ -4,7 +4,7 @@ using System.IO;
 namespace b2xtranslator.PptFileFormat
 {
     [OfficeRecord(0x0400)]
-    public class VbaInfoAtom: Record
+    public class VbaInfoAtom : Record
     {
         public uint persistIdRef;
 
@@ -16,7 +16,7 @@ namespace b2xtranslator.PptFileFormat
             : base(_reader, size, typeCode, version, instance)
         {
             this.persistIdRef = _reader.ReadUInt32();
-            this.fHasMacros =  Tools.Utils.ByteToBool((byte)_reader.ReadUInt32());
+            this.fHasMacros = Tools.Utils.ByteToBool((byte)_reader.ReadUInt32());
             this.version = _reader.ReadUInt32();
         }
     }

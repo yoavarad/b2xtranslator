@@ -41,7 +41,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             Engineering,
             Cube
         }
-        
+
         /// <summary>
         /// A bit that specifies whether the defined name is not visible 
         /// in the list of defined names.
@@ -130,7 +130,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// index value associated to it. A built-in name or its index value MUST be used for this field.
         /// </summary>
         public XLUnicodeStringNoCch Name;
-        
+
         /// <summary>
         /// A NameParsedFormula that specifies the formula for the defined name.
         /// </summary>

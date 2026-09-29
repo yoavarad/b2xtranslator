@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Pls)] 
+    [BiffRecord(RecordType.Pls)]
     public class Pls : BiffRecord
     {
         public const RecordType ID = RecordType.Pls;

@@ -313,7 +313,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                 //    already set to the correct value)
                 path = path.Substring(1);
             }
-            
+
 
             /// Replace 0x03 with \
             path = path.Replace((char)0x03, '\\');

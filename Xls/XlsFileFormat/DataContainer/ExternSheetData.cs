@@ -5,7 +5,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
     /// </summary>
     public class ExternSheetData
     {
-        public ushort iSUPBOOK; 
+        public ushort iSUPBOOK;
         public ushort itabFirst;
         public ushort itabLast;
 
@@ -19,7 +19,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.iSUPBOOK = sup;
             this.itabFirst = first;
-            this.itabLast = last; 
+            this.itabLast = last;
         }
 
     }

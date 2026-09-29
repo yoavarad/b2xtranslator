@@ -20,7 +20,7 @@ namespace b2xtranslator.OfficeDrawing
             // Possible alternatives:
             // 1) Using System.IO.Compression -- supports inflation, but can't parse Zip header data
             // 2) Modifying zlib + minizlib + ZipLib so I can pass in bytes, possible, but not worth the effort       
-            
+
             // KH - I've left the original comment above, but I've ported this to use option (1) as the IZipLib result can't read headers anyway - it can only open entries.
 
             using (var zipReader = ZipFactory.OpenArchive(this.Reader.BaseStream))

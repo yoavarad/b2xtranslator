@@ -7,8 +7,8 @@ namespace b2xtranslator.OpenXmlLib.PresentationML
         public SlideMasterPart(OpenXmlPartContainer parent, int partIndex)
             : base(parent, partIndex)
         {
-        } 
-        
+        }
+
         public override string ContentType
         {
             get { return PresentationMLContentTypes.SlideMaster; }

@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This record specifies the header text of the current sheet when printed.
     /// </summary>
-    [BiffRecord(RecordType.Header)] 
+    [BiffRecord(RecordType.Header)]
     public class Header : BiffRecord
     {
         public const RecordType ID = RecordType.Header;
@@ -20,7 +20,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// be less than or equal to 255. The header text can contain special commands, 
         /// for example a placeholder for the page number, current date or text formatting attributes.
         /// </summary>
-        public XLUnicodeString headerText; 
+        public XLUnicodeString headerText;
 
         public Header(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)

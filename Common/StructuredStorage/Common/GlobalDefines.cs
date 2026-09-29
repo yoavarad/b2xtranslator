@@ -9,7 +9,7 @@ namespace b2xtranslator.StructuredStorage.Common
     /// Constants used to identify sectors in fat, minifat and directory
     /// </summary>
     internal static class SectorId
-	{      
+    {
         internal const uint MAXREGSECT = 0xFFFFFFFA;
         internal const uint DIFSECT = 0xFFFFFFFC;
         internal const uint FATSECT = 0xFFFFFFFD;
@@ -17,7 +17,7 @@ namespace b2xtranslator.StructuredStorage.Common
         internal const uint FREESECT = 0xFFFFFFFF;
 
         internal const uint NOSTREAM = 0xFFFFFFFF;
-	}
+    }
 
 
     /// <summary>
@@ -40,7 +40,7 @@ namespace b2xtranslator.StructuredStorage.Common
         STGTY_STREAM = 2,
         STGTY_LOCKBYTES = 3,
         STGTY_PROPERTY = 4,
-        STGTY_ROOT = 5    
+        STGTY_ROOT = 5
     }
 
 

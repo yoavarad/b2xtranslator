@@ -30,7 +30,9 @@ namespace b2xtranslator.PptFileFormat
             if (rec is BitmapBlip)
             {
                 this.blip = (BitmapBlip)rec;
-            } else if (rec is MetafilePictBlip) {
+            }
+            else if (rec is MetafilePictBlip)
+            {
                 this.mblip = (MetafilePictBlip)rec;
             }
         }
@@ -41,7 +43,7 @@ namespace b2xtranslator.PptFileFormat
     {
         public List<ParagraphRun9> P9Runs = new List<ParagraphRun9>();
         public TextSIException si;
-        
+
         public StyleTextProp9Atom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {
@@ -80,7 +82,7 @@ namespace b2xtranslator.PptFileFormat
                 {
                     //ignore
                 }
-                
+
             }
         }
     }

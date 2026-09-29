@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The HIDEOBJ record stores options selected in the Options dialog box, View tab.
     /// </summary>
-    [BiffRecord(RecordType.HideObj)] 
+    [BiffRecord(RecordType.HideObj)]
     public class HideObj : BiffRecord
     {
         public const RecordType ID = RecordType.HideObj;
@@ -20,7 +20,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// =0 if the Show All option is turned on
         /// </summary>
         public ushort fHideObj;
-        
+
         public HideObj(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -29,9 +29,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fHideObj = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

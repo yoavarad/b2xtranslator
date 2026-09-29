@@ -27,7 +27,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // no special fields in this record as it is just a continuation of the previous record
-            
+
             // just skipping
             this.Reader.BaseStream.Position = this.Offset + this.Length;
 

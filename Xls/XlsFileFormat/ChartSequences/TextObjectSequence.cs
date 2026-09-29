@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
     {
         public TxO TxO;
 
-        public List<Continue> Continue; 
+        public List<Continue> Continue;
 
         public TextObjectSequence(IStreamReader reader)
             : base(reader)
@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             this.TxO = (TxO)BiffRecord.ReadRecord(reader);
 
             // Continue
-            this.Continue = new List<Continue>(); 
+            this.Continue = new List<Continue>();
             while (BiffRecord.GetNextRecordType(reader) == RecordType.Continue)
             {
                 this.Continue.Add((Continue)BiffRecord.ReadRecord(reader));

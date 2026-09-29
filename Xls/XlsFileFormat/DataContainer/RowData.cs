@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using b2xtranslator.Tools; 
+using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
 {
@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             get { return this.row; }
             set { this.row = value; }
         }
-        
+
         /// <summary>
         /// Collection of cellobjects 
         /// </summary>
@@ -39,7 +39,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public bool customHeight;
 
         public int minSpan;
-        public int maxSpan; 
+        public int maxSpan;
         /// <summary>
         /// Ctor 
         /// </summary>
@@ -48,7 +48,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.outlineLevel = -1;
             this.minSpan = -1;
-            this.maxSpan = -1; 
+            this.maxSpan = -1;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public RowData(int row)
         {
             this.row = row;
-            this.cells = new List<AbstractCellData>(); 
+            this.cells = new List<AbstractCellData>();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public void addCell(AbstractCellData cell)
         {
             if (!this.checkCellExists(cell))
-                this.cells.Add(cell); 
+                this.cells.Add(cell);
         }
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             {
                 if (var.Col == cell.Col)
                 {
-                    return true; 
+                    return true;
                 }
             }
-            return false; 
+            return false;
         }
     }
 }

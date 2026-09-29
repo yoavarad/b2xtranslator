@@ -51,7 +51,7 @@ namespace b2xtranslator.Tools
         /// <returns></returns>
         public override string ToString()
         {
-            return Convert.ToString(this.Value, CultureInfo.GetCultureInfo("en-US")); 
+            return Convert.ToString(this.Value, CultureInfo.GetCultureInfo("en-US"));
         }
     }
 }

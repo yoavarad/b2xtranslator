@@ -47,7 +47,7 @@ namespace UnitTests
                     var allEntries = new List<DirectoryEntry>();
                     allEntries.AddRange(storageReader.AllEntries);
                     allEntries.Sort(
-                            delegate(DirectoryEntry a, DirectoryEntry b)
+                            delegate (DirectoryEntry a, DirectoryEntry b)
                             { return a.Sid.CompareTo(b.Sid); }
                         );
 
@@ -79,10 +79,10 @@ namespace UnitTests
                         {
                             name = name.Replace(invalidChars[i], '_');
                         }
-                        pathNames1.Add(entry, new KeyValuePair<string,Guid>(name,entry.ClsId) );
+                        pathNames1.Add(entry, new KeyValuePair<string, Guid>(name, entry.ClsId));
                     }
 
- 
+
                     // Create Directory Structure
                     var sso = new StructuredStorageWriter();
                     sso.RootDirectoryEntry.setClsId(storageReader.RootDirectoryEntry.ClsId);
@@ -110,10 +110,10 @@ namespace UnitTests
                             var vstream = storageReader.GetStream(entry.Path);
                             sde.AddStreamDirectoryEntry(storages[i], vstream);
                         }
-                    }                    
+                    }
 
                     // Write sso to stream
-                    var myStream = new MemoryStream();                    
+                    var myStream = new MemoryStream();
                     sso.write(myStream);
 
                     // Close input storage
@@ -125,7 +125,7 @@ namespace UnitTests
                     var array = new byte[bytesToReadAtOnce];
                     int bytesRead;
 
-                    
+
                     string outputFileName = Path.GetFileNameWithoutExtension(file) + "_output" + Path.GetExtension(file);
                     string path = Path.GetDirectoryName(Path.GetFullPath(file));
                     outputFileName = path + "\\" + outputFileName;
@@ -176,7 +176,7 @@ namespace UnitTests
                         // read bytes from stream, write them back to disk
                         var fs = new FileStream(outputDir + "\\" + pathNames2[key] + ".stream", FileMode.Create);
                         var writer = new BinaryWriter(fs);
-                        array = new byte[bytesToReadAtOnce];                        
+                        array = new byte[bytesToReadAtOnce];
                         do
                         {
                             bytesRead = streamReader.Read(array);

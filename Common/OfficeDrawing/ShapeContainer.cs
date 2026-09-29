@@ -12,8 +12,8 @@ namespace b2xtranslator.OfficeDrawing
         public int Index;
 
         public ShapeContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) 
-        { 
+            : base(_reader, size, typeCode, version, instance)
+        {
         }
 
         /// <summary>

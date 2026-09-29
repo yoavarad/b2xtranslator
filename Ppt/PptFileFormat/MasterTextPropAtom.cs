@@ -22,10 +22,10 @@ namespace b2xtranslator.PptFileFormat
                 this.MasterTextPropRuns.Add(m);
             }
         }
-       
+
     }
 
-    
+
     public struct MasterTextPropRun
     {
         public uint count;

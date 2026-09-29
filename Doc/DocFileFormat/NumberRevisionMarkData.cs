@@ -66,7 +66,7 @@ namespace b2xtranslator.DocFileFormat
 
                 //copy date to new array and parse it
                 var dttm = new byte[4];
-                Array.Copy(bytes,4, dttm,0, 4);
+                Array.Copy(bytes, 4, dttm, 0, 4);
                 this.dttmNumRM = new DateAndTime(dttm);
 
                 //fill the rgbxchNums char array
@@ -90,7 +90,7 @@ namespace b2xtranslator.DocFileFormat
                 //fill the PNBR array
                 this.PNBR = new int[9];
                 j = 0;
-                for (int i = 28; i < 64; i+=4)
+                for (int i = 28; i < 64; i += 4)
                 {
                     this.PNBR[j] = System.BitConverter.ToInt32(bytes, i);
                     j++;

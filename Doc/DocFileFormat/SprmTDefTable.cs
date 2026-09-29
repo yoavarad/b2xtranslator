@@ -28,7 +28,7 @@ namespace b2xtranslator.DocFileFormat
 
             //read rgdxaCenter
             this.rgdxaCenter = new short[this.numberOfColumns + 1];
-            for (int i = 0; i < this.numberOfColumns + 1 ; i++)
+            for (int i = 0; i < this.numberOfColumns + 1; i++)
             {
                 this.rgdxaCenter[i] = System.BitConverter.ToInt16(bytes, pointer);
                 pointer += 2;

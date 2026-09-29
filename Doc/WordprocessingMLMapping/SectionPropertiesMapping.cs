@@ -13,7 +13,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         private XmlElement _sectPr;
         private int _sectNr;
         private ConversionContext _ctx;
-       private SectionType _type = SectionType.nextPage;
+        private SectionType _type = SectionType.nextPage;
 
         private enum SectionType
         {
@@ -114,7 +114,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         /// the properties to a given node.
         /// </summary>
         /// <param name="sectPr">The sectPr node</param>
-        public SectionPropertiesMapping(XmlElement sectPr, ConversionContext ctx, int sectionNr) 
+        public SectionPropertiesMapping(XmlElement sectPr, ConversionContext ctx, int sectionNr)
             : base(null)
         {
             this._ctx = ctx;
@@ -137,7 +137,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             var paperSrc = this._nodeFactory.CreateElement("w", "paperSrc", OpenXmlNamespaces.WordprocessingML);
             var footnotePr = this._nodeFactory.CreateElement("w", "footnotePr", OpenXmlNamespaces.WordprocessingML);
             var pgNumType = this._nodeFactory.CreateElement("w", "pgNumType", OpenXmlNamespaces.WordprocessingML);
-            
+
             //convert headers of this section
             if (this._ctx.Doc.HeaderAndFooterTable.OddHeaders.Count > 0)
             {
@@ -298,17 +298,17 @@ namespace b2xtranslator.WordprocessingMLMapping
                         {
                             fncFtn = (FootnoteRestartCode)sprm.Arguments[0];
                         }
-                            
+
                         appendValueElement(footnotePr, "numRestart", fncFtn.ToString(), true);
                         break;
                     case SinglePropertyModifier.OperationCode.sprmSFpc:
                         //position code
                         short fpc = 0;
-                        if(sprm.Arguments.Length == 2)
+                        if (sprm.Arguments.Length == 2)
                             fpc = System.BitConverter.ToInt16(sprm.Arguments, 0);
                         else
                             fpc = (short)sprm.Arguments[0];
-                        if(fpc == 2)
+                        if (fpc == 2)
                             appendValueElement(footnotePr, "pos", "beneathText", true);
                         break;
                     case SinglePropertyModifier.OperationCode.sprmSNfcFtnRef:
@@ -344,7 +344,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         break;
                     case SinglePropertyModifier.OperationCode.sprmSDxaColWidth:
                         //there is at least one width set, so create the array
-                        if(this._colWidth ==null)
+                        if (this._colWidth == null)
                             this._colWidth = new short[this._colNumber];
 
                         byte index = sprm.Arguments[0];
@@ -493,7 +493,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         private void appendRef(XmlElement parent, string element, string refType, string refId)
         {
             var headerRef = this._nodeFactory.CreateElement("w", element, OpenXmlNamespaces.WordprocessingML);
-            
+
             var headerRefType = this._nodeFactory.CreateAttribute("w", "type", OpenXmlNamespaces.WordprocessingML);
             headerRefType.Value = refType;
             headerRef.Attributes.Append(headerRefType);

@@ -79,7 +79,7 @@ namespace b2xtranslator.OpenXmlLib
             get { return this._appPropertiesPart; }
             set { this._appPropertiesPart = value; }
         }
-               
+
         public AppPropertiesPart AddAppPropertiesPart()
         {
             this.AppPropertiesPart = new AppPropertiesPart(this);

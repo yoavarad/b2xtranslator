@@ -38,7 +38,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
     //            CrtMlfrtSequence crtmlfrtseq = new CrtMlfrtSequence(reader);
     //        }
 
-            
+
     //        // End 
     //        this.End = (End)BiffRecord.ReadRecord(reader); 
     //    }

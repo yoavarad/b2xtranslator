@@ -22,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
         public ObjFmla fmla;
 
 
-        
+
         public FtMacro(IStreamReader reader)
         {
             this.ft = reader.ReadUInt16();

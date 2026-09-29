@@ -34,7 +34,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 this._writer.WriteAttributeString("w", "name", OpenXmlNamespaces.WordprocessingML, font.xszFtn);
 
                 //alternative name
-                if (font.xszAlt!= null && font.xszAlt.Length > 0)
+                if (font.xszAlt != null && font.xszAlt.Length > 0)
                 {
                     this._writer.WriteStartElement("w", "altName", OpenXmlNamespaces.WordprocessingML);
                     this._writer.WriteAttributeString("w", "val", OpenXmlNamespaces.WordprocessingML, font.xszAlt);

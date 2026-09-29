@@ -50,7 +50,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         override internal long SeekToPositionInSector(long sector, long position)
         {
             int sectorInMiniStreamChain = (int)((sector * this._header.MiniSectorSize) / this._fat.SectorSize);
-            int offsetInSector = (int)((sector * this._header.MiniSectorSize) % this._fat.SectorSize);     
+            int offsetInSector = (int)((sector * this._header.MiniSectorSize) % this._fat.SectorSize);
 
             if (position < 0)
             {

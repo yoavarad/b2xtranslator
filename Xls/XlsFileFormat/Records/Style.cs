@@ -12,7 +12,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// record in the BIFF file. When Excel saves the workbook, it writes the STYLE records 
     /// in alphabetical order, which is the order in which the styles appear in the drop-down list box.
     /// </summary>
-    [BiffRecord(RecordType.Style)] 
+    [BiffRecord(RecordType.Style)]
     public class Style : BiffRecord
     {
         public const RecordType ID = RecordType.Style;
@@ -24,7 +24,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// Bits 12, 13, and 14 are unused, and bit 15 ( fBuiltIn ) is 1 for built-in styles.
         /// </summary>
         public ushort ixfe;
-                                
+
         /// <summary>
         /// Built-in style numbers:
         ///     =00h Normal 
@@ -64,7 +64,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// A flag indicating whether this is a built-in style
         /// </summary>
         public bool fBuiltin;
- 
+
         public Style(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -88,11 +88,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             {
                 this.cch = reader.ReadUInt16();
                 int grbit = (int)reader.ReadByte();
-                this.rgch = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, grbit); 
+                this.rgch = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, grbit);
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

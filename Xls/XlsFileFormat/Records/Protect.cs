@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The PROTECT record stores the protection state for a sheet or workbook.
     /// </summary>
-    [BiffRecord(RecordType.Protect)] 
+    [BiffRecord(RecordType.Protect)]
     public class Protect : BiffRecord
     {
         public const RecordType ID = RecordType.Protect;
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fLock = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

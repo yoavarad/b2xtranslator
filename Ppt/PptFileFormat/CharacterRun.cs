@@ -14,7 +14,8 @@ namespace b2xtranslator.PptFileFormat
         public bool StyleFlagsFieldPresent
         {
             //get { return (this.Mask & CharacterMask.StyleFlagsFieldPresent) != 0; }
-            get { 
+            get
+            {
                 if ((this.Mask & CharacterMask.IsBold) != 0) return true;
                 if ((this.Mask & CharacterMask.IsItalic) != 0) return true;
                 if ((this.Mask & CharacterMask.IsUnderlined) != 0) return true;
@@ -23,7 +24,7 @@ namespace b2xtranslator.PptFileFormat
                 if ((this.Mask & CharacterMask.HasHorizonNumRendering) != 0) return true;
                 if ((this.Mask & CharacterMask.IsEmbossed) != 0) return true;
                 if ((this.Mask & CharacterMask.fHasStyle) != 0) return true;
-               
+
                 return false;
             }
         }
@@ -101,14 +102,14 @@ namespace b2xtranslator.PptFileFormat
                     this.Color = new GrColorAtom(reader);
 
                 if (this.PositionPresent)
-                    this.Position = reader.ReadUInt16();        
+                    this.Position = reader.ReadUInt16();
             }
             catch (EndOfStreamException e)
             {
                 string s = e.ToString();
                 //ignore
             }
-               
+
         }
 
         public string ToString(uint depth)
@@ -211,7 +212,7 @@ namespace b2xtranslator.PptFileFormat
         unused10 = 1 << 10, // Bit 10 is unused
         unused11 = 1 << 11, // Bit 11 is unused
         unused12 = 1 << 12, // Bit 12 is unused
-        unused13= 1 << 13, // Bit 13 is unused
+        unused13 = 1 << 13, // Bit 13 is unused
         unused14 = 1 << 14, // Bit 14 is unused
         unused15 = 1 << 15, // Bit 15 is unused
 

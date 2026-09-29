@@ -52,7 +52,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("val #1");
 
             this.AdjustmentValues = "1350,25920";
-            
+
             this.ConnectorLocations = "10800,0;0,10800;10800,21600;21600,10800;@34,@35";
 
             this.TextboxRectangle = "791,791,20809,20809";

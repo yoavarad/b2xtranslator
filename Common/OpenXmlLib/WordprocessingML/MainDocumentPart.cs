@@ -17,7 +17,7 @@
         protected int _footerPartCount = 0;
 
         private string _contentType = WordprocessingMLContentTypes.MainDocument;
-        
+
         public MainDocumentPart(OpenXmlPartContainer parent, string contentType)
             : base(parent)
         {
@@ -137,7 +137,7 @@
 
         public CommentsPart CommentsPart
         {
-            get 
+            get
             {
                 if (this._commentsPart == null)
                 {
@@ -150,9 +150,9 @@
 
         public VbaProjectPart VbaProjectPart
         {
-            get 
+            get
             {
-                if(this._vbaProjectPart == null)
+                if (this._vbaProjectPart == null)
                 {
                     this._vbaProjectPart = this.AddPart(new VbaProjectPart(this));
                 }

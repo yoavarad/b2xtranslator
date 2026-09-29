@@ -48,7 +48,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                         // c:marker
 
                         // c:dPt
-                        
+
                         // c:dLbls (CT_DLbls)
                         this.ChartFormatsSequence.Convert(new DataLabelMapping(this.WorkbookContext, this.ChartContext, seriesFormatSequence));
 

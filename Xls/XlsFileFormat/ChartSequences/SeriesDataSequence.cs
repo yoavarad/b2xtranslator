@@ -26,7 +26,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             for (int i = 0; i < 3; i++)
             {
                 this.SeriesGroups[i] = new SeriesGroup(reader);
-                
+
                 // build matrix from series data
                 this.DataMatrix[(ushort)this.SeriesGroups[i].SIIndex.numIndex - 1] = new AbstractCellContent[this.Dimensions.colMac - this.Dimensions.colMic, this.Dimensions.rwMac - this.Dimensions.rwMic];
                 foreach (var cellContent in this.SeriesGroups[i].Data)

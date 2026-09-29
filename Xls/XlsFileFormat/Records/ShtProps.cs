@@ -72,7 +72,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             if (length > 3)
             {
                 // skip the last optional byte
-                reader.ReadByte(); 
+                reader.ReadByte();
             }
 
             // assert that the correct number of bytes has been read from the stream

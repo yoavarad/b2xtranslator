@@ -242,7 +242,7 @@ namespace b2xtranslator.DocFileFormat
             foreach (var sprm in chpx.grpprl)
             {
                 switch (sprm.OpCode)
-	            {
+                {
                     case SinglePropertyModifier.OperationCode.sprmCPicLocation:
                         ret = System.BitConverter.ToInt32(sprm.Arguments, 0);
                         break;
@@ -251,8 +251,8 @@ namespace b2xtranslator.DocFileFormat
                         break;
                     case SinglePropertyModifier.OperationCode.sprmCFData:
                         break;
-	            }
-                
+                }
+
             }
             return ret;
         }

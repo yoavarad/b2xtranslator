@@ -9,7 +9,7 @@
             : base(parent, partIndex)
         {
         }
-        
+
         public override string ContentType
         {
             get { return OpenXmlContentTypes.Drawing; }

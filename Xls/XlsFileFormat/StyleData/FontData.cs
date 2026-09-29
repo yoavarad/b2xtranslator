@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         public UnderlineStyle uStyle;
         public SuperSubScriptStyle vertAlign;
 
-        public int color; 
+        public int color;
 
         public FontData()
         {
@@ -31,7 +31,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             this.isItalic = false;
             this.isStrike = false;
             this.isOutline = false;
-            this.isShadow = false; 
+            this.isShadow = false;
         }
     }
 }

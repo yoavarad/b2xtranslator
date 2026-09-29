@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this.Length = 9;
             this.Data = "";
             this.type = PtgType.Operand;
-            reader.ReadBytes(8);             
+            reader.ReadBytes(8);
         }
     }
 }

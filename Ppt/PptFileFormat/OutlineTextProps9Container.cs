@@ -10,14 +10,15 @@ namespace b2xtranslator.PptFileFormat
         public List<OutlineTextProps9Entry> OutlineTextProps9Entries = new List<OutlineTextProps9Entry>();
 
         public OutlineTextProps9Container(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
             this.Reader.BaseStream.Position = 0;
-                while (this.Reader.BaseStream.Position < this.Reader.BaseStream.Length)
-                {
-                    var entry = new OutlineTextProps9Entry(this.Reader);
+            while (this.Reader.BaseStream.Position < this.Reader.BaseStream.Length)
+            {
+                var entry = new OutlineTextProps9Entry(this.Reader);
                 this.OutlineTextProps9Entries.Add(entry);
-                }
+            }
         }
     }
 

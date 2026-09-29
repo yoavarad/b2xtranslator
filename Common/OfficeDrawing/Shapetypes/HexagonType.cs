@@ -22,7 +22,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum height 0 @3");
 
             this.AdjustmentValues = "5400";
-            
+
             this.ConnectorLocations = "Rectangle";
 
             this.TextboxRectangle = "1800,1800,19800,19800;3600,3600,18000,18000;6300,6300,15300,15300";
