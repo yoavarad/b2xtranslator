@@ -1,22 +1,22 @@
 using b2xtranslator.CommonTranslatorLib;
 using b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer;
 
-using b2xtranslator.StructuredStorage.Reader; 
+using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat
 {
-    public class XlsDocument :  IVisitable
+    public class XlsDocument : IVisitable
     {
         /// <summary>
         /// Some constant strings 
         /// </summary>
         private const string WORKBOOK = "Workbook";
-        private const string ALTERNATE1 = "Book"; 
+        private const string ALTERNATE1 = "Book";
 
         /// <summary>
         /// The workbook streamreader 
         /// </summary>
-        private VirtualStreamReader workBookStreamReader; 
+        private VirtualStreamReader workBookStreamReader;
 
         /// <summary>
         /// The Workbookextractor / container 
@@ -55,7 +55,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                 throw new ExtractorException(ExtractorException.WORKBOOKSTREAMNOTFOUND);
             }
 
-            this.workBookExtr = new WorkbookExtractor(this.workBookStreamReader, this.WorkBookData); 
+            this.workBookExtr = new WorkbookExtractor(this.workBookStreamReader, this.WorkBookData);
         }
 
 

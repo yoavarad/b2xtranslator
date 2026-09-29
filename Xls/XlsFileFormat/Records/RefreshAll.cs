@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record stores an option flag.
     /// </summary>
-    [BiffRecord(RecordType.RefreshAll)] 
+    [BiffRecord(RecordType.RefreshAll)]
     public class RefreshAll : BiffRecord
     {
         public const RecordType ID = RecordType.RefreshAll;
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fRefreshAll = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

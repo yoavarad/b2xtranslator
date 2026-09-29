@@ -22,21 +22,21 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             public Handle()
             { }
 
-            
+
             [Obsolete("Use default constuctor")]
-            public Handle(string pos, string xRange) 
+            public Handle(string pos, string xRange)
             {
                 this.position = pos;
                 this.xrange = xRange;
             }
-  
-            
+
+
             public string position = null;
             public string xrange = null;
             public string switchHandle = null;
             public string yrange = null;
             public string polar = null;
-            public string radiusrange = null; 
+            public string radiusrange = null;
 
         }
 
@@ -112,7 +112,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
         /// Some shapes that have portions that should be constrained to a fixed aspect ratio, are designed with limo-stretch to keep those portions at the fixed aspect ratio.<br/>
         /// </summary>
         public string Limo;
-     
+
         /// <summary>
         /// Associated with each connection site, there is a direction which specifies at what angle elbow and curved connectors should attach to it<br/>
         /// </summary>
@@ -142,7 +142,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
         public uint TypeCode
         {
-            get 
+            get
             {
                 uint ret = 0;
 
@@ -162,7 +162,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                 return ret;
             }
         }
-	
+
 
 
         private static Dictionary<uint, Type> TypeToShapeClassMapping = new Dictionary<uint, Type>();
@@ -181,7 +181,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             if (TypeToShapeClassMapping.TryGetValue(typeCode, out cls))
             {
-                var constructor = cls.GetConstructor(new Type[] {});
+                var constructor = cls.GetConstructor(new Type[] { });
 
                 if (constructor == null)
                 {
@@ -192,7 +192,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
                 try
                 {
-                    result = (ShapeType)constructor.Invoke(new object[] {});
+                    result = (ShapeType)constructor.Invoke(new object[] { });
                 }
                 catch (TargetInvocationException e)
                 {

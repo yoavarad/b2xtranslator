@@ -50,7 +50,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// The number of elements in this array MUST be equal to the value specified in cFont.
         /// </summary>
         public FontInfo[] rgFontInfo;
-        
+
         public FrtFontList(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -72,7 +72,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
                 for (int i = 0; i < this.cFont; i++)
                 {
-                    this.rgFontInfo[i] = new FontInfo(reader);                    
+                    this.rgFontInfo[i] = new FontInfo(reader);
                 }
             }
 

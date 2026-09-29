@@ -44,7 +44,7 @@ namespace b2xtranslator.PptFileFormat
             this.NotesMasterPersist = this.Reader.ReadUInt32();
             this.HandoutMasterPersist = this.Reader.ReadUInt32();
             this.FirstSlideNum = this.Reader.ReadUInt16();
-            this.SlideSizeType = (SlideSizeType) this.Reader.ReadInt16();
+            this.SlideSizeType = (SlideSizeType)this.Reader.ReadInt16();
 
             this.SaveWithFonts = this.Reader.ReadByte() != 0;
             this.OmitTitlePlace = this.Reader.ReadByte() != 0;

@@ -4,7 +4,7 @@ namespace b2xtranslator.Tools
 {
     public class RGBColor
     {
-        public enum ByteOrder 
+        public enum ByteOrder
         {
             RedFirst,
             RedLast
@@ -21,7 +21,7 @@ namespace b2xtranslator.Tools
         {
             var bytes = System.BitConverter.GetBytes(cv);
 
-            if(order == ByteOrder.RedFirst)
+            if (order == ByteOrder.RedFirst)
             {
                 //R
                 this.Red = bytes[0];

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using b2xtranslator.Spreadsheet.XlsFileFormat.Ptg;
 using b2xtranslator.StructuredStorage.Reader;
-using b2xtranslator.Tools; 
+using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Formula)] 
+    [BiffRecord(RecordType.Formula)]
     public class Formula : BiffRecord
     {
         public const RecordType ID = RecordType.Formula;
@@ -63,9 +63,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// </summary>
         public double calculatedValue;
         public bool boolValueSet;
-        public byte boolValue; 
+        public byte boolValue;
         public int errorValue;
-        public bool fAlwaysCalc; 
+        public bool fAlwaysCalc;
 
         public Formula(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -88,18 +88,18 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 {
                     // this is a boolean value 
                     this.boolValue = this.val[2];
-                    this.boolValueSet = true; 
+                    this.boolValueSet = true;
                 }
                 if (firstOffset == 2)
                 {
                     // this is a error value 
-                    this.errorValue = (int)this.val[2];      
+                    this.errorValue = (int)this.val[2];
                 }
             }
             else
             {
                 this.Reader.BaseStream.Seek(oldStreamPosition, System.IO.SeekOrigin.Begin);
-                this.calculatedValue = reader.ReadDouble(); 
+                this.calculatedValue = reader.ReadDouble();
             }
 
 
@@ -110,7 +110,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // reader.ReadBytes(this.cce);
 
             // check always calc mode 
-            this.fAlwaysCalc = Utils.BitmaskToBool((int)this.grbit, 0x01); 
+            this.fAlwaysCalc = Utils.BitmaskToBool((int)this.grbit, 0x01);
 
             // check if shared formula
             this.fShrFmla = Utils.BitmaskToBool((int)this.grbit, 0x08);
@@ -135,18 +135,18 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             }
             else
             {
-                reader.ReadBytes(this.cce); 
+                reader.ReadBytes(this.cce);
             }
-           
-            
+
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
 
 
         public override string ToString()
         {
-            return "Fomula at position: Row - " + this.rw.ToString() + " | Col - " + this.col.ToString();   
+            return "Fomula at position: Row - " + this.rw.ToString() + " | Col - " + this.col.ToString();
         }
 
 

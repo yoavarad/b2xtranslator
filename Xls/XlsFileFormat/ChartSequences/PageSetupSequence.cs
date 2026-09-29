@@ -39,37 +39,37 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             // Footer 
             this.Footer = (Footer)BiffRecord.ReadRecord(reader);
-            
+
             // HCenter 
-            this.HCenter = (HCenter)BiffRecord.ReadRecord(reader); 
-            
+            this.HCenter = (HCenter)BiffRecord.ReadRecord(reader);
+
             // VCenter 
             this.VCenter = (VCenter)BiffRecord.ReadRecord(reader);
-            
+
             // [LeftMargin] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.LeftMargin)
             {
                 this.LeftMargin = (LeftMargin)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [RightMargin] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.RightMargin)
             {
                 this.RightMargin = (RightMargin)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [TopMargin] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.TopMargin)
             {
                 this.TopMargin = (TopMargin)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [BottomMargin] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.BottomMargin)
             {
                 this.BottomMargin = (BottomMargin)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [Pls *Continue] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Pls)
             {
@@ -81,7 +81,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                     this.Continues.Add((Continue)BiffRecord.ReadRecord(reader));
                 }
             }
-            
+
             // Setup
             this.Setup = (Setup)BiffRecord.ReadRecord(reader);
         }

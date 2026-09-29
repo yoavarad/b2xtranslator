@@ -33,7 +33,7 @@ namespace b2xtranslator.OfficeGraph
         static OfficeGraphBiffRecord()
         {
             UpdateTypeToRecordClassMapping(
-                Assembly.GetExecutingAssembly(), 
+                Assembly.GetExecutingAssembly(),
                 typeof(OfficeGraphBiffRecord).Namespace);
         }
 
@@ -98,7 +98,7 @@ namespace b2xtranslator.OfficeGraph
                     try
                     {
                         result = (OfficeGraphBiffRecord)constructor.Invoke(
-                            new object[] {reader, id, size }
+                            new object[] { reader, id, size }
                             );
                     }
                     catch (TargetInvocationException e)

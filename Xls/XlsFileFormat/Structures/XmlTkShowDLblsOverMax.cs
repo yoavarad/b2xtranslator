@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkShowDLblsOverMax(IStreamReader reader)
         {
-            this.fVDLOverMax = new XmlTkBool(reader);     
+            this.fVDLOverMax = new XmlTkBool(reader);
         }
     }
 }

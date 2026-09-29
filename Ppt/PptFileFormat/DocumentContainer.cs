@@ -31,7 +31,7 @@ namespace b2xtranslator.PptFileFormat
         public DocumentContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {
-            
+
 
             foreach (var collection in this.AllChildrenWithType<SlideListWithText>())
             {
@@ -60,15 +60,18 @@ namespace b2xtranslator.PptFileFormat
                 }
             }
 
-            this.MasterPersistList.Sort(delegate(SlidePersistAtom a, SlidePersistAtom b) {
+            this.MasterPersistList.Sort(delegate (SlidePersistAtom a, SlidePersistAtom b)
+            {
                 return a.PersistIdRef.CompareTo(b.PersistIdRef);
             });
 
-            this.NotesPersistList.Sort(delegate(SlidePersistAtom a, SlidePersistAtom b) {
+            this.NotesPersistList.Sort(delegate (SlidePersistAtom a, SlidePersistAtom b)
+            {
                 return a.PersistIdRef.CompareTo(b.PersistIdRef);
             });
 
-            this.SlidePersistList.Sort(delegate(SlidePersistAtom a, SlidePersistAtom b) {
+            this.SlidePersistList.Sort(delegate (SlidePersistAtom a, SlidePersistAtom b)
+            {
                 return a.PersistIdRef.CompareTo(b.PersistIdRef);
             });
 

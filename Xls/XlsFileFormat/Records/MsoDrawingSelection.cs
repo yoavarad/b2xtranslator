@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This record specifies selected drawing objects and the drawing objects in focus on the sheet.
     /// </summary>
-    [BiffRecord(RecordType.MsoDrawingSelection)] 
+    [BiffRecord(RecordType.MsoDrawingSelection)]
     public class MsoDrawingSelection : BiffRecord
     {
         public const RecordType ID = RecordType.MsoDrawingSelection;
@@ -26,9 +26,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.selection = Record.ReadRecord(reader.BaseStream);
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

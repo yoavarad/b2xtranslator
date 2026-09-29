@@ -12,7 +12,7 @@ namespace b2xtranslator.StructuredStorage.Reader
     /// Provides methods for accessing a compound file.
     /// Author: math
     /// </summary>
-    public sealed class StructuredStorageReader : 
+    public sealed class StructuredStorageReader :
         IStructuredStorageReader
     {
 
@@ -123,8 +123,8 @@ namespace b2xtranslator.StructuredStorage.Reader
 
 
         /// <summary>Closes the file handle</summary>
-        public void Close() =>this._fileHandler?.CloseStream();
-       
+        public void Close() => this._fileHandler?.CloseStream();
+
 
         public void Dispose() => this.Close();
     }

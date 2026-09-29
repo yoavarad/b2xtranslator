@@ -11,9 +11,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
         long _offset;
         string data;
         uint length;
-        
+
         protected uint popSize;
-        protected PtgType type; 
+        protected PtgType type;
 
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this._reader = reader;
             this._offset = this._reader.BaseStream.Position;
             this._id = ptgid;
-            this.data = ""; 
+            this.data = "";
         }
 
         /// <summary>
@@ -88,12 +88,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
 
         public uint getLength()
         {
-            return this.length; 
+            return this.length;
         }
 
         public string getData()
-        {            
-            return Convert.ToString(this.data,CultureInfo.GetCultureInfo("en-US"));
+        {
+            return Convert.ToString(this.data, CultureInfo.GetCultureInfo("en-US"));
         }
 
         public uint PopSize()
@@ -103,7 +103,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
 
         public PtgType OpType()
         {
-            return this.type; 
+            return this.type;
         }
 
     }

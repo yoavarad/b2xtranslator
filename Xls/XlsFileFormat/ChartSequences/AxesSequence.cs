@@ -49,7 +49,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
                     //DVAXIS 
                     this.DvAxisSequence = new DvAxisSequence(reader);
-                    
+
                     //[SERIESAXIS]  
                     if (BiffRecord.GetNextRecordType(reader) == RecordType.Axis)
                     {
@@ -64,7 +64,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
                     //DVAXIS 
                     this.DvAxisSequence = new DvAxisSequence(reader);
-                    
+
                     //DVAXIS 
                     this.DvAxisSequence2 = new DvAxisSequence(reader);
                 }

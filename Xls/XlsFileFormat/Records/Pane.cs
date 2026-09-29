@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Pane)] 
+    [BiffRecord(RecordType.Pane)]
     public class Pane : BiffRecord
     {
         public const RecordType ID = RecordType.Pane;
@@ -33,9 +33,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.colLeft = reader.ReadUInt16();
             this.pnnAcct = (PaneType)reader.ReadByte();
             reader.ReadByte();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

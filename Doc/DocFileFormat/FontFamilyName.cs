@@ -109,7 +109,7 @@ namespace b2xtranslator.DocFileFormat
             this.xszFtn = this.xszFtn.Replace("\0", "");
 
             long readBytes = this._reader.BaseStream.Position - startPos;
-            if(readBytes < this._length)
+            if (readBytes < this._length)
             {
                 //read the next \0 terminated string
                 strStart = reader.BaseStream.Position;

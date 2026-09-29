@@ -14,17 +14,17 @@ namespace b2xtranslator.DocFileFormat
         /// Count of styles in stylesheet
         /// </summary>
         public ushort cstd;
-	
+
         /// <summary>
         /// Length of STD Base as stored in a file
         /// </summary>
         public ushort cbSTDBaseInFile;
-	
+
         /// <summary>
         /// Are built-in stylenames stored?
         /// </summary>
         public bool fStdStylenamesWritten;
-						
+
         /// <summary>
         /// Max sti known when this file was written
         /// </summary>
@@ -45,18 +45,18 @@ namespace b2xtranslator.DocFileFormat
         /// The first is for ASCII characters (0-127), the second is for East Asian characters, 
         /// and the third is the default font for non-East Asian, non-ASCII text.
         /// </summary>
-	    public ushort[] rgftcStandardChpStsh;	
+	    public ushort[] rgftcStandardChpStsh;
 
-	    /// <summary>
-	    /// Size of each lsd in mpstilsd<br/>
+        /// <summary>
+        /// Size of each lsd in mpstilsd<br/>
         /// The count of lsd's is stiMaxWhenSaved
-	    /// </summary>
+        /// </summary>
         public ushort cbLSD;
 
         /// <summary>
         /// latent style data (size == stiMaxWhenSaved upon save!)
         /// </summary>
-	    public LatentStyleData[] mpstilsd;	
+	    public LatentStyleData[] mpstilsd;
 
         /// <summary>
         /// Parses the bytes to retrieve a StyleSheetInformation
@@ -66,7 +66,7 @@ namespace b2xtranslator.DocFileFormat
         {
             this.cstd = System.BitConverter.ToUInt16(bytes, 0);
             this.cbSTDBaseInFile = System.BitConverter.ToUInt16(bytes, 2);
-            if(bytes[4] == 1)
+            if (bytes[4] == 1)
             {
                 this.fStdStylenamesWritten = true;
             }

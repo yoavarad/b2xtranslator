@@ -6,7 +6,7 @@ using b2xtranslator.OpenXmlLib;
 
 namespace b2xtranslator.WordprocessingMLMapping
 {
-    public class StyleSheetMapping 
+    public class StyleSheetMapping
         : AbstractOpenXmlMapping,
           IMapping<StyleSheet>
     {
@@ -106,7 +106,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     {
                         style.papx.Convert(new ParagraphPropertiesMapping(this._writer, this._ctx, this._parentDoc, null));
                     }
-                    
+
                     //write character properties
                     if (style.chpx != null)
                     {

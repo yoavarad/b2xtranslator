@@ -48,9 +48,9 @@ namespace b2xtranslator.WordprocessingMLMapping
                 // always write this attribute 
                 // if this causes regression bugs, remove it.
                 // this was inserted due to a bug in Word 2007 (sf.net item: 2256373)
-                if(shapeType.PreferRelative)
+                if (shapeType.PreferRelative)
                 {
-                    this._writer.WriteAttributeString("o", "preferrelative",OpenXmlNamespaces.Office, "t");
+                    this._writer.WriteAttributeString("o", "preferrelative", OpenXmlNamespaces.Office, "t");
                 }
 
                 //Default fill / stroke
@@ -100,14 +100,14 @@ namespace b2xtranslator.WordprocessingMLMapping
                 if (shapeType.TextPath)
                 {
                     this._writer.WriteAttributeString("textpathok", "t");
-                    
+
                 }
                 if (shapeType.ConnectorLocations != null)
                 {
                     this._writer.WriteAttributeString("o", "connecttype", OpenXmlNamespaces.Office, "custom");
                     this._writer.WriteAttributeString("o", "connectlocs", OpenXmlNamespaces.Office, shapeType.ConnectorLocations);
                 }
-                else if(shapeType.ConnectorType != null)
+                else if (shapeType.ConnectorType != null)
                 {
                     this._writer.WriteAttributeString("o", "connecttype", OpenXmlNamespaces.Office, shapeType.ConnectorType);
                 }
@@ -220,6 +220,6 @@ namespace b2xtranslator.WordprocessingMLMapping
             return type.ToString();
         }
 
-        
+
     }
 }

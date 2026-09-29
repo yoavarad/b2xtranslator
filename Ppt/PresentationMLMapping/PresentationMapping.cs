@@ -13,7 +13,7 @@ namespace b2xtranslator.PresentationMLMapping
     {
         protected ConversionContext _ctx;
         public ContentPart targetPart;
-        
+
         public PresentationMapping(ConversionContext ctx, ContentPart targetPart)
             : base(XmlWriter.Create(targetPart.GetStream(), ctx.WriterSettings))
         {

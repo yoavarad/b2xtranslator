@@ -34,7 +34,7 @@ namespace b2xtranslator.OfficeGraph
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            
+
             // initialize class members from stream
             this.riser = Utils.ByteToBool(reader.ReadByte());
             this.taper = reader.ReadByte();

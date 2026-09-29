@@ -23,16 +23,17 @@ namespace b2xtranslator.OpenXmlLib.WordprocessingML
         public override string TargetDirectory { get { return ""; } }
 
         public ToolbarsPart ToolbarsPart
-        {   
-            get {
+        {
+            get
+            {
                 if (this._toolbars == null)
                 {
                     this._toolbars = new ToolbarsPart(this);
                     this.AddPart(this._toolbars);
                 }
-                return this._toolbars; 
+                return this._toolbars;
             }
         }
-	
+
     }
 }

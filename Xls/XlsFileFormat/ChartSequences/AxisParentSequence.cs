@@ -36,7 +36,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             // 1*4CRT
             this.CrtSequences = new List<CrtSequence>();
-            while(BiffRecord.GetNextRecordType(reader) == RecordType.ChartFormat)
+            while (BiffRecord.GetNextRecordType(reader) == RecordType.ChartFormat)
             {
                 this.CrtSequences.Add(new CrtSequence(reader));
             }

@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this.Length = 3;
             this.Data = "";
             this.type = PtgType.Operator;
-             this.tab = this.Reader.ReadUInt16();
+            this.tab = this.Reader.ReadUInt16();
             this.popSize = 1;
         }
     }

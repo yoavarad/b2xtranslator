@@ -136,7 +136,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 this.cbRuns = reader.ReadUInt16();
                 this.ifntEmpty = reader.ReadUInt16();
                 this.fmla = new ObjFmla(reader);
-                
+
                 if (this.Offset + this.Length == this.Reader.BaseStream.Position)
                 {
                     break;

@@ -17,7 +17,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum @2 0 #1 ");
             this.Formulas.Add("prod @3 32768 32059 ");
             this.Formulas.Add("prod @4 1 2 ");
-            this.Formulas.Add("sum 21600 0 #0 "); 
+            this.Formulas.Add("sum 21600 0 #0 ");
             this.Formulas.Add("prod @6 #1 6079 ");
             this.Formulas.Add("sum @7 #0 0");
 
@@ -26,7 +26,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.ConnectorAngles = "270,90,90,0";
 
             this.TextboxRectangle = "12427,@1,@8,@2;0,12158,@4,21600";
-           
+
             this.Handles = new List<Handle>();
 
             var HandleOne = new Handle

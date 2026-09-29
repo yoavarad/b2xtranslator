@@ -133,7 +133,7 @@ namespace b2xtranslator.OfficeGraph
         /// An unsigned integer (4 bits) that specifies the application version that saved this substream most recently. The value MUST be the value of verXLHigh field or less.
         /// </summary>
         public Byte verLastXLSaved;
-        
+
         public BOF(IStreamReader reader, GraphRecordNumber id, ushort length)
             : base(reader, id, length)
         {

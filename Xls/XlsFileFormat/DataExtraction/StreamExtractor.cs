@@ -48,7 +48,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
     //            foreach (object var in streamEntries)
     //            {
-                    
+
     //                VirtualStream stream = storageReader.GetStream(((DirectoryEntry)var).Name);
     //                // checks which stream is read 
     //                if (((DirectoryEntry)var).Name.Contains(StreamExtractor.DOCSUMMARYINFORMATIONSEARCH)) 

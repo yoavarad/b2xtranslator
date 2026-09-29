@@ -181,7 +181,7 @@ namespace b2xtranslator.DocFileFormat
             chpxHierarchy.Reverse();
 
             //apply the CHPX hierarchy to this CHP
-            foreach(var c in chpxHierarchy)
+            foreach (var c in chpxHierarchy)
             {
                 applyChpx(c, parentDocument);
             }
@@ -229,7 +229,7 @@ namespace b2xtranslator.DocFileFormat
                     case SinglePropertyModifier.OperationCode.sprmCFStrike:
                         this.fStrike = Utils.ByteToBool(sprm.Arguments[0]);
                         break;
-                        // underline
+                    // underline
                     case SinglePropertyModifier.OperationCode.sprmCKul:
                         this.UnderlineStyle = (Global.UnderlineCode)sprm.Arguments[0];
                         break;

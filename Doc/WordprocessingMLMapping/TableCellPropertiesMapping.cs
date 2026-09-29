@@ -9,7 +9,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.WordprocessingMLMapping
 {
-    public class TableCellPropertiesMapping : 
+    public class TableCellPropertiesMapping :
         PropertiesMapping,
         IMapping<TablePropertyExceptions>
     {
@@ -58,14 +58,14 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             //int lastBdr = getLastTabelBorderOccurrence(tapx.grpprl);
 
-            for (int i=0; i< tapx.grpprl.Count; i++)
+            for (int i = 0; i < tapx.grpprl.Count; i++)
             {
                 var sprm = tapx.grpprl[i];
 
                 switch (sprm.OpCode)
-	            {
+                {
                     //Table definition SPRM
-                    case  SinglePropertyModifier.OperationCode.sprmTDefTable:
+                    case SinglePropertyModifier.OperationCode.sprmTDefTable:
                         var tdef = new SprmTDefTable(sprm.Arguments);
                         this._tGrid = tdef.rgdxaCenter;
                         this._tcDef = tdef.rgTc80[this._cellIndex];
@@ -169,18 +169,18 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case SinglePropertyModifier.OperationCode.sprmTSetBrc:
                         byte min = sprm.Arguments[0];
                         byte max = sprm.Arguments[1];
-                        int bordersToApply = (int)sprm.Arguments[2] ;
+                        int bordersToApply = (int)sprm.Arguments[2];
 
                         if (this._cellIndex >= min && this._cellIndex < max)
                         {
                             var brcBytes = new byte[8];
                             Array.Copy(sprm.Arguments, 3, brcBytes, 0, 8);
                             var border = new BorderCode(brcBytes);
-                            if(Utils.BitmaskToBool(bordersToApply, 0x01))
+                            if (Utils.BitmaskToBool(bordersToApply, 0x01))
                             {
                                 this._brcTop = border;
                             }
-                            if(Utils.BitmaskToBool(bordersToApply, 0x02))
+                            if (Utils.BitmaskToBool(bordersToApply, 0x02))
                             {
                                 this._brcLeft = border;
                             }
@@ -213,7 +213,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             {
                 //check the number of merged cells
                 int w = this._grid[this._gridIndex];
-                for (int i = this._gridIndex +1; i < this._grid.Count; i++)
+                for (int i = this._gridIndex + 1; i < this._grid.Count; i++)
                 {
                     this._gridSpan++;
                     w += this._grid[i];
@@ -285,7 +285,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             Array.Copy(sprmArg, cellIndex * shdBytes.Length, shdBytes, 0, shdBytes.Length);
-            
+
             var shd = new ShadingDescriptor(shdBytes);
             appendShading(this._tcPr, shd);
         }

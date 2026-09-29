@@ -13,7 +13,8 @@ namespace b2xtranslator.PptFileFormat
 {
     public class PowerpointDocument : BinaryDocument, IVisitable, IEnumerable<Record>
     {
-        static PowerpointDocument() {
+        static PowerpointDocument()
+        {
             Record.UpdateTypeToRecordClassMapping(Assembly.GetExecutingAssembly(), typeof(PowerpointDocument).Namespace);
         }
 
@@ -55,7 +56,7 @@ namespace b2xtranslator.PptFileFormat
         /// <summary>
         /// The persist object directory is used for mapping persist object identifiers to document stream offsets.
         /// </summary>
-        public Dictionary<uint, uint> PersistObjectDirectory = new Dictionary<uint,uint>();
+        public Dictionary<uint, uint> PersistObjectDirectory = new Dictionary<uint, uint>();
 
         /// <summary>
         /// The DocumentContainer record for this document.
@@ -107,7 +108,7 @@ namespace b2xtranslator.PptFileFormat
         /// The VBA Project Structured Storage
         /// </summary>
         public ExOleObjStgAtom VbaProject;
-        
+
         public PowerpointDocument(StructuredStorageReader file)
         {
             try
@@ -123,7 +124,7 @@ namespace b2xtranslator.PptFileFormat
                     this.CurrentUserStream.Position = 0;
                     var bytes = new byte[this.CurrentUserStream.Length];
                     this.CurrentUserStream.Read(bytes);
-                    string s = Encoding.UTF8.GetString(bytes).Replace("\0","");
+                    string s = Encoding.UTF8.GetString(bytes).Replace("\0", "");
                 }
             }
             catch (InvalidRecordException e)
@@ -145,7 +146,7 @@ namespace b2xtranslator.PptFileFormat
                 }
             }
 
-            
+
             this.PowerpointDocumentStream = file.GetStream("PowerPoint Document");
 
             try
@@ -157,7 +158,7 @@ namespace b2xtranslator.PptFileFormat
             {
                 //ignore
             }
-           
+
 
             if (this.CurrentUserAtom != null)
             {
@@ -222,10 +223,10 @@ namespace b2xtranslator.PptFileFormat
                 }
             }
 
-            foreach(uint idKey in Offsets.Keys)
+            foreach (uint idKey in Offsets.Keys)
             {
-                s.BaseStream.Seek(Offsets[idKey] + Offset0,0);
-                                
+                s.BaseStream.Seek(Offsets[idKey] + Offset0, 0);
+
                 int Type = s.ReadInt16();
                 int Padding = s.ReadInt16();
                 switch (Type)
@@ -420,7 +421,7 @@ namespace b2xtranslator.PptFileFormat
             }
             catch (Exception)
             {
-                
+
             }
         }
 
@@ -435,7 +436,7 @@ namespace b2xtranslator.PptFileFormat
                     {
                         var stgAtom = this.GetPersistObject<ExOleObjStgAtom>(atom.persistIdRef);
                         container.stgAtom = stgAtom;
-                        this.OleObjects.Add(atom.exObjId, container);                   
+                        this.OleObjects.Add(atom.exObjId, container);
                     }
                 }
             }

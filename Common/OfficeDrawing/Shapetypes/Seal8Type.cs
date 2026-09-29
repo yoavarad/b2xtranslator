@@ -15,14 +15,14 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
 
 
-            this.Formulas.Add("sum 10800 0 #0"); 
-            this.Formulas.Add("prod @0 30274 32768"); 
-            this.Formulas.Add("prod @0 12540 32768"); 
-            this.Formulas.Add("sum @1 10800 0"); 
-            this.Formulas.Add("sum @2 10800 0"); 
-            this.Formulas.Add("sum 10800 0 @1"); 
-            this.Formulas.Add("sum 10800 0 @2"); 
-            this.Formulas.Add("prod @0 23170 32768"); 
+            this.Formulas.Add("sum 10800 0 #0");
+            this.Formulas.Add("prod @0 30274 32768");
+            this.Formulas.Add("prod @0 12540 32768");
+            this.Formulas.Add("sum @1 10800 0");
+            this.Formulas.Add("sum @2 10800 0");
+            this.Formulas.Add("sum 10800 0 @1");
+            this.Formulas.Add("sum 10800 0 @2");
+            this.Formulas.Add("prod @0 23170 32768");
             this.Formulas.Add("sum @7 10800 0");
             this.Formulas.Add("sum 10800 0 @7");
 

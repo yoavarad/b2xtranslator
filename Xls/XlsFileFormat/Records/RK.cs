@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This Biffrecord stores some microsoft specific number data 
     /// </summary>
-    [BiffRecord(RecordType.RK)] 
+    [BiffRecord(RecordType.RK)]
     public class RK : BiffRecord
     {
         public const RecordType ID = RecordType.RK;
@@ -47,10 +47,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.rw = reader.ReadUInt16();
             this.col = reader.ReadUInt16();
             this.ixfe = reader.ReadUInt16();
-            this.num = ExcelHelperClass.NumFromRK(reader.ReadBytes(4));  
-            
+            this.num = ExcelHelperClass.NumFromRK(reader.ReadBytes(4));
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

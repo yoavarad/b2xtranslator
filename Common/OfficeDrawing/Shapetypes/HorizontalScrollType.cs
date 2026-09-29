@@ -23,9 +23,9 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas = new List<string>();
 
 
-            this.Formulas.Add("sum width 0 #0"); 
+            this.Formulas.Add("sum width 0 #0");
             this.Formulas.Add("val #0 ");
-            this.Formulas.Add("prod @1 1 2"); 
+            this.Formulas.Add("prod @1 1 2");
             this.Formulas.Add("prod @1 3 4 ");
             this.Formulas.Add("prod @1 5 4 ");
             this.Formulas.Add("prod @1 3 2 ");
@@ -36,7 +36,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum height 0 @1 ");
             this.Formulas.Add("sum height 0 @2 ");
             this.Formulas.Add("val width ");
-            this.Formulas.Add("prod width 1 2"); 
+            this.Formulas.Add("prod width 1 2");
             this.Formulas.Add("prod height 1 2");
 
             this.Handles = new List<Handle>();
@@ -47,7 +47,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             };
 
             this.Handles.Add(handleOne);
-            this.Limo = "10800,10800"; 
+            this.Limo = "10800,10800";
         }
     }
 }

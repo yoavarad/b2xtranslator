@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record stores the sheet name, sheet type, and stream position.
     /// </summary>
-    [BiffRecord(RecordType.BoundSheet8)] 
+    [BiffRecord(RecordType.BoundSheet8)]
     public class BoundSheet8 : BiffRecord
     {
         public const RecordType ID = RecordType.BoundSheet8;
@@ -21,11 +21,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             /// Visible
             /// </summary>
             Visible = 0x00,
- 
+
             /// <summary>
             /// Hidden
             /// </summary>
-            Hidden = 0x01, 
+            Hidden = 0x01,
 
             /// <summary>
             /// Very Hidden; the sheet is hidden and cannot be displayed using the user interface.
@@ -54,7 +54,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             /// Visual Basic module
             /// </summary>
             VisualBasicModule = 0x0006
-        } 
+        }
 
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// The sheet type value
         /// </summary>
-        public SheetType dt; 
+        public SheetType dt;
 
         /// <summary>
         /// extracts the boundsheetdata from the biffrecord  
@@ -106,20 +106,20 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            
+
             this.lbPlyPos = this.Reader.ReadUInt32();
 
             byte flags = reader.ReadByte();
 
             // Bitmask is 0003h -> first two bits 
-            this.hsState = (HiddenState)Utils.BitmaskToByte(flags, 0x0003); 
+            this.hsState = (HiddenState)Utils.BitmaskToByte(flags, 0x0003);
 
             this.dt = (SheetType)reader.ReadByte();
 
             this.stName = new ShortXLUnicodeString(reader);
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
 
         /// <summary>
@@ -132,8 +132,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             returnvalue += "-- Name: " + this.stName.Value + "\n";
             returnvalue += "-- Offset: " + this.lbPlyPos + "\n";
             returnvalue += "-- HiddenState: " + this.hsState + "\n";
-            returnvalue += "-- SheetType: " + this.dt + "\n"; 
-            return returnvalue; 
+            returnvalue += "-- SheetType: " + this.dt + "\n";
+            return returnvalue;
         }
     }
 }

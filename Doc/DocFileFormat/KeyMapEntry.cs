@@ -11,7 +11,7 @@ namespace b2xtranslator.DocFileFormat
             ktMask
         }
 
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -35,7 +35,7 @@ namespace b2xtranslator.DocFileFormat
         public CommandIdentifier paramCid;
 
         private const int KME_LENGTH = 14;
-        
+
         public KeyMapEntry(VirtualStreamReader reader)
             : base(reader, KME_LENGTH)
         {

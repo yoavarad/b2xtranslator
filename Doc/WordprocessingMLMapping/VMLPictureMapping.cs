@@ -44,7 +44,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 //v:shape
                 this._writer.WriteStartElement("v", "shape", OpenXmlNamespaces.VectorML);
                 this._writer.WriteAttributeString("type", "#" + VMLShapeTypeMapping.GenerateTypeId(type));
-                
+
                 var style = new StringBuilder();
                 double xScaling = pict.mx / 1000.0;
                 double yScaling = pict.my / 1000.0;
@@ -151,7 +151,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             //create the image part
             ImagePart imgPart = null;
-            if(bse != null)
+            if (bse != null)
             {
                 switch (bse.btWin32)
                 {

@@ -22,7 +22,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         /// </summary>
         /// <param name="name">Name of the directory entry.</param>
         /// <param name="context">the current context</param>
-        internal BaseDirectoryEntry(string name, StructuredStorageContext context)            
+        internal BaseDirectoryEntry(string name, StructuredStorageContext context)
         {
             this._context = context;
             this.Name = name;
@@ -55,7 +55,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             var directoryStream = this._context.DirectoryStream;
             var unicodeName = this._name.ToCharArray();
             int paddingCounter = 0;
-            foreach (ushort unicodeChar in  unicodeName)
+            foreach (ushort unicodeChar in unicodeName)
             {
                 directoryStream.writeUInt16(unicodeChar);
                 paddingCounter++;

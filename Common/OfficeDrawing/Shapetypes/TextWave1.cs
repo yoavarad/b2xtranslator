@@ -68,6 +68,6 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("mid @22 @23");
             this.Formulas.Add("mid @21 @25");
 
-        }      
+        }
     }
 }

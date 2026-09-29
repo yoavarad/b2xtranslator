@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record contains the user name, which is the name entered when installing Excel.
     /// </summary>
-    [BiffRecord(RecordType.WriteAccess)] 
+    [BiffRecord(RecordType.WriteAccess)]
     public class WriteAccess : BiffRecord
     {
         public const RecordType ID = RecordType.WriteAccess;
@@ -22,9 +22,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

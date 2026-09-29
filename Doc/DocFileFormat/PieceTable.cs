@@ -49,7 +49,7 @@ namespace b2xtranslator.DocFileFormat
                     if (type == 2)
                     {
                         int lcb = System.BitConverter.ToInt32(bytes, pos + 1);
-  
+
                         //read the piece table
                         var piecetable = new byte[lcb];
                         Array.Copy(bytes, pos + 5, piecetable, 0, piecetable.Length);
@@ -65,7 +65,7 @@ namespace b2xtranslator.DocFileFormat
                             int cp = System.BitConverter.ToInt32(piecetable, indexCp);
 
                             //read the next CP
-                            int indexCpNext = (i+1) * 4;
+                            int indexCpNext = (i + 1) * 4;
                             int cpNext = System.BitConverter.ToInt32(piecetable, indexCpNext);
 
                             //read the PCD
@@ -116,10 +116,10 @@ namespace b2xtranslator.DocFileFormat
                         goon = false;
                     }
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     goon = false;
-                    
+
                 }
             }
         }

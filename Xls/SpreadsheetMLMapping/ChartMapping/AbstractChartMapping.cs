@@ -10,7 +10,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
     {
         private ExcelContext _workbookContext;
         private ChartContext _chartContext;
-        
+
         public AbstractChartMapping(ExcelContext workbookContext, ChartContext chartContext)
             : base(chartContext.ChartPart.XmlWriter)
         {

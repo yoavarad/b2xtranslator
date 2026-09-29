@@ -3,7 +3,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.DocFileFormat
 {
-    public class CommandIdentifier: ByteStructure
+    public class CommandIdentifier : ByteStructure
     {
         public enum CidType
         {
@@ -25,7 +25,7 @@ namespace b2xtranslator.DocFileFormat
             var type = (CidType)Utils.BitmaskToInt((int)bytes[0], 0x07);
 
             switch (type)
-            {   
+            {
                 case CidType.cmtFci:
                     break;
                 case CidType.cmtMacro:

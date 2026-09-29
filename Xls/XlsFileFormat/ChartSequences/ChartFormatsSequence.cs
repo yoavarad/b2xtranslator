@@ -167,7 +167,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             while (BiffRecord.GetNextRecordType(reader) == RecordType.DataLabExt
                 || BiffRecord.GetNextRecordType(reader) == RecordType.Text)
             {
-               this.DataLabelGroups.Add(new DataLabelGroup(reader));
+                this.DataLabelGroups.Add(new DataLabelGroup(reader));
             }
 
             // [CrtLayout12A]
