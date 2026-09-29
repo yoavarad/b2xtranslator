@@ -118,7 +118,7 @@ namespace b2xtranslator.StructuredStorage.Reader
                 return 0;
             }
 
-            if (offset + count > array.Length)
+            if (offset + count > array.Length || position >= this.Length)
             {
                 return 0;
             }
@@ -130,6 +130,12 @@ namespace b2xtranslator.StructuredStorage.Reader
                 {
                     return 0;
                 }
+            }
+
+            if (this._sectors == null)
+            {
+                // non-empty stream without a sector chain (start sector ENDOFCHAIN)
+                throw new ChainSizeMismatchException(this._name);
             }
 
             this._position = position;

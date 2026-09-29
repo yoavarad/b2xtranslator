@@ -114,6 +114,18 @@ namespace b2xtranslator.PptFileFormat
         {
             try
             {
+                Parse(file);
+            }
+            catch (Exception ex) when (StructuredStorage.Common.MalformedInput.IsParseFault(ex))
+            {
+                throw new InvalidStreamException("The presentation is corrupt or not a valid PowerPoint 97-2003 file.", ex);
+            }
+        }
+
+        void Parse(StructuredStorageReader file)
+        {
+            try
+            {
                 this.CurrentUserStream = file.GetStream("Current User");
                 var rec = Record.ReadRecord(this.CurrentUserStream);
                 if (rec is CurrentUserAtom)
@@ -481,9 +493,13 @@ namespace b2xtranslator.PptFileFormat
             var result = new List<PersistDirectoryAtom>();
 
             var userEditAtom = this.LastUserEdit;
+            var visitedEditOffsets = new HashSet<uint>();
 
             while (userEditAtom != null)
             {
+                if (!visitedEditOffsets.Add(userEditAtom.OffsetLastEdit))
+                    throw new InvalidStreamException("UserEditAtom chain contains a cycle");
+
                 this.PowerpointDocumentStream.Seek(userEditAtom.OffsetPersistDirectory, SeekOrigin.Begin);
                 var pdAtom = (PersistDirectoryAtom)Record.ReadRecord(this.PowerpointDocumentStream);
                 result.Insert(0, pdAtom);

@@ -48,7 +48,12 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The next sector in the chain</returns>
         override protected uint GetNextSectorInChain(uint currentSector)
         {
-            uint sectorInFile = this._sectorsUsedByFat[(int)(currentSector / this._addressesPerSector)];
+            uint fatIndex = currentSector / (uint)this._addressesPerSector;
+            if (fatIndex >= this._sectorsUsedByFat.Count)
+            {
+                throw new InvalidSectorInChainException();
+            }
+            uint sectorInFile = this._sectorsUsedByFat[(int)fatIndex];
             // calculation of position:
             // currentSector % _addressesPerSector = number of address in the sector address
             // address uses 32 bit = 4 bytes
@@ -128,6 +133,10 @@ namespace b2xtranslator.StructuredStorage.Reader
                     break;
                 }
 
+                if (this._sectorsUsedByDiFat.Contains(nextDiFatSector))
+                {
+                    throw new ChainCycleDetectedException("DiFat");
+                }
                 this._sectorsUsedByDiFat.Add(nextDiFatSector);
                 this._fileHandler.SeekToSector(nextDiFatSector);
 

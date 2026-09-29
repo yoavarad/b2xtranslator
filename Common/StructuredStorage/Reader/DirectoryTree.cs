@@ -107,12 +107,13 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// </summary>        
         private void SeekToDirectoryEntry(uint sid)
         {
-            int sectorInDirectoryChain = (int)(sid * Measures.DirectoryEntrySize) / this._header.SectorSize;
-            if (sectorInDirectoryChain < 0)
+            long offset = (long)sid * Measures.DirectoryEntrySize;
+            long sectorInDirectoryChain = offset / this._header.SectorSize;
+            if (sectorInDirectoryChain >= this._sectorsUsedByDirectory.Count)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new InvalidValueInDirectoryEntryException("sid " + sid);
             }
-            this._fileHandler.SeekToPositionInSector(this._sectorsUsedByDirectory[sectorInDirectoryChain], (sid * Measures.DirectoryEntrySize) % this._header.SectorSize);
+            this._fileHandler.SeekToPositionInSector(this._sectorsUsedByDirectory[(int)sectorInDirectoryChain], offset % this._header.SectorSize);
         }
 
 

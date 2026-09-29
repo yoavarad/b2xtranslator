@@ -114,7 +114,7 @@ namespace b2xtranslator.PptFileFormat
                     throw new NotSupportedException("Encryped PPT files aren't supported at this time");
 
                 default:
-                    throw new NotSupportedException(string.Format(
+                    throw new InvalidStreamException(string.Format(
                         "File doesn't seem to be a PPT file. Magic Bytes = {0}", this.HeaderToken));
             }
 

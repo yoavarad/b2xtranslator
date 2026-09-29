@@ -1,6 +1,7 @@
 using b2xtranslator.CommonTranslatorLib;
 using b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer;
 
+using b2xtranslator.StructuredStorage.Common;
 using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat
@@ -55,7 +56,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                 throw new ExtractorException(ExtractorException.WORKBOOKSTREAMNOTFOUND);
             }
 
-            this.workBookExtr = new WorkbookExtractor(this.workBookStreamReader, this.WorkBookData);
+            try
+            {
+                this.workBookExtr = new WorkbookExtractor(this.workBookStreamReader, this.WorkBookData);
+            }
+            catch (System.Exception ex) when (MalformedInput.IsParseFault(ex))
+            {
+                throw new ExtractorException("The workbook is corrupt or not a valid Excel 97-2003 file.", ex);
+            }
         }
 
 

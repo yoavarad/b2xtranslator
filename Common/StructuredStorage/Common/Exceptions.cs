@@ -247,4 +247,25 @@ namespace b2xtranslator.StructuredStorage.Common
         }
     }
 
+    /// <summary>
+    /// Classifies runtime faults that record parsers raise when reading malformed or truncated data,
+    /// so document parsers can rethrow them as their format's defined exception.
+    /// </summary>
+    public static class MalformedInput
+    {
+        public static bool IsParseFault(Exception ex) =>
+            ex is System.IO.EndOfStreamException
+            || ex is OutOfMemoryException          // size fields driving huge allocations
+            || ex is InvalidOperationException
+            || ex is ArgumentException
+            || ex is IndexOutOfRangeException
+            || ex is InvalidCastException
+            || ex is OverflowException
+            || ex is NullReferenceException
+            || ex is System.Collections.Generic.KeyNotFoundException
+            || ex is System.Reflection.TargetInvocationException
+            || ex is FormatException
+            || ex is DivideByZeroException;
+    }
+
 }
