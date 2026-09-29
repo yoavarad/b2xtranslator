@@ -2,7 +2,7 @@ using System;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat
 {
-    public class ExtractorException: Exception 
+    public class ExtractorException : Exception
     {
         /// <summary>
         /// some public static attributes 
@@ -11,7 +11,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public const string NOFILEFOUNDEXCEPTION = "No file found!!";
         public const string PARSEDFORMULAEXCEPTION = "Formula is not valid !!";
         public const string WORKBOOKSTREAMNOTFOUND = "Workbook stream not found!!";
-        public const string FILEENCRYPTED = "This file is encrypted!!"; 
+        public const string FILEENCRYPTED = "This file is encrypted!!";
 
 
         /// <summary>

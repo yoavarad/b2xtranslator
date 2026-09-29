@@ -42,7 +42,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             //Begin
             this.Begin = (Begin)BiffRecord.ReadRecord(reader);
-            
+
             //Pos 
             this.Pos = (Pos)BiffRecord.ReadRecord(reader);
 
@@ -50,54 +50,54 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             if (BiffRecord.GetNextRecordType(reader) == RecordType.FontX)
             {
                 this.FontX = (FontX)BiffRecord.ReadRecord(reader);
-            }            
-            
+            }
+
             //[AlRuns] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.AlRuns)
             {
                 this.AlRuns = (AlRuns)BiffRecord.ReadRecord(reader);
-            }   
-            
+            }
+
             //AI 
             this.AiSequence = new AiSequence(reader);
-            
+
             //[FRAME] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Frame)
             {
                 this.FrameSequence = new FrameSequence(reader);
-            }   
-            
+            }
+
             //[ObjectLink] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.ObjectLink)
             {
                 this.ObjectLink = (ObjectLink)BiffRecord.ReadRecord(reader);
-            }   
-            
+            }
+
             //[DataLabExtContents] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.DataLabExtContents)
             {
                 this.DataLabExtContents = (DataLabExtContents)BiffRecord.ReadRecord(reader);
-            }   
-            
+            }
+
             //[CrtLayout12] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.CrtLayout12)
             {
                 this.CrtLayout12 = (CrtLayout12)BiffRecord.ReadRecord(reader);
-            }   
-            
+            }
+
             //[TEXTPROPS] 
-            if (BiffRecord.GetNextRecordType(reader) == RecordType.RichTextStream || 
+            if (BiffRecord.GetNextRecordType(reader) == RecordType.RichTextStream ||
                 BiffRecord.GetNextRecordType(reader) == RecordType.TextPropsStream)
             {
                 this.TextPropsSequence = new TextPropsSequence(reader);
-            }  
-            
+            }
+
             //[CRTMLFRT] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.CrtMlFrt)
             {
                 this.CrtMlfrtSequence = new CrtMlfrtSequence(reader);
-            }  
-            
+            }
+
             //End
             this.End = (End)BiffRecord.ReadRecord(reader);
         }

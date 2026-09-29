@@ -19,6 +19,6 @@
 
         public override string TargetName { get { return "core"; } }
         public override string TargetDirectory { get { return "docProps"; } }
-        
+
     }
 }

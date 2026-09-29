@@ -45,7 +45,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
 
         public int ExternalLinkId;
         public string ExternalLinkRef;
-        public int Number; 
+        public int Number;
 
         /// <summary>
         /// Ctor 
@@ -57,7 +57,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             this.virtPath = supbook.virtpathstring;
             this.selfref = supbook.isselfreferencing;
             this.xctDataList = new LinkedList<XCTData>();
-            this.externNames = new LinkedList<string>(); 
+            this.externNames = new LinkedList<string>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <returns></returns>
         public string getRgstString(int index)
         {
-            return this.rgst[index]; 
+            return this.rgst[index];
         }
 
         /// <summary>
@@ -77,17 +77,17 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public void addXCT(XCT xct)
         {
             var xctdata = new XCTData(xct);
-            this.xctDataList.AddLast(xctdata); 
+            this.xctDataList.AddLast(xctdata);
         }
 
         public void addCRN(CRN crn)
         {
-            this.xctDataList.Last.Value.addCRN(crn);           
+            this.xctDataList.Last.Value.addCRN(crn);
         }
 
         public void addEXTERNNAME(ExternName extname)
         {
-            this.externNames.AddLast(extname.extName); 
+            this.externNames.AddLast(extname.extName);
         }
 
 

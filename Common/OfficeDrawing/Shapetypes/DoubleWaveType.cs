@@ -19,8 +19,8 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             this.TextboxRectangle = "@46,@48,@47,@49";
 
-            this.Formulas = new List<string>();           
-            this.Formulas.Add("val #0"); 
+            this.Formulas = new List<string>();
+            this.Formulas.Add("val #0");
             this.Formulas.Add("prod @0 41 9");
             this.Formulas.Add("prod @0 23 9");
             this.Formulas.Add("sum 0 0 @2");
@@ -45,7 +45,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("prod #1 4 3 ");
             this.Formulas.Add("prod #1 5 3 ");
             this.Formulas.Add("prod #1 2 1 ");
-            this.Formulas.Add("sum 21600 0 @20"); 
+            this.Formulas.Add("sum 21600 0 @20");
             this.Formulas.Add("sum 21600 0 @21 ");
             this.Formulas.Add("sum 21600 0 @22 ");
             this.Formulas.Add("sum 21600 0 @23 ");
@@ -69,7 +69,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("max @30 @37 ");
             this.Formulas.Add("min @36 @43 ");
             this.Formulas.Add("prod @0 2 1 ");
-            this.Formulas.Add("sum 21600 0 @48"); 
+            this.Formulas.Add("sum 21600 0 @48");
             this.Formulas.Add("mid @36 @43 ");
             this.Formulas.Add("mid @30 @37");
 
@@ -87,7 +87,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                 position = "#1,bottomRight",
                 xrange = "8640,12960"
             };
-            this.Handles.Add(handleTwo); 
+            this.Handles.Add(handleTwo);
 
         }
     }

@@ -1611,7 +1611,7 @@ namespace b2xtranslator.DocFileFormat
 
         private void setDefaultCompatibilityOptions(FileInformationBlock.FibVersion nFib)
         {
-            if(nFib == FileInformationBlock.FibVersion.Fib1997 || nFib == FileInformationBlock.FibVersion.Fib1997Beta)
+            if (nFib == FileInformationBlock.FibVersion.Fib1997 || nFib == FileInformationBlock.FibVersion.Fib1997Beta)
             {
                 //Word 97 default settings
                 this.fAlignTablesRowByRow = true;
@@ -1649,7 +1649,7 @@ namespace b2xtranslator.DocFileFormat
                 //ToDo: underline characters in numbered lists
                 this.fUseWord2002TableStyleRules = true;
             }
-            else if(nFib ==  FileInformationBlock.FibVersion.Fib2002)
+            else if (nFib == FileInformationBlock.FibVersion.Fib2002)
             {
                 //Word 2002 (XP)
 

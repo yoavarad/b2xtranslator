@@ -25,7 +25,7 @@ namespace b2xtranslator.DocFileFormat
         /// </summary>
         /// <param name="bytes">The bytes starting with the istd</param>
         public ParagraphPropertyExceptions(byte[] bytes, VirtualStream dataStream)
-            : base(new List<byte>(bytes).GetRange(2, bytes.Length-2).ToArray())
+            : base(new List<byte>(bytes).GetRange(2, bytes.Length - 2).ToArray())
         {
             if (bytes.Length != 0)
             {
@@ -36,7 +36,7 @@ namespace b2xtranslator.DocFileFormat
             //where a list of SPRM is saved.
             foreach (var sprm in this.grpprl)
             {
-                if(sprm.OpCode == SinglePropertyModifier.OperationCode.sprmPHugePapx || (int)sprm.OpCode == 0x6646)
+                if (sprm.OpCode == SinglePropertyModifier.OperationCode.sprmPHugePapx || (int)sprm.OpCode == 0x6646)
                 {
                     IStreamReader reader = new VirtualStreamReader(dataStream);
                     uint fc = System.BitConverter.ToUInt32(sprm.Arguments, 0);
@@ -45,7 +45,7 @@ namespace b2xtranslator.DocFileFormat
                     var sizebytes = new byte[2];
                     dataStream.Read(sizebytes, 0, 2, (int)fc);
                     ushort size = System.BitConverter.ToUInt16(sizebytes, 0);
-                    
+
                     //parse the external grpprl
                     //byte[] grpprlBytes = new byte[size];
                     //dataStream.Read(grpprlBytes);

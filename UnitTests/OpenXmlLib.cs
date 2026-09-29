@@ -25,7 +25,7 @@ namespace UnitTests
             var stream = part.GetStream();
             var buf = (new UTF8Encoding()).GetBytes(docXml);
             stream.Write(buf, 0, buf.Length);
-        
+
 
             doc.Close();
 

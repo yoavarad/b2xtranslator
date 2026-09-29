@@ -84,7 +84,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
         {
             this.fMove = Utils.BitmaskToBool(rawData[0], 0x01);
             this.fSize = Utils.BitmaskToBool(rawData[0], 0x02);
-            
+
             this.colL = System.BitConverter.ToUInt16(rawData, 2);
             this.dxL = System.BitConverter.ToUInt16(rawData, 4);
             this.rwT = System.BitConverter.ToUInt16(rawData, 6);

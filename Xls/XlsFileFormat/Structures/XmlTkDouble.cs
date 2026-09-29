@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
             //unused
             reader.ReadBytes(4);
 
-            this.dValue = reader.ReadDouble();       
+            this.dValue = reader.ReadDouble();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.RecordType = record;
             this.externalBookNumber = book;
-            this.externalSheetNumber = sheet; 
+            this.externalSheetNumber = sheet;
         }
     }
 }

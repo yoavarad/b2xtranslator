@@ -36,7 +36,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             this._writer.WriteStartElement(Sml.Sheet.ElChartsheet, Sml.Ns);
             this._writer.WriteAttributeString("xmlns", Sml.Ns);
             this._writer.WriteAttributeString("xmlns", "r", "", OpenXmlNamespaces.Relationships);
-            
+
             var chartSheetContentSequence = chartSheetSequence.ChartSheetContentSequence;
 
             // sheetPr
@@ -50,7 +50,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
             this._writer.WriteEndElement();
 
-            
+
             // sheetViews
             if (chartSheetContentSequence.WindowSequences.Count > 0)
             {

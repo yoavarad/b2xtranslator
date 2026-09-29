@@ -8,9 +8,9 @@ namespace b2xtranslator.StructuredStorage.Reader
     /// Author: math
     /// </summary>
     internal class Fat : AbstractFat
-    {        
+    {
         List<uint> _sectorsUsedByFat = new List<uint>();
-        List<uint> _sectorsUsedByDiFat = new List<uint>();        
+        List<uint> _sectorsUsedByDiFat = new List<uint>();
 
         override internal ushort SectorSize
         {
@@ -24,7 +24,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <param name="fileHandler">Handle to the file handler of the compound file</param>
         internal Fat(Header header, InputHandler fileHandler)
             : base(header, fileHandler)
-        {            
+        {
             Init();
         }
 
@@ -55,7 +55,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             this._fileHandler.SeekToPositionInSector(sectorInFile, 4 * (currentSector % this._addressesPerSector));
             return this._fileHandler.ReadUInt32();
         }
-        
+
 
         /// <summary>
         /// Initalizes the Fat
@@ -63,7 +63,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         private void Init()
         {
             ReadFirst109SectorsUsedByFAT();
-            ReadSectorsUsedByFatFromDiFat();            
+            ReadSectorsUsedByFatFromDiFat();
             CheckConsistency();
         }
 

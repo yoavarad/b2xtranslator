@@ -58,7 +58,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             storage.RootDirectoryEntry.AddStreamDirectoryEntry("PROJECT", xls.Storage.GetStream(this.projectFile));
             storage.RootDirectoryEntry.AddStreamDirectoryEntry("PROJECTwm", xls.Storage.GetStream(this.projectWmFile));
 
-           //write the storage to the xml part
+            //write the storage to the xml part
             storage.write(this.ctx.SpreadDoc.WorkbookPart.VbaProjectPart.GetStream());
         }
     }

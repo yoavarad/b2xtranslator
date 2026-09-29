@@ -44,7 +44,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            
+
             // initialize class members from stream
             this.riser = (RiserType)reader.ReadByte();
             this.taper = (TaperType)reader.ReadByte();

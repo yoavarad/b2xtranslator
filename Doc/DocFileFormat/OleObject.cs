@@ -102,7 +102,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 short cch = reader.ReadInt16();
                 var str = reader.ReadBytes(cch);
                 this.Link = Encoding.ASCII.GetString(str);
-                
+
                 //skip the terminating zero of the ANSI string
                 //even if the characters are ANSI chars, the terminating zero has 2 bytes
                 reader.ReadBytes(2);

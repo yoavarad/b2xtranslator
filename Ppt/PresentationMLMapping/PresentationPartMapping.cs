@@ -32,7 +32,7 @@ namespace b2xtranslator.PresentationMLMapping
             CreateHandoutMasters(ppt);
             CreateVbaProject(ppt);
             CreateSlides(ppt, documentRecord);
-                        
+
             WriteMainMasters(ppt);
             WriteSlides(ppt, documentRecord);
 
@@ -65,7 +65,7 @@ namespace b2xtranslator.PresentationMLMapping
             var defaultStyle = this._ctx.Ppt.DocumentRecord.FirstChildWithType<b2xtranslator.PptFileFormat.Environment>().FirstChildWithType<TextMasterStyleAtom>();
 
             var map = new TextMasterStyleMapping(this._ctx, this._writer, null);
-            
+
             for (int i = 0; i < defaultStyle.IndentLevelCount; i++)
             {
                 map.writepPr(defaultStyle.CRuns[i], defaultStyle.PRuns[i], null, i, false, true);
@@ -119,8 +119,8 @@ namespace b2xtranslator.PresentationMLMapping
 
         }
 
-       
-       private void CreateSlides(PowerpointDocument ppt, DocumentContainer documentRecord)
+
+        private void CreateSlides(PowerpointDocument ppt, DocumentContainer documentRecord)
         {
             foreach (var lst in ppt.DocumentRecord.AllChildrenWithType<SlideListWithText>())
             {
@@ -162,7 +162,7 @@ namespace b2xtranslator.PresentationMLMapping
                                         //found = true;
                                     }
                                 }
-                                
+
                             }
                         }
                         //if (!found)
@@ -174,7 +174,7 @@ namespace b2xtranslator.PresentationMLMapping
                 }
             }
 
-       }
+        }
 
         private void WriteSlides(PowerpointDocument ppt, DocumentContainer documentRecord)
         {

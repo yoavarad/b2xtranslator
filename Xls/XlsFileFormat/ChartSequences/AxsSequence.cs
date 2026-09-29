@@ -33,13 +33,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             if (BiffRecord.GetNextRecordType(reader) == RecordType.IFmtRecord)
             {
                 this.IFmtRecord = (IFmtRecord)BiffRecord.ReadRecord(reader);
-            }   
-            
+            }
+
             //[Tick] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Tick)
             {
                 this.Tick = (Tick)BiffRecord.ReadRecord(reader);
-            }   
+            }
 
             //[FontX] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.FontX)
@@ -53,26 +53,26 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             {
                 this.AxisLineFormatGroups.Add(new AxisLineFormatGroup(reader));
             }
-            
+
             //[AreaFormat] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.AreaFormat)
             {
                 this.AreaFormat = (AreaFormat)BiffRecord.ReadRecord(reader);
             }
-            
+
             //[GELFRAME] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.GelFrame)
             {
                 this.GelFrame = (GelFrame)BiffRecord.ReadRecord(reader);
             }
-            
+
             //*4SHAPEPROPS 
             this.ShapePropsSequences = new List<ShapePropsSequence>();
             while (BiffRecord.GetNextRecordType(reader) == RecordType.ShapePropsStream)
             {
                 this.ShapePropsSequences.Add(new ShapePropsSequence(reader));
             }
-            
+
             //[TextPropsStream *ContinueFrt12]
             if (BiffRecord.GetNextRecordType(reader) == RecordType.TextPropsStream)
             {
@@ -86,17 +86,17 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
     }
 
     public class AxisLineFormatGroup
+    {
+        public AxisLine AxisLine;
+        public LineFormat LineFormat;
+
+        public AxisLineFormatGroup(IStreamReader reader)
         {
-            public AxisLine AxisLine;
-            public LineFormat LineFormat;
+            // *4(AxisLine LineFormat)
 
-            public AxisLineFormatGroup(IStreamReader reader)
-            {
-                // *4(AxisLine LineFormat)
+            this.AxisLine = (AxisLine)BiffRecord.ReadRecord(reader);
 
-                this.AxisLine = (AxisLine)BiffRecord.ReadRecord(reader);
-
-                this.LineFormat = (LineFormat)BiffRecord.ReadRecord(reader);
-            }
+            this.LineFormat = (LineFormat)BiffRecord.ReadRecord(reader);
         }
+    }
 }

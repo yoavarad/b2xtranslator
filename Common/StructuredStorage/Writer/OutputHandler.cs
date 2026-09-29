@@ -34,7 +34,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             this._stream = memoryStream;
             this._bitConverter = new InternalBitConverter(true);
         }
-        
+
 
         /// <summary>
         /// Writes a byte to the stream.
@@ -100,7 +100,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             {
                 return;
             }
-            for (uint i = 0; i < (sectorSize - remaining) ; i++)
+            for (uint i = 0; i < (sectorSize - remaining); i++)
             {
                 this._stream.WriteByte(padding);
             }
@@ -128,8 +128,8 @@ namespace b2xtranslator.StructuredStorage.Writer
                 throw new InvalidSectorSizeException();
             }
 
-            for (uint i = 0; i < ((sectorSize - remaining)/sizeof(uint)); i++)
-            {                                
+            for (uint i = 0; i < ((sectorSize - remaining) / sizeof(uint)); i++)
+            {
                 writeUInt32(padding);
             }
         }

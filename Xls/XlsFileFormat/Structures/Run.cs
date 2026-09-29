@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
         {
             this.ich = reader.ReadUInt16();
             this.ifnt = reader.ReadUInt16();
-            reader.ReadBytes(4);            
+            reader.ReadBytes(4);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace b2xtranslator.DocFileFormat
         /// A signed integer that specifies the size, in bytes, of this structure.
         /// </summary>
         public int lcb;
-            
+
         /// <summary>
         /// An unsigned integer that specifies the number of bytes from the beginning of this structure to the beginning of binData. 
         /// MUST be 0x44. 

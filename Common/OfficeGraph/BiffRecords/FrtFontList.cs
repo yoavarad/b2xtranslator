@@ -49,7 +49,7 @@ namespace b2xtranslator.OfficeGraph
         /// The number of elements in this array MUST be equal to the value specified in cFont.
         /// </summary>
         public FontInfo[] rgFontInfo;
-        
+
         public FrtFontList(IStreamReader reader, GraphRecordNumber id, ushort length)
             : base(reader, id, length)
         {
@@ -71,7 +71,7 @@ namespace b2xtranslator.OfficeGraph
 
                 for (int i = 0; i < this.cFont; i++)
                 {
-                    this.rgFontInfo[i] = new FontInfo(reader);                    
+                    this.rgFontInfo[i] = new FontInfo(reader);
                 }
             }
 

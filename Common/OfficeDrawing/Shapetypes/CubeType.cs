@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(16)]
-    public class CubeType :ShapeType
+    public class CubeType : ShapeType
     {
         public CubeType()
         {

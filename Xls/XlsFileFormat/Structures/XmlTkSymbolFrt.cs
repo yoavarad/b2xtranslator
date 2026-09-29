@@ -20,7 +20,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkSymbolFrt(IStreamReader reader)
         {
-            this.markerStyle = new XmlTkToken(reader);   
+            this.markerStyle = new XmlTkToken(reader);
         }
     }
 }

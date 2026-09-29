@@ -40,7 +40,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             this.AxsSequence = new AxsSequence(reader);
 
             // [CRTMLFRT]
-            if(BiffRecord.GetNextRecordType(reader) == RecordType.CrtMlFrt)
+            if (BiffRecord.GetNextRecordType(reader) == RecordType.CrtMlFrt)
             {
                 this.CrtMlfrtSequence = new CrtMlfrtSequence(reader);
             }

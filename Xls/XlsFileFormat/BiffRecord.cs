@@ -74,14 +74,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public static RecordType GetNextRecordType(IStreamReader reader)
         {
             long position = reader.BaseStream.Position;
-                
+
             // read type of the next record
             var nextRecord = (RecordType)reader.ReadUInt16();
             ushort length = reader.ReadUInt16();
 
             // skip leading StartBlock/EndBlock records
             if (nextRecord == RecordType.StartBlock
-                || nextRecord == RecordType.EndBlock 
+                || nextRecord == RecordType.EndBlock
                 || nextRecord == RecordType.StartObject
                 || nextRecord == RecordType.EndObject
                 || nextRecord == RecordType.ChartFrtInfo)

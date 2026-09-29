@@ -4,7 +4,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.LeftMargin)] 
+    [BiffRecord(RecordType.LeftMargin)]
     public class LeftMargin : BiffRecord
     {
         public const RecordType ID = RecordType.LeftMargin;
@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
 
-            this.value = reader.ReadDouble(); 
+            this.value = reader.ReadDouble();
         }
     }
 }

@@ -24,7 +24,8 @@ namespace b2xtranslator.OpenXmlLib.SpreadsheetML
             this._type = contentType;
         }
 
-        public override string ContentType{
+        public override string ContentType
+        {
             get
             {
                 return this._type;
@@ -78,7 +79,7 @@ namespace b2xtranslator.OpenXmlLib.SpreadsheetML
         /// <returns></returns>
         public WorksheetPart GetWorksheetPart()
         {
-            return this._workSheetPart; 
+            return this._workSheetPart;
         }
 
         /// <summary>

@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.MulBlank)] 
+    [BiffRecord(RecordType.MulBlank)]
     public class MulBlank : BiffRecord
     {
         public const RecordType ID = RecordType.MulBlank;
@@ -56,7 +56,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.colLast = reader.ReadUInt16();
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

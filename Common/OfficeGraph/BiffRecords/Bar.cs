@@ -29,7 +29,7 @@ namespace b2xtranslator.OfficeGraph
         ///     1 to 100      Size of the overlap between data points
         /// </summary>
         public short pcOverlap;
-        
+
         /// <summary>
         /// An unsigned integer that specifies the width of the gap between the categories 
         /// and the left and right edges of the plot area as a percentage of the data point width divided by 2. 

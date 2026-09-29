@@ -41,7 +41,7 @@ namespace b2xtranslator.DocFileFormat
             this.rgb = new byte[this.crun];
             this.grpchpx = new CharacterPropertyExceptions[this.crun];
 
-            j = 4*(this.crun+1);
+            j = 4 * (this.crun + 1);
             for (int i = 0; i < this.rgb.Length; i++)
             {
                 //fill the rgb array

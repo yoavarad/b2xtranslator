@@ -239,7 +239,7 @@ namespace b2xtranslator.PresentationMLMapping
             var masterPart = this._ctx.GetOrCreateMasterMappingByMasterId(this.MasterId).MasterPart;
             string layoutFilename = Utils.SlideLayoutTypeToFilename(type, placeholderTypes);
 
-            
+
             if (!this.LayoutFilenameToLayoutPart.ContainsKey(layoutFilename))
             {
                 var slideLayoutDoc = Utils.GetDefaultDocument("slideLayouts." + layoutFilename);

@@ -58,8 +58,9 @@ namespace b2xtranslator.PptFileFormat
 
         public bool BulletColorPresent
         {
-            get {
-                    return (this.Mask & ParagraphMask.BulletColor) != 0;
+            get
+            {
+                return (this.Mask & ParagraphMask.BulletColor) != 0;
             }
         }
 
@@ -144,7 +145,7 @@ namespace b2xtranslator.PptFileFormat
         {
             try
             {
-            
+
                 this.IndentLevel = noIndentField ? (ushort)0 : reader.ReadUInt16();
                 this.Mask = (ParagraphMask)reader.ReadUInt32();
 

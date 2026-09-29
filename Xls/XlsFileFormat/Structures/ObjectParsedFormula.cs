@@ -13,7 +13,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
     public class ObjectParsedFormula
     {
         private ushort cce;
-        
+
         /// <summary>
         /// LinkedList with the Ptg records !!
         /// </summary>

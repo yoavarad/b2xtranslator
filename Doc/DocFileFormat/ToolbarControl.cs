@@ -46,7 +46,7 @@ namespace b2xtranslator.DocFileFormat
         public bool fNoCustomize;
         public bool fSaveDxy;
         public bool fBeginLine;
-        
+
 
         /// <summary>
         /// 

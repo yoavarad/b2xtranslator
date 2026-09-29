@@ -7,9 +7,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
     public class PtgFuncVar : AbstractPtg
     {
         public const PtgNumber ID = PtgNumber.PtgFuncVar;
-        public byte cparams; 
-        public ushort tab; 
-        public bool fCelFunc; 
+        public byte cparams;
+        public ushort tab;
+        public bool fCelFunc;
 
 
         public PtgFuncVar(IStreamReader reader, PtgNumber ptgid)
@@ -26,11 +26,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this.fCelFunc = false;
             if ((this.tab & 0xF000) == 1)
             {
-                this.fCelFunc = true; 
+                this.fCelFunc = true;
             }
-            this.tab = (ushort)(this.tab & 0x7FFF); 
-            
-            this.popSize = (uint)(this.cparams);  
+            this.tab = (ushort)(this.tab & 0x7FFF);
+
+            this.popSize = (uint)(this.cparams);
         }
     }
 }

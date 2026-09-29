@@ -24,7 +24,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("val height");
             this.Formulas.Add("prod width 1 2");
             this.Formulas.Add("prod height 1 2");
-            
+
             this.AdjustmentValues = "3600";
 
             this.ConnectorLocations = "@8,0;0,@9;@8,@7;@6,@9";

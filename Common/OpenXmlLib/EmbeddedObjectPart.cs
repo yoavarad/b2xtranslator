@@ -20,7 +20,8 @@ namespace b2xtranslator.OpenXmlLib
 
         public override string ContentType
         {
-            get {
+            get
+            {
                 switch (this._format)
                 {
                     case ObjectType.Excel:
@@ -37,10 +38,12 @@ namespace b2xtranslator.OpenXmlLib
             }
         }
 
-        internal override bool HasDefaultContentType { 
-            get {
+        internal override bool HasDefaultContentType
+        {
+            get
+            {
                 return true;
-            }         
+            }
         }
 
         public override string RelationshipType
@@ -67,9 +70,10 @@ namespace b2xtranslator.OpenXmlLib
 
         }
 
-        public override string TargetExt 
-        { 
-            get {
+        public override string TargetExt
+        {
+            get
+            {
                 switch (this._format)
                 {
                     case ObjectType.Excel:
@@ -83,7 +87,7 @@ namespace b2xtranslator.OpenXmlLib
                     default:
                         return ".bin";
                 }
-            } 
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
         {
             get { return this._chartSheetContentSequence; }
         }
-        
+
         public ChartLocation Location
         {
             get { return this._location; }

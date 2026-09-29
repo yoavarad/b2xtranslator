@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The WINDOWPROTECT record stores an option from the Protect Workbook dialog box.
     /// </summary>
-    [BiffRecord(RecordType.WinProtect)] 
+    [BiffRecord(RecordType.WinProtect)]
     public class WinProtect : BiffRecord
     {
         public const RecordType ID = RecordType.WinProtect;
@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         ///  =1 if the workbook windows are protected
         /// </summary>
         public ushort fLockWn;
-        
+
         public WinProtect(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fLockWn = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

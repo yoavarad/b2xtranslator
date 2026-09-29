@@ -126,7 +126,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// Advances the stream pointer accordingly.
         /// </summary>
         /// <returns>The byte cast to an int, or -1 if reading from the end of the stream.</returns>
-        internal int UncheckedReadByte() => 
+        internal int UncheckedReadByte() =>
             this._stream.ReadByte();
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The total number of bytes read into the buffer. 
         /// This might be less than the number of bytes requested if that number 
         /// of bytes are not currently available, or zero if the end of the stream is reached.</returns>
-        internal int UncheckedRead(byte[] array, int offset, int count) => 
+        internal int UncheckedRead(byte[] array, int offset, int count) =>
             this._stream.Read(array, offset, count);
 
         /// <summary>

@@ -50,7 +50,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             //write the xml
             this._writer.WriteStartElement("wne", "toolbarData", OpenXmlNamespaces.MicrosoftWordML);
-            this._writer.WriteAttributeString("r", "id", 
+            this._writer.WriteAttributeString("r", "id",
                 OpenXmlNamespaces.Relationships,
                 this._ctx.Docx.MainDocumentPart.CustomizationsPart.ToolbarsPart.RelIdToString
              );

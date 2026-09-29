@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(96)]
-    public class SmileyFaceType :ShapeType
+    public class SmileyFaceType : ShapeType
     {
         public SmileyFaceType()
         {

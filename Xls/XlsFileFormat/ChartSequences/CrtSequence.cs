@@ -126,7 +126,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.CrtMlFrt)
             {
-                var crtmlfrtseq = new CrtMlfrtSequence(reader); 
+                var crtmlfrtseq = new CrtMlfrtSequence(reader);
             }
 
 

@@ -6,7 +6,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This class is used to read data from a BLANK BiffRecord 
     /// </summary>
-    [BiffRecord(RecordType.Blank)] 
+    [BiffRecord(RecordType.Blank)]
     public class Blank : AbstractCellContent
     {
         public const RecordType ID = RecordType.Blank;
@@ -22,11 +22,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
-            
+
             // all fields are in base class
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

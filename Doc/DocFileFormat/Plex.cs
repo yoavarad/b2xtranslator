@@ -17,7 +17,7 @@ namespace b2xtranslator.DocFileFormat
             var reader = new VirtualStreamReader(tableStream);
 
             int n = 0;
-            if(structureLength > 0)
+            if (structureLength > 0)
             {
                 //this PLEX contains CPs and Elements
                 n = ((int)lcb - CP_LENGTH) / (structureLength + CP_LENGTH);
@@ -48,7 +48,7 @@ namespace b2xtranslator.DocFileFormat
                     this.Elements.Add(genericValue);
                 }
             }
-            else if(structureLength > 0)
+            else if (structureLength > 0)
             {
                 for (int i = 0; i < n; i++)
                 {
@@ -58,7 +58,7 @@ namespace b2xtranslator.DocFileFormat
                     this.Elements.Add(genericValue);
                 }
             }
-            
+
         }
 
         /// <summary>

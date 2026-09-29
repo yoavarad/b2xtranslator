@@ -8,7 +8,7 @@ using b2xtranslator.OfficeDrawing;
 namespace b2xtranslator.PptFileFormat
 {
     [OfficeRecord(1017)]
-    public class SlideShowSlideInfoAtom: Record
+    public class SlideShowSlideInfoAtom : Record
     {
         public int slideTime;
         public uint soundIdRef;
@@ -104,7 +104,7 @@ namespace b2xtranslator.PptFileFormat
             this.Reader.ReadBytes(8); //reserved
 
             this.duration = this.Reader.ReadInt32();
-                      
+
             int flags = this.Reader.ReadInt32();
             this.fFillProperty = Tools.Utils.BitmaskToBool(flags, 0x1 << 0);
             this.fRestartProperty = Tools.Utils.BitmaskToBool(flags, 0x1 << 1);
@@ -277,7 +277,7 @@ namespace b2xtranslator.PptFileFormat
     }
 
     [OfficeRecord(61737)]
-    public class TimeModifierAtom : Record 
+    public class TimeModifierAtom : Record
     {
         public uint type;
         //0 repeat count
@@ -370,7 +370,7 @@ namespace b2xtranslator.PptFileFormat
             this.fAnimationValuesPropertyUsed = Tools.Utils.BitmaskToBool(flags, 0x1 << 4);
             this.fValueTypePropertyUsed = Tools.Utils.BitmaskToBool(flags, 0x1 << 5);
             this.valueType = (TimeAnimateBehaviorValueTypeEnum)this.Reader.ReadInt32();
-        }        
+        }
     }
 
     public enum TimeAnimateBehaviorValueTypeEnum
@@ -460,7 +460,7 @@ namespace b2xtranslator.PptFileFormat
         public bool fToPropertyUsed;
         public bool fValueTypePropertyUsed;
         public TimeAnimateBehaviorValueTypeEnum valueType;
- 
+
         public TimeSetBehaviorAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {
@@ -638,8 +638,8 @@ namespace b2xtranslator.PptFileFormat
         public float fYTo;
         public byte fZoomContents;
 
-       public TimeScaleBehaviorAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance)
+        public TimeScaleBehaviorAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
+             : base(_reader, size, typeCode, version, instance)
         {
             int flags = this.Reader.ReadInt32();
             this.fByPropertyUsed = Tools.Utils.BitmaskToBool(flags, 0x1);
@@ -702,7 +702,7 @@ namespace b2xtranslator.PptFileFormat
 
         public ColorStruct colorBy;
         public ColorStruct colorFrom;
-        public ColorStruct colorTo;  
+        public ColorStruct colorTo;
 
         public TimeColorBehaviorAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
