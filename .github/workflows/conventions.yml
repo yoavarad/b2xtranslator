@@ -1,0 +1,35 @@
+name: Conventions
+
+on:
+  pull_request:
+
+jobs:
+  branch-name:
+    name: Branch name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch naming convention
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          if ! echo "$BRANCH" | grep -qE '^(feat|fix|docs|chore|refactor|test|ci|perf|release|task)/[a-z0-9-]+$'; then
+            echo "ERROR: branch '$BRANCH' does not follow convention: type/description"
+            echo "Valid types: feat fix docs chore refactor test ci perf release task"
+            echo "Example: feat/add-telemetry"
+            exit 1
+          fi
+
+  commit-messages:
+    name: Commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Install commitizen
+        run: uv tool install commitizen
+      - name: Check all commits are conventional
+        run: cz check --rev-range origin/main...HEAD
