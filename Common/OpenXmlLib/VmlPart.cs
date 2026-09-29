@@ -2,17 +2,17 @@
 {
     public class VmlPart : ContentPart
     {
-        
+
 
         internal VmlPart(OpenXmlPartContainer parent, int partIndex)
             : base(parent, partIndex)
         {
-           
+
         }
 
         public override string ContentType
         {
-            get 
+            get
             {
                 return "application/vnd.openxmlformats-officedocument.vmlDrawing";
             }

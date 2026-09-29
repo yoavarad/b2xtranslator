@@ -8,7 +8,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.ShrFmla)] 
+    [BiffRecord(RecordType.ShrFmla)]
     public class ShrFmla : BiffRecord
     {
         public const RecordType ID = RecordType.ShrFmla;
@@ -42,7 +42,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// LinkedList with the Ptg records !!
         /// </summary>
-        public Stack<AbstractPtg> ptgStack; 
+        public Stack<AbstractPtg> ptgStack;
 
         public ShrFmla(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -71,13 +71,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             {
                 this.Reader.BaseStream.Seek(oldStreamPosition, System.IO.SeekOrigin.Begin);
                 this.Reader.BaseStream.Seek(this.cce, System.IO.SeekOrigin.Current);
-                TraceLogger.Error(ex.StackTrace); 
+                TraceLogger.Error(ex.StackTrace);
 
             }
 
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

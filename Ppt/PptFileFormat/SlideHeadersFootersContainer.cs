@@ -7,13 +7,14 @@ namespace b2xtranslator.PptFileFormat
     public class SlideHeadersFootersContainer : RegularContainer
     {
         public SlideHeadersFootersContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
-                foreach (var rec in this.Children)
-                {
-                    
-                }
-        
+            foreach (var rec in this.Children)
+            {
+
+            }
+
         }
     }
 
@@ -39,7 +40,7 @@ namespace b2xtranslator.PptFileFormat
             this.fHasSlideNumber = ((mask & (1 << 3)) != 0);
             this.fHasHeader = ((mask & (1 << 4)) != 0);
             this.fHasFooter = ((mask & (1 << 5)) != 0);
-        }       
+        }
     }
 
 }

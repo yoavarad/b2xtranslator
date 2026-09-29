@@ -16,7 +16,7 @@ namespace UnitTests
     public class CompoundFileExtract
     {
         static void RunCompoundTests(string[] args)
-        {            
+        {
             const int bytesToReadAtOnce = 1024;
             var invalidChars = Path.GetInvalidFileNameChars();
 
@@ -39,7 +39,7 @@ namespace UnitTests
                 var extractionTime = new TimeSpan();
 
                 try
-                {                   
+                {
                     // init StorageReader
                     storageReader = new StructuredStorageReader(file);
 
@@ -60,7 +60,7 @@ namespace UnitTests
 
                     // create output directory
                     string outputDir = '_' + file.Replace('.', '_');
-                    outputDir = outputDir.Replace(':', '_'); 
+                    outputDir = outputDir.Replace(':', '_');
                     Directory.CreateDirectory(outputDir);
 
                     // for each stream                    
@@ -80,7 +80,7 @@ namespace UnitTests
                             writer.Write(array, 0, bytesRead);
                             writer.Flush();
                         } while (bytesRead == array.Length);
-                        
+
                         writer.Close();
                         fs.Close();
                     }
@@ -89,7 +89,7 @@ namespace UnitTests
                     storageReader.Close();
                     storageReader = null;
 
-                    extractionTime = DateTime.Now - begin;                                        
+                    extractionTime = DateTime.Now - begin;
                     Console.WriteLine("Streams extracted in " + string.Format("{0:N2}", extractionTime.TotalSeconds) + "s. (File: " + file + ")");
                 }
                 catch (Exception e)

@@ -29,7 +29,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public List<ExternSheetData> externSheetDataList;
         public LinkedList<SupBookData> supBookDataList;
         public LinkedList<XTIData> xtiDataList;
-        public List<Lbl> definedNameList; 
+        public List<Lbl> definedNameList;
 
         public int refWorkBookNumber;
 
@@ -50,7 +50,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             this.definedNameList = new List<Lbl>();
             this.refWorkBookNumber = 0;
 
-            this.styleData = new StyleData.StyleData(); 
+            this.styleData = new StyleData.StyleData();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="bsd">The Boundsheetdata element</param>
         public void addBoundSheetData(SheetData bsd)
         {
-            this.boundSheetDataList.Add(bsd); 
+            this.boundSheetDataList.Add(bsd);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             for (int i = 0; i < ext.cXTI; i++)
             {
                 var extdata = new ExternSheetData(ext.iSUPBOOK[i], ext.itabFirst[i], ext.itabLast[i]);
-                this.externSheetDataList.Add(extdata); 
+                this.externSheetDataList.Add(extdata);
             }
         }
 
@@ -81,16 +81,16 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="sup"></param>
         public void addSupBookData(SupBook sup)
         {
-            
+
             var supbook = new SupBookData(sup);
             if (!supbook.SelfRef)
             {
                 this.refWorkBookNumber++;
-                supbook.Number = this.refWorkBookNumber; 
+                supbook.Number = this.refWorkBookNumber;
             }
 
 
-            this.supBookDataList.AddLast(supbook); 
+            this.supBookDataList.AddLast(supbook);
         }
 
 
@@ -103,22 +103,22 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             var extSheet = this.externSheetDataList[index];
             SupBookData supData = null;
-            var listenum = this.supBookDataList.GetEnumerator();   
-            
+            var listenum = this.supBookDataList.GetEnumerator();
+
 
             int count = 0;
-            listenum.MoveNext(); 
+            listenum.MoveNext();
             do
             {
                 if (count == extSheet.iSUPBOOK)
                 {
-                    supData = listenum.Current; 
+                    supData = listenum.Current;
                 }
-                count++; 
+                count++;
             }
             while (listenum.MoveNext());
 
-            string back = ""; 
+            string back = "";
             if (supData != null && supData.SelfRef)
             {
                 string first = this.boundSheetDataList[extSheet.itabFirst].boundsheetRecord.stName.Value;
@@ -129,7 +129,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
                 }
                 else
                 {
-                    back = first + ":" + last; 
+                    back = first + ":" + last;
                 }
             }
             else
@@ -145,10 +145,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
                     back = first + ":" + last;
                 }
                 // add one to the index 
-                back = "[" + supData.Number.ToString()+"]" + back; 
+                back = "[" + supData.Number.ToString() + "]" + back;
 
             }
-            return back; 
+            return back;
         }
 
 
@@ -160,7 +160,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             var xti = new XTIData(this.xtiDataList.Count - 1, this.supBookDataList.Count - 1, xct.itab);
             this.xtiDataList.AddLast(xti);
-            this.supBookDataList.Last.Value.addXCT(xct); 
+            this.supBookDataList.Last.Value.addXCT(xct);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="xct"></param>
         public void addCRN(CRN crn)
         {
-            this.supBookDataList.Last.Value.addCRN(crn); 
+            this.supBookDataList.Last.Value.addCRN(crn);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="xct"></param>
         public void addEXTERNNAME(ExternName extname)
         {
-            this.supBookDataList.Last.Value.addEXTERNNAME(extname); 
+            this.supBookDataList.Last.Value.addEXTERNNAME(extname);
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="name"></param>
         public void addDefinedName(Lbl name)
         {
-            this.definedNameList.Add(name); 
+            this.definedNameList.Add(name);
         }
 
         /// <summary>
@@ -199,14 +199,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             if (this.definedNameList[id - 1].Name.Value.Length > 1)
             {
-                return this.definedNameList[id - 1].Name.Value; 
+                return this.definedNameList[id - 1].Name.Value;
             }
             else
             {
                 string internName = "_xlnm." + ExcelHelperClass.getNameStringfromBuiltInFunctionID(this.definedNameList[id - 1].Name.Value);
-                return internName; 
+                return internName;
             }
-           
+
         }
 
         /// <summary>
@@ -221,9 +221,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             SupBookData supData = null;
             var listenum = this.supBookDataList.GetEnumerator();
 
-            string back = ""; 
+            string back = "";
             int count = 0;
-            int counttwo = 0; 
+            int counttwo = 0;
             listenum.MoveNext();
             do
             {
@@ -244,9 +244,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
                 }
                 counttwo++;
             } while (nameEnum.MoveNext());
-            
 
-            return "[" + (supData.Number) + "]!" + back; 
+
+            return "[" + (supData.Number) + "]!" + back;
         }
 
         #region IVisitable Members

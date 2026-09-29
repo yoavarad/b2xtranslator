@@ -7,7 +7,8 @@ namespace b2xtranslator.PptFileFormat
     public class ProgTags : RegularContainer
     {
         public ProgTags(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {       
+            : base(_reader, size, typeCode, version, instance)
+        {
         }
     }
 }

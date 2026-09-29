@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkTickMarkSkipFrt(IStreamReader reader)
         {
-            this.nInternal = new XmlTkDWord(reader);   
+            this.nInternal = new XmlTkDWord(reader);
         }
     }
 }

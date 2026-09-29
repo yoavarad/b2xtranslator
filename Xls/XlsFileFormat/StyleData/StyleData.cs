@@ -7,12 +7,12 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 {
-    public class StyleData: IVisitable
+    public class StyleData : IVisitable
     {
         protected List<FormatData> formatDataList;
         public List<FormatData> FormatDataList
         {
-            get{ return this.formatDataList; }
+            get { return this.formatDataList; }
         }
 
         protected List<XFData> xfCellDataList;
@@ -64,7 +64,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             this.fillDataList = new List<FillData>();
             this.fontDataList = new List<FontData>();
             this.borderDataList = new List<BorderData>();
-            this.colorDataList = new List<RGBColor>(); 
+            this.colorDataList = new List<RGBColor>();
 
             // fill fillList with none and grey value 
 
@@ -81,10 +81,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         /// </summary>
         /// <param name="formatbiffrec"></param>
         public void addFormatValue(Format formatbiffrec)
-        { 
+        {
 
-                var fd = new FormatData(formatbiffrec.ifmt, formatbiffrec.rgb);
-                this.formatDataList.Add(fd);
+            var fd = new FormatData(formatbiffrec.ifmt, formatbiffrec.rgb);
+            this.formatDataList.Add(fd);
 
         }
 
@@ -101,23 +101,23 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             if (xf.fWrap != 0)
             {
                 xfdata.wrapText = true;
-                xfdata.hasAlignment = true; 
+                xfdata.hasAlignment = true;
             }
             if (xf.alc != 0xFF)
             {
                 xfdata.hasAlignment = true;
-                xfdata.horizontalAlignment = xf.alc; 
+                xfdata.horizontalAlignment = xf.alc;
             }
             if (xf.alcV != 0x02)
             {
-                xfdata.hasAlignment = true;               
+                xfdata.hasAlignment = true;
             }
             xfdata.verticalAlignment = xf.alcV;
 
             if (xf.fJustLast != 0)
             {
                 xfdata.hasAlignment = true;
-                xfdata.justifyLastLine = true; 
+                xfdata.justifyLastLine = true;
             }
             if (xf.fShrinkToFit != 0)
             {
@@ -156,20 +156,20 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             {
                 this.xfCellStyleDataList.Add(xfdata);
             }
-            else 
+            else
             {
                 this.xfCellDataList.Add(xfdata);
             }
-            int countxf = this.XFCellDataList.Count+this.xfCellStyleDataList.Count;
+            int countxf = this.XFCellDataList.Count + this.xfCellStyleDataList.Count;
             var fd = new FillData((StyleEnum)xf.fls, xf.icvFore, xf.icvBack);
             int fillDataId = this.addFillDataValue(fd);
-            TraceLogger.DebugInternal(fd.ToString() + " -- Number XF " + countxf.ToString() + " -- Number FillData: " + this.fillDataList.Count); 
+            TraceLogger.DebugInternal(fd.ToString() + " -- Number XF " + countxf.ToString() + " -- Number FillData: " + this.fillDataList.Count);
             xfdata.fillId = fillDataId;
 
             // add border data 
             var borderData = new BorderData();
             // diagonal value 
-            borderData.diagonalValue = (ushort)xf.grbitDiag; 
+            borderData.diagonalValue = (ushort)xf.grbitDiag;
             // create and add borderparts 
             var top = new BorderPartData((ushort)xf.dgTop, xf.icvTop);
             borderData.top = top;
@@ -187,9 +187,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             borderData.diagonal = diagonal;
 
             int borderId = this.addBorderDataValue(borderData);
-            xfdata.borderId = borderId; 
+            xfdata.borderId = borderId;
 
-             
+
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         public void addStyleValue(Style stylebiff)
         {
 
-                this.styleList.Add(stylebiff);
+            this.styleList.Add(stylebiff);
 
         }
 
@@ -219,9 +219,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             }
             else
             {
-                return listId; 
+                return listId;
             }
-            
+
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
 
             fontdata.fontFamily = font.bFamily;
-            fontdata.charSet = font.bCharSet; 
+            fontdata.charSet = font.bCharSet;
 
             // boolean values 
             fontdata.isItalic = font.fItalic;
@@ -262,20 +262,20 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             fontdata.isShadow = font.fShadow;
             fontdata.isStrike = font.fStrikeOut;
             fontdata.isBold = font.bls == Font.FontWeight.Bold;
-            
+
             // TODO avoid cast
             fontdata.uStyle = (UnderlineStyle)font.uls;
             fontdata.vertAlign = (SuperSubScriptStyle)font.sss;
 
-            fontdata.color = font.icv; 
+            fontdata.color = font.icv;
 
             // add the value to the list 
-            this.fontDataList.Add(fontdata); 
+            this.fontDataList.Add(fontdata);
         }
 
         public void setColorList(List<RGBColor> colorList)
         {
-            this.colorDataList = colorList; 
+            this.colorDataList = colorList;
         }
 
         #region IVisitable Members

@@ -42,10 +42,10 @@ namespace b2xtranslator.OfficeGraph
 
             this.rw = reader.ReadUInt16();
             this.col = reader.ReadUInt16();
-            reader.ReadByte(); 
+            reader.ReadByte();
             this.ixfe = reader.ReadUInt16();
-            this.num = reader.ReadDouble(); 
-            
+            this.num = reader.ReadDouble();
+
             // assert that the correct number of bytes has been read from the stream
             // Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
         }

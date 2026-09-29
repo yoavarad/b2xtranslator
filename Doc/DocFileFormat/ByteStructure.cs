@@ -14,7 +14,7 @@ namespace b2xtranslator.DocFileFormat
         public byte[] RawBytes => this._rawBytes;
 
 
-        public ByteStructure(VirtualStreamReader reader, int length) 
+        public ByteStructure(VirtualStreamReader reader, int length)
         {
             this._reader = reader;
             this._length = length;
@@ -27,7 +27,7 @@ namespace b2xtranslator.DocFileFormat
             }
         }
 
-        public override string ToString() => 
+        public override string ToString() =>
             Utils.GetHashDump(this._rawBytes);
     }
 }

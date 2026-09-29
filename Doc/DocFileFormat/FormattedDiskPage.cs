@@ -2,7 +2,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.DocFileFormat
 {
-    public class FormattedDiskPage 
+    public class FormattedDiskPage
     {
         public enum FKPType
         {

@@ -44,7 +44,7 @@ namespace b2xtranslator.DocFileFormat
 
                     //there is a native TAP in the data stream
                     uint fc = System.BitConverter.ToUInt32(sprm.Arguments, 0);
-                    
+
                     //get the size of the following grpprl
                     //byte[] sizebytes = new byte[2];
                     //dataStream.Read(sizebytes, 2, (int)fc);
@@ -67,7 +67,7 @@ namespace b2xtranslator.DocFileFormat
                         }
                     }
                 }
-                
+
             }
         }
 

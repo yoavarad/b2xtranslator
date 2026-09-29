@@ -7,7 +7,7 @@ namespace b2xtranslator.OpenXmlLib
         protected string _id;
         protected string _relationshipType;
         protected string _target;
-        
+
         public ExternalRelationship(string id, string relationshipType, Uri targetUri)
         {
             this._id = id;
@@ -27,7 +27,7 @@ namespace b2xtranslator.OpenXmlLib
             get { return this._id; }
             set { this._id = value; }
         }
-        
+
         public string RelationshipType
         {
             get { return this._relationshipType; }

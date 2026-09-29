@@ -11,7 +11,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Joins = JoinStyle.round;
             this.Path = "wr-21600,,21600,43200,,,21600,21600nfewr-21600,,21600,43200,,,21600,21600l,21600nsxe";
             this.Formulas = new List<string>();
-              
+
             this.Formulas.Add("val #2");
             this.Formulas.Add("val #3");
             this.Formulas.Add("val #4");
@@ -29,7 +29,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             var HandleTwo = new Handle();
             HandleOne.position = "@2,#1";
-            HandleOne.polar = "@0,@1"; 
+            HandleOne.polar = "@0,@1";
             this.Handles.Add(HandleTwo);
         }
     }

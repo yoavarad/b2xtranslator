@@ -31,7 +31,7 @@ namespace b2xtranslator.PptFileFormat
         public TextHeaderAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {
-            this.TextType = (TextType) this.Reader.ReadUInt32();
+            this.TextType = (TextType)this.Reader.ReadUInt32();
         }
 
         public void HandleTextDataRecord(ITextDataRecord tdRecord)

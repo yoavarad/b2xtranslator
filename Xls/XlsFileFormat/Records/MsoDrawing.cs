@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.MsoDrawing)] 
+    [BiffRecord(RecordType.MsoDrawing)]
     public class MsoDrawing : BiffRecord
     {
         public const RecordType ID = RecordType.MsoDrawing;
@@ -21,7 +21,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // initialize class members from stream
             this.rgChildRec = Record.ReadRecord(reader.BaseStream);
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
             //Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
 

@@ -5,10 +5,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
     /// <summary>
     /// Abstract class which stores some data
     /// </summary>
-    public abstract class AbstractCellData: IComparable
+    public abstract class AbstractCellData : IComparable
     {
         /// Attributes ///
-        
+
         /// <summary>
         /// Row of the Object
         /// </summary>
@@ -17,11 +17,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// Getter Setter from Row 
         /// </summary>
 	    public int Row
-	    {
-		    get { return this.row;}
-		    set { this.row = value;}
-	    }
-	
+        {
+            get { return this.row; }
+            set { this.row = value; }
+        }
+
         /// <summary>
         /// The column of the object 
         /// </summary>
@@ -30,10 +30,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// Getter Setter from col 
         /// </summary>
 	    public int Col
-	    {
-		    get { return this.col;}
-		    set { this.col = value;}
-	    }
+        {
+            get { return this.col; }
+            set { this.col = value; }
+        }
 
         /// <summary>
         /// TemplateID from this object 
@@ -55,7 +55,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <summary>
         /// Ctor 
         /// </summary>
-        public AbstractCellData() : this (0,0,0)  { }
+        public AbstractCellData() : this(0, 0, 0) { }
 
         /// <summary>
         /// ctor
@@ -67,7 +67,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.row = row;
             this.col = col;
-            this.templateID = templateID; 
+            this.templateID = templateID;
         }
 
         /// Abstract Methods ///
@@ -99,6 +99,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             else
                 return (0);
         }
-        
+
     }
 }

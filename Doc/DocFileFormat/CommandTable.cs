@@ -72,7 +72,7 @@ namespace b2xtranslator.DocFileFormat
                         break;
                     case 0x10:
                         //it's a TcgSttbf
-                        this.CommandStringTable = new StringTable(typeof(string), reader); 
+                        this.CommandStringTable = new StringTable(typeof(string), reader);
                         break;
                     case 0x11:
                         //it's a MacroNames table

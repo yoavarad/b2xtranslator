@@ -19,7 +19,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             }
             else
             {
-                this.Data = "TRUE"; 
+                this.Data = "TRUE";
             }
             this.Length = 2;
             this.type = PtgType.Operator;

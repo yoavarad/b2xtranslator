@@ -6,7 +6,7 @@ namespace b2xtranslator.OfficeDrawing
     public class GD
     {
         public int sgf;
-       
+
         public bool fCalculatedParam1;
         public bool fCalculatedParam2;
         public bool fCalculatedParam3;
@@ -39,8 +39,8 @@ namespace b2xtranslator.OfficeDrawing
 
         public ushort cbElemVert;
 
-        public PathParser(byte[] pSegmentInfo, byte[] pVertices):this(pSegmentInfo,pVertices,null)
-        {}
+        public PathParser(byte[] pSegmentInfo, byte[] pVertices) : this(pSegmentInfo, pVertices, null)
+        { }
 
         public PathParser(byte[] pSegmentInfo, byte[] pVertices, byte[] pGuides)
         {
@@ -53,7 +53,7 @@ namespace b2xtranslator.OfficeDrawing
                 ushort cbElemG = System.BitConverter.ToUInt16(pGuides, 4);
                 for (int i = 6; i < pGuides.Length; i += cbElemG)
                 {
-                    this.Guides.Add(new GD(System.BitConverter.ToUInt16(pGuides, i), System.BitConverter.ToInt16(pGuides, i + 2), System.BitConverter.ToInt16(pGuides, i + 4),System.BitConverter.ToInt16(pGuides, i+6)));
+                    this.Guides.Add(new GD(System.BitConverter.ToUInt16(pGuides, i), System.BitConverter.ToInt16(pGuides, i + 2), System.BitConverter.ToInt16(pGuides, i + 4), System.BitConverter.ToInt16(pGuides, i + 6)));
                 }
             }
 
@@ -84,7 +84,7 @@ namespace b2xtranslator.OfficeDrawing
             int y;
             for (int i = 6; i <= pVertices.Length - this.cbElemVert; i += this.cbElemVert)
             {
-                switch(this.cbElemVert)
+                switch (this.cbElemVert)
                 {
                     case 4:
                         x = System.BitConverter.ToInt16(pVertices, i);
@@ -95,7 +95,7 @@ namespace b2xtranslator.OfficeDrawing
                         }
 
                         y = System.BitConverter.ToInt16(pVertices, i + this.cbElemVert / 2);
-                        this.Values.Add(new Point(x,y));
+                        this.Values.Add(new Point(x, y));
                         break;
                     case 8:
                         x = System.BitConverter.ToInt32(pVertices, i);
@@ -111,7 +111,7 @@ namespace b2xtranslator.OfficeDrawing
 
                         y = System.BitConverter.ToInt32(pVertices, i + this.cbElemVert / 2);
                         this.Values.Add(
-                             new Point(x,y));
+                             new Point(x, y));
                         break;
                 }
             }

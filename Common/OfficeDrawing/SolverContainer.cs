@@ -8,17 +8,18 @@ namespace b2xtranslator.OfficeDrawing
     public class SolverContainer : RegularContainer
     {
         public SolverContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
-                foreach (var item in this.Children)
+            foreach (var item in this.Children)
+            {
+                switch (item.TypeCode)
                 {
-                    switch (item.TypeCode)
-                    {
-                        default:
-                            break;
-                    }
+                    default:
+                        break;
                 }
-        
+            }
+
         }
     }
 
@@ -33,7 +34,8 @@ namespace b2xtranslator.OfficeDrawing
         public uint cptiB;
 
         public FConnectorRule(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
             this.ruid = this.Reader.ReadUInt32();
             this.spidA = this.Reader.ReadUInt32();
@@ -51,7 +53,8 @@ namespace b2xtranslator.OfficeDrawing
         public uint spid;
 
         public FArcRule(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
             this.ruid = this.Reader.ReadUInt32();
             this.spid = this.Reader.ReadUInt32();
@@ -65,7 +68,8 @@ namespace b2xtranslator.OfficeDrawing
         public uint spid;
 
         public FCalloutRule(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
+            : base(_reader, size, typeCode, version, instance)
+        {
 
             this.ruid = this.Reader.ReadUInt32();
             this.spid = this.Reader.ReadUInt32();

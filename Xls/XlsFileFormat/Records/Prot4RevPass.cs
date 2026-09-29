@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The PROT4REV record stores an encrypted password for shared-workbook protection.
     /// </summary>
-    [BiffRecord(RecordType.Prot4RevPass)] 
+    [BiffRecord(RecordType.Prot4RevPass)]
     public class Prot4RevPass : BiffRecord
     {
         public const RecordType ID = RecordType.Prot4RevPass;
@@ -29,9 +29,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.wRevPass = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

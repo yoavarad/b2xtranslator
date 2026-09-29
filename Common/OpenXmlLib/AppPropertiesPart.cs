@@ -19,6 +19,6 @@ namespace b2xtranslator.OpenXmlLib
 
         public override string TargetName { get { return "app"; } }
         public override string TargetDirectory { get { return "docProps"; } }
-        
+
     }
 }

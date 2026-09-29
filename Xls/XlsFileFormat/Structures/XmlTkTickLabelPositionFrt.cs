@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkTickLabelPositionFrt(IStreamReader reader)
         {
-            this.xmltkHigh = new XmlTkToken(reader);   
+            this.xmltkHigh = new XmlTkToken(reader);
         }
     }
 }

@@ -3,9 +3,9 @@ namespace b2xtranslator.OpenXmlLib.WordprocessingML
     public class GlossaryPart : MainDocumentPart
     {
         public GlossaryPart(OpenXmlPartContainer parent, string contentType)
-            : base (parent, contentType)
+            : base(parent, contentType)
         {
-            
+
         }
 
         public override string RelationshipType { get { return OpenXmlRelationshipTypes.GlossaryDocument; } }

@@ -10,8 +10,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
         public BorderPartData(ushort style, int colorId)
         {
-            this.style = style; 
-            this.colorId = colorId; 
+            this.style = style;
+            this.colorId = colorId;
         }
 
         /// <summary>
@@ -53,6 +53,15 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
             // Return true if the fields match:
             return (this.colorId == bpd.colorId) && (this.style == bpd.style);
+        }
+
+        /// <summary>
+        /// Hash code consistent with Equals
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return System.HashCode.Combine(this.colorId, this.style);
         }
     }
 

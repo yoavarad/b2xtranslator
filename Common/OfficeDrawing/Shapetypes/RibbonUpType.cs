@@ -45,7 +45,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("val height");
 
             this.AdjustmentValues = "5400,18900";
-            
+
             this.ConnectorLocations = "@25,0;2700,@22;@25,@10;@26,@22";
 
             this.ConnectorAngles = "270,180,90,0";
@@ -55,10 +55,10 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Handles = new List<Handle>();
             var HandleOne = new Handle();
             var HandleTwo = new Handle();
-            HandleOne.position="#0,topLeft";
-            HandleOne.xrange="2700,8100";
-            HandleTwo.position="center,#1";
-            HandleTwo.yrange="14400,21600";
+            HandleOne.position = "#0,topLeft";
+            HandleOne.xrange = "2700,8100";
+            HandleTwo.position = "center,#1";
+            HandleTwo.yrange = "14400,21600";
             this.Handles.Add(HandleOne);
             this.Handles.Add(HandleTwo);
 

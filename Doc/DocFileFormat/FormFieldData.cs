@@ -255,7 +255,7 @@ namespace b2xtranslator.DocFileFormat
         }
 
         public enum TextboxType
-        { 
+        {
             /// <summary>
             /// Specifies that the textbox value is regular text.
             /// </summary>

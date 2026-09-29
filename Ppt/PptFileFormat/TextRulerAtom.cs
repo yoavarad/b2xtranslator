@@ -72,7 +72,7 @@ namespace b2xtranslator.PptFileFormat
             if (this.fLeftMargin5) this.leftMargin5 = this.Reader.ReadInt16();
             if (this.fIndent5) this.indent5 = this.Reader.ReadInt16();
 
-        }        
+        }
     }
 
     public class TabStops

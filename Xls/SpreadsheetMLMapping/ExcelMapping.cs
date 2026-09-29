@@ -18,11 +18,11 @@ namespace b2xtranslator.SpreadsheetMLMapping
         public ExcelMapping(ExcelContext xlscon, OpenXmlPart targetPart)
             : base(XmlWriter.Create(targetPart.GetStream(), xlscon.WriterSettings))
         {
-            this.xlscon = xlscon; 
+            this.xlscon = xlscon;
         }
 
-        public abstract void Apply(XlsDocument xls); 
-        }
+        public abstract void Apply(XlsDocument xls);
+    }
 
-    
+
 }

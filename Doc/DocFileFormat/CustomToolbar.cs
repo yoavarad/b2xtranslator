@@ -62,7 +62,7 @@ namespace b2xtranslator.DocFileFormat
             this.cCtls = reader.ReadInt32();
             this.rTBC = new List<ToolbarControl>();
             for (int i = 0; i < this.cCtls; i++)
-            {   
+            {
                 this.rTBC.Add(new ToolbarControl(reader));
             }
         }

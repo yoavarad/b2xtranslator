@@ -86,6 +86,15 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         }
 
         /// <summary>
+        /// Hash code consistent with Equals
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return System.HashCode.Combine(this.fillPatern, this.icvBack, this.icvFore);
+        }
+
+        /// <summary>
         /// Simple toString method
         /// </summary>
         /// <returns></returns>

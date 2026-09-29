@@ -4,7 +4,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.ColInfo)] 
+    [BiffRecord(RecordType.ColInfo)]
     public class ColInfo : BiffRecord
     {
         public const RecordType ID = RecordType.ColInfo;
@@ -34,8 +34,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.coldx = reader.ReadUInt16();
             this.ixfe = reader.ReadUInt16();
 
-            int buffer = reader.ReadUInt16(); 
-            
+            int buffer = reader.ReadUInt16();
+
             ///
             /// A - fHidden (1 bit)
             /// B - fUserSet (1 bit)
@@ -53,13 +53,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             this.iOutLevel = (int)(buffer & 0x0700) >> 0x8;
 
-            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x1000); 
+            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x1000);
 
             // read two following not documented bytes 
-            reader.ReadUInt16(); 
+            reader.ReadUInt16();
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

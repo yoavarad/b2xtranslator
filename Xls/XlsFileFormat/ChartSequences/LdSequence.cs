@@ -22,8 +22,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
         public CrtMlfrtSequence CrtMlfrtSequence;
 
-        public End End; 
-        
+        public End End;
+
         public LdSequence(IStreamReader reader)
             : base(reader)
         {
@@ -31,7 +31,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             /// Legend Begin Pos ATTACHEDLABEL [FRAME] [CrtLayout12] [TEXTPROPS] [CRTMLFRT] End
 
             // Legend 
-            this.Legend = (Legend)BiffRecord.ReadRecord(reader); 
+            this.Legend = (Legend)BiffRecord.ReadRecord(reader);
 
             // Begin
             this.Begin = (Begin)BiffRecord.ReadRecord(reader);
@@ -40,7 +40,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             this.Pos = (Pos)BiffRecord.ReadRecord(reader);
 
             // [ATTACHEDLABEL]
-            this.AttachedLabelSequence = new AttachedLabelSequence(reader); 
+            this.AttachedLabelSequence = new AttachedLabelSequence(reader);
 
             // [FRAME]
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Frame)
@@ -68,7 +68,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             }
 
             // End 
-            this.End = (End)BiffRecord.ReadRecord(reader); 
+            this.End = (End)BiffRecord.ReadRecord(reader);
 
         }
 

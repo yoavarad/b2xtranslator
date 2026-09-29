@@ -216,7 +216,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.fShowLabelAndPerc = Utils.BitmaskToBool(flags, 0x800);
             this.fShowPercent = Utils.BitmaskToBool(flags, 0x1000);
             this.fShowBubbleSizes = Utils.BitmaskToBool(flags, 0x2000);
-            this.fShowLabel = Utils.BitmaskToBool(flags, 0x4000); 
+            this.fShowLabel = Utils.BitmaskToBool(flags, 0x4000);
             //0x8000 is reserved
             this.icvText = reader.ReadUInt16();
             ushort values = reader.ReadUInt16();

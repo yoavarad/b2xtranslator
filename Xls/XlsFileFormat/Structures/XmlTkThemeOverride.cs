@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkThemeOverride(IStreamReader reader)
         {
-            this.rgThemeOverride = new XmlTkBlob(reader);   
+            this.rgThemeOverride = new XmlTkBlob(reader);
         }
     }
 }

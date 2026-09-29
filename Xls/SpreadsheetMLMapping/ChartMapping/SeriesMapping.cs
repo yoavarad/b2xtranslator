@@ -24,7 +24,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             // c:idx
             // TODO: check the meaning of this element
             writeValueElement(Dml.Chart.ElIdx, seriesFormatSequence.SerToCrt.id.ToString());
-            
+
             // c:order
             writeValueElement(Dml.Chart.ElOrder, seriesFormatSequence.order.ToString());
 
@@ -35,7 +35,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 if (aiSequence.BRAI.braiId == BRAI.BraiId.SeriesNameOrLegendText)
                 {
                     var brai = aiSequence.BRAI;
-                    
+
                     if (aiSequence.SeriesText != null)
                     {
                         switch (brai.rt)

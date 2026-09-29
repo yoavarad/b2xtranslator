@@ -47,7 +47,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             int lastSepxCp = 0;
             foreach (int sepxCp in this._doc.AllSepx.Keys)
                 lastSepxCp = sepxCp;
-            
+
             var lastSepx = this._doc.AllSepx[lastSepxCp];
             lastSepx.Convert(new SectionPropertiesMapping(this._writer, this._ctx, this._sectionNr));
 

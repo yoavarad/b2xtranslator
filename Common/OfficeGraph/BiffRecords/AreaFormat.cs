@@ -82,7 +82,7 @@ namespace b2xtranslator.OfficeGraph
             // TODO: handle default cases and ignoring of fields
             this.icvFore = reader.ReadUInt16();
             this.icvBack = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
             Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }

@@ -33,7 +33,7 @@ namespace b2xtranslator.PptFileFormat
                 this.Runs.Add(run);
             }
 
-        }       
+        }
     }
 
     public class TextSIRun
@@ -61,7 +61,7 @@ namespace b2xtranslator.PptFileFormat
         public ushort lid;
         public ushort bidi;
         public ushort altLid;
-        
+
         public TextSIException(BinaryReader reader)
         {
             this.flags = reader.ReadUInt32();

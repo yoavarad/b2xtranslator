@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             this.colFirst = crn.colFirst;
             this.colLast = crn.colLast;
             this.rw = crn.rw;
-            this.oper = crn.oper; 
+            this.oper = crn.oper;
         }
     }
 }

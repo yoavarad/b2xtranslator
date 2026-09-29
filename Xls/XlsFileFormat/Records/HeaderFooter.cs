@@ -6,7 +6,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.HeaderFooter)] 
+    [BiffRecord(RecordType.HeaderFooter)]
     public class HeaderFooter : BiffRecord
     {
         public const RecordType ID = RecordType.HeaderFooter;
@@ -113,7 +113,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             //this.strFooterFirst = new XLUnicodeString(reader).Value;
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

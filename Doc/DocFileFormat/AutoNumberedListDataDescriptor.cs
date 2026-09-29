@@ -26,7 +26,7 @@ namespace b2xtranslator.DocFileFormat
         /// Not used
         /// </summary>
         public bool fSpareX;
-	
+
         /// <summary>
         /// Characters displayed before/after auto number
         /// </summary>
@@ -65,7 +65,7 @@ namespace b2xtranslator.DocFileFormat
                     this.fSpareX = true;
 
                 this.rgxch = new char[32];
-                int j=0;
+                int j = 0;
                 for (int i = 24; i <= 88; i += 2)
                 {
                     this.rgxch[j] = Convert.ToChar(BitConverter.ToInt16(bytes, i));

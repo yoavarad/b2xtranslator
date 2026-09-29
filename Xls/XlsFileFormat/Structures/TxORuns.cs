@@ -27,7 +27,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
         {
             int noOfRuns = (cbRuns / 8) - 1;
             this.rgTxoRuns = new Run[noOfRuns];
-            
+
             for (int i = 0; i < noOfRuns; i++)
             {
                 if (i == 1028 && BiffRecord.GetNextRecordType(reader) == RecordType.Continue)

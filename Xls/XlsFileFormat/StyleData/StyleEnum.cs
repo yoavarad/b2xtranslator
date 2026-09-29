@@ -5,8 +5,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
     public enum StyleEnum : ushort
     {
         FLSNULL = 0x00,
-        FLSSOLID = 0x01, 
-        FLSMEDGRAY = 0x02,    
+        FLSSOLID = 0x01,
+        FLSMEDGRAY = 0x02,
         FLSDKGRAY = 0x03,
         FLSLTGRAY = 0x04,
         FLSDKHOR = 0x05,
@@ -22,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         FLSLTGRID = 0x0F,
         FLSLTTRELLIS = 0x10,
         FLSGRAY125 = 0x11,
-        FLSGRAY0625 = 0x12        
+        FLSGRAY0625 = 0x12
     }
 
     public enum SuperSubScriptStyle : ushort
@@ -44,7 +44,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
     public enum BorderPartType : ushort
     {
-        bottom, 
+        bottom,
         top,
         left,
         right,

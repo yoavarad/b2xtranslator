@@ -155,7 +155,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 case 0x000B: return "dashDotDot";
                 case 0x000C: return "mediumDashDotDot";
                 case 0x000D: return "slantDashDot";
-                default: return "none"; 
+                default: return "none";
             }
         }
 
@@ -184,12 +184,12 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 _writer.WriteAttributeString("val", Convert.ToString(font.size.ToPoints(), CultureInfo.GetCultureInfo("en-US")));
                 _writer.WriteEndElement();
             }
-            
+
             // font name 
             if (type == FontElementType.NormalStyle)
                 _writer.WriteStartElement("name");
             else if (type == FontElementType.String)
-                _writer.WriteStartElement("rFont"); 
+                _writer.WriteStartElement("rFont");
             _writer.WriteAttributeString("val", font.fontName);
             _writer.WriteEndElement();
             // font family 
@@ -253,7 +253,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             StylesMapping.WriteRgbColor(_writer, StyleMappingHelper.convertColorIdToRGB(font.color));
 
             // end font element 
-            _writer.WriteEndElement(); 
+            _writer.WriteEndElement();
         }
 
 
@@ -275,8 +275,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 case 0x01: return "left";
                 case 0x03: return "right";
 
- 
-                default: return ""; 
+
+                default: return "";
             }
         }
 
@@ -299,6 +299,6 @@ namespace b2xtranslator.SpreadsheetMLMapping
         }
     }
 
-    
+
 
 }

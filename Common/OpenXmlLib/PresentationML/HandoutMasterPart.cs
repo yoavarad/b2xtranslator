@@ -5,8 +5,8 @@ namespace b2xtranslator.OpenXmlLib.PresentationML
         public HandoutMasterPart(OpenXmlPartContainer parent, int partIndex)
             : base(parent, partIndex)
         {
-        } 
-        
+        }
+
         public override string ContentType
         {
             get { return PresentationMLContentTypes.HandoutMaster; }

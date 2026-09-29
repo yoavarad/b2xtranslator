@@ -55,7 +55,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                     // c:plotVisOnly
                     writeValueElement(Dml.Chart.ElPlotVisOnly, chartFormatsSequence.ShtProps.fPlotVisOnly ? "1" : "0");
-                    
+
                     // c:dispBlanksAs
                     string dispBlanksAs = string.Empty;
                     switch (chartFormatsSequence.ShtProps.mdBlank)

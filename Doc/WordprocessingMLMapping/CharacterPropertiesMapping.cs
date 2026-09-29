@@ -73,7 +73,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write properties
-            if (this._writer !=null && (this._rPr.ChildNodes.Count > 0 || this._rPr.Attributes.Count > 0))
+            if (this._writer != null && (this._rPr.ChildNodes.Count > 0 || this._rPr.Attributes.Count > 0))
             {
                 this._rPr.WriteTo(this._writer);
             }
@@ -96,7 +96,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         this._currentIstd = System.BitConverter.ToUInt16(sprm.Arguments, 0);
                         appendValueElement(parent, "rStyle", StyleSheetMapping.MakeStyleId(this._doc.Styles.Styles[this._currentIstd]), true);
                         break;
-                    
+
                     //Element flags
                     case 0x085A:
                         appendFlagElement(parent, sprm, "rtl", true);
@@ -175,7 +175,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         langid = new LanguageId(System.BitConverter.ToInt16(sprm.Arguments, 0));
                         langid.Convert(new LanguageIdMapping(lang, LanguageIdMapping.LanguageType.Complex));
                         break;
-                    
+
                     //borders
                     case 0x6865:
                     case 0xCA72:
@@ -225,7 +225,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case 0x4A61:
                         appendValueElement(parent, "szCs", System.BitConverter.ToInt16(sprm.Arguments, 0).ToString(), true);
                         break;
-                    
+
                     //font family
                     case 0x4A4F:
                         var ascii = this._nodeFactory.CreateAttribute("w", "ascii", OpenXmlNamespaces.WordprocessingML);
@@ -233,12 +233,12 @@ namespace b2xtranslator.WordprocessingMLMapping
                         ascii.Value = ffn.xszFtn;
                         rFonts.Attributes.Append(ascii);
                         break;
-                   case 0x4A50:
-                       var eastAsia = this._nodeFactory.CreateAttribute("w", "eastAsia", OpenXmlNamespaces.WordprocessingML);
-                       var ffnAsia = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
-                       eastAsia.Value = ffnAsia.xszFtn;
-                       rFonts.Attributes.Append(eastAsia);
-                       break;
+                    case 0x4A50:
+                        var eastAsia = this._nodeFactory.CreateAttribute("w", "eastAsia", OpenXmlNamespaces.WordprocessingML);
+                        var ffnAsia = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
+                        eastAsia.Value = ffnAsia.xszFtn;
+                        rFonts.Attributes.Append(eastAsia);
+                        break;
                     case 0x4A51:
                         var ansi = this._nodeFactory.CreateAttribute("w", "hAnsi", OpenXmlNamespaces.WordprocessingML);
                         var ffnAnsi = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
@@ -306,7 +306,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         protected override void appendFlagElement(XmlElement node, SinglePropertyModifier sprm, string elementName, bool unique)
         {
             byte flag = sprm.Arguments[0];
-            if(flag != 128)
+            if (flag != 128)
             {
                 var ele = this._nodeFactory.CreateElement("w", elementName, OpenXmlNamespaces.WordprocessingML);
                 var val = this._nodeFactory.CreateAttribute("w", "val", OpenXmlNamespaces.WordprocessingML);
@@ -336,7 +336,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     //no attribute means true
                     node.AppendChild(ele);
                 }
-                else if(flag == 129)
+                else if (flag == 129)
                 {
                     //Invert the value of the style
 
@@ -346,7 +346,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     {
                         styleId = this._currentIstd;
                     }
-                    else if(this._currentPapx != null)
+                    else if (this._currentPapx != null)
                     {
                         styleId = this._currentPapx.istd;
                     }
@@ -366,7 +366,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     }
 
                     //apply the toggle values to get the real value of the style
-                    bool stylesVal = applyToggleHierachy(sprm); 
+                    bool stylesVal = applyToggleHierachy(sprm);
 
                     //invert it
                     if (stylesVal)

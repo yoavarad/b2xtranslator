@@ -11,7 +11,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// It has no record data field and is C0010000h. Any application other 
     /// than Excel 2000 that edits the file should not write out this record.
     /// </summary>
-    [BiffRecord(RecordType.Excel9File)] 
+    [BiffRecord(RecordType.Excel9File)]
     public class Excel9File : BiffRecord
     {
         public const RecordType ID = RecordType.Excel9File;
@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             Debug.Assert(this.Id == ID);
 
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Length == 0); 
+            Debug.Assert(this.Length == 0);
         }
     }
 }

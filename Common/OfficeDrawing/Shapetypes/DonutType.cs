@@ -3,14 +3,14 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(23)]
-    class DonutType: ShapeType
+    class DonutType : ShapeType
     {
         public DonutType()
         {
             this.ShapeConcentricFill = false;
             this.Joins = JoinStyle.round;
             this.Path = "m,10800qy10800,,21600,10800,10800,21600,,10800xm@0,10800qy10800@2@1,10800,10800@0@0,10800xe";
-                       
+
             this.Formulas = new List<string>();
             this.Formulas.Add("val #0");
             this.Formulas.Add("sum width 0 #0");

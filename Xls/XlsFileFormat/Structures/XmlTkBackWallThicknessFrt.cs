@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkBackWallThicknessFrt(IStreamReader reader)
         {
-            this.wallThickness = new XmlTkDWord(reader);   
+            this.wallThickness = new XmlTkDWord(reader);
         }
     }
 }
