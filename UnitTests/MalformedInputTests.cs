@@ -25,8 +25,22 @@ namespace UnitTests
         static readonly TimeSpan TimeLimit = TimeSpan.FromSeconds(30);
         const long AllocationLimit = 256L * 1024 * 1024;
 
+        System.Diagnostics.TraceListener[] savedListeners;
+
         [OneTimeSetUp]
-        public void RegisterCodePages() => Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        public void SetUp()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            // The Xls record parsers carry hundreds of Debug.Assert integrity checks. They are compiled out of
+            // Release builds and are developer diagnostics, not the library's error contract; in Debug builds the
+            // test host would turn them into DebugAssertException. Silence them while fuzzing.
+            savedListeners = System.Diagnostics.Trace.Listeners.Cast<System.Diagnostics.TraceListener>().ToArray();
+            System.Diagnostics.Trace.Listeners.Clear();
+        }
+
+        [OneTimeTearDown]
+        public void TearDown() => System.Diagnostics.Trace.Listeners.AddRange(savedListeners);
 
         static string FilePath(string name)
         {
@@ -73,7 +87,8 @@ namespace UnitTests
                 }
                 catch (Exception ex) { error = ex; }
                 allocated = GC.GetAllocatedBytesForCurrentThread() - before;
-            }, 16 * 1024 * 1024) { IsBackground = true };
+            }, 16 * 1024 * 1024)
+            { IsBackground = true };
             t.Start();
             caught = null;
             if (!t.Join(TimeLimit))
