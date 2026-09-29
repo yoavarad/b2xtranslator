@@ -1,0 +1,22 @@
+name: PR Body Check
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  check-body:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+      - name: Install ydk
+        run: uv tool install git+https://github.com/yoavarad/ydk@7c088f57c75677169452c1da105022709613a24d
+      - name: Check PR body
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          printf '%s' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+          ydk verify pr-body --body-file "$RUNNER_TEMP/pr-body.md" --base-ref "origin/$BASE_REF"
