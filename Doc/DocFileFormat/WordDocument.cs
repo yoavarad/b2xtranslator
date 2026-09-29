@@ -180,7 +180,14 @@ namespace b2xtranslator.DocFileFormat
 
         public WordDocument(StructuredStorageReader reader, int fibFC = 0)
         {
-            Parse(reader, fibFC);
+            try
+            {
+                Parse(reader, fibFC);
+            }
+            catch (Exception ex) when (MalformedInput.IsParseFault(ex))
+            {
+                throw new ByteParseException("The Word document is corrupt or not a valid Word 97-2003 file.", ex);
+            }
         }
 
         void Parse(StructuredStorageReader reader, int fibFC)
