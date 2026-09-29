@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using b2xtranslator.OfficeDrawing;
 using b2xtranslator.OpenXmlLib;
 using System;
@@ -38,8 +39,10 @@ namespace b2xtranslator.PptFileFormat
             {
                 managerRels = GetRelations(zipReader, managerPath);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Best-effort: Missing theme is a valid fallback (returns null).
+                TraceLogger.Debug("Theme: theme manager relations not readable, no theme: {0}", ex.Message);
                 this.XmlDocumentElement = null;
                 return null;
             }

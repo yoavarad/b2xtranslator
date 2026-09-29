@@ -1,4 +1,5 @@
 
+using b2xtranslator.Tools;
 
 using System;
 using System.Collections.Generic;
@@ -506,9 +507,10 @@ namespace b2xtranslator.PresentationMLMapping
                                                 {
                                                     this.lang = System.Globalization.CultureInfo.GetCultureInfo(sirun.si.lid).IetfLanguageTag;
                                                 }
-                                                catch (Exception)
+                                                catch (Exception ex)
                                                 {
-                                                    //ignore
+                                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                                    TraceLogger.Debug("TextMapping: language id invalid, omitting lang: {0}", ex.Message);
                                                 }
                                                 break;
                                         }
@@ -528,9 +530,10 @@ namespace b2xtranslator.PresentationMLMapping
                                                 {
                                                     this.altLang = System.Globalization.CultureInfo.GetCultureInfo(sirun.si.altLid).IetfLanguageTag;
                                                 }
-                                                catch (Exception)
+                                                catch (Exception ex)
                                                 {
-                                                    //ignore
+                                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                                    TraceLogger.Debug("TextMapping: alt language id invalid, omitting altLang: {0}", ex.Message);
                                                 }
                                                 break;
                                         }

@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Text;
 using System.IO;
@@ -210,9 +211,10 @@ namespace b2xtranslator.PptFileFormat
                     this.TextDirection = reader.ReadUInt16();
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                string s = e.ToString();
+                // Best-effort: Truncated run data is tolerated; earlier fields remain valid.
+                TraceLogger.Debug("ParagraphRun: paragraph properties truncated, keeping values read so far: {0}", ex.Message);
             }
             //if (this.TabStopsPresent)
             //{

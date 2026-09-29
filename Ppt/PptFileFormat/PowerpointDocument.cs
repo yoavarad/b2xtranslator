@@ -1,4 +1,5 @@
 
+using b2xtranslator.Tools;
 
 using System;
 using System.Collections.Generic;
@@ -154,9 +155,10 @@ namespace b2xtranslator.PptFileFormat
                 this.DocumentSummaryInformationStream = file.GetStream("DocumentSummaryInformation");
                 ScanDocumentSummaryInformation();
             }
-            catch (StructuredStorage.Common.StreamNotFoundException)
+            catch (StructuredStorage.Common.StreamNotFoundException ex)
             {
-                //ignore
+                // Best-effort: Optional stream.
+                TraceLogger.Debug("PowerpointDocument: DocumentSummaryInformation stream not found, skipping: {0}", ex.Message);
             }
 
 
@@ -419,9 +421,10 @@ namespace b2xtranslator.PptFileFormat
                 var vbaInfo = this.DocumentRecord.DocInfoListContainer.FirstChildWithType<VBAInfoContainer>();
                 this.VbaProject = GetPersistObject<ExOleObjStgAtom>(vbaInfo.objStgDataRef);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                // Best-effort: VBA project is optional; document converts without it.
+                TraceLogger.Debug("PowerpointDocument: VBA project not readable, treating as absent: {0}", ex.Message);
             }
         }
 

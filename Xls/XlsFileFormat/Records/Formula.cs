@@ -130,7 +130,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     this.Reader.BaseStream.Seek(this.cce, System.IO.SeekOrigin.Current);
                     TraceLogger.Error("Formula parse error in Row {0} Column {1}", this.rw, this.col);
                     TraceLogger.Debug(ex.StackTrace);
-                    TraceLogger.Debug("Inner exception: {0}", ex.InnerException.StackTrace);
+                    TraceLogger.Debug("Inner exception: {0}", ex.InnerException?.StackTrace);
                 }
             }
             else

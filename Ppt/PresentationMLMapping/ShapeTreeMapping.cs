@@ -417,9 +417,10 @@ namespace b2xtranslator.PresentationMLMapping
 
                         }
 
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-                            //ignore
+                            // Best-effort: Optional property; shape is still written.
+                            TraceLogger.Debug("ShapeTreeMapping: optional shape property failed, skipping: {0}", ex.Message);
                         }
                     }
 
@@ -1159,8 +1160,10 @@ namespace b2xtranslator.PresentationMLMapping
                         //continueShape = false;
                         reader.Close();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        // Best-effort: Fallback path handles the shape; conversion continues.
+                        TraceLogger.Warning("ShapeTreeMapping: shape XML could not be parsed, falling back to default shape handling: {0}", ex.Message);
                         continueShape = true;
                         if (reader != null) reader.Close();
                     }
@@ -2930,9 +2933,10 @@ namespace b2xtranslator.PresentationMLMapping
 
                                             }
 
-                                            catch (Exception)
+                                            catch (Exception ex)
                                             {
-                                                //ignore
+                                                // Best-effort: Optional property; shape is still written.
+                                                TraceLogger.Debug("ShapeTreeMapping: optional shape property failed, skipping: {0}", ex.Message);
                                             }
                                         }
 
@@ -3107,9 +3111,10 @@ namespace b2xtranslator.PresentationMLMapping
                                         {
                                             lang = System.Globalization.CultureInfo.GetCultureInfo(sia.Runs[0].si.lid).IetfLanguageTag;
                                         }
-                                        catch (Exception)
+                                        catch (Exception ex)
                                         {
-                                            //ignore
+                                            // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                            TraceLogger.Debug("ShapeTreeMapping: language id invalid, omitting lang: {0}", ex.Message);
                                         }
                                         break;
                                 }
@@ -3129,9 +3134,10 @@ namespace b2xtranslator.PresentationMLMapping
                                         {
                                             altLang = System.Globalization.CultureInfo.GetCultureInfo(sia.Runs[0].si.altLid).IetfLanguageTag;
                                         }
-                                        catch (Exception)
+                                        catch (Exception ex)
                                         {
-                                            //ignore
+                                            // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                            TraceLogger.Debug("ShapeTreeMapping: alt language id invalid, omitting altLang: {0}", ex.Message);
                                         }
                                         break;
                                 }

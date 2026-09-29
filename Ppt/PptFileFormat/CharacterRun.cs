@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Text;
 using System.IO;
@@ -104,10 +105,10 @@ namespace b2xtranslator.PptFileFormat
                 if (this.PositionPresent)
                     this.Position = reader.ReadUInt16();
             }
-            catch (EndOfStreamException e)
+            catch (EndOfStreamException ex)
             {
-                string s = e.ToString();
-                //ignore
+                // Best-effort: Truncated run data is tolerated; earlier fields remain valid.
+                TraceLogger.Debug("CharacterRun: run properties truncated, keeping values read so far: {0}", ex.Message);
             }
 
         }

@@ -256,8 +256,10 @@ namespace b2xtranslator.DocFileFormat
                         goOn = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    // Best-effort: Loop-termination: any failure ends the walk and the properties collected so far are used.
+                    TraceLogger.Debug("CharacterProperties: style hierarchy walk failed, stopping walk: {0}", ex.Message);
                     goOn = false;
                 }
             }
