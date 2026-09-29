@@ -512,28 +512,14 @@ namespace b2xtranslator.PresentationMLMapping
                     switch (color.Index)
                     {
                         case 0x00:
-                            this._writer.WriteAttributeString("val", "bg1"); //background
-                            break;
                         case 0x01:
-                            this._writer.WriteAttributeString("val", "tx1"); //text
-                            break;
                         case 0x02:
-                            this._writer.WriteAttributeString("val", "dk1"); //shadow
-                            break;
                         case 0x03:
-                            this._writer.WriteAttributeString("val", "tx1"); //title text
-                            break;
                         case 0x04:
-                            this._writer.WriteAttributeString("val", "bg2"); //fill
-                            break;
                         case 0x05:
-                            this._writer.WriteAttributeString("val", "accent1"); //accent1
-                            break;
                         case 0x06:
-                            this._writer.WriteAttributeString("val", "accent2"); //accent2
-                            break;
                         case 0x07:
-                            this._writer.WriteAttributeString("val", "accent3"); //accent3
+                            this._writer.WriteAttributeString("val", Utils.getSchemeColorName(color.Index));
                             break;
                         case 0xFE: //sRGB
                             lastColor = color.Red.ToString("X").PadLeft(2, '0') + color.Green.ToString("X").PadLeft(2, '0') + color.Blue.ToString("X").PadLeft(2, '0');
