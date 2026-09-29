@@ -721,7 +721,7 @@ namespace b2xtranslator.PresentationMLMapping
                             else if (!defaultStyle.PRuns[tp.indentLevel].BulletCharPresent)
                             {
                                 this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
-                                this._writer.WriteAttributeString("char", "•");
+                                this._writer.WriteAttributeString("char", "ï¿½");
                                 this._writer.WriteEndElement(); //buChar
                             }
 
@@ -902,55 +902,21 @@ namespace b2xtranslator.PresentationMLMapping
                     //_writer.WriteAttributeString("val", (p.LineSpacing * 1000).ToString());
                     //_writer.WriteEndElement(); //spcPct
 
-                    if (p.LineSpacing < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * p.LineSpacing * 12).ToString()); //TODO: this has to be verified!
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.LineSpacing).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-
+                    Utils.WriteSpacing(this._writer, p.LineSpacing.GetValueOrDefault());
 
                     this._writer.WriteEndElement(); //lnSpc
                 }
                 if (p.SpaceBeforePresent)
                 {
                     this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                    if (p.SpaceBefore < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * p.SpaceBefore).ToString()); //TODO: the 12 is wrong: find correct value
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.SpaceBefore).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, p.SpaceBefore.GetValueOrDefault());
                     this._writer.WriteEndElement(); //spcBef
                 }
 
                 if (p.SpaceAfterPresent)
                 {
                     this._writer.WriteStartElement("a", "spcAft", OpenXmlNamespaces.DrawingML);
-                    if (p.SpaceAfter < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * p.SpaceAfter).ToString()); //TODO: the 12 is wrong: find correct value
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.SpaceAfter).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, p.SpaceAfter.GetValueOrDefault());
                     this._writer.WriteEndElement(); //spcAft
                 }
 
@@ -1187,7 +1153,7 @@ namespace b2xtranslator.PresentationMLMapping
                             else if (!bulletWritten && !p.BulletCharPresent)
                             {
                                 this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
-                                this._writer.WriteAttributeString("char", "•");
+                                this._writer.WriteAttributeString("char", "ï¿½");
                                 this._writer.WriteEndElement(); //buChar
                             }
                         }
