@@ -7,7 +7,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// NOTE: This is STANDARDWIDTH in the previously released spec
     /// </summary>
-    [BiffRecord(RecordType.DxGCol)] 
+    [BiffRecord(RecordType.DxGCol)]
     public class DxGCol : BiffRecord
     {
         public const RecordType ID = RecordType.DxGCol;
@@ -20,9 +20,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(86)]
-    public class RightBracketType :ShapeType
+    public class RightBracketType : ShapeType
     {
 
         public RightBracketType()

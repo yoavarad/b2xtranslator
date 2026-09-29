@@ -7,7 +7,7 @@ namespace b2xtranslator.OpenXmlLib
 {
     /// <summary>ZipFactory provides instances of IZipReader.</summary>
     public static class ZipFactory
-	{
+    {
         /// <summary>Provides an instance of IZipReader.</summary>
         /// <param name="path">The path of the ZIP file to read.</param>
         /// <returns></returns>
@@ -28,7 +28,8 @@ namespace b2xtranslator.OpenXmlLib
             /// <summary>Holds the ZIP archive to read.</summary>
             ZipArchive zipArchive;
 
-            public ZipReader(string path) {
+            public ZipReader(string path)
+            {
                 this.fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
                 this.zipArchive = new ZipArchive(this.fileStream, ZipArchiveMode.Read);
             }
@@ -38,7 +39,8 @@ namespace b2xtranslator.OpenXmlLib
                 this.zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, leaveOpen: true);
             }
 
-            public void Close() {
+            public void Close()
+            {
                 this.fileStream?.Close();
                 this.fileStream = null;
 
@@ -46,7 +48,8 @@ namespace b2xtranslator.OpenXmlLib
                 this.zipArchive = null;
             }
 
-            Stream IZipReader.GetEntry(string relativePath) {
+            Stream IZipReader.GetEntry(string relativePath)
+            {
                 string resolvedPath = ResolvePath(relativePath);
                 var entry = this.zipArchive.GetEntry(resolvedPath);
                 return entry?.Open();

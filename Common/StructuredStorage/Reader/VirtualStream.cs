@@ -117,7 +117,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             {
                 return 0;
             }
-            
+
             if (offset + count > array.Length)
             {
                 return 0;
@@ -138,7 +138,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             int bytesRead = 0;
             int totalBytesRead = 0;
             int positionInArray = offset;
-          
+
             // Read part in first relevant sector
             int positionInSector = Convert.ToInt32(position % this._fat.SectorSize);
             this._fat.SeekToPositionInSector(this._sectors[sectorInChain], positionInSector);
@@ -179,7 +179,7 @@ namespace b2xtranslator.StructuredStorage.Reader
 
             // Read remaining part in last relevant sector
             this._fat.SeekToPositionInSector(this._sectors[sectorInChain], 0);
-            
+
             bytesRead = this._fat.UncheckedRead(array, positionInArray, count - totalBytesRead);
 
             // Update variables
@@ -280,7 +280,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         //    {
         //        return -1;
         //    }
-            
+
         //    int sectorInChain = (int)(position / _fat.SectorSize);
 
         //    if (sectorInChain >= _entries.Count)

@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.MulRk)] 
+    [BiffRecord(RecordType.MulRk)]
     public class MulRk : BiffRecord
     {
         public const RecordType ID = RecordType.MulRk;
@@ -18,12 +18,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// First column number 
         /// </summary>
-        public ushort colFirst;        
+        public ushort colFirst;
 
         /// <summary>
         /// The last affected column 
         /// </summary>
-        public ushort colLast;         
+        public ushort colLast;
 
         /// <summary>
         /// List with format indexes 
@@ -48,10 +48,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
             this.ixfe = new List<ushort>();
-            this.rknumber = new List<double>(); 
+            this.rknumber = new List<double>();
 
             // count records - 6 standard non variable values !!! 
-            int count = (int)(this.Length - 6) / 6 ;
+            int count = (int)(this.Length - 6) / 6;
             this.rw = reader.ReadUInt16();
             this.colFirst = reader.ReadUInt16();
             for (int i = 0; i < count; i++)
@@ -59,11 +59,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 this.ixfe.Add(reader.ReadUInt16());
                 var buffer = reader.ReadBytes(4);
 
-                this.rknumber.Add(ExcelHelperClass.NumFromRK(buffer)); 
+                this.rknumber.Add(ExcelHelperClass.NumFromRK(buffer));
             }
-            this.colLast = reader.ReadUInt16(); 
+            this.colLast = reader.ReadUInt16();
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
-       }
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
+        }
     }
 }

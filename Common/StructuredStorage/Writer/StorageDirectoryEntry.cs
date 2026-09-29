@@ -16,14 +16,14 @@ namespace b2xtranslator.StructuredStorage.Writer
         List<StreamDirectoryEntry> _streamDirectoryEntries = new List<StreamDirectoryEntry>();
         internal List<StreamDirectoryEntry> StreamDirectoryEntries
         {
-            get { return this._streamDirectoryEntries; }            
+            get { return this._streamDirectoryEntries; }
         }
 
         // The storage directory entries of this storage directory entry
         List<StorageDirectoryEntry> _storageDirectoryEntries = new List<StorageDirectoryEntry>();
         internal List<StorageDirectoryEntry> StorageDirectoryEntries
         {
-            get { return this._storageDirectoryEntries; }            
+            get { return this._storageDirectoryEntries; }
         }
 
         // The stream and storage directory entries of this storage directory entry
@@ -49,7 +49,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         /// <param name="stream">The stream referenced by the stream directory entry</param>
         public void AddStreamDirectoryEntry(string name, Stream stream)
         {
-            if (this._streamDirectoryEntries.Exists(delegate(StreamDirectoryEntry a) { return name == a.Name; }))
+            if (this._streamDirectoryEntries.Exists(delegate (StreamDirectoryEntry a) { return name == a.Name; }))
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         public StorageDirectoryEntry AddStorageDirectoryEntry(string name)
         {
             StorageDirectoryEntry result = null;
-            result = this._storageDirectoryEntries.Find(delegate(StorageDirectoryEntry a) { return name == a.Name; });
+            result = this._storageDirectoryEntries.Find(delegate (StorageDirectoryEntry a) { return name == a.Name; });
             if (result != null)
             {
                 // entry exists
@@ -157,7 +157,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             {
                 entry.Sid = this.Context.getNewSid();
             }
-            
+
             return setRelationsAndColorRecursive(this._allDirectoryEntries, (int)Math.Floor(Math.Log(this._allDirectoryEntries.Count, 2)), 0);
         }
 
@@ -172,7 +172,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         private uint setRelationsAndColorRecursive(List<BaseDirectoryEntry> entryList, int treeHeight, int treeLevel)
         {
             if (entryList.Count < 1)
-            {                
+            {
                 return SectorId.FREESECT;
             }
 
@@ -199,7 +199,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             {
                 entryList[middleIndex].RightSiblingSid = rightSubTree[rightmiddleIndex].Sid;
                 setRelationsAndColorRecursive(rightSubTree, treeHeight, treeLevel + 1);
-            }            
+            }
 
             return entryList[middleIndex].Sid;
         }
@@ -212,7 +212,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         /// <returns>The result</returns>
         private static int getMiddleIndex(List<BaseDirectoryEntry> list)
         {
-            return (int)Math.Floor((list.Count - 1)/ 2.0);
+            return (int)Math.Floor((list.Count - 1) / 2.0);
         }
 
 

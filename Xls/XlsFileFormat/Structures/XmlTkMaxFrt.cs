@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkMaxFrt(IStreamReader reader)
         {
-            this.maxScale = new XmlTkDouble(reader);   
+            this.maxScale = new XmlTkDouble(reader);
         }
     }
 }

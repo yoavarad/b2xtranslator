@@ -27,7 +27,7 @@
             this.widht = 0;
 
             this.outlineLevel = 0;
-            this.style = 0; 
+            this.style = 0;
         }
 
     }

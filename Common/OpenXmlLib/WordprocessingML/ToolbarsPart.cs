@@ -1,6 +1,6 @@
 namespace b2xtranslator.OpenXmlLib.WordprocessingML
 {
-    public class ToolbarsPart: ContentPart
+    public class ToolbarsPart : ContentPart
     {
         internal ToolbarsPart(OpenXmlPartContainer parent)
             : base(parent, 0)

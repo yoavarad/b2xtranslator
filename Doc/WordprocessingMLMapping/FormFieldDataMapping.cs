@@ -88,7 +88,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         this._writer.WriteAttributeString("w", "val", OpenXmlNamespaces.WordprocessingML, ffd.cch.ToString());
                         this._writer.WriteEndElement();
                     }
-                    
+
                     //textformat
                     if (ffd.xstzTextFormat != null && ffd.xstzTextFormat.Length > 0)
                     {
@@ -134,7 +134,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     this._writer.WriteStartElement("w", "default", OpenXmlNamespaces.WordprocessingML);
                     this._writer.WriteAttributeString("w", "val", OpenXmlNamespaces.WordprocessingML, ffd.wDef.ToString());
                     this._writer.WriteEndElement();
-                    
+
                     break;
                 case FormFieldData.FormFieldType.iTypeDrop:
                     this._writer.WriteStartElement("w", "ddList", OpenXmlNamespaces.WordprocessingML);

@@ -53,7 +53,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         ///                     data point of pie and pie of pie chart groups.
         /// </summary>
         public LineType lineId;
-        
+
         public CrtLine(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {

@@ -59,7 +59,7 @@ namespace b2xtranslator.PptFileFormat
             : base(_reader, size, typeCode, version, instance)
         {
             this.Position = this.Reader.ReadInt32();
-            this.PlacementId = (PlaceholderEnum) this.Reader.ReadByte();
+            this.PlacementId = (PlaceholderEnum)this.Reader.ReadByte();
             this.PlaceholderSize = this.Reader.ReadByte();
             // Throw away additional junk
             this.Reader.ReadUInt16();

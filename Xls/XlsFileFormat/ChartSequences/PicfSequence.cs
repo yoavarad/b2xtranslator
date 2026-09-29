@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
         public PicF PicF;
 
-        public End End; 
+        public End End;
 
         public PicfSequence(IStreamReader reader)
             : base(reader)
@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             this.PicF = (PicF)BiffRecord.ReadRecord(reader);
 
             // End 
-            this.End = (End)BiffRecord.ReadRecord(reader); 
+            this.End = (End)BiffRecord.ReadRecord(reader);
 
         }
     }

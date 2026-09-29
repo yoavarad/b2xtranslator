@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkTpb(IStreamReader reader)
         {
-            this.textPropsStream = new XmlTkBlob(reader);   
+            this.textPropsStream = new XmlTkBlob(reader);
         }
     }
 }

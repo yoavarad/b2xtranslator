@@ -26,13 +26,13 @@ namespace b2xtranslator.OpenXmlLib
         {
             get
             {
-                if(this._vbaDataPart == null)
+                if (this._vbaDataPart == null)
                 {
                     this._vbaDataPart = this.AddPart(new VbaDataPart(this));
                 }
                 return this._vbaDataPart;
             }
-            
+
         }
     }
 }

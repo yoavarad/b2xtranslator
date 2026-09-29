@@ -61,7 +61,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             foreach (var font in sd.FontDataList)
             {
                 ///
-                StyleMappingHelper.addFontElement(this._writer, font, FontElementType.NormalStyle); 
+                StyleMappingHelper.addFontElement(this._writer, font, FontElementType.NormalStyle);
 
 
             }
@@ -82,7 +82,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 this._writer.WriteAttributeString("patternType", StyleMappingHelper.getStringFromFillPatern(fd.Fillpatern));
 
                 // foreground color 
-                WriteRgbForegroundColor(this._writer, StyleMappingHelper.convertColorIdToRGB(fd.IcvFore)); 
+                WriteRgbForegroundColor(this._writer, StyleMappingHelper.convertColorIdToRGB(fd.IcvFore));
 
                 // background color 
                 WriteRgbBackgroundColor(this._writer, StyleMappingHelper.convertColorIdToRGB(fd.IcvBack));
@@ -129,12 +129,12 @@ namespace b2xtranslator.SpreadsheetMLMapping
                     // do nothing !
                 }
 
-               
+
                 string borderStyle = "";
 
                 // left border 
                 this._writer.WriteStartElement("left");
-                borderStyle = StyleMappingHelper.convertBorderStyle(borderData.left.style); 
+                borderStyle = StyleMappingHelper.convertBorderStyle(borderData.left.style);
                 if (!borderStyle.Equals("none"))
                 {
                     this._writer.WriteAttributeString("style", borderStyle);
@@ -252,7 +252,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 }
                 if (xfcell.hasAlignment)
                 {
-                    StylesMapping.WriteCellAlignment(this._writer, xfcell); 
+                    StylesMapping.WriteCellAlignment(this._writer, xfcell);
                 }
 
                 this._writer.WriteEndElement();
@@ -276,7 +276,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                 if (style.rgch != null)
                 {
-                    this._writer.WriteAttributeString("name", style.rgch); 
+                    this._writer.WriteAttributeString("name", style.rgch);
                 }
                 // theres a bug with the zero based reading from the referenz id 
                 // so the style.ixfe value is reduzed by one
@@ -293,8 +293,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 this._writer.WriteEndElement();
             }
 
-            this._writer.WriteEndElement(); 
-            
+            this._writer.WriteEndElement();
+
             // close tags 
 
 
@@ -312,7 +312,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                     this._writer.WriteStartElement("rgbColor");
                     this._writer.WriteAttributeString("rgb", string.Format("{0:x2}", item.Alpha).ToString() + item.SixDigitHexCode);
 
-                    this._writer.WriteEndElement(); 
+                    this._writer.WriteEndElement();
 
                 }
 
@@ -341,7 +341,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             if (!string.IsNullOrEmpty(color) && color != "Auto")
             {
                 writer.WriteStartElement("color");
-                
+
                 writer.WriteAttributeString("rgb", "FF" + color);
                 writer.WriteEndElement();
             }

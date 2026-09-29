@@ -13,7 +13,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             this._ftr = ftr;
         }
-        
+
         public override void Apply(WordDocument doc)
         {
             this._doc = doc;

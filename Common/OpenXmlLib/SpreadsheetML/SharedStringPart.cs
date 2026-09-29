@@ -3,7 +3,7 @@ namespace b2xtranslator.OpenXmlLib.SpreadsheetML
     public class SharedStringPart : OpenXmlPart
     {
         public SharedStringPart(OpenXmlPartContainer parent)
-            : base(parent,0)
+            : base(parent, 0)
         {
         }
 

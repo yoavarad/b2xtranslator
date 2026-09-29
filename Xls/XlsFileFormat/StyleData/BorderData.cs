@@ -11,12 +11,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         public BorderPartData right;
         public BorderPartData diagonal;
 
-        public ushort diagonalValue; 
+        public ushort diagonalValue;
 
         public BorderData()
         {
 
-            this.diagonalValue = 0; 
+            this.diagonalValue = 0;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             }
 
             if (this.top.Equals(bd.top) && this.bottom.Equals(bd.bottom) && this.left.Equals(bd.left)
-                && this.right.Equals(bd.right) && this.diagonal.Equals(bd.diagonal) 
+                && this.right.Equals(bd.right) && this.diagonal.Equals(bd.diagonal)
                 && this.diagonalValue == bd.diagonalValue)
             {
                 return true;
@@ -74,6 +74,15 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Hash code consistent with Equals
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return System.HashCode.Combine(this.top, this.bottom, this.left, this.right, this.diagonal, this.diagonalValue);
         }
 
     }

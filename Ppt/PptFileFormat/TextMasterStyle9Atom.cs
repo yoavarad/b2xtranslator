@@ -8,7 +8,7 @@ namespace b2xtranslator.PptFileFormat
     public class TextMasterStyle9Atom : Record
     {
         public List<ParagraphRun9> pruns = new List<ParagraphRun9>();
-       
+
         public TextMasterStyle9Atom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
         {

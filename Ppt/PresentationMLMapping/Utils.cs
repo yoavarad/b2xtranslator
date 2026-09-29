@@ -16,14 +16,14 @@ namespace b2xtranslator.PresentationMLMapping
 
         public static int MasterCoordToEMU(int mc)
         {
-            return (int) (mc * MC_PER_EMU);
+            return (int)(mc * MC_PER_EMU);
         }
 
         public static int EMUToMasterCoord(int emu)
         {
-            return (int) (emu / MC_PER_EMU);
+            return (int)(emu / MC_PER_EMU);
         }
-                
+
         public static XmlDocument GetDefaultDocument(string filename)
         {
             var a = Assembly.GetExecutingAssembly();
@@ -278,7 +278,7 @@ namespace b2xtranslator.PresentationMLMapping
                     return "twoObjOverTx";
 
                 default:
-                    throw new NotImplementedException("Don't know how to map slide layout type " + type); 
+                    throw new NotImplementedException("Don't know how to map slide layout type " + type);
             }
         }
 
@@ -315,8 +315,10 @@ namespace b2xtranslator.PresentationMLMapping
                     case 0xF0: //shape fill color
                         if (so.OptionsByID.ContainsKey(b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor))
                         {
-                            result = getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor].op,slide,so);
-                        } else {
+                            result = getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor].op, slide, so);
+                        }
+                        else
+                        {
                             result = new RGBColor(MasterScheme.Fills, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;  //TODO: find out which color to use in this case
                         }
                         break;
@@ -424,8 +426,8 @@ namespace b2xtranslator.PresentationMLMapping
                 //    default:
                 //        break;
                 //}
-            } 
-            
+            }
+
             if (fSchemeIndex)
             {
                 //red is the index to the color scheme
@@ -463,7 +465,7 @@ namespace b2xtranslator.PresentationMLMapping
                         return bytes[0].ToString("X").PadLeft(2, '0') + bytes[1].ToString("X").PadLeft(2, '0') + bytes[3].ToString("X").PadLeft(2, '0');
                     case 0xFF: //undefined
                         break;
-                }                
+                }
             }
             return bytes[0].ToString("X").PadLeft(2, '0') + bytes[1].ToString("X").PadLeft(2, '0') + bytes[2].ToString("X").PadLeft(2, '0');
         }

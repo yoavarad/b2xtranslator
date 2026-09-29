@@ -19,7 +19,7 @@ namespace b2xtranslator.PresentationMLMapping
         {
             var bytes = vbaProject.DecompressData();
             this._targetPart.GetStream().Write(bytes, 0, bytes.Length);
-            
+
         }
     }
 }

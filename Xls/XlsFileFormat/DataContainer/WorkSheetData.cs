@@ -26,7 +26,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
         // TODO
         public List<ARRAY> ARRAYList;
-        public List<HyperlinkData> HyperLinkList; 
+        public List<HyperlinkData> HyperLinkList;
         public SortedList<int, RowData> rowDataTable;
         public List<ColumnInfoData> colInfoDataTable;
         public List<SharedFormulaData> sharedFormulaDataTable;
@@ -49,15 +49,15 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public double? topMargin;
         public double? bottomMargin;
         public double? headerMargin;
-        public double? footerMargin; 
+        public double? footerMargin;
 
         // PageSetup 
         private Setup pageSetup;
-        public Setup PageSetup 
-        { 
-            get{ return this.pageSetup; }
+        public Setup PageSetup
+        {
+            get { return this.pageSetup; }
         }
-        
+
         /// <summary>
         /// Ctor 
         /// </summary>
@@ -79,7 +79,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             this.boundsheetRecord = null;
 
             this.defaultRowHeight = -1;
-            this.defaultColWidth = -1; 
+            this.defaultColWidth = -1;
 
 
         }
@@ -213,7 +213,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             cell.Col = formula.col;
             cell.Row = formula.rw;
             cell.TemplateID = formula.ixfe;
-            cell.alwaysCalculated = formula.fAlwaysCalc; 
+            cell.alwaysCalculated = formula.fAlwaysCalc;
 
             if (formula.fShrFmla)
             {
@@ -379,7 +379,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             rowData.maxSpan = row.colMac;
             rowData.minSpan = row.colMic;
-            rowData.customHeight = row.fUnsynced; 
+            rowData.customHeight = row.fUnsynced;
         }
 
         /// <summary>
@@ -402,7 +402,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             colinfoData.collapsed = colinfo.fCollapsed;
             colinfoData.style = colinfo.ixfe;
 
-            this.colInfoDataTable.Add(colinfoData); 
+            this.colInfoDataTable.Add(colinfoData);
         }
 
         /// <summary>
@@ -411,7 +411,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// <param name="width"></param>
         public void addDefaultColWidth(int width)
         {
-            this.defaultColWidth = width; 
+            this.defaultColWidth = width;
         }
 
         /// <summary>
@@ -426,19 +426,19 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             }
             else
             {
-                this.defaultRowHeight = defaultRowData.miyRwHidden; 
+                this.defaultRowHeight = defaultRowData.miyRwHidden;
             }
             this.zeroHeight = defaultRowData.fDyZero;
             this.customHeight = defaultRowData.fUnsynced;
             this.thickTop = defaultRowData.fExAsc;
-            this.thickBottom = defaultRowData.fExDsc; 
+            this.thickBottom = defaultRowData.fExDsc;
         }
 
         public void addSetupData(Setup setup)
         {
             this.footerMargin = setup.numFtr;
             this.headerMargin = setup.numHdr;
-            this.pageSetup = setup; 
+            this.pageSetup = setup;
         }
 
         public void addHyperLinkData(HLink hlink)
@@ -453,7 +453,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             hld.location = hlink.location;
             hld.display = hlink.displayName;
 
-            this.HyperLinkList.Add(hld); 
+            this.HyperLinkList.Add(hld);
         }
 
         public override void Convert<T>(T mapping)

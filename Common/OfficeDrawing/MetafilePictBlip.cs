@@ -96,7 +96,7 @@ namespace b2xtranslator.OfficeDrawing
                     false);
 
                 var buffer = new byte[this.m_cb];
-                inStream.Read(buffer, 0, this.m_cb);
+                inStream.ReadAtLeast(buffer, this.m_cb, throwOnEndOfStream: false);
 
                 return buffer;
             }

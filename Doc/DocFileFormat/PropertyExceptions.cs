@@ -24,7 +24,7 @@ namespace b2xtranslator.DocFileFormat
             if (bytes.Length != 0)
             {
                 //read the sprms
-                
+
                 int sprmStart = 0;
                 bool goOn = true;
                 while (goOn)

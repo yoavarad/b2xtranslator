@@ -7,15 +7,15 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
     public class FrameSequence : BiffRecordSequence, IVisitable
     {
         public Frame Frame;
-        
+
         public Begin Begin;
-        
+
         public LineFormat LineFormat;
-        
+
         public AreaFormat AreaFormat;
-        
+
         public GelFrameSequence GelFrameSequence;
-        
+
         public ShapePropsSequence ShapePropsSequence;
 
         public End End;
@@ -26,28 +26,28 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             // Frame 
             this.Frame = (Frame)BiffRecord.ReadRecord(reader);
-            
+
             // Begin 
-            this.Begin = (Begin)BiffRecord.ReadRecord(reader); 
-            
+            this.Begin = (Begin)BiffRecord.ReadRecord(reader);
+
             // LineFormat 
             this.LineFormat = (LineFormat)BiffRecord.ReadRecord(reader);
-            
+
             // AreaFormat 
             this.AreaFormat = (AreaFormat)BiffRecord.ReadRecord(reader);
-            
+
             // [GELFRAME] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.GelFrame)
             {
                 this.GelFrameSequence = new GelFrameSequence(reader);
             }
-            
+
             // [SHAPEPROPS] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.ShapePropsStream)
             {
-               this.ShapePropsSequence = new ShapePropsSequence(reader);
+                this.ShapePropsSequence = new ShapePropsSequence(reader);
             }
-            
+
             // End
             this.End = (End)BiffRecord.ReadRecord(reader);
         }

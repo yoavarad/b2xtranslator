@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat
 {
-    public class ChartSheetContentSequence: BiffRecordSequence, IVisitable
+    public class ChartSheetContentSequence : BiffRecordSequence, IVisitable
     {
         public WriteProtect WriteProtect;
 
@@ -88,7 +88,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             }
 
             // *HFPicture
-            while(BiffRecord.GetNextRecordType(reader) == RecordType.HFPicture)
+            while (BiffRecord.GetNextRecordType(reader) == RecordType.HFPicture)
             {
                 this.HFPictures.Add((HFPicture)BiffRecord.ReadRecord(reader));
             }
@@ -142,50 +142,50 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             {
                 this.Palette = (Palette)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [SXViewLink]
             if (BiffRecord.GetNextRecordType(reader) == RecordType.SXViewLink)
             {
                 this.SXViewLink = (SXViewLink)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [PivotChartBits] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.PivotChartBits)
             {
                 this.PivotChartBits = (PivotChartBits)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [SBaseRef] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.SBaseRef)
             {
                 this.SBaseRef = (SBaseRef)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [MsoDrawingGroup] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.MsoDrawingGroup)
             {
                 this.MsoDrawingGroup = (MsoDrawingGroup)BiffRecord.ReadRecord(reader);
             }
-            
+
             // OBJECTS 
             this.ObjectsSequence = new ObjectsSequence(reader);
-            
+
             // Units 
             this.Units = (Units)BiffRecord.ReadRecord(reader);
-            
+
             // CHARTFOMATS 
             this.ChartFormatsSequence = new ChartFormatsSequence(reader);
-            
+
             // SERIESDATA 
             this.SeriesDataSequence = new SeriesDataSequence(reader);
-            
+
             // *WINDOW 
             this.WindowSequences = new List<WindowSequence>();
             while (BiffRecord.GetNextRecordType(reader) == RecordType.Window2)
             {
                 this.WindowSequences.Add(new WindowSequence(reader));
             }
-            
+
             // *CUSTOMVIEW 
             this.CustomViewSequences = new List<CustomViewSequence>();
 
@@ -203,19 +203,19 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             //{
             //    this.CustomViewSequences.Add(new CustomViewSequence(reader));
             //}
-            
+
             // [CodeName] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.CodeName)
             {
                 this.CodeName = (CodeName)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [CRTMLFRT] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.CrtMlFrt)
             {
                 this.CrtMlfrtSequence = new CrtMlfrtSequence(reader);
             }
-            
+
             // EOF
             this.EOF = (EOF)BiffRecord.ReadRecord(reader);
         }

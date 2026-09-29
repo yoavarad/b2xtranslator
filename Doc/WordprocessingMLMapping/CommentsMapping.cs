@@ -20,7 +20,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
             int cp = doc.FIB.ccpText + doc.FIB.ccpFtn + doc.FIB.ccpHdr;
             for (int i = 0; i < doc.AnnotationsReferencePlex.Elements.Count; i++)
-			{
+            {
                 this._writer.WriteStartElement("w", "comment", OpenXmlNamespaces.WordprocessingML);
 
                 var atrdPre10 = (AnnotationReferenceDescriptor)doc.AnnotationsReferencePlex.Elements[index];
@@ -29,7 +29,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 this._writer.WriteAttributeString("w", "initials", OpenXmlNamespaces.WordprocessingML, atrdPre10.UserInitials);
 
                 //ATRDpost10 is optional and not saved in all files
-                if (doc.AnnotationReferenceExtraTable != null && 
+                if (doc.AnnotationReferenceExtraTable != null &&
                     doc.AnnotationReferenceExtraTable.Count > index)
                 {
                     var atrdPost10 = doc.AnnotationReferenceExtraTable[index];

@@ -4,7 +4,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.InterfaceHdr)] 
+    [BiffRecord(RecordType.InterfaceHdr)]
     public class InterfaceHdr : BiffRecord
     {
         public const RecordType ID = RecordType.InterfaceHdr;

@@ -46,7 +46,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                         seriesFormatSequence.Convert(new SeriesMapping(this.WorkbookContext, this.ChartContext));
 
                         // c:pictureOptions (CT_PictureOptions)
-                        
+
                         // c:dPt (Data Points)
                         for (int i = 1; i < seriesFormatSequence.SsSequence.Count; i++)
                         {
@@ -71,7 +71,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                         this._writer.WriteEndElement(); // c:ser
                     }
                 }
-        
+
                 // c:dLbls (Data Labels)
 
                 // c:dropLines

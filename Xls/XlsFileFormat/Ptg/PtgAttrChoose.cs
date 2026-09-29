@@ -19,9 +19,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             uint cOffset = this.Reader.ReadUInt16();
             for (int i = 0; i <= cOffset; i++)
             {
-                this.Reader.ReadUInt16(); 
+                this.Reader.ReadUInt16();
             }
-            this.Length += (cOffset+1) * 2; 
+            this.Length += (cOffset + 1) * 2;
         }
     }
 }

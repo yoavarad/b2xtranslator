@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The Backup record specifies whether Excel should save backup versions of a file.
     /// </summary>
-    [BiffRecord(RecordType.Backup)] 
+    [BiffRecord(RecordType.Backup)]
     public class Backup : BiffRecord
     {
         public const RecordType ID = RecordType.Backup;
@@ -26,9 +26,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fBackupFile = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

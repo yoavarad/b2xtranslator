@@ -14,7 +14,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         uint _miniFatStart = SectorId.FREESECT;
         internal uint MiniFatStart
         {
-            get { return this._miniFatStart; }            
+            get { return this._miniFatStart; }
         }
 
 
@@ -22,7 +22,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         uint _numMiniFatSectors = 0x0;
         internal uint NumMiniFatSectors
         {
-            get { return this._numMiniFatSectors; }            
+            get { return this._numMiniFatSectors; }
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         /// <param name="context">the current context</param>
         internal MiniFat(StructuredStorageContext context)
             : base(context)
-        {            
+        {
         }
 
 

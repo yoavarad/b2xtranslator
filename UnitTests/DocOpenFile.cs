@@ -6,7 +6,10 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using static b2xtranslator.OpenXmlLib.OpenXmlPackage;
@@ -16,7 +19,9 @@ namespace UnitTests
     [TestFixture]
     public class DocOpenFile
     {
-        Application word2007 = null;
+        // No field initializer: touching this field from the constructor would
+        // load the Word interop types even when Office is not installed.
+        Application word2007;
         List<FileInfo> files;
         object confirmConversions = Type.Missing;
         object readOnly = true;
@@ -38,6 +43,9 @@ namespace UnitTests
         object originalFormat = false;
         object routeDocument = false;
 
+        const string RequiresWord = "RequiresWord";
+        string wordUnavailableReason = null;
+
 
         [OneTimeSetUp]
         public void SetUp()
@@ -55,13 +63,49 @@ namespace UnitTests
                 this.files.Add(new FileInfo(fileNode.Attributes["path"].Value));
             }
 
-            //start the application
-            this.word2007 = new Application();
+            //start the application; the Word-comparison tests are ignored when
+            //Word / the Office 2007 interop assemblies are not installed
+            try
+            {
+                StartWord();
+            }
+            catch (Exception ex) when (ex is FileNotFoundException || ex is FileLoadException || ex is COMException)
+            {
+                this.wordUnavailableReason = "Microsoft Word (Office 2007 interop) is not available: " + ex.Message;
+            }
         }
 
 
         [OneTimeTearDown]
         public void TearDown()
+        {
+            if (this.wordUnavailableReason == null)
+                QuitWord();
+        }
+
+        // Ignore Word-dependent tests before NUnit invokes (and JIT-compiles)
+        // them, since their bodies reference the Word interop types.
+        [SetUp]
+        public void RequireWordIfNeeded()
+        {
+            if (this.wordUnavailableReason != null
+                && TestContext.CurrentContext.Test.Properties["Category"].Contains(RequiresWord))
+            {
+                Assert.Ignore(this.wordUnavailableReason);
+            }
+        }
+
+        // Kept in separate non-inlined methods so a missing interop assembly
+        // surfaces as a catchable exception at the call site instead of
+        // failing JIT compilation of the NUnit setup/teardown methods.
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void StartWord()
+        {
+            this.word2007 = new Application();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void QuitWord()
         {
             this.word2007.Quit(
                 ref this.saveChanges,
@@ -99,6 +143,7 @@ namespace UnitTests
         }
 
         [Test]
+        [Category(RequiresWord)]
         public void PropertiesTest()
         {
             foreach (var inputFile in this.files)
@@ -161,6 +206,7 @@ namespace UnitTests
         /// Also tests the start and the end position a randomly selected bookmark.
         /// </summary>
         [Test]
+        [Category(RequiresWord)]
         public void BookmarksTest()
         {
             foreach (var inputFile in this.files)
@@ -219,6 +265,7 @@ namespace UnitTests
         /// Also compares the author of the first comment.
         /// </summary>
         [Test]
+        [Category(RequiresWord)]
         public void CommentsTest()
         {
             foreach (var inputFile in this.files)

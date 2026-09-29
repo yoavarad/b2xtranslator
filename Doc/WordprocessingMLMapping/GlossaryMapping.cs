@@ -23,7 +23,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             for (int i = 0; i < this._doc.AutoTextPlex.CharacterPositions.Count - 2; i++)
             {
                 int cpStart = this._doc.AutoTextPlex.CharacterPositions[i];
-                int cpEnd = this._doc.AutoTextPlex.CharacterPositions[i+1];
+                int cpEnd = this._doc.AutoTextPlex.CharacterPositions[i + 1];
 
                 writeAutoTextDocPart(cpStart, cpEnd, i);
             }
@@ -44,9 +44,9 @@ namespace b2xtranslator.WordprocessingMLMapping
             //write the name
             this._writer.WriteStartElement("w", "name", OpenXmlNamespaces.WordprocessingML);
             string name = this._doc.AutoTextNames.Strings[index];
-            if((int)name[name.Length-1] == 1)
+            if ((int)name[name.Length - 1] == 1)
             {
-                name = name.Remove(name.Length-1);
+                name = name.Remove(name.Length - 1);
             }
             this._writer.WriteAttributeString("w", "val", OpenXmlNamespaces.WordprocessingML, name);
             this._writer.WriteEndElement();

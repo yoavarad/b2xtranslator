@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The DSF  record stores a flag that indicates if the workbook is a double stream file.
     /// </summary>
-    [BiffRecord(RecordType.DSF)] 
+    [BiffRecord(RecordType.DSF)]
     public class DSF : BiffRecord
     {
         public const RecordType ID = RecordType.DSF;
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fDSF = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.AdjustmentValues = "5400,2700";
 
             this.ConnectorLocations = "@18,@10;2700,@15;@18,21600;@19,@15";
-            
+
             this.ConnectorAngles = "270,180,90,0";
 
             this.TextboxRectangle = "@0,@10,@9,21600";
@@ -48,9 +48,9 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Handles = new List<Handle>();
             var HandleOne = new Handle();
             var HandleTwo = new Handle();
-            HandleOne.position="#0,bottomRight"; 
-            HandleOne.xrange="2700,8100";
-            HandleTwo.position="center,#1";
+            HandleOne.position = "#0,bottomRight";
+            HandleOne.xrange = "2700,8100";
+            HandleTwo.position = "center,#1";
             HandleTwo.yrange = "0,7200";
             this.Handles.Add(HandleOne);
             this.Handles.Add(HandleTwo);

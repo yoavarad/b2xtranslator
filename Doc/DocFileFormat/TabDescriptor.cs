@@ -31,8 +31,8 @@ namespace b2xtranslator.DocFileFormat
         /// <param name="b">The byte</param>
         public TabDescriptor(byte b)
         {
-          this.jc = Convert.ToByte(Convert.ToInt32(b) & 0x07);
-          this.tlc = Convert.ToByte(b >> 3);
+            this.jc = Convert.ToByte(Convert.ToInt32(b) & 0x07);
+            this.tlc = Convert.ToByte(b >> 3);
         }
     }
 }

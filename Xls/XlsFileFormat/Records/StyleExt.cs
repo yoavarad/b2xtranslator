@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// formatting properties can be associated with the style XF by name and the style’s formatting 
     /// can be updated on load (Office Excel 2007 or later).
     /// </summary>
-    [BiffRecord(RecordType.StyleExt)] 
+    [BiffRecord(RecordType.StyleExt)]
     public class StyleExt : BiffRecord
     {
         public const RecordType ID = RecordType.StyleExt;
@@ -26,7 +26,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// Record type; this matches the BIFF rt in the first two bytes of the record; =0892h
         /// </summary>
-        public ushort rt;	
+        public ushort rt;
 
         /// <summary>
         /// FRT cell reference flag; =0 currently
@@ -80,7 +80,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// </summary>
         //public xfProps	
         // TODO: define class XFPROPS
-        
+
         public StyleExt(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -89,9 +89,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

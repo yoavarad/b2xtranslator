@@ -19,8 +19,8 @@ namespace b2xtranslator.WordprocessingMLMapping
         private WordDocument _parentDoc;
 
         public ParagraphPropertiesMapping(
-            XmlWriter writer, 
-            ConversionContext ctx, 
+            XmlWriter writer,
+            ConversionContext ctx,
             WordDocument parentDoc,
             CharacterPropertyExceptions paraEndChpx)
             : base(writer)
@@ -33,10 +33,10 @@ namespace b2xtranslator.WordprocessingMLMapping
         }
 
         public ParagraphPropertiesMapping(
-            XmlWriter writer, 
+            XmlWriter writer,
             ConversionContext ctx,
             WordDocument parentDoc,
-            CharacterPropertyExceptions paraEndChpx, 
+            CharacterPropertyExceptions paraEndChpx,
             SectionPropertyExceptions sepx,
             int sectionNr)
             : base(writer)
@@ -81,7 +81,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     rPr.AppendChild(del);
                 }
 
-                if(rPr.ChildNodes.Count >0 )
+                if (rPr.ChildNodes.Count > 0)
                 {
                     this._pPr.AppendChild(rPr);
                 }
@@ -114,7 +114,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case SinglePropertyModifier.OperationCode.sprmPFContextualSpacing:
                         appendFlagAttribute(this._pPr, sprm, "contextualSpacing");
                         break;
-                    
+
                     //element flags
                     case SinglePropertyModifier.OperationCode.sprmPFBiDi:
                         isRightToLeft = true;
@@ -217,9 +217,9 @@ namespace b2xtranslator.WordprocessingMLMapping
                         line.Value = Math.Abs(lspd.dyaLine).ToString();
                         spacing.Attributes.Append(line);
                         var lineRule = this._nodeFactory.CreateAttribute("w", "lineRule", OpenXmlNamespaces.WordprocessingML);
-                        if(!lspd.fMultLinespace && lspd.dyaLine < 0)
+                        if (!lspd.fMultLinespace && lspd.dyaLine < 0)
                             lineRule.Value = "exact";
-                        else if(!lspd.fMultLinespace && lspd.dyaLine > 0)
+                        else if (!lspd.fMultLinespace && lspd.dyaLine > 0)
                             lineRule.Value = "atLeast";
                         //no line rule means auto
                         spacing.Attributes.Append(lineRule);
@@ -283,20 +283,20 @@ namespace b2xtranslator.WordprocessingMLMapping
                         appendBorderAttributes(new BorderCode(sprm.Arguments), barBorder);
                         addOrSetBorder(pBdr, barBorder);
                         break;
-                    
+
                     //shading
                     case SinglePropertyModifier.OperationCode.sprmPShd80:
                     case SinglePropertyModifier.OperationCode.sprmPShd:
                         var desc = new ShadingDescriptor(sprm.Arguments);
                         appendShading(this._pPr, desc);
                         break;
-                    
+
                     //numbering
                     case SinglePropertyModifier.OperationCode.sprmPIlvl:
                         appendValueElement(numPr, "ilvl", sprm.Arguments[0].ToString(), true);
                         break;
                     case SinglePropertyModifier.OperationCode.sprmPIlfo:
-                        ushort val  = System.BitConverter.ToUInt16(sprm.Arguments, 0);
+                        ushort val = System.BitConverter.ToUInt16(sprm.Arguments, 0);
                         appendValueElement(numPr, "numId", val.ToString(), true);
 
                         ////check if there is a ilvl reference, if not, check the count of LVLs.
@@ -321,7 +321,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         //read the removed tabs
                         byte itbdDelMax = sprm.Arguments[pos];
                         pos++;
-                        for(int i=0; i<itbdDelMax; i++)
+                        for (int i = 0; i < itbdDelMax; i++)
                         {
                             var tab = this._nodeFactory.CreateElement("w", "tab", OpenXmlNamespaces.WordprocessingML);
                             //clear
@@ -333,7 +333,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                             tabsPos.Value = System.BitConverter.ToInt16(sprm.Arguments, pos).ToString();
                             tab.Attributes.Append(tabsPos);
                             tabs.AppendChild(tab);
-                            
+
                             //skip the tolerence array in sprm 0xC615
                             if (sprm.OpCode == SinglePropertyModifier.OperationCode.sprmPChgTabs)
                                 pos += 4;

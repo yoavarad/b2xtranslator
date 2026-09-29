@@ -22,7 +22,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         {
             get { return this._startSector; }
         }
-        
+
         // Lengh of the virtual stream.
         public ulong Length
         {
@@ -33,7 +33,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         uint _sectorCount;
         public uint SectorCount
         {
-            get { return this._sectorCount;  }
+            get { return this._sectorCount; }
         }
 
 
@@ -62,7 +62,8 @@ namespace b2xtranslator.StructuredStorage.Writer
             this._startSector = this._fat.writeChain(this.SectorCount);
             var reader = new BinaryReader(this._stream);
             reader.BaseStream.Seek(0, SeekOrigin.Begin);
-            while (true) {
+            while (true)
+            {
                 var bytes = reader.ReadBytes((int)this._sectorSize);
                 this._outputHander.writeSectors(bytes, this._sectorSize, (byte)0x0);
                 if (bytes.Length != this._sectorSize)

@@ -45,7 +45,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             ulong magicNumber = fileHandler.ReadUInt64(0x0);
             // Check for Magic Number                       
             if (magicNumber != MAGIC_NUMBER)
-            {                
+            {
                 throw new MagicNumberException(string.Format("Found: {0,10:X}", magicNumber));
             }
 
@@ -60,7 +60,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             this.MiniFatStartSector = fileHandler.ReadUInt32();
             this.NoSectorsInMiniFatChain = fileHandler.ReadUInt32();
             this.DiFatStartSector = fileHandler.ReadUInt32();
-            this.NoSectorsInDiFatChain = fileHandler.ReadUInt32(); 
+            this.NoSectorsInDiFatChain = fileHandler.ReadUInt32();
         }
     }
 }

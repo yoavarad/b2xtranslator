@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The dxWn and dyWn fields contain the window size, also in units of 1/20th  of a point.
     /// </summary>
-    [BiffRecord(RecordType.Window1)] 
+    [BiffRecord(RecordType.Window1)]
     public class Window1 : BiffRecord
     {
         public const RecordType ID = RecordType.Window1;
@@ -24,7 +24,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// Horizontal position of the window in units of 1/20th of a point.
         /// </summary>
         public ushort xWn;
-	
+
         /// <summary>
         /// Vertical position of the window in units of 1/20th of a point.
         /// </summary>
@@ -34,27 +34,27 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// Width of the window in units of 1/20th of a point.
         /// </summary>
         public ushort dxWn;
-	
+
         /// <summary>
         /// Height of the window in units of 1/20th of a point.
         /// </summary>
         public ushort dyWn;
-	
+
         /// <summary>
         /// Option flags
         /// </summary>
         public ushort grbit;
-	
-    	/// <summary>
-    	/// Index of the selected workbook tab (0-based).
-    	/// </summary>
+
+        /// <summary>
+        /// Index of the selected workbook tab (0-based).
+        /// </summary>
         public ushort itabCur;
-	
+
         /// <summary>
         /// Index of the first displayed workbook tab (0-based).
         /// </summary>
         public ushort itabFirst;
-	
+
         /// <summary>
         /// Number of workbook tabs that are selected.
         /// </summary>
@@ -64,7 +64,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// Ratio of the width of the workbook tabs to the width of the horizontal scroll bar; 
         /// to obtain the ratio, convert to decimal and then divide by 1000.
         /// </summary>
-        public ushort wTabRatio;	
+        public ushort wTabRatio;
 
         // The grbit field contains the following option flags:
         // Field                        Offset	Bits    Mask	Name	Contents
@@ -106,9 +106,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.itabFirst = reader.ReadUInt16();
             this.ctabSel = reader.ReadUInt16();
             this.wTabRatio = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

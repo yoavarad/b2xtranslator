@@ -59,7 +59,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             var ele = this._nodeFactory.CreateElement("w", elementName, OpenXmlNamespaces.WordprocessingML);
 
-            if(elementValue != null && elementValue != "")
+            if (elementValue != null && elementValue != "")
             {
                 var val = this._nodeFactory.CreateAttribute("w", "val", OpenXmlNamespaces.WordprocessingML);
                 val.Value = elementValue;

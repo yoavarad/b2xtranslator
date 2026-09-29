@@ -29,7 +29,7 @@ namespace b2xtranslator.DocFileFormat
                     this.Add(name.ToString());
                     name = new StringBuilder();
                 }
-                pos+=2;
+                pos += 2;
             }
             //add last name
             this.Add(name.ToString());

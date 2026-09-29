@@ -37,7 +37,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
             foreach (var sprm in tapx.grpprl)
             {
-                switch (sprm.OpCode)  
+                switch (sprm.OpCode)
                 {
                     case SinglePropertyModifier.OperationCode.sprmTDefTable:
                         //SprmTDefTable tdef = new SprmTDefTable(sprm.Arguments);
@@ -46,7 +46,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     //header row
                     case SinglePropertyModifier.OperationCode.sprmTTableHeader:
                         bool fHeader = Utils.ByteToBool(sprm.Arguments[0]);
-                        if(fHeader)
+                        if (fHeader)
                         {
                             var header = this._nodeFactory.CreateElement("w", "tblHeader", OpenXmlNamespaces.WordprocessingML);
                             this._trPr.AppendChild(header);
@@ -113,51 +113,51 @@ namespace b2xtranslator.WordprocessingMLMapping
                         appendValueElement(this._trPr, "divId", System.BitConverter.ToInt32(sprm.Arguments, 0).ToString(), true);
                         break;
 
-                    ////borders 80 exceptions
-                    //case SinglePropertyModifier.OperationCode.sprmTTableBorders80:
-                    //    byte[] brc80 = new byte[4];
-                    //    //top border
-                    //    Array.Copy(sprm.Arguments, 0, brc80, 0, 4);
-                    //    brcTop = new BorderCode(brc80);
-                    //    //left
-                    //    Array.Copy(sprm.Arguments, 4, brc80, 0, 4);
-                    //    brcLeft = new BorderCode(brc80);
-                    //    //bottom
-                    //    Array.Copy(sprm.Arguments, 8, brc80, 0, 4);
-                    //    brcBottom = new BorderCode(brc80);
-                    //    //right
-                    //    Array.Copy(sprm.Arguments, 12, brc80, 0, 4);
-                    //    brcRight = new BorderCode(brc80);
-                    //    //inside H
-                    //    Array.Copy(sprm.Arguments, 16, brc80, 0, 4);
-                    //    brcHorz = new BorderCode(brc80);
-                    //    //inside V
-                    //    Array.Copy(sprm.Arguments, 20, brc80, 0, 4);
-                    //    brcVert = new BorderCode(brc80);
-                    //    break;
+                        ////borders 80 exceptions
+                        //case SinglePropertyModifier.OperationCode.sprmTTableBorders80:
+                        //    byte[] brc80 = new byte[4];
+                        //    //top border
+                        //    Array.Copy(sprm.Arguments, 0, brc80, 0, 4);
+                        //    brcTop = new BorderCode(brc80);
+                        //    //left
+                        //    Array.Copy(sprm.Arguments, 4, brc80, 0, 4);
+                        //    brcLeft = new BorderCode(brc80);
+                        //    //bottom
+                        //    Array.Copy(sprm.Arguments, 8, brc80, 0, 4);
+                        //    brcBottom = new BorderCode(brc80);
+                        //    //right
+                        //    Array.Copy(sprm.Arguments, 12, brc80, 0, 4);
+                        //    brcRight = new BorderCode(brc80);
+                        //    //inside H
+                        //    Array.Copy(sprm.Arguments, 16, brc80, 0, 4);
+                        //    brcHorz = new BorderCode(brc80);
+                        //    //inside V
+                        //    Array.Copy(sprm.Arguments, 20, brc80, 0, 4);
+                        //    brcVert = new BorderCode(brc80);
+                        //    break;
 
-                    ////border exceptions
-                    //case SinglePropertyModifier.OperationCode.sprmTTableBorders:
-                    //    byte[] brc = new byte[8];
-                    //    //top border
-                    //    Array.Copy(sprm.Arguments, 0, brc, 0, 8);
-                    //    brcTop = new BorderCode(brc);
-                    //    //left
-                    //    Array.Copy(sprm.Arguments, 8, brc, 0, 8);
-                    //    brcLeft = new BorderCode(brc);
-                    //    //bottom
-                    //    Array.Copy(sprm.Arguments, 16, brc, 0, 8);
-                    //    brcBottom = new BorderCode(brc);
-                    //    //right
-                    //    Array.Copy(sprm.Arguments, 24, brc, 0, 8);
-                    //    brcRight = new BorderCode(brc);
-                    //    //inside H
-                    //    Array.Copy(sprm.Arguments, 32, brc, 0, 8);
-                    //    brcHorz = new BorderCode(brc);
-                    //    //inside V
-                    //    Array.Copy(sprm.Arguments, 40, brc, 0, 8);
-                    //    brcVert = new BorderCode(brc);
-                    //    break;
+                        ////border exceptions
+                        //case SinglePropertyModifier.OperationCode.sprmTTableBorders:
+                        //    byte[] brc = new byte[8];
+                        //    //top border
+                        //    Array.Copy(sprm.Arguments, 0, brc, 0, 8);
+                        //    brcTop = new BorderCode(brc);
+                        //    //left
+                        //    Array.Copy(sprm.Arguments, 8, brc, 0, 8);
+                        //    brcLeft = new BorderCode(brc);
+                        //    //bottom
+                        //    Array.Copy(sprm.Arguments, 16, brc, 0, 8);
+                        //    brcBottom = new BorderCode(brc);
+                        //    //right
+                        //    Array.Copy(sprm.Arguments, 24, brc, 0, 8);
+                        //    brcRight = new BorderCode(brc);
+                        //    //inside H
+                        //    Array.Copy(sprm.Arguments, 32, brc, 0, 8);
+                        //    brcHorz = new BorderCode(brc);
+                        //    //inside V
+                        //    Array.Copy(sprm.Arguments, 40, brc, 0, 8);
+                        //    brcVert = new BorderCode(brc);
+                        //    break;
                 }
             }
 

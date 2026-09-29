@@ -23,7 +23,7 @@ namespace b2xtranslator.OfficeGraph
             Debug.Assert(this.Id == ID);
 
             // initialize class members from stream
-            
+
             // the content of this record is to be ignored
             reader.ReadBytes(4);
 

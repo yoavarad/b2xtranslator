@@ -27,7 +27,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
 
         public bool isSharedFormula = false;
 
-        public bool alwaysCalculated = false; 
+        public bool alwaysCalculated = false;
 
         /// <summary>
         /// This method is used to get the Value from this cell 
@@ -46,12 +46,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             if (obj is Stack<AbstractPtg>)
             {
-                this.ptgStack = (Stack<AbstractPtg>)obj; 
+                this.ptgStack = (Stack<AbstractPtg>)obj;
             }
         }
 
 
-        public object calculatedValue; 
+        public object calculatedValue;
 
-     }
+    }
 }

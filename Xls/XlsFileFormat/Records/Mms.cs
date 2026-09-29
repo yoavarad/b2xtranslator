@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record stores the number of ADDMENU  groups and DELMENU  groups in the Book  stream.
     /// </summary>
-    [BiffRecord(RecordType.Mms)] 
+    [BiffRecord(RecordType.Mms)]
     public class Mms : BiffRecord
     {
         public const RecordType ID = RecordType.Mms;
@@ -22,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// Number of DELMENU record groups
         /// </summary>
-        public byte cditm;  
+        public byte cditm;
 
         public Mms(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)

@@ -26,7 +26,7 @@ namespace b2xtranslator.DocFileFormat
             var reader = new VirtualStreamReader(tableStream);
             tableStream.Seek(fib.fcDggInfo, System.IO.SeekOrigin.Begin);
 
-             if (fib.lcbDggInfo > 0)
+            if (fib.lcbDggInfo > 0)
             {
                 int maxPosition = (int)(fib.fcDggInfo + fib.lcbDggInfo);
 
@@ -76,7 +76,7 @@ namespace b2xtranslator.DocFileFormat
         {
             ShapeContainer ret = null;
 
-            foreach(var drawing in this.Drawings)
+            foreach (var drawing in this.Drawings)
             {
                 var group = (GroupContainer)drawing.container.FirstChildWithType<GroupContainer>();
                 if (group != null)

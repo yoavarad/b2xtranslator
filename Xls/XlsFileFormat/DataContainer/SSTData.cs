@@ -4,7 +4,7 @@ using b2xtranslator.Spreadsheet.XlsFileFormat.Records;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
 {
-    public class SSTData: IVisitable
+    public class SSTData : IVisitable
     {
         /// <summary>
         /// Total and unique number of strings in this SST-Biffrecord 
@@ -24,7 +24,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="sst">The SST BiffRecord</param>
         public SSTData(SST sst)
         {
-            this.copySSTData(sst); 
+            this.copySSTData(sst);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             this.StringList = sst.StringList;
             this.FormatList = sst.FormatList;
             this.cstTotal = sst.cstTotal;
-            this.cstUnique = sst.cstUnique; 
+            this.cstUnique = sst.cstUnique;
         }
 
         public List<StringFormatAssignment> getFormatingRuns(int stringNumber)
@@ -46,11 +46,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             {
                 if (item.StringNumber == stringNumber)
                 {
-                    returnList.Add(item); 
+                    returnList.Add(item);
                 }
-                
+
             }
-            return returnList; 
+            return returnList;
         }
 
         #region IVisitable Members
