@@ -136,7 +136,11 @@ namespace b2xtranslator.PresentationMLMapping
 
                 case PlaceholderEnum.MasterTitle:
                 case PlaceholderEnum.Title:
+                case PlaceholderEnum.VerticalTextTitle:
                     return "title";
+
+                case PlaceholderEnum.VerticalTextBody:
+                    return "body";
 
                 case PlaceholderEnum.MasterBody:
                 case PlaceholderEnum.Body:
@@ -327,6 +331,9 @@ namespace b2xtranslator.PresentationMLMapping
 
                 case SlideLayoutType.TwoRowsTopTwoColumns:
                     return "twoObjOverTx";
+
+                case SlideLayoutType.VerticalTitleRightBodyLeft:
+                    return "vertTitleAndTx";
 
                 default:
                     throw new NotImplementedException("Don't know how to map slide layout type " + type);
