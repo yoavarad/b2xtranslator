@@ -39,7 +39,7 @@ namespace UnitTests
                 // wrapper element so the fragment carries the p: namespace declaration once
                 writer.WriteStartElement("p", "root", "http://schemas.openxmlformats.org/presentationml/2006/main");
                 var type = typeof(Converter).Assembly.GetType("b2xtranslator.PresentationMLMapping.SlideTransitionMapping", true);
-                object mapping =Activator.CreateInstance(type, new object[] { null, writer });
+                object mapping = Activator.CreateInstance(type, new object[] { null, writer });
                 type.GetMethod("Apply").Invoke(mapping, new object[] { atom });
                 writer.WriteEndElement();
             }
