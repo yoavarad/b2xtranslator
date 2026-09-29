@@ -1,7 +1,7 @@
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(111)]
-    public class FlowChartInputOutputType :ShapeType
+    public class FlowChartInputOutputType : ShapeType
     {
         public FlowChartInputOutputType()
         {

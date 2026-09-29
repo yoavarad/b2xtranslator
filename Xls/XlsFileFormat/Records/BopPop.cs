@@ -98,7 +98,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// 0x0001 or if fAutoSplit is set to 1, this value MUST be ignored.
         /// </summary>
         public double numSplitValue;
-        
+
         /// <summary>
         /// A bit that specifies whether one or more data points in the chart group have shadows.
         /// </summary>

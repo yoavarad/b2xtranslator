@@ -8,8 +8,8 @@ namespace b2xtranslator.OpenXmlLib.SpreadsheetML
         public ExternalLinkPart(OpenXmlPartContainer parent, int RefNumber)
             : base(parent, RefNumber)
         {
-            this.RefNumber = RefNumber; 
-            
+            this.RefNumber = RefNumber;
+
         }
 
 

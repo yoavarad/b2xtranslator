@@ -19,7 +19,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             this.ConnectorLocations = "10800,@2;0,10800;10800,@3;21600,10800";
             this.ConnectorAngles = "270,180,90,0";
-                
+
             this.Handles = new List<Handle>();
             var h1 = new Handle
             {

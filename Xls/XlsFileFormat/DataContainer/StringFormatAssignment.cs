@@ -20,7 +20,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.StringNumber = 0;
             this.CharNumber = 0;
-            this.FontRecord = 0; 
+            this.FontRecord = 0;
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             this.StringNumber = StringNumber;
             this.CharNumber = CharNumber;
-            this.FontRecord = FontRecord; 
+            this.FontRecord = FontRecord;
         }
     }
 }

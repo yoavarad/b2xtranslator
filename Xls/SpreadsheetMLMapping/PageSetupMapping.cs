@@ -17,7 +17,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             : base(targetPart.XmlWriter)
         {
             this._xlsContext = xlsContext;
-            this._chartsheetPart = targetPart; 
+            this._chartsheetPart = targetPart;
         }
 
         #region IMapping<PageSetupSequence> Members

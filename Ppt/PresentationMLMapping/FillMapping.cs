@@ -43,7 +43,9 @@ namespace b2xtranslator.PresentationMLMapping
                     if (so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.fillColor))
                     {
                         colorval = Utils.getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[ShapeOptions.PropertyId.fillColor].op, (RegularContainer)slide, so, ref SchemeType);
-                    } else {
+                    }
+                    else
+                    {
                         colorval = "FFFFFF"; //TODO: find out which color to use in this case
                     }
                     this._writer.WriteStartElement("a", "solidFill", OpenXmlNamespaces.DrawingML);
@@ -80,7 +82,7 @@ namespace b2xtranslator.PresentationMLMapping
 
                     this._writer.WriteStartElement("a", "fgClr", OpenXmlNamespaces.DrawingML);
                     this._writer.WriteStartElement("a", "srgbClr", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", Utils.getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[ShapeOptions.PropertyId.fillColor].op, slide,so));
+                    this._writer.WriteAttributeString("val", Utils.getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[ShapeOptions.PropertyId.fillColor].op, slide, so));
                     this._writer.WriteEndElement();
                     this._writer.WriteEndElement();
 
@@ -179,17 +181,18 @@ namespace b2xtranslator.PresentationMLMapping
 
                         this._writer.WriteEndElement();
 
-                    } else if (blipIndex <= gr.FirstChildWithType<BlipStoreContainer>().Children.Count)
+                    }
+                    else if (blipIndex <= gr.FirstChildWithType<BlipStoreContainer>().Children.Count)
                     {
                         var bse = (BlipStoreEntry)gr.FirstChildWithType<BlipStoreContainer>().Children[(int)blipIndex - 1];
 
                         if (this._ctx.Ppt.PicturesContainer._pictures.ContainsKey(bse.foDelay))
                         {
                             var rec = this._ctx.Ppt.PicturesContainer._pictures[bse.foDelay];
-                           
+
                             if (rec is BitmapBlip)
                             {
-                                var b = (BitmapBlip)this._ctx.Ppt.PicturesContainer._pictures[bse.foDelay];                                
+                                var b = (BitmapBlip)this._ctx.Ppt.PicturesContainer._pictures[bse.foDelay];
                                 imgPart = this._parentSlideMapping.targetPart.AddImagePart(ShapeTreeMapping.getImageType(b.TypeCode));
                                 imgPart.TargetDirectory = "..\\media";
                                 var outStream = imgPart.GetStream();
@@ -336,10 +339,10 @@ namespace b2xtranslator.PresentationMLMapping
                             }
                         }
                     }
-                    
+
                     if (useFillAndBack)
                     {
-                        
+
                         colorval = Utils.getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[ShapeOptions.PropertyId.fillColor].op, slide, so);
 
                         this._writer.WriteStartElement("a", "gs", OpenXmlNamespaces.DrawingML);
@@ -470,18 +473,18 @@ namespace b2xtranslator.PresentationMLMapping
                             while (pos < length)
                             {
                                 colval = Utils.getRGBColorFromOfficeArtCOLORREF(BitConverter.ToUInt32(data, pos), slide, so);
-                                
+
                                 pos += 4;
                                 fixedpoint = new FixedPointNumber(BitConverter.ToUInt16(data, pos), BitConverter.ToUInt16(data, pos + 2));
-                                shadeColors.Insert(0,colval);
+                                shadeColors.Insert(0, colval);
                                 pos += 4;
                             }
                         }
-                                           
+
                     }
                     else
                     {
-                        bool switchcolors = false; 
+                        bool switchcolors = false;
                         if (switchColors & so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.fillBackColor))
                         {
                             colorval = Utils.getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[ShapeOptions.PropertyId.fillBackColor].op, slide, so);
@@ -519,7 +522,7 @@ namespace b2xtranslator.PresentationMLMapping
                         shadeColors.Add(colorval);
                         shadeColors.Add(colorval2);
                     }
-                                       
+
 
                     int gspos;
                     string col;
@@ -529,10 +532,13 @@ namespace b2xtranslator.PresentationMLMapping
                         if (i == 0)
                         {
                             gspos = 0;
-                        } else if (i == shadeColors.Count-1)
+                        }
+                        else if (i == shadeColors.Count - 1)
                         {
                             gspos = 100000;
-                        } else {
+                        }
+                        else
+                        {
                             gspos = i * 100000 / shadeColors.Count;
                         }
 

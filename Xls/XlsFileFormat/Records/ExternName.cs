@@ -5,7 +5,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.ExternName)] 
+    [BiffRecord(RecordType.ExternName)]
     public class ExternName : BiffRecord
     {
         public const RecordType ID = RecordType.ExternName;
@@ -13,13 +13,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         public ushort ixals;
         public bool fOle;
         public bool fOleLink;
-        public ushort grbit; 
+        public ushort grbit;
         public string extName;
         public byte cch;
 
         public ushort cce;
 
-        public string nameDefinition; 
+        public string nameDefinition;
 
         public ExternName(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -58,11 +58,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     }
                 }
                 this.cce = this.Reader.ReadUInt16();
-                this.Reader.ReadBytes(this.cce); 
+                this.Reader.ReadBytes(this.cce);
 
             }
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

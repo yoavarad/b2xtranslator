@@ -52,10 +52,10 @@ namespace b2xtranslator.Tools
             int cch = System.BitConverter.ToInt32(cchBytes, 0);
 
             //dont read the terminating zero
-            var stringBytes = new byte[cch*2];
+            var stringBytes = new byte[cch * 2];
             stream.Read(stringBytes, 0, stringBytes.Length);
 
-            return Encoding.Unicode.GetString(stringBytes, 0, stringBytes.Length-2);
+            return Encoding.Unicode.GetString(stringBytes, 0, stringBytes.Length - 2);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace b2xtranslator.Tools
         public static string ReadXstz(Stream stream)
         {
             string xst = ReadXst(stream);
-            
+
             //skip the termination
             var termiantion = new byte[2];
             stream.Read(termiantion, 0, termiantion.Length);

@@ -51,7 +51,7 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 var sh = sc.FirstChildWithType<Shape>();
                 var so = sc.FirstChildWithType<ShapeOptions>();
-               
+
                 if (so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.fillType))
                 {
                     this._writer.WriteStartElement("p", "bg", OpenXmlNamespaces.PresentationML);
@@ -128,7 +128,7 @@ namespace b2xtranslator.PresentationMLMapping
             else
             {
                 //throw new NotImplementedException("Write txStyles in case of PPT without roundTripTxStyles"); // TODO (pre PP2007)
-                
+
                 //XmlDocument slideLayoutDoc = Utils.GetDefaultDocument("txStyles");
                 //slideLayoutDoc.WriteTo(_writer);
 
@@ -156,7 +156,7 @@ namespace b2xtranslator.PresentationMLMapping
                 var schemes = this.Master.AllChildrenWithType<ColorSchemeAtom>();
                 if (schemes.Count > 0)
                 {
-                    new ColorSchemeMapping(this._ctx, themePart.XmlWriter).Apply(schemes);                    
+                    new ColorSchemeMapping(this._ctx, themePart.XmlWriter).Apply(schemes);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace b2xtranslator.PresentationMLMapping
             }
 
             themePart.XmlWriter.Flush();
-           
+
 
             this.MasterPart.ReferencePart(themePart);
 

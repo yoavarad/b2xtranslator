@@ -12,7 +12,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         public string FieldExpansion;
 
         private Regex classicFieldFormat = new Regex(@"^(" + TextMark.FieldBeginMark + ")(.*)(" + TextMark.FieldSeperator + ")(.*)(" + TextMark.FieldEndMark + ")");
-        
+
         private Regex shortFieldFormat = new Regex(@"^(" + TextMark.FieldBeginMark + ")(.*)(" + TextMark.FieldEndMark + ")");
 
         public Field(char[] fieldChars)

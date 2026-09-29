@@ -53,7 +53,7 @@ namespace UnitTests
             foreach (var pcd in this.doc.PieceTable.Pieces)
             {
                 //Console.WriteLine("\t"+pcd.cpStart + " - " + pcd.cpEnd + " : " + pcd.encoding.ToString() + " , starts at 0x" + String.Format("{0:x04}", pcd.fc));
-                Console.WriteLine("Piece starts at "+ string.Format("{0:X04}", pcd.fc) + " and hast encoding "+pcd.encoding.ToString());
+                Console.WriteLine("Piece starts at " + string.Format("{0:X04}", pcd.fc) + " and hast encoding " + pcd.encoding.ToString());
             }
         }
 
@@ -76,7 +76,7 @@ namespace UnitTests
             var stsh = new StyleSheet(this.doc.FIB, this.doc.TableStream, this.doc.DataStream);
             Console.WriteLine("Stylesheet contains " + stsh.Styles.Count + " Styles");
 
-            for (int i=0; i<stsh.Styles.Count; i++)
+            for (int i = 0; i < stsh.Styles.Count; i++)
             {
                 Console.WriteLine("Style " + i);
                 var std = stsh.Styles[i];
@@ -84,7 +84,7 @@ namespace UnitTests
                 {
                     Console.WriteLine("\tIdentifier: " + std.sti);
                     Console.WriteLine("\tStyle Kind: " + std.stk);
-                    Console.WriteLine("\tBased On: " + std.istdBase); 
+                    Console.WriteLine("\tBased On: " + std.istdBase);
                     Console.WriteLine("\tName: " + std.xstzName);
 
                     if (std.papx != null)

@@ -37,7 +37,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.ConnectorAngles = "270,180,90,0";
 
             this.TextboxRectangle = "@13,@6,@14,@9;@1,@17,@4,@9";
-           
+
             this.Handles = new List<Handle>();
             var HandleOne = new Handle
             {

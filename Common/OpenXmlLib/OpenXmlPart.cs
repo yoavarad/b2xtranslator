@@ -32,7 +32,7 @@ namespace b2xtranslator.OpenXmlLib
         public override string TargetExt { get { return ".xml"; } }
         public abstract string ContentType { get; }
         public abstract string RelationshipType { get; }
-        
+
         internal virtual bool HasDefaultContentType { get { return false; } }
 
         public Stream GetStream()
@@ -84,12 +84,12 @@ namespace b2xtranslator.OpenXmlLib
             {
                 part.WritePart(writer);
             }
-            
+
             writer.AddPart(this.TargetFullName);
 
 
             writer.Write(this.GetStream());
-            
+
             this.WriteRelationshipPart(writer);
         }
     }

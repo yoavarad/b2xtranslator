@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// This class extracts the data from a LABELSST Record
     /// This record describes a cell that contains a string constant from the shared string table 
     /// </summary>
-    [BiffRecord(RecordType.LabelSst)] 
+    [BiffRecord(RecordType.LabelSst)]
     public class LabelSst : BiffRecord
     {
         public const RecordType ID = RecordType.LabelSst;
@@ -20,22 +20,22 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// <summary>
         /// Rownumber 
         /// </summary>
-        public ushort rw;      
+        public ushort rw;
 
         /// <summary>
         /// Colnumber 
         /// </summary>
-        public ushort col;     
-        
+        public ushort col;
+
         /// <summary>
         /// index to the XF record 
         /// </summary>
-        public ushort ixfe;    
+        public ushort ixfe;
 
         /// <summary>
         /// index into the SST record  
         /// </summary>
-        public uint isst;     
+        public uint isst;
 
         /// <summary>
         /// Ctor 
@@ -52,9 +52,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.col = reader.ReadUInt16();
             this.ixfe = reader.ReadUInt16();
             this.isst = reader.ReadUInt32();
-           
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

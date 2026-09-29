@@ -146,7 +146,7 @@ namespace b2xtranslator.OfficeDrawing
         /// </summary>
         /// <typeparam name="T">Type of ancestor to search for</typeparam>
         /// <returns>First ancestor with appropriate type or null if none was found</returns>
-        public T FirstAncestorWithType<T>() where T: Record
+        public T FirstAncestorWithType<T>() where T : Record
         {
             var curAncestor = this.ParentRecord;
 

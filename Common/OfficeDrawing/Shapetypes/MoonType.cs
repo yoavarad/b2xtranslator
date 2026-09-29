@@ -32,7 +32,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
 
             this.AdjustmentValues = "10800";
-            this.ConnectorAngles = "270,180,90,0"; 
+            this.ConnectorAngles = "270,180,90,0";
             this.ConnectorLocations = "21600,0;0,10800;21600,21600;@0,10800";
 
             this.TextboxRectangle = "@12,@15,@0,@16";

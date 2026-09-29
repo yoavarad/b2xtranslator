@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Selection)] 
+    [BiffRecord(RecordType.Selection)]
     public class Selection : BiffRecord
     {
         public const RecordType ID = RecordType.Selection;
@@ -65,9 +65,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                     this.rgref[i] = new RefU(reader);
                 }
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

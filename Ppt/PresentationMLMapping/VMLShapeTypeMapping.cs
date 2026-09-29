@@ -12,7 +12,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public VMLShapeTypeMapping(ConversionContext ctx, XmlWriter writer)
             : base(writer)
-        {}
+        { }
 
         public void Apply(ShapeType shapeType)
         {
@@ -114,9 +114,9 @@ namespace b2xtranslator.PresentationMLMapping
                 this._writer.WriteEndElement(); //path
 
                 //Lock
-                this._writer.WriteStartElement("o","lock",OpenXmlNamespaces.Office);
+                this._writer.WriteStartElement("o", "lock", OpenXmlNamespaces.Office);
                 this._writer.WriteAttributeString("v", "ext", OpenXmlNamespaces.VectorML, "edit");
-                this._writer.WriteAttributeString("aspectratio","f");
+                this._writer.WriteAttributeString("aspectratio", "f");
                 this._writer.WriteEndElement(); //lock
 
                 //Handles
@@ -169,6 +169,6 @@ namespace b2xtranslator.PresentationMLMapping
             return type.ToString();
         }
 
-        
+
     }
 }

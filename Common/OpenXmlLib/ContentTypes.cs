@@ -21,12 +21,12 @@
         public const string Drawing = "application/vnd.openxmlformats-officedocument.drawing+xml";
         public const string Emf = "image/x-emf";
         public const string Wmf = "image/x-wmf";
-        
+
         public const string MSExcel = "application/vnd.ms-excel";
         public const string MSWord = "application/msword";
         public const string MSPowerpoint = "application/vnd.ms-powerpoint";
     }
-     
+
     public static class WordprocessingMLContentTypes
     {
         // WordprocessingML content types
@@ -42,8 +42,8 @@
         public const string Settings = "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml";
 
         public const string Comments = "application/vnd.openxmlformats-officedocument.wordprocessingml.comments+xml";
-  
-        public const string Footnotes="application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml"; 
+
+        public const string Footnotes = "application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml";
         public const string Endnotes = "application/vnd.openxmlformats-officedocument.wordprocessingml.endnotes+xml";
 
         public const string Header = "application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml";
@@ -57,13 +57,13 @@
         // SpreadsheetML content types
         public const string Workbook = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml";
         public const string WorkbookMacro = "application/vnd.ms-excel.sheet.macroEnabled.main+xml";
-       
+
         public const string Styles = "application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml";
         public const string Worksheet = "application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml";
         public const string Chartsheet = "application/vnd.openxmlformats-officedocument.spreadsheetml.chartsheet+xml";
         public const string SharedStrings = "application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml";
         public const string Connections = "application/vnd.openxmlformats-officedocument.spreadsheetml.connections+xml";
-        public const string ExternalLink = "application/vnd.openxmlformats-officedocument.spreadsheetml.externalLink+xml"; 
+        public const string ExternalLink = "application/vnd.openxmlformats-officedocument.spreadsheetml.externalLink+xml";
     }
 
     public static class PresentationMLContentTypes
@@ -122,7 +122,7 @@
 
         // SpreadsheetML Namespaces
         public const string SpreadsheetML = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
-        
+
         //Office
         public const string Office = "urn:schemas-microsoft-com:office:office";
         public const string OfficeWord = "urn:schemas-microsoft-com:office:word";
@@ -136,9 +136,9 @@
         public const string Theme = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme";
 
         public const string OfficeDocument = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
-        public const string Styles="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles";
+        public const string Styles = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles";
         public const string FontTable = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable";
-        public const string Numbering = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"; 
+        public const string Numbering = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering";
         public const string WebSettings = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings";
         public const string Settings = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings";
 
@@ -146,7 +146,7 @@
         public const string CustomXmlProperties = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps";
 
         public const string Comments = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/comments";
-        
+
         public const string Footnotes = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes";
         public const string Endnotes = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/endnotes";
 
@@ -174,12 +174,12 @@
         public const string SharedStrings = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings";
         public const string ExternalLink = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLink";
         public const string ExternalLinkPath = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/externalLinkPath";
-        
+
         public const string Chart = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart";
         public const string Drawing = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing";
 
-        
-        public const string HyperLink = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"; 
+
+        public const string HyperLink = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink";
     }
 
     public static class MicrosoftWordRelationshipTypes

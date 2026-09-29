@@ -24,7 +24,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 {
                     macroClsid = entry.ClsId;
                 }
-                else if(entry.Path == "\\Macros\\VBA")
+                else if (entry.Path == "\\Macros\\VBA")
                 {
                     vbaClsid = entry.ClsId;
                 }
@@ -49,7 +49,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             storage.RootDirectoryEntry.AddStreamDirectoryEntry("PROJECT", doc.Storage.GetStream("\\Macros\\PROJECT"));
             storage.RootDirectoryEntry.AddStreamDirectoryEntry("PROJECTwm", doc.Storage.GetStream("\\Macros\\PROJECTwm"));
 
-           //write the storage to the xml part
+            //write the storage to the xml part
             storage.write(this._targetPart.GetStream());
         }
     }

@@ -10,7 +10,7 @@ namespace b2xtranslator.OfficeDrawing
         public int Index;
 
         public GroupContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) 
+            : base(_reader, size, typeCode, version, instance)
         {
             for (int i = 0; i < this.Children.Count; i++)
             {

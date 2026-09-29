@@ -2,7 +2,7 @@ using System;
 
 namespace b2xtranslator.DocFileFormat
 {
-    public class UnspportedFileVersionException :Exception
+    public class UnspportedFileVersionException : Exception
     {
         private const string MSG = "DocFileFormat does not support .doc files that have been created with Word versions older than Word 97.";
 

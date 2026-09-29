@@ -19,6 +19,6 @@
 
         public override string TargetName { get { return "itemProps" + this.PartIndex; } }
         public override string TargetDirectory { get { return "customXml"; } }
-        
+
     }
 }

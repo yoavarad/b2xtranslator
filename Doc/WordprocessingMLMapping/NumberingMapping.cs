@@ -87,7 +87,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     //The style id is used for a reverse reference. 
                     //It can happen that the reference points to the wrong style.
                     short styleIndex = lstf.rgistd[j];
-                    if(styleIndex != ListData.ISTD_NIL)
+                    if (styleIndex != ListData.ISTD_NIL)
                     {
                         this._writer.WriteStartElement("w", "pStyle", OpenXmlNamespaces.WordprocessingML);
                         this._writer.WriteAttributeString("w", "val", OpenXmlNamespaces.WordprocessingML, StyleSheetMapping.MakeStyleId(this._ctx.Doc.Styles.Styles[styleIndex]));
@@ -105,7 +105,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     this._writer.WriteEndElement();
 
                     //pPr
-                    lvl.grpprlPapx.Convert(new ParagraphPropertiesMapping(this._writer, this._ctx, this._parentDoc,  null));
+                    lvl.grpprlPapx.Convert(new ParagraphPropertiesMapping(this._writer, this._ctx, this._parentDoc, null));
 
                     //rPr
                     lvl.grpprlChpx.Convert(new CharacterPropertiesMapping(this._writer, this._parentDoc, new RevisionData(lvl.grpprlChpx), lvl.grpprlPapx, false));
@@ -124,7 +124,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
                 //start num
                 this._writer.WriteStartElement("w", "num", OpenXmlNamespaces.WordprocessingML);
-                this._writer.WriteAttributeString("w", "numId", OpenXmlNamespaces.WordprocessingML, (i+1).ToString());
+                this._writer.WriteAttributeString("w", "numId", OpenXmlNamespaces.WordprocessingML, (i + 1).ToString());
 
                 int index = FindIndexbyId(rglst, lfo.lsid);
 
@@ -143,13 +143,13 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             int ret = -1;
             for (int i = 0; i < list.Count; i++)
-			{
+            {
                 if (list[i].lsid == id)
                 {
                     ret = i;
                     break;
                 }
-			}
+            }
             return ret;
         }
 

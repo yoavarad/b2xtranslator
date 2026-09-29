@@ -50,7 +50,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.frtHeaderOld = new FrtHeaderOld(reader);
-            this.iObjectKind= (ObjectType)reader.ReadUInt16();
+            this.iObjectKind = (ObjectType)reader.ReadUInt16();
             this.iObjectContext = reader.ReadUInt16();
             this.iObjectInstance1 = reader.ReadUInt16();
             this.iObjectInstance2 = reader.ReadUInt16();

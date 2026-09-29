@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             this.Length = 5;
             this.Data = "#REF!";
             this.type = PtgType.Operand;
-            reader.ReadBytes(4);             
+            reader.ReadBytes(4);
         }
     }
 }

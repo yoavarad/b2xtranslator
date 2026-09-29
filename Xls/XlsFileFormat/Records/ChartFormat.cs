@@ -54,7 +54,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             Debug.Assert(this.Id == ID);
 
             // initialize class members from stream
-            
+
             //ignore beginning of record
             reader.ReadBytes(16);
             this.fVaried = Utils.BitmaskToBool(reader.ReadUInt16(), 0x0001);

@@ -90,9 +90,9 @@ namespace b2xtranslator.OfficeDrawing
         public List<T> AllChildrenWithType<T>() where T : Record
         {
             return (List<T>)this.Children.FindAll(
-                delegate(Record r) { return r is T; }
+                delegate (Record r) { return r is T; }
             ).ConvertAll<T>(
-                delegate(Record r) { return (T)r; }
+                delegate (Record r) { return (T)r; }
             );
         }
 
@@ -104,7 +104,7 @@ namespace b2xtranslator.OfficeDrawing
         public T FirstChildWithType<T>() where T : Record
         {
             return (T)this.Children.Find(
-                delegate(Record r) { return r is T; }
+                delegate (Record r) { return r is T; }
             );
         }
 

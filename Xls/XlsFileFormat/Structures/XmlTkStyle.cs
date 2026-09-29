@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkStyle(IStreamReader reader)
         {
-            this.chartStyle = new XmlTkDWord(reader);  
+            this.chartStyle = new XmlTkDWord(reader);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace b2xtranslator.OfficeDrawing
 
             //Reserved 0x800000 0x1000000
 
-            this.fUsefLineOpaqueBackColor = Utils.BitmaskToBool(entryOperand, 0x2000000); 
+            this.fUsefLineOpaqueBackColor = Utils.BitmaskToBool(entryOperand, 0x2000000);
         }
     }
 }

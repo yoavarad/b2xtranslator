@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkOverlay(IStreamReader reader)
         {
-            this.fOverlay = new XmlTkBool(reader);    
+            this.fOverlay = new XmlTkBool(reader);
         }
     }
 }

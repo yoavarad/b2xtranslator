@@ -12,7 +12,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkToken(IStreamReader reader)
         {
-            this.xtHeader = new XmlTkHeader(reader);  
+            this.xtHeader = new XmlTkHeader(reader);
 
             this.dValue = reader.ReadUInt16();
         }

@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkRotYFrt(IStreamReader reader)
         {
-            this.rotationY = new XmlTkDWord(reader);   
+            this.rotationY = new XmlTkDWord(reader);
         }
     }
 }

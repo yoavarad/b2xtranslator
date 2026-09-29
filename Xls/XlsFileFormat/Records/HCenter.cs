@@ -4,12 +4,12 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.HCenter)] 
+    [BiffRecord(RecordType.HCenter)]
     public class HCenter : BiffRecord
     {
         public const RecordType ID = RecordType.HCenter;
 
-        public bool hcenter; 
+        public bool hcenter;
 
         public HCenter(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -24,7 +24,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             }
             else
             {
-                this.hcenter = false; 
+                this.hcenter = false;
             }
 
         }

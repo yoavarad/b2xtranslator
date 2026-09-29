@@ -237,7 +237,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                                 }
                                 if (fcell.alwaysCalculated)
                                 {
-                                    this._writer.WriteAttributeString("ca", "1"); 
+                                    this._writer.WriteAttributeString("ca", "1");
                                 }
 
                                 if (value.Equals(""))
@@ -338,39 +338,39 @@ namespace b2xtranslator.SpreadsheetMLMapping
                     bool writtenParentElement = false;
                     foreach (var link in bsd.HyperLinkList)
                     {
-                    //    Uri url;
-                    //    if (link.absolute)
-                    //    {
+                        //    Uri url;
+                        //    if (link.absolute)
+                        //    {
 
-                    //        if (link.url.StartsWith("http", true, CultureInfo.GetCultureInfo("en-US"))
-                    //            || link.url.StartsWith("mailto", true, CultureInfo.GetCultureInfo("en-US")))
-                    //        {
-                    //            url = new Uri(link.url, UriKind.Absolute);
+                        //        if (link.url.StartsWith("http", true, CultureInfo.GetCultureInfo("en-US"))
+                        //            || link.url.StartsWith("mailto", true, CultureInfo.GetCultureInfo("en-US")))
+                        //        {
+                        //            url = new Uri(link.url, UriKind.Absolute);
 
-                    //        }
-                    //        else
-                    //        {
-                    //            link.url = "file:///" + link.url;
-                    //            url = new Uri(link.url, UriKind.Absolute);
-                    //        }
+                        //        }
+                        //        else
+                        //        {
+                        //            link.url = "file:///" + link.url;
+                        //            url = new Uri(link.url, UriKind.Absolute);
+                        //        }
 
-                    //    }
-                    //    else
-                    //    {
+                        //    }
+                        //    else
+                        //    {
 
-                    //        url = new Uri(link.url, UriKind.Relative);
+                        //        url = new Uri(link.url, UriKind.Relative);
 
-                    //    }
-                    //    try
-                    //    {
-                    //        if (System.Uri.IsWellFormedUriString(url.LocalPath.ToString(), System.UriKind.Absolute))
-                    //        {
-                                
-                                //if (!writtenParentElement)
-                                //{
-                                    
-                                //    writtenParentElement = true;
-                                //}
+                        //    }
+                        //    try
+                        //    {
+                        //        if (System.Uri.IsWellFormedUriString(url.LocalPath.ToString(), System.UriKind.Absolute))
+                        //        {
+
+                        //if (!writtenParentElement)
+                        //{
+
+                        //    writtenParentElement = true;
+                        //}
                         string refstring;
 
                         if (link.colLast == link.colFirst && link.rwLast == link.rwFirst)
@@ -405,19 +405,19 @@ namespace b2xtranslator.SpreadsheetMLMapping
                             }
                             this._writer.WriteEndElement();
                         }
-                    /*           }
-                     }
-                        catch (Exception ex)
-                        {
-                            TraceLogger.DebugInternal(ex.Message.ToString());
-                            TraceLogger.DebugInternal(ex.StackTrace.ToString());
-                        }
-                    }*/
+                        /*           }
+                         }
+                            catch (Exception ex)
+                            {
+                                TraceLogger.DebugInternal(ex.Message.ToString());
+                                TraceLogger.DebugInternal(ex.StackTrace.ToString());
+                            }
+                        }*/
                     }
                     this._writer.WriteEndElement(); // hyperlinks
                     if (writtenParentElement)
                     {
-                        
+
                     }
                 }
 

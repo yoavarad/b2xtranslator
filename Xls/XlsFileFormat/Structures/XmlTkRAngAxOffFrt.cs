@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkRAngAxOffFrt(IStreamReader reader)
         {
-            this.fRightAngAxOff = new XmlTkBool(reader);   
+            this.fRightAngAxOff = new XmlTkBool(reader);
         }
     }
 }

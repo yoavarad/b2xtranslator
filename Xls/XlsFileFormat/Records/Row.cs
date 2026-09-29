@@ -5,7 +5,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Row)] 
+    [BiffRecord(RecordType.Row)]
     public class Row : BiffRecord
     {
         public const RecordType ID = RecordType.Row;
@@ -24,7 +24,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         public int ixfe_val;
         public bool fExAsc;
         public bool fExDes;
-        public bool fPhonetic; 
+        public bool fPhonetic;
 
         public Row(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -55,8 +55,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             /// reserved3 (1 byte): MUST be 1, and MUST be ignored.
             ///
             this.iOutLevel = buffer & 0x0007;
-            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x10); 
-            this.fDyZero = Utils.BitmaskToBool(buffer, 0x20); 
+            this.fCollapsed = Utils.BitmaskToBool(buffer, 0x10);
+            this.fDyZero = Utils.BitmaskToBool(buffer, 0x20);
             this.fUnsynced = Utils.BitmaskToBool(buffer, 0x40);
             this.fGhostDirty = Utils.BitmaskToBool(buffer, 0x80);
 
@@ -70,12 +70,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             ///G - fExAsc (1 bit): A bit that specifies whether any cell in the row has a thick top border, or any cell in the row directly above the current row has a thick bottom border. Thick borders are the following enumeration values from BorderStyle: THICK and DOUBLE.
             ///H - fExDes (1 bit): A bit that specifies whether any cell in the row has a medium or thick bottom border, or any cell in the row directly below the current row has a medium or thick top border. Thick borders are previously specified. Medium borders are the following enumeration values from BorderStyle: MEDIUM, MEDIUMDASHED, MEDIUMDASHDOT, MEDIUMDASHDOTDOT, and SLANTDASHDOT.
             ///I - fPhonetic (1 bit): A bit that specifies whether the phonetic guide feature is enabled for any cell in this row. J - unused2 (1 bit): Undefined and MUST be ignored.
-             
-            
 
-            
+
+
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

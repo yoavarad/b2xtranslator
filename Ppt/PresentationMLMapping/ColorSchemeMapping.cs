@@ -26,7 +26,7 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteAttributeString("name", "dummyTheme");
 
             this._writer.WriteStartElement("a", "themeElements", OpenXmlNamespaces.DrawingML);
-            var s = schemes[schemes.Count-1];
+            var s = schemes[schemes.Count - 1];
             writeScheme(s);
 
             //write fontScheme
@@ -42,7 +42,7 @@ namespace b2xtranslator.PresentationMLMapping
                 this._writer.WriteStartElement("a", "extraClrSchemeLst", OpenXmlNamespaces.DrawingML);
                 foreach (var scheme in schemes)
                 {
-                    this._writer.WriteStartElement("a","extraClrScheme", OpenXmlNamespaces.DrawingML);
+                    this._writer.WriteStartElement("a", "extraClrScheme", OpenXmlNamespaces.DrawingML);
                     writeScheme(scheme);
                     this._writer.WriteEndElement(); // extraClrScheme
                 }
@@ -51,7 +51,7 @@ namespace b2xtranslator.PresentationMLMapping
 
 
             this._writer.WriteEndElement(); // theme
-            
+
         }
 
         private void writeFmtScheme()

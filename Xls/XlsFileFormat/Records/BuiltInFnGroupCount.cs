@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// This record stores the number of built-in function groups 
     /// (Financial, Math & Trig, Date & Time, and so on) in the current version of Excel.
     /// </summary>
-    [BiffRecord(RecordType.BuiltInFnGroupCount)] 
+    [BiffRecord(RecordType.BuiltInFnGroupCount)]
     public class BuiltInFnGroupCount : BiffRecord
     {
         public const RecordType ID = RecordType.BuiltInFnGroupCount;
@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// Number of built-in function groups
         /// </summary>
         public ushort cFnGroup;
-        
+
         public BuiltInFnGroupCount(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.cFnGroup = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

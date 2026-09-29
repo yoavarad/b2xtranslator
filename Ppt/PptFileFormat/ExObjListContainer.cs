@@ -49,7 +49,7 @@ namespace b2xtranslator.PptFileFormat
             this.exObjId = this.Reader.ReadInt32();
             int subType = this.Reader.ReadInt32();
             this.persistIdRef = this.Reader.ReadUInt32();
-            int unused = this.Reader.ReadInt32();            
+            int unused = this.Reader.ReadInt32();
         }
     }
 
@@ -104,7 +104,7 @@ namespace b2xtranslator.PptFileFormat
         {
             // create memory stream to the data
             var msCompressed = new MemoryStream(this.data);
-            
+
             // skip the first 2 bytes
             msCompressed.ReadByte();
             msCompressed.ReadByte();

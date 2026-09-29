@@ -15,7 +15,7 @@ namespace b2xtranslator.DocFileFormat
 
             // parse the values
             var values = new List<string>();
-            while (tableStream.Position < fc+lcb)
+            while (tableStream.Position < fc + lcb)
                 values.Add(Utils.ReadXst(tableStream));
 
             // map to the dictionary

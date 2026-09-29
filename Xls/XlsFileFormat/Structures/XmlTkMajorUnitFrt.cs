@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkMajorUnitFrt(IStreamReader reader)
         {
-            this.majorUnit = new XmlTkDouble(reader);   
+            this.majorUnit = new XmlTkDouble(reader);
         }
     }
 }

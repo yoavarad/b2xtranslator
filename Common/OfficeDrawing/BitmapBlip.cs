@@ -44,7 +44,7 @@ namespace b2xtranslator.OfficeDrawing
                 this.m_bTag = this.Reader.ReadByte();
                 this.m_pvBits = this.Reader.ReadBytes((int)(size - 17));
             }
-           
+
         }
     }
 }
