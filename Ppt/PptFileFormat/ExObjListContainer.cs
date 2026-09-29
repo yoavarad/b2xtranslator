@@ -112,7 +112,7 @@ namespace b2xtranslator.PptFileFormat
             // decompress the bytes
             var decompressedBytes = new byte[this.decompressedSize];
             var deflateStream = new DeflateStream(msCompressed, CompressionMode.Decompress, true);
-            deflateStream.Read(decompressedBytes, 0, decompressedBytes.Length);
+            deflateStream.ReadAtLeast(decompressedBytes, decompressedBytes.Length, throwOnEndOfStream: false);
 
             return decompressedBytes;
         }

@@ -61,7 +61,7 @@ namespace UnitTests
         public void DOPTest()
         {
             var dopBytes = new byte[(int)this.doc.FIB.lcbDop];
-            this.doc.TableStream.Read(dopBytes, dopBytes.Length, (int)this.doc.FIB.fcDop);
+            this.doc.TableStream.Read(dopBytes, 0, dopBytes.Length, this.doc.FIB.fcDop);
             var dop = new DocumentProperties(this.doc.FIB, this.doc.TableStream);
 
             Console.WriteLine("Initial Footnote number: " + dop.nFtn);
