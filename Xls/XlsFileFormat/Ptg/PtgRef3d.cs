@@ -13,7 +13,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
         public ushort col;
 
         public bool colRelative;
-        public bool rwRelative; 
+        public bool rwRelative;
 
         public PtgRef3d(IStreamReader reader, PtgNumber ptgid)
             :

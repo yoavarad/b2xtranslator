@@ -9,7 +9,7 @@ namespace b2xtranslator.DocFileFormat
 
         public AnnotationReferenceExtraTable(FileInformationBlock fib, VirtualStream tableStream)
         {
-            if(fib.nFib >= FileInformationBlock.FibVersion.Fib2002)
+            if (fib.nFib >= FileInformationBlock.FibVersion.Fib2002)
             {
                 tableStream.Seek((long)fib.fcAtrdExtra, System.IO.SeekOrigin.Begin);
                 var reader = new VirtualStreamReader(tableStream);
@@ -19,7 +19,7 @@ namespace b2xtranslator.DocFileFormat
                 //read the n ATRDPost10 structs
                 for (int i = 0; i < n; i++)
                 {
-                    this.Add(new AnnotationReferenceDescriptorExtra(reader, ARTDPost10_LENGTH));        
+                    this.Add(new AnnotationReferenceDescriptorExtra(reader, ARTDPost10_LENGTH));
                 }
             }
         }

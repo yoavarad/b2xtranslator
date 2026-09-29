@@ -88,7 +88,7 @@ namespace b2xtranslator.OfficeGraph
         /// column of the data sheet. MUST be less than or equal to 0x0F9F.
         /// </summary>
         public ushort rowcol;
-        
+
         public BRAI(IStreamReader reader, GraphRecordNumber id, ushort length)
             : base(reader, id, length)
         {

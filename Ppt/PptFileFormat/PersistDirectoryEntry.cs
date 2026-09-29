@@ -53,7 +53,7 @@ namespace b2xtranslator.PptFileFormat
         {
             uint StartPersistIdAndPersistCount = reader.ReadUInt32();
             this.StartPersistId = (StartPersistIdAndPersistCount & 0x000FFFFFU); // First 20 bit
-            this.PersistCount   = (StartPersistIdAndPersistCount & 0xFFF00000U) >> 20; // Last 12 bit
+            this.PersistCount = (StartPersistIdAndPersistCount & 0xFFF00000U) >> 20; // Last 12 bit
 
             for (int i = 0; i < this.PersistCount; i++)
             {

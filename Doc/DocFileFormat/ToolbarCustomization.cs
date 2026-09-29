@@ -35,7 +35,7 @@ namespace b2xtranslator.DocFileFormat
             this.tbidForTBD = reader.ReadInt32();
             reader.ReadBytes(2);
             this.ctbds = reader.ReadInt16();
-            
+
             //read the cutomization data
             if (this.tbidForTBD == 0)
             {

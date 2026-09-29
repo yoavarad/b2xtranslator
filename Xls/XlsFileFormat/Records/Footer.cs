@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This record specifies the footer text of the current sheet when printed.
     /// </summary>
-    [BiffRecord(RecordType.Footer)] 
+    [BiffRecord(RecordType.Footer)]
     public class Footer : BiffRecord
     {
         public const RecordType ID = RecordType.Footer;
@@ -22,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// formatting attributes, as specified in the ABNF grammar for special
         /// commands as specified in Header.
         /// </summary>
-        public XLUnicodeString footerText; 
+        public XLUnicodeString footerText;
 
         public Footer(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)

@@ -107,12 +107,12 @@ namespace b2xtranslator.StructuredStorage.Common
             return result;
         }
 
-        internal List<byte> getBytes(List <uint> input)
+        internal List<byte> getBytes(List<uint> input)
         {
             var output = new List<byte>();
 
             foreach (uint entry in input)
-	        {
+            {
                 output.AddRange(getBytes(entry));
             }
             return output;

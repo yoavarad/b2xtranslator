@@ -42,7 +42,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                 xrange = "10800,21600"
             };
             this.Handles.Add(HandleOne);
-            
+
         }
     }
 }

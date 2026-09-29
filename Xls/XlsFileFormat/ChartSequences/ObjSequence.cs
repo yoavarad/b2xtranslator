@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public List<Continue> Continue;
 
         // public Obj Obj; 
- 
+
         public ObjSequence(IStreamReader reader)
             : base(reader)
         {

@@ -42,7 +42,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             this.Limo = "10800,10800";
 
-          
+
         }
     }
 }

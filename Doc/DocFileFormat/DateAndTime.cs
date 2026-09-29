@@ -84,7 +84,7 @@ namespace b2xtranslator.DocFileFormat
             else
             {
                 return new DateTime(this.yr, this.mon, this.dom, this.hr, this.mint, 0);
-            } 
+            }
         }
 
         private void setDefaultValues()

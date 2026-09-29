@@ -25,7 +25,7 @@ namespace b2xtranslator.PresentationMLMapping
         protected string _footertext;
         protected string _headertext;
         protected string _datetext;
-        
+
         public PresentationMapping<RegularContainer> parentSlideMapping = null;
         public Dictionary<AnimationInfoContainer, int> animinfos = new Dictionary<AnimationInfoContainer, int>();
         public StyleTextProp9Atom ShapeStyleTextProp9Atom = null;
@@ -62,7 +62,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public void Apply(PPDrawing drawing)
         {
-            Apply((RegularContainer) drawing);
+            Apply((RegularContainer)drawing);
             writeVML();
         }
 
@@ -197,7 +197,7 @@ namespace b2xtranslator.PresentationMLMapping
                 availableWidth -= this.ColumnWidthsByYPos[currentLeft];
                 currentLeft += this.ColumnWidthsByYPos[currentLeft];
                 count++;
-            }            
+            }
 
             return count;
         }
@@ -218,10 +218,10 @@ namespace b2xtranslator.PresentationMLMapping
                 return count;
             }
             catch (Exception)
-            {                
+            {
                 throw;
             }
-           
+
         }
 
         public void ApplyTable(GroupContainer group, uint TABLEFLAGS)
@@ -254,14 +254,14 @@ namespace b2xtranslator.PresentationMLMapping
                             this.RowHeights.Add(0);
                         }
                     }
-                }                
+                }
             }
 
             var Cells = new List<ShapeContainer>();
             //Lines = new List<ShapeContainer>();
             var LinesByPosition = new Dictionary<string, ShapeContainer>();
-           
-            var tablelist = new SortedList<int,SortedList<int,ShapeContainer>>();
+
+            var tablelist = new SortedList<int, SortedList<int, ShapeContainer>>();
             this.verticallinelist = new SortedList<int, SortedList<int, ShapeContainer>>();
             this.horizontallinelist = new SortedList<int, SortedList<int, ShapeContainer>>();
 
@@ -299,7 +299,7 @@ namespace b2xtranslator.PresentationMLMapping
                     {
                         string s = Utils.getPrstForShape(shape.Instance);
                     }
-                } 
+                }
             }
 
             this.ColumnWidthsByYPos = new SortedDictionary<int, int>();
@@ -325,7 +325,7 @@ namespace b2xtranslator.PresentationMLMapping
             foreach (int y in this.ColumnWidthsByYPos.Keys)
             {
                 ColumnIndices.Add(y, counter++);
-            }            
+            }
 
             //the table contains all cells at their correct position
             var table = new ShapeContainer[this.RowHeights.Count, this.ColumnWidthsByYPos.Count];
@@ -485,7 +485,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 this._writer.WriteAttributeString("rowSpan", GetRowSpanCount(anch, row).ToString());
                             }
                         }
-                        
+
                         if (anch.rcgBounds.Width > colWidth)
                         {
                             this._writer.WriteAttributeString("gridSpan", GetGridSpanCount(anch, col).ToString());
@@ -571,7 +571,7 @@ namespace b2xtranslator.PresentationMLMapping
                     {
                         if (col > 0 && table[row, col - 1] != null)
                         {
-                            var previouscontainer = table[row, col-1];
+                            var previouscontainer = table[row, col - 1];
                             var anch = previouscontainer.FirstChildWithType<ChildAnchor>();
 
                             if (anch.rcgBounds.Height > this.RowHeights[row] && GetRowSpanCount(anch, row) > 1)
@@ -600,9 +600,9 @@ namespace b2xtranslator.PresentationMLMapping
                             }
                         }
 
-                        if (row > 0 && table[row-1, col] != null) //this checks the cell on the left
+                        if (row > 0 && table[row - 1, col] != null) //this checks the cell on the left
                         {
-                            var previouscontainer = table[row-1, col];
+                            var previouscontainer = table[row - 1, col];
                             var anch = previouscontainer.FirstChildWithType<ChildAnchor>();
                             int colWidth = this.ColumnWidthsByYPos[anch.Left];
 
@@ -611,15 +611,15 @@ namespace b2xtranslator.PresentationMLMapping
                                 this._writer.WriteAttributeString("gridSpan", "2");
                             }
 
-                            if (anch.rcgBounds.Height > this.RowHeights[row-1])
+                            if (anch.rcgBounds.Height > this.RowHeights[row - 1])
                             {
                                 this._writer.WriteAttributeString("vMerge", "1");
                             }
-                           
+
                         }
-                        else if (row > 0 && col > 0  && table[row - 1, col - 1] != null) //this checks the cell above on the left
+                        else if (row > 0 && col > 0 && table[row - 1, col - 1] != null) //this checks the cell above on the left
                         {
-                            var previouscontainer = table[row - 1, col-1];
+                            var previouscontainer = table[row - 1, col - 1];
                             var anch = previouscontainer.FirstChildWithType<ChildAnchor>();
 
                             if (anch.rcgBounds.Height > this.RowHeights[row - 1])
@@ -629,13 +629,13 @@ namespace b2xtranslator.PresentationMLMapping
                         }
 
                         //insert dummy tc content
-                        this._writer.WriteStartElement("a","txBody",OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteElementString("a","bodyPr",OpenXmlNamespaces.DrawingML,"");
-                        this._writer.WriteElementString("a","lstStyle",OpenXmlNamespaces.DrawingML,"");
-                        this._writer.WriteElementString("a","p",OpenXmlNamespaces.DrawingML,"");
+                        this._writer.WriteStartElement("a", "txBody", OpenXmlNamespaces.DrawingML);
+                        this._writer.WriteElementString("a", "bodyPr", OpenXmlNamespaces.DrawingML, "");
+                        this._writer.WriteElementString("a", "lstStyle", OpenXmlNamespaces.DrawingML, "");
+                        this._writer.WriteElementString("a", "p", OpenXmlNamespaces.DrawingML, "");
                         this._writer.WriteEndElement(); //txBody
 
-                        this._writer.WriteElementString("a", "tcPr", OpenXmlNamespaces.DrawingML,"");
+                        this._writer.WriteElementString("a", "tcPr", OpenXmlNamespaces.DrawingML, "");
                     }
 
                     this._writer.WriteEndElement(); //tc
@@ -699,12 +699,12 @@ namespace b2xtranslator.PresentationMLMapping
 
 
                     if (lineleft == anch.Left)
-                    //if (linetop == anch.Top) leftLine = line;
-                    if (linetop <= anch.Top && linetop + h >= anch.Bottom) leftLine = line;
-                    
+                        //if (linetop == anch.Top) leftLine = line;
+                        if (linetop <= anch.Top && linetop + h >= anch.Bottom) leftLine = line;
+
                     if (lineleft == anch.Right)
-                    //if (linetop == anch.Top) rightLine = line;
-                    if (linetop <= anch.Top && linetop + h >= anch.Bottom) rightLine = line;
+                        //if (linetop == anch.Top) rightLine = line;
+                        if (linetop <= anch.Top && linetop + h >= anch.Bottom) rightLine = line;
                 }
 
             }
@@ -762,7 +762,7 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteStartElement("a", "lnBlToTr", OpenXmlNamespaces.DrawingML);
             this._writer.WriteElementString("a", "noFill", OpenXmlNamespaces.DrawingML, "");
             this._writer.WriteEndElement(); //lnBlToTr
-                      
+
         }
 
         private void WriteLineProperties(ShapeOptions soline)
@@ -827,7 +827,7 @@ namespace b2xtranslator.PresentationMLMapping
                     //        break;
                     //    case 2: //flat
                     this._writer.WriteAttributeString("cap", "flat");
-                            //break;
+                    //break;
                     //}
                 }
 
@@ -869,7 +869,8 @@ namespace b2xtranslator.PresentationMLMapping
                     //        _writer.WriteEndElement();
                     //    }
                     //}
-                } else if (soframe != null && soframe.OptionsByID.ContainsKey(ShapeOptions.PropertyId.lineStyleBooleans))
+                }
+                else if (soframe != null && soframe.OptionsByID.ContainsKey(ShapeOptions.PropertyId.lineStyleBooleans))
                 {
                     WriteLineProperties(soframe);
                     //LineStyleBooleans fsb = new LineStyleBooleans(soframe.OptionsByID[ShapeOptions.PropertyId.lineStyleBooleans].op);
@@ -896,7 +897,7 @@ namespace b2xtranslator.PresentationMLMapping
                     //    }
                     //}
                 }
-               
+
                 if (soline.OptionsByID.ContainsKey(ShapeOptions.PropertyId.lineDashing))
                 {
                     this._writer.WriteStartElement("a", "prstDash", OpenXmlNamespaces.DrawingML);
@@ -1066,7 +1067,7 @@ namespace b2xtranslator.PresentationMLMapping
                     this._writer.WriteEndElement(); //tailEnd
                 }
 
-                break;  
+                break;
             }
         }
 
@@ -1074,7 +1075,7 @@ namespace b2xtranslator.PresentationMLMapping
         private ShapeOptions so;
         public void Apply(ShapeContainer container)
         {
-            Apply(container, "","", "");
+            Apply(container, "", "", "");
         }
         public void Apply(ShapeContainer container, string footertext, string headertext, string datetext)
         {
@@ -1094,35 +1095,35 @@ namespace b2xtranslator.PresentationMLMapping
 
             this.so = container.FirstChildWithType<ShapeOptions>();
             //if (clientData == null)
-                if (this.so != null)
+            if (this.so != null)
+            {
+                if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.Pib))
                 {
-                    if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.Pib))
+                    if (sh.fOleShape)
                     {
-                        if (sh.fOleShape)
-                        {
-                            OEPlaceHolderAtom placeholder = null;
-                            int exObjIdRef = -1;
-                            CheckClientData(container.FirstChildWithType<ClientData>(), ref placeholder, ref exObjIdRef);
-                            var oleContainer = this._ctx.Ppt.OleObjects[exObjIdRef];
-                            if (oleContainer.FirstChildWithType<CStringAtom>() != null)
+                        OEPlaceHolderAtom placeholder = null;
+                        int exObjIdRef = -1;
+                        CheckClientData(container.FirstChildWithType<ClientData>(), ref placeholder, ref exObjIdRef);
+                        var oleContainer = this._ctx.Ppt.OleObjects[exObjIdRef];
+                        if (oleContainer.FirstChildWithType<CStringAtom>() != null)
                             if (oleContainer.FirstChildWithType<CStringAtom>().Text == "Chart")
                             {
                                 writeOle(container, oleContainer);
                                 continueShape = false;
                             }
-                        }
+                    }
 
-                        if (continueShape)
-                        {
-                            writePic(container);
-                            continueShape = false;
-                        }
+                    if (continueShape)
+                    {
+                        writePic(container);
+                        continueShape = false;
                     }
                 }
-                else
-                {
-                this.so =  new ShapeOptions();
-                }
+            }
+            else
+            {
+                this.so = new ShapeOptions();
+            }
 
             ShapeOptions sndSo = null;
             string prstGeom = "";
@@ -1250,7 +1251,7 @@ namespace b2xtranslator.PresentationMLMapping
                         var bytes = BitConverter.GetBytes(this.so.OptionsByID[ShapeOptions.PropertyId.rotation].op);
                         int integral = BitConverter.ToInt16(bytes, 2);
                         uint fractional = BitConverter.ToUInt16(bytes, 0);
-                        decimal result = integral +((decimal)fractional / (decimal)65536);
+                        decimal result = integral + ((decimal)fractional / (decimal)65536);
 
                         Double w = anchor.Bottom - anchor.Top;
                         Double h = anchor.Right - anchor.Left;
@@ -1291,7 +1292,7 @@ namespace b2xtranslator.PresentationMLMapping
                         if (swapHeightWidth)
                         {
                             this._writer.WriteAttributeString("cx", Utils.MasterCoordToEMU(anchor.Bottom - anchor.Top).ToString());
-                            this._writer.WriteAttributeString("cy", Utils.MasterCoordToEMU(anchor.Right - anchor.Left).ToString());                            
+                            this._writer.WriteAttributeString("cy", Utils.MasterCoordToEMU(anchor.Right - anchor.Left).ToString());
                         }
                         else
                         {
@@ -1431,7 +1432,7 @@ namespace b2xtranslator.PresentationMLMapping
                     if (record is ClientTextbox) TextBoxFound = true;
                 }
 
-                
+
                 if (!TextBoxFound & !sh.fConnector)
                 {
 
@@ -1468,7 +1469,7 @@ namespace b2xtranslator.PresentationMLMapping
                             {
                                 this._writer.WriteAttributeString("sz", "3600");
                             }
-                            
+
                             if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.GeometryTextBooleanProperties))
                             {
                                 var gb = new GeometryTextBooleanProperties(this.so.OptionsByID[ShapeOptions.PropertyId.GeometryTextBooleanProperties].op);
@@ -1700,7 +1701,7 @@ namespace b2xtranslator.PresentationMLMapping
                         string colorval = "000000";
                         string schemeType = "";
                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.lineColor))
-                        colorval = Utils.getRGBColorFromOfficeArtCOLORREF(this.so.OptionsByID[ShapeOptions.PropertyId.lineColor].op, slide, this.so, ref schemeType);
+                            colorval = Utils.getRGBColorFromOfficeArtCOLORREF(this.so.OptionsByID[ShapeOptions.PropertyId.lineColor].op, slide, this.so, ref schemeType);
                         this._writer.WriteStartElement("a", "solidFill", OpenXmlNamespaces.DrawingML);
 
                         if (schemeType.Length == 0)
@@ -1713,7 +1714,7 @@ namespace b2xtranslator.PresentationMLMapping
                             this._writer.WriteStartElement("a", "schemeClr", OpenXmlNamespaces.DrawingML);
                             this._writer.WriteAttributeString("val", schemeType);
                         }
-                                             
+
                         if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.lineOpacity) && this.so.OptionsByID[ShapeOptions.PropertyId.lineOpacity].op != 65536)
                         {
                             this._writer.WriteStartElement("a", "alpha", OpenXmlNamespaces.DrawingML);
@@ -1879,9 +1880,9 @@ namespace b2xtranslator.PresentationMLMapping
                         break;
                 }
             }
-            
+
             return size;
-        
+
         }
 
         private void writeOle(ShapeContainer container, ExOleEmbedContainer oleContainer)
@@ -1891,7 +1892,7 @@ namespace b2xtranslator.PresentationMLMapping
 
             this._writer.WriteStartElement("p", "graphicFrame", OpenXmlNamespaces.PresentationML);
             this._writer.WriteStartElement("p", "nvGraphicFramePr", OpenXmlNamespaces.PresentationML);
-            
+
             //string id = WriteCNvPr(--groupcounter, "");
             string id = WriteCNvPr(sh.spid, "");
 
@@ -1914,10 +1915,10 @@ namespace b2xtranslator.PresentationMLMapping
             var clanchor = container.FirstChildWithType<ClientAnchor>();
             if (clanchor == null)
             {
-                 var chanchor = container.FirstChildWithType<ChildAnchor>();
-                 anchor = new Rectangle(chanchor.Left, chanchor.Top, chanchor.rcgBounds.Width, chanchor.rcgBounds.Height);
-                 if (anchor != null && anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
-                 {
+                var chanchor = container.FirstChildWithType<ChildAnchor>();
+                anchor = new Rectangle(chanchor.Left, chanchor.Top, chanchor.rcgBounds.Width, chanchor.rcgBounds.Height);
+                if (anchor != null && anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
+                {
                     this._writer.WriteStartElement("p", "xfrm", OpenXmlNamespaces.PresentationML);
 
                     this._writer.WriteStartElement("a", "off", OpenXmlNamespaces.DrawingML);
@@ -1931,11 +1932,11 @@ namespace b2xtranslator.PresentationMLMapping
                     this._writer.WriteEndElement();
 
                     this._writer.WriteEndElement();
-                 }
+                }
             }
             else
             {
-                anchor = new Rectangle(clanchor.Left, clanchor.Top,clanchor.Right - clanchor.Left,clanchor.Bottom - clanchor.Top);
+                anchor = new Rectangle(clanchor.Left, clanchor.Top, clanchor.Right - clanchor.Left, clanchor.Bottom - clanchor.Top);
                 if (anchor != null && anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
                 {
                     this._writer.WriteStartElement("p", "xfrm", OpenXmlNamespaces.PresentationML);
@@ -1995,7 +1996,7 @@ namespace b2xtranslator.PresentationMLMapping
             Rectangle rec;
             if (chanch != null)
             {
-                rec = new Rectangle(chanch.Left, chanch.Top, chanch.Right - anch.Left,chanch.Bottom - anch.Top);
+                rec = new Rectangle(chanch.Left, chanch.Top, chanch.Right - anch.Left, chanch.Bottom - anch.Top);
             }
             else if (anch != null)
             {
@@ -2014,7 +2015,7 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteStartElement("p", "oleObj", OpenXmlNamespaces.PresentationML);
             this._writer.WriteAttributeString("spid", spid);
             this._writer.WriteAttributeString("name", name);
-            this._writer.WriteAttributeString("id",OpenXmlNamespaces.Relationships, rId);
+            this._writer.WriteAttributeString("id", OpenXmlNamespaces.Relationships, rId);
             this._writer.WriteAttributeString("imgW", size.X.ToString());
             this._writer.WriteAttributeString("imgH", size.Y.ToString());
             this._writer.WriteAttributeString("progId", progId);
@@ -2083,8 +2084,8 @@ namespace b2xtranslator.PresentationMLMapping
                         indexOfPicture = en.op - 1;
                         break;
                     case ShapeOptions.PropertyId.pibName:
-                    //    name = Encoding.Unicode.GetString(en.opComplex);
-                    //    name = name.Substring(0, name.Length - 1).Replace("\0","");
+                        //    name = Encoding.Unicode.GetString(en.opComplex);
+                        //    name = name.Substring(0, name.Length - 1).Replace("\0","");
                         break;
                     case ShapeOptions.PropertyId.pibPrintName:
                         id = (int)en.op;
@@ -2097,11 +2098,13 @@ namespace b2xtranslator.PresentationMLMapping
             var bse = (BlipStoreEntry)gr.FirstChildWithType<BlipStoreContainer>().Children[(int)indexOfPicture];
 
             //if (this.parentSlideMapping is MasterMapping) return;
-            
+
             if (this._ctx.AddedImages.ContainsKey(bse.foDelay))
             {
-                rId = this._ctx.AddedImages[bse.foDelay]; 
-            } else {
+                rId = this._ctx.AddedImages[bse.foDelay];
+            }
+            else
+            {
 
                 if (!this._ctx.Ppt.PicturesContainer._pictures.ContainsKey(bse.foDelay))
                 {
@@ -2216,7 +2219,7 @@ namespace b2xtranslator.PresentationMLMapping
                     {
                         b1 = (Decimal)b / 0x8000;
                     }
-                    
+
                     b1 = b1 * 100000;
                     b1 = Math.Floor(b1);
                     this._writer.WriteAttributeString("bright", b1.ToString());
@@ -2845,7 +2848,7 @@ namespace b2xtranslator.PresentationMLMapping
                 if (ms.Length > 0)
                 {
                     var rec = Record.ReadRecord(ms);
-                    bool blnContinue = true; 
+                    bool blnContinue = true;
                     if (rec.TypeCode == 4116 && output)
                     {
                         var animinfo = (AnimationInfoContainer)rec;
@@ -2862,109 +2865,109 @@ namespace b2xtranslator.PresentationMLMapping
                     }
 
                     if (blnContinue)
-                    while (true)
-                    {
-                        switch (rec.TypeCode)
+                        while (true)
                         {
-                            case 3009:
-                                exObjIdRef = ((ExObjRefAtom)rec).exObjIdRef;
-                                break;
-                            case 3011:
-                                placeholder = (OEPlaceHolderAtom)rec;
+                            switch (rec.TypeCode)
+                            {
+                                case 3009:
+                                    exObjIdRef = ((ExObjRefAtom)rec).exObjIdRef;
+                                    break;
+                                case 3011:
+                                    placeholder = (OEPlaceHolderAtom)rec;
 
-                                if (placeholder != null && output)
-                                {
+                                    if (placeholder != null && output)
+                                    {
 
                                         this._writer.WriteStartElement("p", "ph", OpenXmlNamespaces.PresentationML);
 
-                                    if (!placeholder.IsObjectPlaceholder())
-                                    {
-                                        string typeValue = Utils.PlaceholderIdToXMLValue(placeholder.PlacementId);
-                                            this._writer.WriteAttributeString("type", typeValue);
-                                    }
-
-                                    switch (placeholder.PlaceholderSize)
-                                    {
-                                        case 1:
-                                                this._writer.WriteAttributeString("sz", "half");
-                                            break;
-                                        case 2:
-                                                this._writer.WriteAttributeString("sz", "quarter");
-                                            break;
-                                    }
-
-
-                                    if (placeholder.Position != -1)
-                                    {
-                                            this._writer.WriteAttributeString("idx", placeholder.Position.ToString());
-                                    }
-                                    else
-                                    {
-                                        try
+                                        if (!placeholder.IsObjectPlaceholder())
                                         {
-                                            var master = this._ctx.Ppt.FindMasterRecordById(clientData.FirstAncestorWithType<Slide>().FirstChildWithType<SlideAtom>().MasterId);
-                                            foreach (var cont in master.FirstChildWithType<PPDrawing>().FirstChildWithType<DrawingContainer>().FirstChildWithType<GroupContainer>().AllChildrenWithType<ShapeContainer>())
+                                            string typeValue = Utils.PlaceholderIdToXMLValue(placeholder.PlacementId);
+                                            this._writer.WriteAttributeString("type", typeValue);
+                                        }
+
+                                        switch (placeholder.PlaceholderSize)
+                                        {
+                                            case 1:
+                                                this._writer.WriteAttributeString("sz", "half");
+                                                break;
+                                            case 2:
+                                                this._writer.WriteAttributeString("sz", "quarter");
+                                                break;
+                                        }
+
+
+                                        if (placeholder.Position != -1)
+                                        {
+                                            this._writer.WriteAttributeString("idx", placeholder.Position.ToString());
+                                        }
+                                        else
+                                        {
+                                            try
                                             {
-                                                var s = cont.FirstChildWithType<Shape>();
-                                                var d = cont.FirstChildWithType<ClientData>();
-                                                if (d != null)
+                                                var master = this._ctx.Ppt.FindMasterRecordById(clientData.FirstAncestorWithType<Slide>().FirstChildWithType<SlideAtom>().MasterId);
+                                                foreach (var cont in master.FirstChildWithType<PPDrawing>().FirstChildWithType<DrawingContainer>().FirstChildWithType<GroupContainer>().AllChildrenWithType<ShapeContainer>())
                                                 {
-                                                    ms = new System.IO.MemoryStream(d.bytes);
-                                                    rec = Record.ReadRecord(ms);
-                                                    if (rec is OEPlaceHolderAtom)
+                                                    var s = cont.FirstChildWithType<Shape>();
+                                                    var d = cont.FirstChildWithType<ClientData>();
+                                                    if (d != null)
                                                     {
-                                                        var placeholder2 = (OEPlaceHolderAtom)rec;
-                                                        if (placeholder2.PlacementId == PlaceholderEnum.MasterBody && (placeholder.PlacementId == PlaceholderEnum.Body || placeholder.PlacementId == PlaceholderEnum.Object))
+                                                        ms = new System.IO.MemoryStream(d.bytes);
+                                                        rec = Record.ReadRecord(ms);
+                                                        if (rec is OEPlaceHolderAtom)
                                                         {
-                                                            if (placeholder2.Position != -1)
+                                                            var placeholder2 = (OEPlaceHolderAtom)rec;
+                                                            if (placeholder2.PlacementId == PlaceholderEnum.MasterBody && (placeholder.PlacementId == PlaceholderEnum.Body || placeholder.PlacementId == PlaceholderEnum.Object))
                                                             {
+                                                                if (placeholder2.Position != -1)
+                                                                {
                                                                     this._writer.WriteAttributeString("idx", placeholder2.Position.ToString());
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
+
                                             }
 
+                                            catch (Exception)
+                                            {
+                                                //ignore
+                                            }
                                         }
-
-                                        catch (Exception)
-                                        {
-                                            //ignore
-                                        }
-                                    }
 
                                         this._writer.WriteEndElement();
-                                    phWritten = true;
-                                }
-                                break;
-                            case 4116:
-                                var animinfo = (AnimationInfoContainer)rec;
+                                        phWritten = true;
+                                    }
+                                    break;
+                                case 4116:
+                                    var animinfo = (AnimationInfoContainer)rec;
                                     this.animinfos.Add(animinfo, this._idCnt);
-                                break;
-                            case 5000:
-                                var con = (RegularContainer)rec;
-                                foreach (var t in con.AllChildrenWithType<ProgBinaryTag>())
-                                {
-                                    var c = t.FirstChildWithType<CStringAtom>();
-                                    var b = t.FirstChildWithType<ProgBinaryTagDataBlob>();
-                                    var p = b.FirstChildWithType<StyleTextProp9Atom>();
+                                    break;
+                                case 5000:
+                                    var con = (RegularContainer)rec;
+                                    foreach (var t in con.AllChildrenWithType<ProgBinaryTag>())
+                                    {
+                                        var c = t.FirstChildWithType<CStringAtom>();
+                                        var b = t.FirstChildWithType<ProgBinaryTagDataBlob>();
+                                        var p = b.FirstChildWithType<StyleTextProp9Atom>();
                                         this.ShapeStyleTextProp9Atom = p;
-                                }
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if (ms.Position < ms.Length)
+                            {
+                                rec = Record.ReadRecord(ms);
+                            }
+                            else
+                            {
                                 break;
-                            default:
-                                break;
+                            }
                         }
-                        if (ms.Position < ms.Length)
-                        {
-                            rec = Record.ReadRecord(ms);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }                    
                 }
-            
+
                 var container = (RegularContainer)(clientData.ParentRecord);
                 foreach (var b in container.AllChildrenWithType<ClientTextbox>())
                 {
@@ -2984,7 +2987,7 @@ namespace b2xtranslator.PresentationMLMapping
                             case 0xfa2: //MasterTextPropAtom
                                 break;
                             case 0xfd8: //SlideNumberMCAtom
-                               
+
                                 break;
                             case 0xff7: //DateTimeMCAtom
                                 if (!phWritten && output)
@@ -3063,7 +3066,7 @@ namespace b2xtranslator.PresentationMLMapping
                         break;
                     case 0xfa2: //MasterTextPropAtom
                         var m = (MasterTextPropAtom)rec;
-                        foreach(var r in m.MasterTextPropRuns)
+                        foreach (var r in m.MasterTextPropRuns)
                         {
                             if (!lst.Contains(r.indentLevel))
                             {
@@ -3105,11 +3108,11 @@ namespace b2xtranslator.PresentationMLMapping
                                             lang = System.Globalization.CultureInfo.GetCultureInfo(sia.Runs[0].si.lid).IetfLanguageTag;
                                         }
                                         catch (Exception)
-                                        {   
+                                        {
                                             //ignore
-                                        }                                       
+                                        }
                                         break;
-                                }                               
+                                }
                             }
                             if (sia.Runs[0].si.altLang)
                             {
@@ -3140,47 +3143,47 @@ namespace b2xtranslator.PresentationMLMapping
                     case 0xffa: //FooterMCAtom
                     case 0xff8: //GenericDateMCAtom
                         if (!lvlRprWritten)
-                        foreach (var r in style.PRuns)
-                        {
-                                this._writer.WriteStartElement("a", "lvl" + (r.IndentLevel + 1) + "pPr", OpenXmlNamespaces.DrawingML);
-                            if (r.AlignmentPresent)
+                            foreach (var r in style.PRuns)
                             {
-                                switch (r.Alignment)
+                                this._writer.WriteStartElement("a", "lvl" + (r.IndentLevel + 1) + "pPr", OpenXmlNamespaces.DrawingML);
+                                if (r.AlignmentPresent)
                                 {
-                                    case 0x0000: //Left
+                                    switch (r.Alignment)
+                                    {
+                                        case 0x0000: //Left
                                             this._writer.WriteAttributeString("algn", "l");
-                                        break;
-                                    case 0x0001: //Center
+                                            break;
+                                        case 0x0001: //Center
                                             this._writer.WriteAttributeString("algn", "ctr");
-                                        break;
-                                    case 0x0002: //Right
+                                            break;
+                                        case 0x0002: //Right
                                             this._writer.WriteAttributeString("algn", "r");
-                                        break;
-                                    case 0x0003: //Justify
+                                            break;
+                                        case 0x0003: //Justify
                                             this._writer.WriteAttributeString("algn", "just");
-                                        break;
-                                    case 0x0004: //Distributed
+                                            break;
+                                        case 0x0004: //Distributed
                                             this._writer.WriteAttributeString("algn", "dist");
-                                        break;
-                                    case 0x0005: //ThaiDistributed
+                                            break;
+                                        case 0x0005: //ThaiDistributed
                                             this._writer.WriteAttributeString("algn", "thaiDist");
-                                        break;
-                                    case 0x0006: //JustifyLow
+                                            break;
+                                        case 0x0006: //JustifyLow
                                             this._writer.WriteAttributeString("algn", "justLow");
-                                        break;
+                                            break;
+                                    }
                                 }
-                            }
-                            string lastColor = "";
-                            string lastSize = "";
-                            string lastTypeface = "";
-                            RegularContainer slide = textbox.FirstAncestorWithType<Slide>();
-                            if (slide == null) slide = textbox.FirstAncestorWithType<Note>();
-                            if (slide == null) slide = textbox.FirstAncestorWithType<Handout>();
+                                string lastColor = "";
+                                string lastSize = "";
+                                string lastTypeface = "";
+                                RegularContainer slide = textbox.FirstAncestorWithType<Slide>();
+                                if (slide == null) slide = textbox.FirstAncestorWithType<Note>();
+                                if (slide == null) slide = textbox.FirstAncestorWithType<Handout>();
 
-                            new CharacterRunPropsMapping(this._ctx, this._writer).Apply(style.CRuns[0], "defRPr", slide, ref lastColor, ref lastSize, ref lastTypeface, lang, altLang, null,r.IndentLevel,null,null,0, insideTable);
+                                new CharacterRunPropsMapping(this._ctx, this._writer).Apply(style.CRuns[0], "defRPr", slide, ref lastColor, ref lastSize, ref lastTypeface, lang, altLang, null, r.IndentLevel, null, null, 0, insideTable);
                                 this._writer.WriteEndElement();
-                            lvlRprWritten = true;
-                        }
+                                lvlRprWritten = true;
+                            }
                         break;
                     default:
                         break;
@@ -3271,7 +3274,7 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteStartElement("a", "cxnLst", OpenXmlNamespaces.DrawingML);
 
             var pVertices = this.so.OptionsByID[ShapeOptions.PropertyId.pVertices];
-            
+
             uint shapepath = 1;
             if (this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.shapePath))
             {
@@ -3290,13 +3293,14 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 var pGuides = this.so.OptionsByID[ShapeOptions.PropertyId.pGuides];
                 pp = new PathParser(SegementInfo.opComplex, pVertices.opComplex, pGuides.opComplex);
-            } else 
+            }
+            else
             {
                 pp = new PathParser(SegementInfo.opComplex, pVertices.opComplex);
             }
-        
 
-            
+
+
 
             foreach (var point in pp.Values)
             {
@@ -3400,7 +3404,7 @@ namespace b2xtranslator.PresentationMLMapping
                             foreach (int escape in tempEscapes)
                             {
                                 if (!Escapes.ContainsKey(new Point(start, end)))
-                                Escapes.Add(new Point(start, end), escape);
+                                    Escapes.Add(new Point(start, end), escape);
                             }
                             start = i + 1;
                             tempEscapes.Clear();
@@ -3484,7 +3488,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 //check for escape codes
                                 foreach (var p in Escapes.Keys)
                                 {
-                                    if (p.X <= i+1 && p.Y >= i+1)
+                                    if (p.X <= i + 1 && p.Y >= i + 1)
                                     {
                                         switch (Escapes[p])
                                         {
@@ -3599,11 +3603,11 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteElementString("a", "avLst", OpenXmlNamespaces.DrawingML, "");
                     }
                     this._writer.WriteEndElement(); //prstGeom
-                }                
+                }
             }
         }
 
-        
+
 
         public Dictionary<int, int> spidToId = new Dictionary<int, int>();
         private string WriteCNvPr(int spid, string name)
@@ -3647,7 +3651,7 @@ namespace b2xtranslator.PresentationMLMapping
             _writer.WriteStartElement("a", "chExt", OpenXmlNamespaces.DrawingML);
             _writer.WriteAttributeString("cx", rect.Width.ToString());
             _writer.WriteAttributeString("cy", rect.Height.ToString());
-            _writer.WriteEndElement();            
+            _writer.WriteEndElement();
 
             _writer.WriteEndElement();
         }

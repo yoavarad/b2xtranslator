@@ -1,7 +1,7 @@
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(110)]
-    public class FlowChartDecisionType :ShapeType
+    public class FlowChartDecisionType : ShapeType
     {
         public FlowChartDecisionType()
         {

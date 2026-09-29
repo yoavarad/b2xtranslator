@@ -207,7 +207,7 @@ namespace b2xtranslator.DocFileFormat
 
         private void setDefaultValues()
         {
- 	        this.cv = 0;
+            this.cv = 0;
             this.cxchTextAfter = 0;
             this.cxchTextBefore = 0;
             this.dxaIndent = 0;

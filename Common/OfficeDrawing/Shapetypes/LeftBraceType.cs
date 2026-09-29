@@ -25,18 +25,18 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("prod #0 2 1");
             this.Formulas.Add("sum 21600 0 @9");
             this.Formulas.Add("val #1");
-            
+
             this.AdjustmentValues = "1800,10800";
             this.ConnectorLocations = "21600,0;0,10800;21600,21600";
             this.TextboxRectangle = "13963,@4,21600,@5";
 
             this.Handles = new List<Handle>();
             var HandleOne = new Handle();
-            var HandleTwo= new Handle();
-            HandleOne.position="center,#0";
+            var HandleTwo = new Handle();
+            HandleOne.position = "center,#0";
             HandleOne.yrange = "0,@8";
-            HandleTwo.position="topLeft,#1";
-            HandleTwo.yrange="@9,@10";
+            HandleTwo.position = "topLeft,#1";
+            HandleTwo.yrange = "@9,@10";
             this.Handles.Add(HandleOne);
             this.Handles.Add(HandleTwo);
 

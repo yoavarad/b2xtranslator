@@ -26,9 +26,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     {
         public enum OriginatorVersion
         {
-           Excel2000  = 0x9,
-           Excel2002Excel2003  = 0xA,
-           Excel2007  = 0xC
+            Excel2000 = 0x9,
+            Excel2002Excel2003 = 0xA,
+            Excel2007 = 0xC
         }
 
         public enum WriterVersion
@@ -37,7 +37,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             Excel2002Excel2003 = 0xA,
             Excel2007 = 0xC
         }
-        
+
         public const RecordType ID = RecordType.ChartFrtInfo;
 
         public FrtHeaderOld frtHeaderOld;

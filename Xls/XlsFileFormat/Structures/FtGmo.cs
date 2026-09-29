@@ -19,7 +19,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
         /// </summary>
         public ushort cb;
 
-        
+
         public FtGmo(IStreamReader reader)
         {
             this.ft = reader.ReadUInt16();

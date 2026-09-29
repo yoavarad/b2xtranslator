@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkLogBaseFrt(IStreamReader reader)
         {
-            this.logScale = new XmlTkDouble(reader);   
+            this.logScale = new XmlTkDouble(reader);
         }
     }
 }

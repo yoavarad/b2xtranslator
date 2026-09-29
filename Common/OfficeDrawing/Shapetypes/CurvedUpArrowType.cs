@@ -13,18 +13,18 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas = new List<string>();
 
 
-            this.Formulas.Add("val #0");  
-            this.Formulas.Add("val #1"); 
-            this.Formulas.Add("val #2"); 
-            this.Formulas.Add("sum #0 width #1"); 
-            this.Formulas.Add("prod @3 1 2"); 
+            this.Formulas.Add("val #0");
+            this.Formulas.Add("val #1");
+            this.Formulas.Add("val #2");
+            this.Formulas.Add("sum #0 width #1");
+            this.Formulas.Add("prod @3 1 2");
             this.Formulas.Add("sum #1 #1 width ");
-            this.Formulas.Add("sum @5 #1 #0"); 
-            this.Formulas.Add("prod @6 1 2"); 
-            this.Formulas.Add("mid width #0"); 
-            this.Formulas.Add("ellipse #2 height @4"); 
+            this.Formulas.Add("sum @5 #1 #0");
+            this.Formulas.Add("prod @6 1 2");
+            this.Formulas.Add("mid width #0");
+            this.Formulas.Add("ellipse #2 height @4");
             this.Formulas.Add("sum @4 @9 0 ");
-            this.Formulas.Add("sum @10 #1 width"); 
+            this.Formulas.Add("sum @10 #1 width");
             this.Formulas.Add("sum @7 @9 0 ");
             this.Formulas.Add("sum @11 width #0 ");
             this.Formulas.Add("sum @5 0 #0 ");
@@ -35,7 +35,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum @16 0 @18 ");
             this.Formulas.Add("val width ");
             this.Formulas.Add("val height ");
-            this.Formulas.Add("sum 0 0 height"); 
+            this.Formulas.Add("sum 0 0 height");
             this.Formulas.Add("sum @16 0 @4 ");
             this.Formulas.Add("ellipse @23 @4 height ");
             this.Formulas.Add("sum @8 128 0 ");
@@ -49,7 +49,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum @31 0 @32 ");
             this.Formulas.Add("sqrt @33 ");
             this.Formulas.Add("sum @34 height 0 ");
-            this.Formulas.Add("prod width height @35"); 
+            this.Formulas.Add("prod width height @35");
             this.Formulas.Add("sum @36 64 0 ");
             this.Formulas.Add("prod #0 1 2 ");
             this.Formulas.Add("ellipse @30 @38 height ");
@@ -64,7 +64,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.ConnectorAngles = "270,270,270,90,0";
 
             this.TextboxRectangle = "@41,@43,@42,@44";
-           
+
             this.Handles = new List<Handle>();
 
             var HandleOne = new Handle
@@ -75,8 +75,8 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Handles.Add(HandleOne);
 
             var HandleTwo = new Handle();
-            HandleOne.position="#1,topLeft";
-            HandleOne.xrange="@25,@20";
+            HandleOne.position = "#1,topLeft";
+            HandleOne.xrange = "@25,@20";
             this.Handles.Add(HandleTwo);
 
             var HandleThree = new Handle

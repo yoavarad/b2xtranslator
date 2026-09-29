@@ -47,7 +47,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             date.Append(":00Z");
 
             var xml = this._nodeFactory.CreateAttribute("w", "date", OpenXmlNamespaces.WordprocessingML);
-            xml.Value = date.ToString() ;
+            xml.Value = date.ToString();
 
             //append or write
             if (this._writer != null)

@@ -42,7 +42,7 @@ namespace b2xtranslator.PptFileFormat
                     default:
                         break;
                 }
-                
+
             }
             pos = 1;
         }

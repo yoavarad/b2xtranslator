@@ -48,7 +48,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// Rich string follows
         /// </summary>
         private bool fRichSt;
-        
+
         public BiffString(IStreamReader reader)
         {
             this.cch = reader.ReadUInt16();

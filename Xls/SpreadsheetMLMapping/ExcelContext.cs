@@ -14,7 +14,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
         private SpreadsheetDocument spreadDoc;
         private XmlWriterSettings writerSettings;
         private XlsDocument xlsDoc;
-        private SheetData currentSheet; 
+        private SheetData currentSheet;
 
         /// <summary>
         /// The settings of the XmlWriter which writes to the part
@@ -60,7 +60,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
         public ExcelContext(XlsDocument xlsDoc, XmlWriterSettings writerSettings)
         {
             this.xlsDoc = xlsDoc;
-            this.writerSettings = writerSettings; 
+            this.writerSettings = writerSettings;
         }
     }
 

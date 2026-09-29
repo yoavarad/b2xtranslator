@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkFormatCodeFrt(IStreamReader reader)
         {
-            this.stFormat = new XmlTkString(reader);   
+            this.stFormat = new XmlTkString(reader);
         }
     }
 }

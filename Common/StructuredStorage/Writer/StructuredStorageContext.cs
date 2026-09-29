@@ -16,28 +16,28 @@ namespace b2xtranslator.StructuredStorage.Writer
         Header _header;
         internal Header Header
         {
-            get { return this._header; }            
+            get { return this._header; }
         }
 
         // The fat of this context.
         Fat _fat;
         internal Fat Fat
         {
-            get { return this._fat; }            
+            get { return this._fat; }
         }
 
         // The mini fat of this context.
         MiniFat _miniFat;
         internal MiniFat MiniFat
         {
-            get { return this._miniFat; }            
+            get { return this._miniFat; }
         }
 
         // The handler of the output stream of this context.
         OutputHandler _tempOutputStream;
         internal OutputHandler TempOutputStream
         {
-            get { return this._tempOutputStream; }            
+            get { return this._tempOutputStream; }
         }
 
         // The handler of the directory stream of this context.

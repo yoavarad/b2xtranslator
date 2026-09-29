@@ -21,7 +21,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 12 	colFirst 	2 	The first column of the range associated with the record 
     /// 14 	colLast 	2 	The last column of the range associated with the record 
     /// </summary>
-    [BiffRecord(RecordType.MergeCells)] 
+    [BiffRecord(RecordType.MergeCells)]
     public class MergeCells : BiffRecord
     {
         public const RecordType ID = RecordType.MergeCells;
@@ -45,7 +45,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         public MergeCells(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {
-            this.mergeCellDataList = new List<MergeCellData>(); 
+            this.mergeCellDataList = new List<MergeCellData>();
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);
 
@@ -58,11 +58,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
                 mcd.rwLast = this.Reader.ReadUInt16();
                 mcd.colFirst = this.Reader.ReadUInt16();
                 mcd.colLast = this.Reader.ReadUInt16();
-                this.mergeCellDataList.Add(mcd); 
+                this.mergeCellDataList.Add(mcd);
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

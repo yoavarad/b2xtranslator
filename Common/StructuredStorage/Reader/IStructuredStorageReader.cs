@@ -13,7 +13,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// Collection of all stream _entries contained in a compound file
         /// </summary> 
         ICollection<DirectoryEntry> AllStreamEntries { get; }
-        
+
         /// <summary>
         /// Collection of all entry names contained in a compound file
         /// </summary>        

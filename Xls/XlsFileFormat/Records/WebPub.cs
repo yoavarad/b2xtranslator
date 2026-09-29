@@ -4,7 +4,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.WebPub)] 
+    [BiffRecord(RecordType.WebPub)]
     public class WebPub : BiffRecord
     {
         public const RecordType ID = RecordType.WebPub;
@@ -20,9 +20,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // just skipping
             this.Reader.BaseStream.Position = this.Offset + this.Length;
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

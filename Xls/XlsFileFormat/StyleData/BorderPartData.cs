@@ -10,8 +10,8 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
         public BorderPartData(ushort style, int colorId)
         {
-            this.style = style; 
-            this.colorId = colorId; 
+            this.style = style;
+            this.colorId = colorId;
         }
 
         /// <summary>

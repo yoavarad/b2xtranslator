@@ -20,16 +20,16 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
         {
             Debug.Assert(this.Id == ID);
             this.Length = 5;
-            this.rw = this.Reader.ReadInt16(); 
+            this.rw = this.Reader.ReadInt16();
             this.col = this.Reader.ReadInt16();
             this.colRelative = Utils.BitmaskToBool(this.col, 0x4000);
             this.rwRelative = Utils.BitmaskToBool(this.col, 0x8000);
 
 
             this.col = (short)(this.col & 0x3FFF);
-    
 
-            
+
+
             this.type = PtgType.Operand;
             this.popSize = 1;
         }

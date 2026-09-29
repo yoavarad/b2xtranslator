@@ -13,7 +13,7 @@
         public string location;
         public string display;
 
-        public bool absolute; 
+        public bool absolute;
         public HyperlinkData()
         {
         }

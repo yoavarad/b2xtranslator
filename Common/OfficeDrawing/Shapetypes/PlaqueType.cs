@@ -23,7 +23,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("prod height 1 2");
 
 
-            
+
             this.AdjustmentValues = "3600";
             this.ConnectorLocations = "@8,0;0,@9;@8,@7;@6,@9";
 

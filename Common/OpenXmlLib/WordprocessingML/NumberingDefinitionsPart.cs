@@ -6,7 +6,7 @@ namespace b2xtranslator.OpenXmlLib.WordprocessingML
             : base(parent, 0)
         {
         }
-        
+
         public override string ContentType
         {
             get { return WordprocessingMLContentTypes.Numbering; }

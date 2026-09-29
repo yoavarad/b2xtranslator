@@ -17,7 +17,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             : base("", context)
         {
             this.Color = DirectoryEntryColor.DE_RED; // 0x0
-            this.Type = DirectoryEntryType.STGTY_INVALID;            
+            this.Type = DirectoryEntryType.STGTY_INVALID;
         }
 
     }

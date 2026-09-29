@@ -5,7 +5,7 @@ namespace b2xtranslator.CommonTranslatorLib
         #region IVisitable Members
 
         public abstract void Convert<T>(T mapping);
-        
+
         #endregion
     }
 }

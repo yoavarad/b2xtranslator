@@ -86,7 +86,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
                     //justification
                     case SinglePropertyModifier.OperationCode.sprmTJc:
-                    case  SinglePropertyModifier.OperationCode.sprmTJcRow:
+                    case SinglePropertyModifier.OperationCode.sprmTJcRow:
                         appendValueElement(this._tblPr, "jc", ((Global.JustificationCode)sprm.Arguments[0]).ToString(), true);
                         break;
 
@@ -99,10 +99,10 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case SinglePropertyModifier.OperationCode.sprmTIstd:
                     case SinglePropertyModifier.OperationCode.sprmTIstdPermute:
                         short styleIndex = System.BitConverter.ToInt16(sprm.Arguments, 0);
-                        if(this._styles.Styles.Count> styleIndex)
+                        if (this._styles.Styles.Count > styleIndex)
                         {
                             string id = StyleSheetMapping.MakeStyleId(this._styles.Styles[styleIndex]);
-                            if(id != "TableNormal")
+                            if (id != "TableNormal")
                             {
                                 appendValueElement(this._tblPr, "tblStyle", id, true);
                             }

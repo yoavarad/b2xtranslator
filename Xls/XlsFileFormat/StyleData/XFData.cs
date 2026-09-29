@@ -6,9 +6,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
 
     public class XFData
     {
-        public int ifmt; 
-        public int ixfParent; 
-        public int fStyle; 
+        public int ifmt;
+        public int ixfParent;
+        public int fStyle;
         public int fillId;
         public int fontId;
         public int borderId;
@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         public int textRotation;
 
         public int indent;
-        public int readingOrder; 
+        public int readingOrder;
 
         public XFData()
         {
@@ -36,7 +36,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
             this.wrapText = false;
             this.hasAlignment = false;
             this.justifyLastLine = false;
-            this.shrinkToFit = false; 
+            this.shrinkToFit = false;
 
         }
 

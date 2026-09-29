@@ -108,7 +108,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         /// A ChartParsedFormula that specifies the formula that specifies the reference.
         /// </summary>
         public ChartParsedFormula formula;
-        
+
         public BRAI(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
         {

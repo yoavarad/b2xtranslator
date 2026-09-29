@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
         public FormatData(int ifmt, string formatstring)
         {
             this.formatString = formatstring;
-            this.ifmt = ifmt; 
+            this.ifmt = ifmt;
         }
     }
 }

@@ -5,13 +5,13 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.DefaultRowHeight)] 
+    [BiffRecord(RecordType.DefaultRowHeight)]
     public class DefaultRowHeight : BiffRecord
     {
         public const RecordType ID = RecordType.DefaultRowHeight;
 
         public int miyRW;
-        public int miyRwHidden; 
+        public int miyRwHidden;
         public bool fDyZero;
         public bool fUnsynced;
         public bool fExAsc;
@@ -35,7 +35,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             }
             else
             {
-                this.miyRwHidden = reader.ReadUInt16(); 
+                this.miyRwHidden = reader.ReadUInt16();
             }
 
         }

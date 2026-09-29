@@ -13,7 +13,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkDispBlanksAsFrt(IStreamReader reader)
         {
-            this.blanksAs = new XmlTkToken(reader);   
+            this.blanksAs = new XmlTkToken(reader);
         }
     }
 }

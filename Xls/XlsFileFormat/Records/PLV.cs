@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This record specifies the settings of a Page Layout view for a sheet.
     /// </summary>
-    [BiffRecord(RecordType.PLV)] 
+    [BiffRecord(RecordType.PLV)]
     public class PLV : BiffRecord
     {
         public const RecordType ID = RecordType.PLV;
@@ -59,9 +59,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.fPageLayoutView = Utils.BitmaskToBool(flags, 0x0001);
             this.fRulerVisible = Utils.BitmaskToBool(flags, 0x0002);
             this.fWhitespaceHidden = Utils.BitmaskToBool(flags, 0x0004);
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

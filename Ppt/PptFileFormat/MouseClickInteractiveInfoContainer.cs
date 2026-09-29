@@ -9,8 +9,9 @@ namespace b2xtranslator.PptFileFormat
         public MouseClickTextInteractiveInfoAtom Range;
 
         public MouseClickInteractiveInfoContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) {
-        
+            : base(_reader, size, typeCode, version, instance)
+        {
+
         }
     }
 
@@ -59,7 +60,7 @@ namespace b2xtranslator.PptFileFormat
             this.fStopSound = ((mask & (1 << 1)) != 0);
             this.fCustomShowReturn = ((mask & (1 << 2)) != 0);
             this.fVisited = ((mask & (1 << 3)) != 0);
-        }       
+        }
     }
 
 

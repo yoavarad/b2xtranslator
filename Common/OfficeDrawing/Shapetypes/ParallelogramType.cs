@@ -29,7 +29,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("if @10 @7 height");
 
             this.AdjustmentValues = "5400";
-            
+
             this.ConnectorLocations = "@4,0;10800,@11;@3,10800;@5,21600;10800,@12;@2,10800";
 
             this.TextboxRectangle = "1800,1800,19800,19800;8100,8100,13500,13500;10800,10800,10800,10800";
@@ -41,7 +41,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                 xrange = "0,21600"
             };
             this.Handles.Add(HandleOne);
-               
+
 
 
 

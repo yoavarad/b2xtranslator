@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkHeightPercent(IStreamReader reader)
         {
-            this.heightPercent = new XmlTkDouble(reader);   
+            this.heightPercent = new XmlTkDouble(reader);
         }
     }
 }

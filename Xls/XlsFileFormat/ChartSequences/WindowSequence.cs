@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
         public List<Selection> Selections;
 
-        public WindowSequence(IStreamReader reader) 
+        public WindowSequence(IStreamReader reader)
             : base(reader)
         {
             // Window2 [PLV] [Scl] [Pane] *Selection
@@ -30,19 +30,19 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
             {
                 this.PLV = (PLV)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [Scl] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Scl)
             {
                 this.Scl = (Scl)BiffRecord.ReadRecord(reader);
             }
-            
+
             // [Pane] 
             if (BiffRecord.GetNextRecordType(reader) == RecordType.Pane)
             {
                 this.Pane = (Pane)BiffRecord.ReadRecord(reader);
             }
-            
+
             //*Selection
             this.Selections = new List<Selection>();
             while (BiffRecord.GetNextRecordType(reader) == RecordType.Selection)

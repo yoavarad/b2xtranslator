@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(22)]
-    public class CanType :ShapeType
+    public class CanType : ShapeType
     {
         public CanType()
         {

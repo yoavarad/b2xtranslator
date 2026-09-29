@@ -33,7 +33,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("sum 21600 0 @14 ");
             this.Formulas.Add("val #0 ");
             this.Formulas.Add("sum 21600 0 #0");
-            
+
             this.AdjustmentValues = "5400";
             this.TextboxRectangle = "@9,@9,@8,@8";
             this.Handles = new List<Handle>();

@@ -11,7 +11,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public ushort xmltkParent;
 
-        public ArrayList chainRecords = new ArrayList();       
+        public ArrayList chainRecords = new ArrayList();
 
         public XmlTkChain(IStreamReader reader)
         {
@@ -39,26 +39,26 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
                         this.chainRecords.Add(new XmlTkMinFrt(reader));
                     }
 
-                     if (getNextXmlTkTag(reader) == 0x0)
+                    if (getNextXmlTkTag(reader) == 0x0)
                     {
-                         this.chainRecords.Add(new XmlTkLogBaseFrt(reader));
+                        this.chainRecords.Add(new XmlTkLogBaseFrt(reader));
                     }
 
                     break;
                 case 0x02:
                     //chainRecords = [XmlTkStyle] [XmlTkThemeOverride] [XmlTkColorMappingOverride]
-                    
-                    if(getNextXmlTkTag(reader) == 0x03)
+
+                    if (getNextXmlTkTag(reader) == 0x03)
                     {
                         this.chainRecords.Add(new XmlTkStyle(reader));
                     }
 
-                    if(getNextXmlTkTag(reader) == 0x33)
+                    if (getNextXmlTkTag(reader) == 0x33)
                     {
                         this.chainRecords.Add(new XmlTkThemeOverride(reader));
                     }
 
-                    if(getNextXmlTkTag(reader) == 0x34)
+                    if (getNextXmlTkTag(reader) == 0x34)
                     {
                         this.chainRecords.Add(new XmlTkColorMappingOverride(reader));
                     }
@@ -117,7 +117,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
                     {
                         this.chainRecords.Add(new XmlTkMinorUnitTypeFrt(reader));
                     }
-                    
+
                     break;
                 case 0x05:
                     //chainRecords = [XmlTkShowDLblsOverMax] [XmlTkBackWallThicknessFrt] [XmlTkFloorThicknessFrt] [XmlTkDispBlanksAsFrt] [SURFACE]
@@ -216,7 +216,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
                     {
                         this.chainRecords.Add(new XmlTkHeightPercent(reader));
                     }
-                    
+
                     break;
             }
 
