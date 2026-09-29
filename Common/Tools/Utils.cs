@@ -29,10 +29,10 @@ namespace b2xtranslator.Tools
         public static string ReadWString(Stream stream)
         {
             var cch = new byte[1];
-            stream.Read(cch, 0, cch.Length);
+            stream.ReadAtLeast(cch, cch.Length, throwOnEndOfStream: false);
 
             var chars = new byte[2 * cch[0]];
-            stream.Read(chars, 0, chars.Length);
+            stream.ReadAtLeast(chars, chars.Length, throwOnEndOfStream: false);
 
             return Encoding.Unicode.GetString(chars);
         }
@@ -48,12 +48,12 @@ namespace b2xtranslator.Tools
         public static string ReadLengthPrefixedUnicodeString(Stream stream)
         {
             var cchBytes = new byte[4];
-            stream.Read(cchBytes, 0, cchBytes.Length);
+            stream.ReadAtLeast(cchBytes, cchBytes.Length, throwOnEndOfStream: false);
             int cch = System.BitConverter.ToInt32(cchBytes, 0);
 
             //dont read the terminating zero
             var stringBytes = new byte[cch * 2];
-            stream.Read(stringBytes, 0, stringBytes.Length);
+            stream.ReadAtLeast(stringBytes, stringBytes.Length, throwOnEndOfStream: false);
 
             return Encoding.Unicode.GetString(stringBytes, 0, stringBytes.Length - 2);
         }
@@ -69,12 +69,12 @@ namespace b2xtranslator.Tools
         public static string ReadLengthPrefixedAnsiString(Stream stream)
         {
             var cchBytes = new byte[4];
-            stream.Read(cchBytes, 0, cchBytes.Length);
+            stream.ReadAtLeast(cchBytes, cchBytes.Length, throwOnEndOfStream: false);
             int cch = System.BitConverter.ToInt32(cchBytes, 0);
 
             //dont read the terminating zero
             var stringBytes = new byte[cch];
-            stream.Read(stringBytes, 0, stringBytes.Length);
+            stream.ReadAtLeast(stringBytes, stringBytes.Length, throwOnEndOfStream: false);
 
             if (cch > 0)
                 return Encoding.ASCII.GetString(stringBytes, 0, stringBytes.Length - 1);
@@ -93,12 +93,12 @@ namespace b2xtranslator.Tools
         {
             // read the char count
             var cch = new byte[2];
-            stream.Read(cch, 0, cch.Length);
+            stream.ReadAtLeast(cch, cch.Length, throwOnEndOfStream: false);
             ushort charCount = System.BitConverter.ToUInt16(cch, 0);
 
             // read the string
             var xst = new byte[charCount * 2];
-            stream.Read(xst, 0, xst.Length);
+            stream.ReadAtLeast(xst, xst.Length, throwOnEndOfStream: false);
             return Encoding.Unicode.GetString(xst);
         }
 
@@ -108,7 +108,7 @@ namespace b2xtranslator.Tools
 
             //skip the termination
             var termiantion = new byte[2];
-            stream.Read(termiantion, 0, termiantion.Length);
+            stream.ReadAtLeast(termiantion, termiantion.Length, throwOnEndOfStream: false);
 
             return xst;
         }
@@ -116,10 +116,10 @@ namespace b2xtranslator.Tools
         public static string ReadShortXlUnicodeString(Stream stream)
         {
             var cch = new byte[1];
-            stream.Read(cch, 0, cch.Length);
+            stream.ReadAtLeast(cch, cch.Length, throwOnEndOfStream: false);
 
             var fHighByte = new byte[1];
-            stream.Read(fHighByte, 0, fHighByte.Length);
+            stream.ReadAtLeast(fHighByte, fHighByte.Length, throwOnEndOfStream: false);
 
             int rgbLength = cch[0];
             if (fHighByte[0] >= 0)
@@ -129,7 +129,7 @@ namespace b2xtranslator.Tools
             }
 
             var rgb = new byte[rgbLength];
-            stream.Read(rgb, 0, rgb.Length);
+            stream.ReadAtLeast(rgb, rgb.Length, throwOnEndOfStream: false);
 
             if (fHighByte[0] >= 0)
             {
