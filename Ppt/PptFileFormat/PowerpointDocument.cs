@@ -147,11 +147,11 @@ namespace b2xtranslator.PptFileFormat
             }
 
             // Optional 'Pictures' stream
-            if (file.FullNameOfAllStreamEntries.Contains("\\Pictures"))
+            if (file.TryGetStream("Pictures", out var picturesStream))
             {
                 try
                 {
-                    this.PicturesStream = file.GetStream("Pictures");
+                    this.PicturesStream = picturesStream;
                     this.PicturesContainer = new Pictures(new BinaryReader(this.PicturesStream), (uint)this.PicturesStream.Length, 0, 0, 0);
                 }
                 catch (InvalidRecordException e)
@@ -163,15 +163,15 @@ namespace b2xtranslator.PptFileFormat
 
             this.PowerpointDocumentStream = file.GetStream("PowerPoint Document");
 
-            try
+            if (file.TryGetStream("DocumentSummaryInformation", out var dsiStream))
             {
-                this.DocumentSummaryInformationStream = file.GetStream("DocumentSummaryInformation");
+                this.DocumentSummaryInformationStream = dsiStream;
                 ScanDocumentSummaryInformation();
             }
-            catch (StructuredStorage.Common.StreamNotFoundException ex)
+            else
             {
                 // Best-effort: Optional stream.
-                TraceLogger.Debug("PowerpointDocument: DocumentSummaryInformation stream not found, skipping: {0}", ex.Message);
+                TraceLogger.Debug("PowerpointDocument: DocumentSummaryInformation stream not found, skipping.");
             }
 
 
