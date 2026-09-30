@@ -3539,7 +3539,7 @@ namespace b2xtranslator.PresentationMLMapping
                     this._writer.WriteStartElement("a", "prstGeom", OpenXmlNamespaces.DrawingML);
                     this._writer.WriteAttributeString("prst", prst);
                     int? linearAdj = this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.adjustValue)
-                        ? Utils.LegacyLinearAdjustToOoxml(prst, (int)this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op)
+                        ? Utils.LegacyLinearAdjustToOoxml(prst, (int)Math.Min(this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op, (uint)int.MaxValue))
                         : null;
                     if (linearAdj.HasValue)
                     {
