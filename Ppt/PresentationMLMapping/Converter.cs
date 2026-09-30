@@ -81,6 +81,8 @@ namespace b2xtranslator.PresentationMLMapping
                 context.WriterSettings = xws;
                 context.Pptx = pptx;
 
+                using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("map")?.SetTag("b2x.format", "ppt");
+
                 // Write presentation.xml
                 ppt.Convert(new PresentationPartMapping(context));
 

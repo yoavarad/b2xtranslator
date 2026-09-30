@@ -180,6 +180,7 @@ namespace b2xtranslator.DocFileFormat
 
         public WordDocument(StructuredStorageReader reader, int fibFC = 0)
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("parse")?.SetTag("b2x.format", "doc");
             try
             {
                 Parse(reader, fibFC);

@@ -96,6 +96,8 @@ namespace b2xtranslator.WordprocessingMLMapping
                 context.WriterSettings = xws;
                 context.Docx = docx;
 
+                using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("map")?.SetTag("b2x.format", "doc");
+
                 //convert the macros
                 if (docx.DocumentType == OpenXmlPackage.DocumentType.MacroEnabledDocument ||
                     docx.DocumentType == OpenXmlPackage.DocumentType.MacroEnabledTemplate)

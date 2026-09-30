@@ -47,6 +47,8 @@ namespace b2xtranslator.OpenXmlLib
 
         public virtual void Close()
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("write");
+
             // serialize the package on closing
             var writer = new OpenXmlWriter();
             writer.Open(this.FileName);

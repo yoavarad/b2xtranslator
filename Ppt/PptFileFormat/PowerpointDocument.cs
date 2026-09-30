@@ -112,6 +112,7 @@ namespace b2xtranslator.PptFileFormat
 
         public PowerpointDocument(StructuredStorageReader file)
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("parse")?.SetTag("b2x.format", "ppt");
             try
             {
                 Parse(file);
