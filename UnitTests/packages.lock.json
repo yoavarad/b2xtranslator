@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "Microsoft.NET.Test.Sdk": {
+        "type": "Direct",
+        "requested": "[17.14.1, )",
+        "resolved": "17.14.1",
+        "contentHash": "HJKqKOE+vshXra2aEHpi2TlxYX7Z9VFYkr+E5rwEvHC8eIXiyO+K9kNm8vmNom3e2rA56WqxU+/N9NJlLGXsJQ==",
+        "dependencies": {
+          "Microsoft.CodeCoverage": "17.14.1",
+          "Microsoft.TestPlatform.TestHost": "17.14.1"
+        }
+      },
+      "NUnit": {
+        "type": "Direct",
+        "requested": "[3.14.0, )",
+        "resolved": "3.14.0",
+        "contentHash": "R7iPwD7kbOaP3o2zldWJbWeMQAvDKD0uld27QvA3PAALl1unl7x0v2J7eGiJOYjimV/BuGT4VJmr45RjS7z4LA==",
+        "dependencies": {
+          "NETStandard.Library": "2.0.0"
+        }
+      },
+      "NUnit.Console": {
+        "type": "Direct",
+        "requested": "[3.7.0, )",
+        "resolved": "3.7.0",
+        "contentHash": "SRigP1GEq40W6umx+fykPZbX9xCsFd9bDh+N2OslmtD4f4RrHEy9O4St4foO2R1gK1GLagBzTCiSA6Km4GD+Fg==",
+        "dependencies": {
+          "NUnit.ConsoleRunner": "3.7.0",
+          "NUnit.Extension.NUnitProjectLoader": "3.5.0",
+          "NUnit.Extension.NUnitV2Driver": "3.6.0",
+          "NUnit.Extension.NUnitV2ResultWriter": "3.5.0",
+          "NUnit.Extension.TeamCityEventListener": "1.0.2",
+          "NUnit.Extension.VSProjectLoader": "3.5.0"
+        }
+      },
+      "NUnit3TestAdapter": {
+        "type": "Direct",
+        "requested": "[4.6.0, )",
+        "resolved": "4.6.0",
+        "contentHash": "R7e1+a4vuV/YS+ItfL7f//rG+JBvVeVLX4mHzFEZo4W1qEKl8Zz27AqvQSAqo+BtIzUCo4aAJMYa56VXS4hudw=="
+      },
+      "Microsoft.CodeCoverage": {
+        "type": "Transitive",
+        "resolved": "17.14.1",
+        "contentHash": "pmTrhfFIoplzFVbhVwUquT+77CbGH+h4/3mBpdmIlYtBi9nAB+kKI6dN3A/nV4DFi3wLLx/BlHIPK+MkbQ6Tpg=="
+      },
+      "Microsoft.NETCore.Platforms": {
+        "type": "Transitive",
+        "resolved": "1.1.0",
+        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
+      },
+      "Microsoft.TestPlatform.ObjectModel": {
+        "type": "Transitive",
+        "resolved": "17.14.1",
+        "contentHash": "xTP1W6Mi6SWmuxd3a+jj9G9UoC850WGwZUps1Wah9r1ZxgXhdJfj1QqDLJkFjHDCvN42qDL2Ps5KjQYWUU0zcQ=="
+      },
+      "Microsoft.TestPlatform.TestHost": {
+        "type": "Transitive",
+        "resolved": "17.14.1",
+        "contentHash": "d78LPzGKkJwsJXAQwsbJJ7LE7D1wB+rAyhHHAaODF+RDSQ0NgMjDFkSA1Djw18VrxO76GlKAjRUhl+H8NL8Z+Q==",
+        "dependencies": {
+          "Microsoft.TestPlatform.ObjectModel": "17.14.1",
+          "Newtonsoft.Json": "13.0.3"
+        }
+      },
+      "NETStandard.Library": {
+        "type": "Transitive",
+        "resolved": "2.0.0",
+        "contentHash": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
+      "NUnit.ConsoleRunner": {
+        "type": "Transitive",
+        "resolved": "3.7.0",
+        "contentHash": "7K9dbmg+t0AM1/vDNy3chuU+ctUa2ApnoWeLFhu2ELjXEpSAv/Vfn0frBPGwWOd1TyKcPfMJ89rMtX+RNqzvnQ=="
+      },
+      "NUnit.Extension.NUnitProjectLoader": {
+        "type": "Transitive",
+        "resolved": "3.5.0",
+        "contentHash": "oe+PYd5uf0u3WoV6txz6esPe5I9I3PV0o96KoEVvJs+AYMG9MCebmnMq7N8dYJrWiDKIuSDwZ6WTs84XTDZ/Pw=="
+      },
+      "NUnit.Extension.NUnitV2Driver": {
+        "type": "Transitive",
+        "resolved": "3.6.0",
+        "contentHash": "TZIWwZaND/91p9FCuZH0vJLNPVyFV4No6XHgtd2ZLwN6MQZVPWdI4apL38ejsKAFn3nF1yTlvJgYF1l2mlo8wA=="
+      },
+      "NUnit.Extension.NUnitV2ResultWriter": {
+        "type": "Transitive",
+        "resolved": "3.5.0",
+        "contentHash": "qz5Xxd+yBStdMP/jIIFz01cN3x8rKBCoF3alFHa5Gr+lZqdFyV1DN+3l8AlHrDSX5OzAz+T5CCBkgDim/hqGkQ=="
+      },
+      "NUnit.Extension.TeamCityEventListener": {
+        "type": "Transitive",
+        "resolved": "1.0.2",
+        "contentHash": "VWtqluuxC1VizTdD/GcdppF1AJGa0sGIGwRKpo8cuAC9Hcw5X4znraTLyVc62Wqj/+C9VwTZ4FI88GZHexYPNg=="
+      },
+      "NUnit.Extension.VSProjectLoader": {
+        "type": "Transitive",
+        "resolved": "3.5.0",
+        "contentHash": "JbWSqy3Kh2EkzaHd0GDh3jfdzOf6w3v5h3UbKnR9yUJix9XjucZbFmQuj9DYsvpzVKrWGtvQLLrWZYOo6uBGrw=="
+      },
+      "b2xtranslator": {
+        "type": "Project"
+      },
+      "b2xtranslator.doc": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator": "[2.0.0, )"
+        }
+      },
+      "b2xtranslator.ppt": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator": "[2.0.0, )"
+        }
+      },
+      "b2xtranslator.xls": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator": "[2.0.0, )"
+        }
+      },
+      "doc2x": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator.doc": "[1.0.0, )"
+        }
+      },
+      "ppt2x": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator.ppt": "[1.0.0, )"
+        }
+      },
+      "xls2x": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator.xls": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}
