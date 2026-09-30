@@ -781,58 +781,57 @@ namespace b2xtranslator.WordprocessingMLMapping
             int valuePointer = 0;
             foreach (var seg in parser.Segments)
             {
-                try
-                {
-                    switch (seg.Type)
-                    {
-                        case PathSegment.SegmentType.msopathLineTo:
-                            VmlPath.Append("l");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            valuePointer += 1;
-                            break;
-                        case PathSegment.SegmentType.msopathCurveTo:
-                            VmlPath.Append("c");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 1].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 1].Y);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 2].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 2].Y);
-                            valuePointer += 3;
-                            break;
-                        case PathSegment.SegmentType.msopathMoveTo:
-                            VmlPath.Append("m");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            valuePointer += 1;
-                            break;
-                        case PathSegment.SegmentType.msopathClose:
-                            VmlPath.Append("x");
-                            break;
-                        case PathSegment.SegmentType.msopathEnd:
-                            VmlPath.Append("e");
-                            break;
-                        case PathSegment.SegmentType.msopathEscape:
-                        case PathSegment.SegmentType.msopathClientEscape:
-                        case PathSegment.SegmentType.msopathInvalid:
-                            //ignore escape segments and invalid segments
-                            break;
-
-                    }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    // Sometimes there are more Segments than available Values.
-                    // Accordingly to the spec this should never happen :)
+                // Sometimes there are more Segments than available Values.
+                // Accordingly to the spec this should never happen :)
+                int needed = seg.Type == PathSegment.SegmentType.msopathCurveTo ? 3
+                    : (seg.Type == PathSegment.SegmentType.msopathLineTo || seg.Type == PathSegment.SegmentType.msopathMoveTo) ? 1
+                    : 0;
+                if (valuePointer + needed > parser.Values.Count)
                     break;
+
+                switch (seg.Type)
+                {
+                    case PathSegment.SegmentType.msopathLineTo:
+                        VmlPath.Append("l");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        valuePointer += 1;
+                        break;
+                    case PathSegment.SegmentType.msopathCurveTo:
+                        VmlPath.Append("c");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 1].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 1].Y);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 2].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 2].Y);
+                        valuePointer += 3;
+                        break;
+                    case PathSegment.SegmentType.msopathMoveTo:
+                        VmlPath.Append("m");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        valuePointer += 1;
+                        break;
+                    case PathSegment.SegmentType.msopathClose:
+                        VmlPath.Append("x");
+                        break;
+                    case PathSegment.SegmentType.msopathEnd:
+                        VmlPath.Append("e");
+                        break;
+                    case PathSegment.SegmentType.msopathEscape:
+                    case PathSegment.SegmentType.msopathClientEscape:
+                    case PathSegment.SegmentType.msopathInvalid:
+                        //ignore escape segments and invalid segments
+                        break;
+
                 }
             }
 

@@ -1283,14 +1283,11 @@ namespace b2xtranslator.WordprocessingMLMapping
         /// <returns></returns>
         protected SectionPropertyExceptions findValidSepx(int cp)
         {
-            SectionPropertyExceptions ret = null;
-
-            try
+            if (this._doc.AllSepx.TryGetValue(cp, out var ret))
             {
-                ret = this._doc.AllSepx[cp];
                 this._lastValidSepx = ret;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 //there is no SEPX at this position, 
                 //so the previous SEPX is valid for this cp

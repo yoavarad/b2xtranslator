@@ -6,6 +6,7 @@ using b2xtranslator.PptFileFormat;
 using System.Xml;
 using System.Reflection;
 using b2xtranslator.Tools;
+using b2xtranslator.OpenXmlLib;
 using b2xtranslator.OfficeDrawing;
 
 namespace b2xtranslator.PresentationMLMapping
@@ -63,6 +64,27 @@ namespace b2xtranslator.PresentationMLMapping
         {
             decimal percent = (decimal)legacyValue / LegacyAdjustRange * 100;
             return (int)Math.Round((percent - 50) * OoxmlPercentPerPercent, MidpointRounding.AwayFromZero);
+        }
+
+        /// <summary>
+        /// Presets whose single legacy adjust value (0..21600 of the shape extent) maps linearly onto the
+        /// DrawingML "adj" guide (1/100000 of the shape extent, see LegacyAdjustRange).
+        /// </summary>
+        private static readonly System.Collections.Generic.HashSet<string> LinearSingleAdjustPresets =
+            new System.Collections.Generic.HashSet<string>
+            {
+                "roundRect", "triangle", "octagon", "cube", "can", "donut", "plaque", "bevel", "parallelogram"
+            };
+
+        /// <summary>
+        /// Converts the legacy adjust value of a preset in LinearSingleAdjustPresets into the
+        /// DrawingML "adj" value. Returns null when the preset has no linear mapping.
+        /// </summary>
+        public static int? LegacyLinearAdjustToOoxml(string prst, int legacyValue)
+        {
+            if (!LinearSingleAdjustPresets.Contains(prst)) return null;
+            decimal v = Math.Round((decimal)legacyValue * 100000 / LegacyAdjustRange, MidpointRounding.AwayFromZero);
+            return (int)Math.Max(0, Math.Min(100000, v)); //clamp corrupt input; legacy adj is relative to width/height, OOXML to min(w,h): approximation
         }
 
         public static int MasterCoordToEMU(int mc)
@@ -279,10 +301,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnLeftTwoRows with rightType = {0}",
-                                rightType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -300,10 +319,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnRightTwoRows with leftType = {0}",
-                                leftType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -322,10 +338,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoRowsAndTitle with topType = {0} and bottomType = {1}",
-                                topType, bottomType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -338,9 +351,23 @@ namespace b2xtranslator.PresentationMLMapping
                 case SlideLayoutType.VerticalTitleRightBodyLeftTwoRows:
                     return "vertTitleAndTxOverChart";
 
+                case SlideLayoutType.TwoRowsBottomTwoColumns:
+                    return FallbackLayout(type, "obj");
+
                 default:
-                    throw new NotImplementedException("Don't know how to map slide layout type " + type);
+                    return FallbackLayout(type, "blank");
             }
+        }
+
+        /// <summary>
+        /// Layout types with no ECMA-376 slide layout counterpart fall back to a generic
+        /// layout instead of aborting the whole conversion (see docs/adr-unmapped-slide-layouts.md).
+        /// </summary>
+        private static string FallbackLayout(SlideLayoutType type, string filename)
+        {
+            System.Diagnostics.Trace.TraceWarning(
+                "No slide layout mapping for {0}; falling back to '{1}'", type, filename);
+            return filename;
         }
 
         /// <summary>
@@ -364,6 +391,47 @@ namespace b2xtranslator.PresentationMLMapping
                 case 0x07: return "folHlink"; // AccentAndFollowedHyperlink
                 default: return "";
             }
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterScheme (bit 1) clear means the page has its own color scheme.
+        /// </summary>
+        public static bool HasOwnColorScheme(ushort flags)
+        {
+            return (flags & 0x2) == 0;
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterBackground (bit 2) clear means the page has its own background.
+        /// </summary>
+        public static bool HasOwnBackground(ushort flags)
+        {
+            return (flags & 0x4) == 0;
+        }
+
+        /// <summary>
+        /// Writes p:clrMapOvr. If the page has its own color scheme and a color mapping is available,
+        /// an overrideClrMapping is written (missing attributes filled with the identity mapping),
+        /// otherwise masterClrMapping.
+        /// </summary>
+        public static void WriteClrMapOvr(XmlWriter writer, bool ownColorScheme, XmlElement clrMap)
+        {
+            writer.WriteStartElement("p", "clrMapOvr", OpenXmlNamespaces.PresentationML);
+            if (ownColorScheme && clrMap != null)
+            {
+                writer.WriteStartElement("a", "overrideClrMapping", OpenXmlNamespaces.DrawingML);
+                foreach (var name in new[] { "bg1", "tx1", "bg2", "tx2", "accent1", "accent2", "accent3", "accent4", "accent5", "accent6", "hlink", "folHlink" })
+                {
+                    string identity = name == "bg1" ? "lt1" : name == "tx1" ? "dk1" : name == "bg2" ? "lt2" : name == "tx2" ? "dk2" : name;
+                    writer.WriteAttributeString(name, clrMap.HasAttribute(name) ? clrMap.GetAttribute(name) : identity);
+                }
+                writer.WriteEndElement();
+            }
+            else
+            {
+                writer.WriteElementString("a", "masterClrMapping", OpenXmlNamespaces.DrawingML, "");
+            }
+            writer.WriteEndElement();
         }
 
         public static string getRGBColorFromOfficeArtCOLORREF(uint value, RegularContainer slide, b2xtranslator.OfficeDrawing.ShapeOptions so)

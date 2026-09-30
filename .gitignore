@@ -24,3 +24,9 @@ bld/
 # YDK generated local state (machine-specific, not committed)
 .ydk/cache/
 .ydk/proofs/
+
+# perf corpus (generated large tier)
+perf/corpus/large/
+perf/corpus/small/*.docx
+perf/corpus/small/*.xlsx
+perf/corpus/small/*.pptx

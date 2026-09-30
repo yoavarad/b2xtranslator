@@ -47,7 +47,22 @@ namespace b2xtranslator.PresentationMLMapping
             // TODO: Write slide data of master slide
             this._writer.WriteStartElement("p", "cSld", OpenXmlNamespaces.PresentationML);
 
-            //TODO: write background properties (p:bg)
+            if (notesAtom != null && Utils.HasOwnBackground(notesAtom.Flags))
+            {
+                var drawing = note.FirstChildWithType<PPDrawing>();
+                var container = drawing != null ? drawing.FirstChildWithType<DrawingContainer>() : null;
+                var sc = container != null ? container.FirstChildWithType<ShapeContainer>() : null;
+                var so = sc != null ? sc.FirstChildWithType<ShapeOptions>() : null;
+                if (so != null && (so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.fillType) || so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.fillColor)))
+                {
+                    this._writer.WriteStartElement("p", "bg", OpenXmlNamespaces.PresentationML);
+                    this._writer.WriteStartElement("p", "bgPr", OpenXmlNamespaces.PresentationML);
+                    new FillMapping(this._ctx, this._writer, this).Apply(so);
+                    this._writer.WriteElementString("a", "effectLst", OpenXmlNamespaces.DrawingML, "");
+                    this._writer.WriteEndElement(); //p:bgPr
+                    this._writer.WriteEndElement(); //p:bg
+                }
+            }
 
             this._writer.WriteStartElement("p", "spTree", OpenXmlNamespaces.PresentationML);
 

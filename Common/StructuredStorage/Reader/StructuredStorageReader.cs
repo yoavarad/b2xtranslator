@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using b2xtranslator.StructuredStorage.Common;
+using b2xtranslator.Tools;
 
 [assembly: CLSCompliant(false)]
 
@@ -41,6 +42,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <param name="stream">The stream to the storage</param>
         public StructuredStorageReader(Stream stream)
         {
+            using var activity = Instrumentation.Source.StartActivity("open-storage");
             try
             {
                 this._fileHandler = new InputHandler(stream);
@@ -60,6 +62,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <param name="fileName">The name of the file including its path</param>
         public StructuredStorageReader(string fileName)
         {
+            using var activity = Instrumentation.Source.StartActivity("open-storage");
             try
             {
                 this._fileHandler = new InputHandler(fileName);
@@ -90,6 +93,31 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (entry == null)
                 throw new StreamNotFoundException(path);
 
+            return OpenStream(entry, path);
+        }
+
+        /// <summary>
+        /// Tries to get a handle to a stream with the given name/path (same path rules as <see cref="GetStream"/>).
+        /// Returns false if no stream entry with that path exists; other failures throw as in <see cref="GetStream"/>.
+        /// </summary>
+        /// <param name="path">The path of the virtual stream.</param>
+        /// <param name="stream">The virtual stream, or null if not found.</param>
+        /// <returns>True if the stream exists.</returns>
+        public bool TryGetStream(string path, out VirtualStream stream)
+        {
+            var entry = this._directory.GetDirectoryEntry(path);
+            if (entry == null || entry.Type != DirectoryEntryType.STGTY_STREAM)
+            {
+                stream = null;
+                return false;
+            }
+
+            stream = OpenStream(entry, path);
+            return true;
+        }
+
+        VirtualStream OpenStream(DirectoryEntry entry, string path)
+        {
             if (entry.Type != DirectoryEntryType.STGTY_STREAM)
                 throw new WrongDirectoryEntryTypeException();
 

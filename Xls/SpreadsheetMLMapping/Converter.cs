@@ -84,6 +84,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
         public static void Convert(XlsDocument xls, SpreadsheetDocument spreadsheetDocument)
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("map")?.SetTag("b2x.format", "xls");
+
             //Setup the writer
             var xws = new XmlWriterSettings
             {

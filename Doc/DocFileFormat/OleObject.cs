@@ -89,83 +89,80 @@ namespace b2xtranslator.WordprocessingMLMapping
 
         private void processLinkInfoStream(string linkStream)
         {
-            try
-            {
-                var reader = new VirtualStreamReader(this._docStorage.GetStream(linkStream));
-
-                //there are two versions of the Link string, one contains ANSI characters, the other contains
-                //unicode characters.
-                //Both strings seem not to be standardized:
-                //The length prefix is a character count EXCLUDING the terminating zero
-
-                //Read the ANSI version
-                short cch = reader.ReadInt16();
-                var str = reader.ReadBytes(cch);
-                this.Link = Encoding.ASCII.GetString(str);
-
-                //skip the terminating zero of the ANSI string
-                //even if the characters are ANSI chars, the terminating zero has 2 bytes
-                reader.ReadBytes(2);
-
-                //skip the next 4 bytes (flags?)
-                reader.ReadBytes(4);
-
-                //Read the Unicode version
-                cch = reader.ReadInt16();
-                str = reader.ReadBytes(cch * 2);
-                this.Link = Encoding.Unicode.GetString(str);
-
-                //skip the terminating zero of the Unicode string
-                reader.ReadBytes(2);
-            }
-            catch (StreamNotFoundException ex)
+            if (!this._docStorage.TryGetStream(linkStream, out var stream))
             {
                 // Best-effort: Optional stream; absence is normal for many OLE objects.
-                TraceLogger.Debug("OleObject: link stream not found, skipping: {0}", ex.Message);
+                TraceLogger.Debug("OleObject: link stream not found, skipping: {0}", linkStream);
+                return;
             }
+
+            var reader = new VirtualStreamReader(stream);
+
+            //there are two versions of the Link string, one contains ANSI characters, the other contains
+            //unicode characters.
+            //Both strings seem not to be standardized:
+            //The length prefix is a character count EXCLUDING the terminating zero
+
+            //Read the ANSI version
+            short cch = reader.ReadInt16();
+            var str = reader.ReadBytes(cch);
+            this.Link = Encoding.ASCII.GetString(str);
+
+            //skip the terminating zero of the ANSI string
+            //even if the characters are ANSI chars, the terminating zero has 2 bytes
+            reader.ReadBytes(2);
+
+            //skip the next 4 bytes (flags?)
+            reader.ReadBytes(4);
+
+            //Read the Unicode version
+            cch = reader.ReadInt16();
+            str = reader.ReadBytes(cch * 2);
+            this.Link = Encoding.Unicode.GetString(str);
+
+            //skip the terminating zero of the Unicode string
+            reader.ReadBytes(2);
         }
 
         private void processCompObjStream(string compStream)
         {
-            try
-            {
-                var reader = new VirtualStreamReader(this._docStorage.GetStream(compStream));
-
-                //skip the CompObjHeader
-                reader.ReadBytes(28);
-
-                this.UserType = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
-                this.ClipboardFormat = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
-                this.Program = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
-            }
-            catch (StreamNotFoundException ex)
+            if (!this._docStorage.TryGetStream(compStream, out var stream))
             {
                 // Best-effort: Optional stream; absence is normal for many OLE objects.
-                TraceLogger.Debug("OleObject: CompObj stream not found, skipping: {0}", ex.Message);
+                TraceLogger.Debug("OleObject: CompObj stream not found, skipping: {0}", compStream);
+                return;
             }
+
+            var reader = new VirtualStreamReader(stream);
+
+            //skip the CompObjHeader
+            reader.ReadBytes(28);
+
+            this.UserType = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
+            this.ClipboardFormat = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
+            this.Program = Utils.ReadLengthPrefixedAnsiString(reader.BaseStream);
         }
 
         private void processOleStream(string oleStream)
         {
-            try
-            {
-                var reader = new VirtualStreamReader(this._docStorage.GetStream(oleStream));
-
-                //skip version
-                reader.ReadBytes(4);
-
-                //read the embedded/linked flag
-                int flag = reader.ReadInt32();
-                this.fLinked = Utils.BitmaskToBool(flag, 0x1);
-
-                //Link update option
-                this.UpdateMode = (LinkUpdateOption)reader.ReadInt32();
-            }
-            catch (StreamNotFoundException ex)
+            if (!this._docStorage.TryGetStream(oleStream, out var stream))
             {
                 // Best-effort: Optional stream; absence is normal for many OLE objects.
-                TraceLogger.Debug("OleObject: OLE stream not found, skipping: {0}", ex.Message);
+                TraceLogger.Debug("OleObject: OLE stream not found, skipping: {0}", oleStream);
+                return;
             }
+
+            var reader = new VirtualStreamReader(stream);
+
+            //skip version
+            reader.ReadBytes(4);
+
+            //read the embedded/linked flag
+            int flag = reader.ReadInt32();
+            this.fLinked = Utils.BitmaskToBool(flag, 0x1);
+
+            //Link update option
+            this.UpdateMode = (LinkUpdateOption)reader.ReadInt32();
         }
 
         private string getOleEntryName(CharacterPropertyExceptions chpx)
