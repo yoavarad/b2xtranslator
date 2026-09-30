@@ -88,7 +88,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public static string SlideSizeTypeToXMLValue(SlideSizeType sst)
         {
-            // OOXML Spec § 4.8.22
+            // OOXML Spec ï¿½ 4.8.22
             switch (sst)
             {
                 case SlideSizeType.A4Paper:
@@ -334,6 +334,9 @@ namespace b2xtranslator.PresentationMLMapping
 
                 case SlideLayoutType.VerticalTitleRightBodyLeft:
                     return "vertTitleAndTx";
+
+                case SlideLayoutType.VerticalTitleRightBodyLeftTwoRows:
+                    return "vertTitleAndTxOverChart";
 
                 default:
                     throw new NotImplementedException("Don't know how to map slide layout type " + type);

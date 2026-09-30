@@ -25,5 +25,16 @@ namespace UnitTests
             Assert.That(name, Is.EqualTo("vertTitleAndTx"));
             Assert.IsNotNull(PptUtils.GetDefaultDocument("slideLayouts." + name).DocumentElement);
         }
+
+        // MS-PPT SL_VerticalTitleBodyTwoRows -> ST_SlideLayoutType "vertTitleAndTxOverChart".
+        [Test]
+        public void SlideLayoutTypeToFilename_MapsVerticalTitleBodyTwoRows()
+        {
+            var placeholders = new[] { PlaceholderEnum.VerticalTextTitle, PlaceholderEnum.VerticalTextBody, PlaceholderEnum.Graph };
+            string name = PptUtils.SlideLayoutTypeToFilename(SlideLayoutType.VerticalTitleRightBodyLeftTwoRows, placeholders);
+
+            Assert.That(name, Is.EqualTo("vertTitleAndTxOverChart"));
+            Assert.IsNotNull(PptUtils.GetDefaultDocument("slideLayouts." + name).DocumentElement);
+        }
     }
 }
