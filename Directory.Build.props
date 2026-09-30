@@ -2,4 +2,11 @@
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
+  <!--
+    Pass -p:CiWarningsAsErrors=true to fail the build on compiler warnings.
+    Local builds are unaffected unless the property is passed.
+  -->
+  <PropertyGroup Condition="'$(CiWarningsAsErrors)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
 </Project>
