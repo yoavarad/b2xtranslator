@@ -14,8 +14,8 @@ Status: **done** = implemented in this task; **deferred** = left as is, with rea
 | `Utils.PlaceholderIdToXMLValue` | `VerticalTextTitle` -> `title`, `VerticalTextBody` -> `body` | **done** |
 | `Utils.SlideLayoutTypeToFilename` | `VerticalTitleRightBodyLeft` (SL_VerticalTitleBody) -> `vertTitleAndTx` (default layout already shipped) | **done** |
 | `Utils.SlideLayoutTypeToFilename` | `VerticalTitleRightBodyLeftTwoRows` -> `vertTitleAndTxOverChart` | deferred: no default layout XML shipped for it |
-| `Utils.SlideLayoutTypeToFilename` | `TwoRowsBottomTwoColumns` | deferred: ECMA-376 ST_SlideLayoutType has `twoObjOverTx` (top columns) but no bottom-columns counterpart, so it would need a `cust` layout |
-| `Utils.SlideLayoutTypeToFilename` | `TwoColumnsLeftTwoRows` / `TwoColumnsRightTwoRows` / `TwoRowsAndTitle` with other placeholder combos | deferred: no spec-defined target; choosing one is a guess |
+| `Utils.SlideLayoutTypeToFilename` | `TwoRowsBottomTwoColumns` | **done (#86, falls back to `obj`, see adr-unmapped-slide-layouts.md)**; was: ECMA-376 ST_SlideLayoutType has `twoObjOverTx` (top columns) but no bottom-columns counterpart, so it would need a `cust` layout |
+| `Utils.SlideLayoutTypeToFilename` | `TwoColumnsLeftTwoRows` / `TwoColumnsRightTwoRows` / `TwoRowsAndTitle` with other placeholder combos | deferred:  no spec-defined target; choosing one is a guess |
 | `Utils.SlideLayoutTypeToFilename` | `TitleMaster`, `MasterNotes`, `NotesTitleAndBody`, `Handout` | deferred: master/notes/handout geometries (MS-PPT SlideLayoutType 2, 4, 5, 6). No slide-layout target, so they still hit the default throw |
 | `Utils.PlaceholderIdToXMLValue` | `None` | deferred: not a real placeholder |
 | `Utils.SlideSizeTypeToXMLValue` | default branch | deferred: every MS-PPT SlideSizeEnum value is already mapped |
