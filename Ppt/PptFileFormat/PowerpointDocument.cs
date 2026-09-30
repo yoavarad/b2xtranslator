@@ -137,7 +137,7 @@ namespace b2xtranslator.PptFileFormat
                 {
                     this.CurrentUserStream.Position = 0;
                     var bytes = new byte[this.CurrentUserStream.Length];
-                    this.CurrentUserStream.Read(bytes);
+                    this.CurrentUserStream.Read(bytes, 0, bytes.Length, 0);
                     string s = Encoding.UTF8.GetString(bytes).Replace("\0", "");
                 }
             }

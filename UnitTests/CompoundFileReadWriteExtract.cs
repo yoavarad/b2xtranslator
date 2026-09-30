@@ -179,7 +179,7 @@ namespace UnitTests
                         array = new byte[bytesToReadAtOnce];
                         do
                         {
-                            bytesRead = streamReader.Read(array);
+                            bytesRead = streamReader.Read(array, 0, array.Length);
                             writer.Write(array, 0, bytesRead);
                             writer.Flush();
                         } while (bytesRead == array.Length);

@@ -9,11 +9,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
     /// </summary>
     public class FormulaCell : AbstractCellData
     {
-        /// <summary>
-        /// String which stores the index to the sharedstringtable 
-        /// </summary>
-        private string valueString;
-
         ///
 
         private Stack<AbstractPtg> ptgStack;
@@ -35,7 +30,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <returns></returns>
         public override string getValue()
         {
-            return this.valueString;
+            return null;
         }
 
         /// <summary>

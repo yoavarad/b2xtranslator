@@ -80,7 +80,6 @@ namespace b2xtranslator.PresentationMLMapping
         }
 
         //used to give each group a unique identifyer
-        private int groupcounter = -10;
         public void Apply(GroupContainer group)
         {
             var gsr = group.FirstChildWithType<ShapeContainer>().FirstChildWithType<GroupShapeRecord>();
@@ -1920,7 +1919,7 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 var chanchor = container.FirstChildWithType<ChildAnchor>();
                 anchor = new Rectangle(chanchor.Left, chanchor.Top, chanchor.rcgBounds.Width, chanchor.rcgBounds.Height);
-                if (anchor != null && anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
+                if (anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
                 {
                     this._writer.WriteStartElement("p", "xfrm", OpenXmlNamespaces.PresentationML);
 
@@ -1940,7 +1939,7 @@ namespace b2xtranslator.PresentationMLMapping
             else
             {
                 anchor = new Rectangle(clanchor.Left, clanchor.Top, clanchor.Right - clanchor.Left, clanchor.Bottom - clanchor.Top);
-                if (anchor != null && anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
+                if (anchor.Right >= anchor.Left && anchor.Bottom >= anchor.Top)
                 {
                     this._writer.WriteStartElement("p", "xfrm", OpenXmlNamespaces.PresentationML);
 

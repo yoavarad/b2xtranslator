@@ -45,7 +45,7 @@
             return spreadsheet;
         }
 
-        public OpenXmlPackage.DocumentType DocumentType
+        public new OpenXmlPackage.DocumentType DocumentType
         {
             get { return this._documentType; }
             set { this._documentType = value; }

@@ -7,11 +7,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
     public class SharedFormulaData
     {
         /// <summary>
-        /// String which stores the index to the sharedstringtable 
-        /// </summary>
-        private string valueString;
-
-        /// <summary>
         /// Rownumber 
         /// </summary>
         public ushort rwFirst;
@@ -54,7 +49,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <returns></returns>
         public string getValue()
         {
-            return this.valueString;
+            return null;
         }
 
         /// <summary>

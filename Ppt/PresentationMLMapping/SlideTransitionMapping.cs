@@ -13,7 +13,6 @@ namespace b2xtranslator.PresentationMLMapping
         AbstractOpenXmlMapping//,
     {
         protected ConversionContext _ctx;
-        private ShapeTreeMapping _stm;
         private List<Point> TextAreasForAnimation = new List<Point>();
 
         public SlideTransitionMapping(ConversionContext ctx, XmlWriter writer)
