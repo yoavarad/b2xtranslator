@@ -44,20 +44,23 @@ arguments to save the series instead of watching it live.
 
 ```sh
 dotnet-trace collect \
-  --providers "Microsoft-Diagnostics-DiagnosticSource:0x3:5:FilterAndPayloadSpecs=[AS]b2xtranslator/*" \
+  --providers 'Microsoft-Diagnostics-DiagnosticSource:0x2:5:FilterAndPayloadSpecs="[AS]b2xtranslator/*"' \
   --profile cpu-sampling \
   -o doc2x.nettrace \
   -- dotnet Shell/doc2x/bin/Release/net10.0/doc2x.dll input.doc -o out.docx
 ```
 
 The `[AS]b2xtranslator/*` spec tells the runtime's DiagnosticSource bridge to
-listen to every activity from the `b2xtranslator` source; start/stop events are
-written as `Activity/Start` and `Activity/Stop` with their durations.
+listen to every activity from the `b2xtranslator` source. Each stage shows up as
+an `Activity1Start` / `Activity1Stop` event pair (nested stages use `Activity2*`)
+whose `EventName` is `<stage>/Start` or `<stage>/Stop`; the time between a pair
+is the stage duration. On Windows `cmd`, use outer double quotes and escape the
+inner ones (`\"`).
 
 ## Viewing the activities
 
 - **PerfView** (Windows): open `doc2x.nettrace`, then *Events* and filter on
-  `Microsoft-Diagnostics-DiagnosticSource/Activity`. The CPU stacks view shows
+  `Microsoft-Diagnostics-DiagnosticSource/Activity1` (Start/Stop). The CPU stacks view shows
   where time goes inside each stage.
 - **Speedscope**: `dotnet-trace convert --format speedscope doc2x.nettrace` and
   load the output at https://www.speedscope.app for the CPU samples.
