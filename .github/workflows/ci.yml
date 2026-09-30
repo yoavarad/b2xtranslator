@@ -49,12 +49,12 @@ jobs:
       # UnitTests cannot multi-target net8.0 (Shell projects are net10.0 only).
       - name: "Build (PR: net10.0 only)"
         if: github.event_name == 'pull_request'
-        run: dotnet build UnitTests -c Release --no-restore -f net10.0
+        run: dotnet build UnitTests -c Release --no-restore -f net10.0 -p:CiWarningsAsErrors=true
 
       # main / manual: build every TFM so net8.0 stays verified.
       - name: Build (all target frameworks)
         if: github.event_name != 'pull_request'
-        run: dotnet build ${{ env.SOLUTION }} -c Release --no-restore
+        run: dotnet build ${{ env.SOLUTION }} -c Release --no-restore -p:CiWarningsAsErrors=true
 
       # Same target as the local ydk dotnet-format gate (the .sln). Windows only to avoid
       # line-ending false positives.
