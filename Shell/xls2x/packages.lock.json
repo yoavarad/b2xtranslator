@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "b2xtranslator": {
+        "type": "Project"
+      },
+      "b2xtranslator.xls": {
+        "type": "Project",
+        "dependencies": {
+          "b2xtranslator": "[2.0.0, )"
+        }
+      }
+    }
+  }
+}
