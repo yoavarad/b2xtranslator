@@ -47,7 +47,7 @@ jobs:
 
       # PRs: build only UnitTests' dependency graph (net10.0); net8.0 is untested here.
       # UnitTests cannot multi-target net8.0 (Shell projects are net10.0 only).
-      - name: Build (PR: net10.0 only)
+      - name: "Build (PR: net10.0 only)"
         if: github.event_name == 'pull_request'
         run: dotnet build UnitTests -c Release --no-restore -f net10.0
 
