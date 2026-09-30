@@ -279,10 +279,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnLeftTwoRows with rightType = {0}",
-                                rightType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -300,10 +297,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnRightTwoRows with leftType = {0}",
-                                leftType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -322,10 +316,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoRowsAndTitle with topType = {0} and bottomType = {1}",
-                                topType, bottomType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -335,9 +326,23 @@ namespace b2xtranslator.PresentationMLMapping
                 case SlideLayoutType.VerticalTitleRightBodyLeft:
                     return "vertTitleAndTx";
 
+                case SlideLayoutType.TwoRowsBottomTwoColumns:
+                    return FallbackLayout(type, "obj");
+
                 default:
-                    throw new NotImplementedException("Don't know how to map slide layout type " + type);
+                    return FallbackLayout(type, "blank");
             }
+        }
+
+        /// <summary>
+        /// Layout types with no ECMA-376 slide layout counterpart fall back to a generic
+        /// layout instead of aborting the whole conversion (see docs/adr-unmapped-slide-layouts.md).
+        /// </summary>
+        private static string FallbackLayout(SlideLayoutType type, string filename)
+        {
+            System.Diagnostics.Trace.TraceWarning(
+                "No slide layout mapping for {0}; falling back to '{1}'", type, filename);
+            return filename;
         }
 
         /// <summary>
