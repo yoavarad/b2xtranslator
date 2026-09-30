@@ -40,6 +40,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// <param name="file"></param>
         public XlsDocument(StructuredStorageReader reader)
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("parse")?.SetTag("b2x.format", "xls");
             this.WorkBookData = new WorkBookData();
             this.Storage = reader;
 

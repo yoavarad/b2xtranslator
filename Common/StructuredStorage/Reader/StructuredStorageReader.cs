@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using b2xtranslator.StructuredStorage.Common;
+using b2xtranslator.Tools;
 
 [assembly: CLSCompliant(false)]
 
@@ -41,6 +42,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <param name="stream">The stream to the storage</param>
         public StructuredStorageReader(Stream stream)
         {
+            using var activity = Instrumentation.Source.StartActivity("open-storage");
             try
             {
                 this._fileHandler = new InputHandler(stream);
@@ -60,6 +62,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <param name="fileName">The name of the file including its path</param>
         public StructuredStorageReader(string fileName)
         {
+            using var activity = Instrumentation.Source.StartActivity("open-storage");
             try
             {
                 this._fileHandler = new InputHandler(fileName);
