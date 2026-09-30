@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Linq;
 using b2xtranslator.PptFileFormat;
 using b2xtranslator.CommonTranslatorLib;
 using System.Xml;
@@ -121,6 +122,25 @@ namespace b2xtranslator.PresentationMLMapping
             }
 
             this._writer.WriteEndElement(); //bodyStyle
+
+            this._writer.WriteStartElement("p", "otherStyle", OpenXmlNamespaces.PresentationML);
+
+            foreach (var atom in atoms.Where(a => a.Instance == 4 && a.IndentLevelCount > 0))
+            {
+                this.lastSpaceBefore = 0;
+                this.lastColor = "";
+                this.lastBulletFont = "";
+                this.lastBulletChar = "";
+                this.lastBulletColor = "";
+                this.lastSize = "";
+                for (int i = 0; i < 9; i++)
+                {
+                    int src = i < atom.IndentLevelCount ? i : 0;
+                    writepPr(atom.CRuns[src], atom.PRuns[src], null, i, false);
+                }
+            }
+
+            this._writer.WriteEndElement(); //otherStyle
 
             this._writer.WriteEndElement(); //txStyles
         }
