@@ -46,6 +46,12 @@ jobs:
       - name: Build
         run: dotnet build ${{ env.SOLUTION }} -c Release --no-restore
 
+      # Same target as the local ydk dotnet-format gate (the .sln). Windows only to avoid
+      # line-ending false positives.
+      - name: Format check
+        if: runner.os == 'Windows'
+        run: dotnet format ${{ env.SOLUTION }} --verify-no-changes --no-restore
+
       - name: Test
         run: dotnet test UnitTests -c Release --no-build --logger "trx;LogFileName=results.trx" --results-directory TestResults
 
@@ -55,3 +61,22 @@ jobs:
         with:
           name: test-results-${{ matrix.os }}
           path: TestResults
+
+      # Fails on High/Critical advisories in direct or transitive packages.
+      - name: Vulnerable package check
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -o pipefail
+          status=0
+          for proj in Common/b2xtranslator.csproj Doc/b2xtranslator.doc.csproj Xls/b2xtranslator.xls.csproj Ppt/b2xtranslator.ppt.csproj Shell/doc2x/doc2x.csproj Shell/xls2x/xls2x.csproj Shell/ppt2x/ppt2x.csproj UnitTests/UnitTests.csproj; do
+            echo "::group::$proj"
+            out=$(dotnet list "$proj" package --vulnerable --include-transitive)
+            echo "$out"
+            echo "::endgroup::"
+            if echo "$out" | grep -Eq '\b(High|Critical)\b'; then
+              echo "::error::High/Critical vulnerable package in $proj"
+              status=1
+            fi
+          done
+          exit $status
