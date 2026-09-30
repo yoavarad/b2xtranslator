@@ -162,12 +162,10 @@ namespace b2xtranslator.WordprocessingMLMapping
             this._writer.WriteElementString("w", "useAltKinsokuLineBreakRules", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "allowSpaceOfSameStyleInTable", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "doNotSuppressIndentation", OpenXmlNamespaces.WordprocessingML, "");
-            this._writer.WriteElementString("w", "doNotAutofitConstrainedTables", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "autofitToFirstFixedWidthCell", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "displayHangulFixedWidth", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "splitPgBreakAndParaMark", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "doNotVertAlignCellWithSp", OpenXmlNamespaces.WordprocessingML, "");
-            this._writer.WriteElementString("w", "doNotBreakConstrainedForcedTable", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "doNotVertAlignInTxbx", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "useAnsiKerningPairs", OpenXmlNamespaces.WordprocessingML, "");
             this._writer.WriteElementString("w", "cachedColBalance", OpenXmlNamespaces.WordprocessingML, "");
@@ -185,6 +183,12 @@ namespace b2xtranslator.WordprocessingMLMapping
                 this._writer.WriteElementString("w", "balanceSingleByteDoubleByteWidth", OpenXmlNamespaces.WordprocessingML, "");
             if (dop.fConvMailMergeEsc)
                 this._writer.WriteElementString("w", "convMailMergeEsc", OpenXmlNamespaces.WordprocessingML, "");
+            if (dop.fDontAutofitConstrainedTable)
+                this._writer.WriteElementString("w", "doNotAutofitConstrainedTables", OpenXmlNamespaces.WordprocessingML, "");
+            if (dop.fDontBreakConstrainedForcedTable)
+                this._writer.WriteElementString("w", "doNotBreakConstrainedForcedTable", OpenXmlNamespaces.WordprocessingML, "");
+            if (dop.fUnderlineTabInNumList)
+                this._writer.WriteElementString("w", "underlineTabInNumList", OpenXmlNamespaces.WordprocessingML, "");
             if (dop.fDontBreakWrappedTables)
                 this._writer.WriteElementString("w", "doNotBreakWrappedTables", OpenXmlNamespaces.WordprocessingML, "");
             if (!dop.fExpShRtn)
