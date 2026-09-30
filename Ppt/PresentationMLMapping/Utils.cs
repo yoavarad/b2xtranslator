@@ -6,6 +6,7 @@ using b2xtranslator.PptFileFormat;
 using System.Xml;
 using System.Reflection;
 using b2xtranslator.Tools;
+using b2xtranslator.OpenXmlLib;
 using b2xtranslator.OfficeDrawing;
 
 namespace b2xtranslator.PresentationMLMapping
@@ -361,6 +362,47 @@ namespace b2xtranslator.PresentationMLMapping
                 case 0x07: return "folHlink"; // AccentAndFollowedHyperlink
                 default: return "";
             }
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterScheme (bit 1) clear means the page has its own color scheme.
+        /// </summary>
+        public static bool HasOwnColorScheme(ushort flags)
+        {
+            return (flags & 0x2) == 0;
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterBackground (bit 2) clear means the page has its own background.
+        /// </summary>
+        public static bool HasOwnBackground(ushort flags)
+        {
+            return (flags & 0x4) == 0;
+        }
+
+        /// <summary>
+        /// Writes p:clrMapOvr. If the page has its own color scheme and a color mapping is available,
+        /// an overrideClrMapping is written (missing attributes filled with the identity mapping),
+        /// otherwise masterClrMapping.
+        /// </summary>
+        public static void WriteClrMapOvr(XmlWriter writer, bool ownColorScheme, XmlElement clrMap)
+        {
+            writer.WriteStartElement("p", "clrMapOvr", OpenXmlNamespaces.PresentationML);
+            if (ownColorScheme && clrMap != null)
+            {
+                writer.WriteStartElement("a", "overrideClrMapping", OpenXmlNamespaces.DrawingML);
+                foreach (var name in new[] { "bg1", "tx1", "bg2", "tx2", "accent1", "accent2", "accent3", "accent4", "accent5", "accent6", "hlink", "folHlink" })
+                {
+                    string identity = name == "bg1" ? "lt1" : name == "tx1" ? "dk1" : name == "bg2" ? "lt2" : name == "tx2" ? "dk2" : name;
+                    writer.WriteAttributeString(name, clrMap.HasAttribute(name) ? clrMap.GetAttribute(name) : identity);
+                }
+                writer.WriteEndElement();
+            }
+            else
+            {
+                writer.WriteElementString("a", "masterClrMapping", OpenXmlNamespaces.DrawingML, "");
+            }
+            writer.WriteEndElement();
         }
 
         public static string getRGBColorFromOfficeArtCOLORREF(uint value, RegularContainer slide, b2xtranslator.OfficeDrawing.ShapeOptions so)

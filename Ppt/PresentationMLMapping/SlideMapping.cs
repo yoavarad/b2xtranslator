@@ -150,7 +150,10 @@ namespace b2xtranslator.PresentationMLMapping
             this._writer.WriteEndElement(); //spTree
             this._writer.WriteEndElement(); //cSld
 
-            // TODO: Write clrMapOvr
+            var slideClrMap = slide.FirstChildWithType<ColorMappingAtom>();
+            Utils.WriteClrMapOvr(this._writer,
+                Utils.HasOwnColorScheme(slideAtom.Flags) && slide.FirstChildWithType<ColorSchemeAtom>() != null,
+                slideClrMap != null ? slideClrMap.XmlDocumentElement as System.Xml.XmlElement : null);
 
             if (slide.FirstChildWithType<SlideShowSlideInfoAtom>() != null)
             {
