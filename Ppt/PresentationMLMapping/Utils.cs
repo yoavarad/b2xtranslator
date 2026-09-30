@@ -65,6 +65,27 @@ namespace b2xtranslator.PresentationMLMapping
             return (int)Math.Round((percent - 50) * OoxmlPercentPerPercent, MidpointRounding.AwayFromZero);
         }
 
+        /// <summary>
+        /// Presets whose single legacy adjust value (0..21600 of the shape extent) maps linearly onto the
+        /// DrawingML "adj" guide (1/100000 of the shape extent, see LegacyAdjustRange).
+        /// </summary>
+        private static readonly System.Collections.Generic.HashSet<string> LinearSingleAdjustPresets =
+            new System.Collections.Generic.HashSet<string>
+            {
+                "roundRect", "triangle", "octagon", "cube", "can", "donut", "plaque", "bevel", "parallelogram"
+            };
+
+        /// <summary>
+        /// Converts the legacy adjust value of a preset in LinearSingleAdjustPresets into the
+        /// DrawingML "adj" value. Returns null when the preset has no linear mapping.
+        /// </summary>
+        public static int? LegacyLinearAdjustToOoxml(string prst, int legacyValue)
+        {
+            if (!LinearSingleAdjustPresets.Contains(prst)) return null;
+            decimal v = Math.Round((decimal)legacyValue * 100000 / LegacyAdjustRange, MidpointRounding.AwayFromZero);
+            return (int)Math.Max(0, Math.Min(100000, v)); //clamp corrupt input; legacy adj is relative to width/height, OOXML to min(w,h): approximation
+        }
+
         public static int MasterCoordToEMU(int mc)
         {
             return (int)(mc * MC_PER_EMU);

@@ -3538,12 +3538,16 @@ namespace b2xtranslator.PresentationMLMapping
 
                     this._writer.WriteStartElement("a", "prstGeom", OpenXmlNamespaces.DrawingML);
                     this._writer.WriteAttributeString("prst", prst);
-                    if (prst == "roundRect" & this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.adjustValue)) //TODO: implement for all shapes
+                    int? linearAdj = this.so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.adjustValue)
+                        ? Utils.LegacyLinearAdjustToOoxml(prst, (int)this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op)
+                        : null;
+                    if (linearAdj.HasValue)
                     {
+                        //legacy adjust is 0..21600 of the shape extent; DrawingML adj is 1/100000 (100000/21600 = 4.63)
                         this._writer.WriteStartElement("a", "avLst", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteStartElement("a", "gd", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteAttributeString("name", "adj");
-                        this._writer.WriteAttributeString("fmla", "val " + Math.Floor(this.so.OptionsByID[ShapeOptions.PropertyId.adjustValue].op * 4.63).ToString()); //TODO: find out where this 4.63 comes from (value found by analysing behaviour of Powerpoint 2003)
+                        this._writer.WriteAttributeString("fmla", "val " + linearAdj.Value.ToString());
                         this._writer.WriteEndElement();
                         this._writer.WriteEndElement();
                     }
@@ -3623,19 +3627,19 @@ namespace b2xtranslator.PresentationMLMapping
         {
             _writer.WriteStartElement("a", "xfrm", OpenXmlNamespaces.DrawingML);
 
-            // TODO: Coordinate conversion?
+            // rect is already in EMU (only caller passes an empty group rect), so no conversion is needed
             _writer.WriteStartElement("a", "off", OpenXmlNamespaces.DrawingML);
             _writer.WriteAttributeString("x", rect.X.ToString());
             _writer.WriteAttributeString("y", rect.Y.ToString());
             _writer.WriteEndElement();
 
-            // TODO: Coordinate conversion?
+            // rect is already in EMU, no conversion needed
             _writer.WriteStartElement("a", "ext", OpenXmlNamespaces.DrawingML);
             _writer.WriteAttributeString("cx", rect.Width.ToString());
             _writer.WriteAttributeString("cy", rect.Height.ToString());
             _writer.WriteEndElement();
 
-            // TODO: Where do we get this from?
+            // child coordinate space is kept identical to the group extent (chOff = 0, chExt = ext), so children need no rescaling
             _writer.WriteStartElement("a", "chOff", OpenXmlNamespaces.DrawingML);
             _writer.WriteAttributeString("x", "0");
             _writer.WriteAttributeString("y", "0");

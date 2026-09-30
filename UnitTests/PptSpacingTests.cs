@@ -41,5 +41,27 @@ namespace UnitTests
         {
             Assert.AreEqual(expected, Utils.LegacyCalloutAdjustToOoxml(legacy));
         }
+
+        [TestCase("roundRect", 5400, 25000)]
+        [TestCase("triangle", 10800, 50000)]
+        [TestCase("octagon", 6326, 29287)]
+        [TestCase("cube", 5400, 25000)]
+        [TestCase("can", 5400, 25000)]
+        [TestCase("donut", 5400, 25000)]
+        [TestCase("plaque", 3600, 16667)]
+        [TestCase("bevel", 2700, 12500)]
+        [TestCase("parallelogram", 5400, 25000)]
+        public void LegacyLinearAdjustToOoxml_MapsSupportedPresets(string prst, int legacy, int expected)
+        {
+            Assert.AreEqual(expected, Utils.LegacyLinearAdjustToOoxml(prst, legacy));
+        }
+
+        [TestCase("rightArrow")]
+        [TestCase("rect")]
+        [TestCase("wedgeRectCallout")]
+        public void LegacyLinearAdjustToOoxml_ReturnsNullForUnsupportedPresets(string prst)
+        {
+            Assert.IsNull(Utils.LegacyLinearAdjustToOoxml(prst, 5400));
+        }
     }
 }
