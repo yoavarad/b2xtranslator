@@ -93,7 +93,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The total number of bytes read into the buffer. 
         /// This might be less than the number of bytes requested if that number 
         /// of bytes are not currently available, or zero if the end of the stream is reached.</returns>
-        [Obsolete("Warning. Signature used to be Read(byte[] array, int count, int position).\nChange calls to Read(array, count, position, 0)!")]
+        // Note: signature used to be Read(byte[] array, int count, int position); use Read(array, offset, count, position) for positioned reads.
         public override int Read(byte[] array, int offset, int count)
         {
             return Read(array, offset, count, this._position);

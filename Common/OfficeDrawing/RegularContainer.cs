@@ -13,7 +13,7 @@ namespace b2xtranslator.OfficeDrawing
     /// </summary>
     public class RegularContainer : Record
     {
-        private const bool WRITE_DEBUG_DUMPS = false;
+        private static readonly bool WRITE_DEBUG_DUMPS = false;
         public List<Record> Children = new List<Record>();
 
         public RegularContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)

@@ -11,4 +11,7 @@
     <Authors>Evolution Recruitment Solutions and DIaLOGIKa</Authors>
     <Description>Convert binary legacy Microsoft Office formats to OpenXML</Description>
   </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="UnitTests" />
+  </ItemGroup>
 </Project>

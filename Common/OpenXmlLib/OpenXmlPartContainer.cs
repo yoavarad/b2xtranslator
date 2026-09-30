@@ -226,12 +226,12 @@ namespace b2xtranslator.OpenXmlLib
                         else
                         {
 
-                            writer.WriteAttributeString("Target", Uri.EscapeUriString(rel.Target.ToString()));
+                            writer.WriteAttributeString("Target", UriEscaping.EscapeUriString(rel.Target.ToString()));
                         }
                     }
                     else
                     {
-                        writer.WriteAttributeString("Target", Uri.EscapeUriString(rel.Target));
+                        writer.WriteAttributeString("Target", UriEscaping.EscapeUriString(rel.Target));
                     }
 
                     writer.WriteAttributeString("TargetMode", "External");
