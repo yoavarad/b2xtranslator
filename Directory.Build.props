@@ -1,6 +1,11 @@
 <Project>
   <PropertyGroup>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <!-- CI (GitHub Actions sets CI and GITHUB_ACTIONS): normalize source paths for reproducible builds. -->
+  <PropertyGroup Condition="'$(CI)' == 'true' Or '$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
   <!--
     Pass -p:CiWarningsAsErrors=true to fail the build on compiler warnings.
