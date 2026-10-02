@@ -30,3 +30,6 @@ perf/corpus/large/
 perf/corpus/small/*.docx
 perf/corpus/small/*.xlsx
 perf/corpus/small/*.pptx
+
+# BenchmarkDotNet output (Benchmarks/ project; baseline lives in docs/perf/baseline.md)
+BenchmarkDotNet.Artifacts/
