@@ -61,6 +61,9 @@ namespace UnitTests
                     }
                     Assert.That(slides.Exists(x => x.Contains("Vertical Title")));
                     Assert.That(slides.Exists(x => x.Contains("Normal Title")));
+                    var vertical = slides.Single(x => x.Contains("Vertical Title"));
+                    Assert.That(System.Text.RegularExpressions.Regex.Matches(vertical, "orient=\"vert\"").Count, Is.EqualTo(2));
+                    Assert.That(slides.Single(x => x.Contains("Normal Title")), Does.Not.Contain("orient="));
 
                     var layoutTypes = new List<string>();
                     foreach (var e in zip.Entries)
