@@ -153,7 +153,9 @@ namespace b2xtranslator.PptFileFormat
                 // Note: These appear in Mask as well -- there they are true
                 // when the flag differs from the Master style.
                 // The actual value for the differing flags is stored here.
-                // (TODO: This is still a guess. Verify.)
+                // Verified against [MS-PPT] PFMasks (bits A-Z match ParagraphMask) and TextPFException
+                // (field order/sizes): bulletFlags exists iff any of hasBullet/bulletHasFont/
+                // bulletHasColor/bulletHasSize is set, and holds the actual values.
                 if (this.BulletFlagsFieldPresent)
                     this.BulletFlags = reader.ReadUInt16();
 

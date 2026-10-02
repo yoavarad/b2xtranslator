@@ -368,7 +368,7 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 this._writer.WriteStartElement("a", "p", OpenXmlNamespaces.DrawingML);
                 this._writer.WriteStartElement("a", "endParaRPr", OpenXmlNamespaces.DrawingML);
-                // TODO...
+                // Empty paragraph: no text, so no run properties to emit; endParaRPr is intentionally empty.
                 this._writer.WriteEndElement();
                 this._writer.WriteEndElement();
             }
@@ -687,9 +687,12 @@ namespace b2xtranslator.PresentationMLMapping
                                     this._writer.WriteAttributeString("val", (defaultStyle.PRuns[tp.indentLevel].BulletSize * 1000).ToString());
                                     this._writer.WriteEndElement(); //buSzPct
                                 }
-                                else
+                                else if (defaultStyle.PRuns[tp.indentLevel].BulletSize < 0)
                                 {
-                                    //TODO
+                                    // [MS-PPT] BulletSize: -4000..-1 = absolute size in points; a:buSzPts is in 1/100 pt.
+                                    this._writer.WriteStartElement("a", "buSzPts", OpenXmlNamespaces.DrawingML);
+                                    this._writer.WriteAttributeString("val", (-defaultStyle.PRuns[tp.indentLevel].BulletSize * 100).ToString());
+                                    this._writer.WriteEndElement(); //buSzPts
                                 }
                             }
                             if (defaultStyle.PRuns[tp.indentLevel].BulletFontPresent)
@@ -981,9 +984,12 @@ namespace b2xtranslator.PresentationMLMapping
                                 this._writer.WriteAttributeString("val", (p.BulletSize * 1000).ToString());
                                 this._writer.WriteEndElement(); //buSzPct
                             }
-                            else
+                            else if (p.BulletSize < 0)
                             {
-                                //TODO
+                                // [MS-PPT] BulletSize: -4000..-1 = absolute size in points; a:buSzPts is in 1/100 pt.
+                                this._writer.WriteStartElement("a", "buSzPts", OpenXmlNamespaces.DrawingML);
+                                this._writer.WriteAttributeString("val", (-p.BulletSize * 100).ToString());
+                                this._writer.WriteEndElement(); //buSzPts
                             }
                         }
                         else if (p.BulletFlagsFieldPresent && (p.BulletFlags & 0x1 << 3) > 0)
