@@ -372,6 +372,11 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteAttributeString("type", typeValue);
                     }
 
+                    if (placeholder.PlacementId == PlaceholderEnum.VerticalTextTitle || placeholder.PlacementId == PlaceholderEnum.VerticalTextBody)
+                    {
+                        this._writer.WriteAttributeString("orient", "vert");
+                    }
+
                     switch (placeholder.PlaceholderSize)
                     {
                         case 1:
@@ -2890,6 +2895,11 @@ namespace b2xtranslator.PresentationMLMapping
                                         {
                                             string typeValue = Utils.PlaceholderIdToXMLValue(placeholder.PlacementId);
                                             this._writer.WriteAttributeString("type", typeValue);
+                                        }
+
+                                        if (placeholder.PlacementId == PlaceholderEnum.VerticalTextTitle || placeholder.PlacementId == PlaceholderEnum.VerticalTextBody)
+                                        {
+                                            this._writer.WriteAttributeString("orient", "vert");
                                         }
 
                                         switch (placeholder.PlaceholderSize)
