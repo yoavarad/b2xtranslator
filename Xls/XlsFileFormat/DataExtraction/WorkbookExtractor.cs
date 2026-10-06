@@ -126,7 +126,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                             this.oldOffset = this.StreamReader.BaseStream.Position;
                             // create a list of bytearrays to store the following continue records 
                             // List<byte[]> byteArrayList = new List<byte[]>();
-                            var buffer = new byte[length];
+                            byte[] buffer;
                             var vsrList = new LinkedList<VirtualStreamReader>();
                             buffer = this.StreamReader.ReadBytes((int)length);
                             // byteArrayList.Add(buffer);
@@ -140,8 +140,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                             while (bh2.id == RecordType.Continue)
                             {
                                 bh2.length = (ushort)(this.StreamReader.ReadUInt16());
-
-                                buffer = new byte[bh2.length];
 
                                 // create a buffer with the bytes from the records and put that array into the 
                                 // list 
@@ -260,8 +258,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                     default:
                         {
                             // this else statement is used to read BiffRecords which aren't implemented 
-                            var buffer = new byte[bh.length];
-                            buffer = this.StreamReader.ReadBytes(bh.length);
+                            this.StreamReader.ReadBytes(bh.length);
                             TraceLogger.Debug("Unknown record found. ID {0}", bh.id);
                         }
                         break;

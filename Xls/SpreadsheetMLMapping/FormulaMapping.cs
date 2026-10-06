@@ -1,7 +1,8 @@
-
+﻿
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 using b2xtranslator.Spreadsheet.XlsFileFormat;
 using b2xtranslator.Spreadsheet.XlsFileFormat.Ptg;
 using b2xtranslator.Tools;
@@ -332,7 +333,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                             || value == FtabValues.TODAY
                             )
                         {
-                            buffer += "()";
+                            buffer = AppendArgs(buffer, resultStack, 0);
                         }
                         // One param 
                         else if (value == FtabValues.ISNA || value == FtabValues.ISERROR ||
@@ -373,7 +374,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                             || value == FtabValues.DATESTRING || value == FtabValues.PHONETIC
                             )
                         {
-                            buffer += "(" + resultStack.Pop() + ")";
+                            buffer = AppendArgs(buffer, resultStack, 1);
                         }
                         // two params 
                         else if (value == FtabValues.ROUND || value == FtabValues.REPT ||
@@ -399,11 +400,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                             )
                         {
-                            buffer += "(";
-                            string buffer2 = resultStack.Pop();
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-
-                            buffer += buffer2 + ")";
+                            buffer = AppendArgs(buffer, resultStack, 2);
                         }
                         // Three params 
                         else if (value == FtabValues.MID || value == FtabValues.DCOUNT ||
@@ -425,11 +422,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
                                 || value == FtabValues.TDIST || value == FtabValues.FORECAST
                             )
                         {
-                            buffer += "(";
-                            string buffer2 = resultStack.Pop();
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-                            buffer += buffer2 + ")";
+                            buffer = AppendArgs(buffer, resultStack, 3);
                         }
                         // four params 
                         else if (value == FtabValues.REPLACE || value == FtabValues.SYD
@@ -440,12 +433,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
                             )
                         {
-                            buffer += "(";
-                            string buffer2 = resultStack.Pop();
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-                            buffer2 = resultStack.Pop() + "," + buffer2;
-                            buffer += buffer2 + ")";
+                            buffer = AppendArgs(buffer, resultStack, 4);
                         }
                         if ((int)value != 0xff)
                         {
@@ -512,24 +500,12 @@ namespace b2xtranslator.SpreadsheetMLMapping
                                 || value == FtabValues.STDEVA || value == FtabValues.VARA
                                 )
                             {
-                                buffer += "(";
-                                string buffer2 = resultStack.Pop();
-                                for (int i = 1; i < ptgfv.cparams; i++)
-                                {
-                                    buffer2 = resultStack.Pop() + "," + buffer2;
-                                }
-                                buffer += buffer2 + ")";
+                                buffer = AppendArgs(buffer, resultStack, Math.Max(1, (int)ptgfv.cparams));
                                 resultStack.Push(buffer);
                             }
                             else if ((int)value == 0xFF)
                             {
-                                buffer = "(";
-                                string buffer2 = resultStack.Pop();
-                                for (int i = 1; i < ptgfv.cparams - 1; i++)
-                                {
-                                    buffer2 = resultStack.Pop() + "," + buffer2;
-                                }
-                                buffer += buffer2 + ")";
+                                buffer = AppendArgs(string.Empty, resultStack, Math.Max(1, ptgfv.cparams - 1));
                                 // take the additional Operator from the Operandstack 
                                 buffer = resultStack.Pop() + buffer;
                                 resultStack.Push(buffer);
@@ -554,6 +530,27 @@ namespace b2xtranslator.SpreadsheetMLMapping
                 resultStack.Push("");
 
             return resultStack.Pop();
+        }
+
+        /// <summary>
+        /// Pops n operands (last popped is first argument) and returns name(arg1,arg2,...).
+        /// </summary>
+        private static string AppendArgs(string name, Stack<string> stack, int n)
+        {
+            var args = new string[n];
+            for (int i = n - 1; i >= 0; i--)
+            {
+                args[i] = stack.Pop();
+            }
+            var sb = new StringBuilder(name);
+            sb.Append('(');
+            for (int i = 0; i < n; i++)
+            {
+                if (i > 0) sb.Append(',');
+                sb.Append(args[i]);
+            }
+            sb.Append(')');
+            return sb.ToString();
         }
 
         /// <summary>
