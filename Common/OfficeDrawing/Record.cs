@@ -50,15 +50,9 @@ namespace b2xtranslator.OfficeDrawing
             {
                 if (this._RawData == null && this._Body.Array != null)
                 {
-                    if (this._Body.Offset == 0 && this._Body.Count == this._Body.Array.Length)
-                    {
-                        this._RawData = this._Body.Array;
-                    }
-                    else
-                    {
-                        this._RawData = new byte[this._Body.Count];
-                        Buffer.BlockCopy(this._Body.Array, this._Body.Offset, this._RawData, 0, this._Body.Count);
-                    }
+                    // Windowed body: copy out so RawData never aliases the parent's buffer.
+                    this._RawData = new byte[this._Body.Count];
+                    Buffer.BlockCopy(this._Body.Array, this._Body.Offset, this._RawData, 0, this._Body.Count);
                 }
                 return this._RawData;
             }
