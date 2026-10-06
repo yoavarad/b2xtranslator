@@ -306,7 +306,17 @@ namespace b2xtranslator.StructuredStorage.Reader
         public int Skip(uint count)
         {
             // Equivalent to reading and discarding count bytes: advance position by what is available.
-            long available = Math.Max(0, this._length - this._position);
+            if (count < 1 || this._position < 0 || this._position >= this._length)
+            {
+                return 0;
+            }
+
+            if (this._sectors == null)
+            {
+                throw new ChainSizeMismatchException(this._name);
+            }
+
+            long available = this._length - this._position;
             int skipped = (int)Math.Min(count, available);
             this._position += skipped;
             return skipped;
