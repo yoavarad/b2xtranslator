@@ -159,6 +159,21 @@ namespace b2xtranslator.StructuredStorage.Reader
         }
 
 
+        private void Read(Span<byte> span)
+        {
+            int result = this._stream.Read(span);
+            if (result != span.Length)
+                throw new ReadBytesAmountMismatchException();
+        }
+
+        private void ReadPosition(Span<byte> span, long position)
+        {
+            if (position < 0)
+                throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
+
+            this._stream.Seek(position, 0);
+            this.Read(span);
+        }
         /// <summary>
         /// Reads a UInt16 at the current position of the file stream.
         /// May only be used after InitBitConverter() is called.
@@ -170,7 +185,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[2];
+            Span<byte> array = stackalloc byte[2];
             this.Read(array);
             return this._bitConverter.ToUInt16(array);
         }
@@ -187,7 +202,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[4];
+            Span<byte> array = stackalloc byte[4];
             this.Read(array);
             return this._bitConverter.ToUInt32(array);
         }
@@ -204,7 +219,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[8];
+            Span<byte> array = stackalloc byte[8];
             this.Read(array);
             return this._bitConverter.ToUInt64(array);
         }
@@ -224,7 +239,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[2];
+            Span<byte> array = stackalloc byte[2];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt16(array);
         }
@@ -244,7 +259,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[4];
+            Span<byte> array = stackalloc byte[4];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt32(array);
         }
@@ -264,7 +279,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[8];
+            Span<byte> array = stackalloc byte[8];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt64(array);
         }
