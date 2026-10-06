@@ -56,23 +56,23 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             if (this.isvirtpath)
             {
-                this.virtpathstring = "";
+                var virtpathBuilder = new System.Text.StringBuilder();
                 byte firstbyte = this.Reader.ReadByte();
                 int firstbit = firstbyte & 0x1;
                 for (int i = 0; i < this.cch; i++)
                 {
                     if (firstbit == 0)
                     {
-                        this.virtpathstring += (char)this.Reader.ReadByte();
+                        virtpathBuilder.Append((char)this.Reader.ReadByte());
                         // read 1 byte per char 
                     }
                     else
                     {
                         // read two byte per char 
-                        this.virtpathstring += System.BitConverter.ToChar(this.Reader.ReadBytes(2), 0);
+                        virtpathBuilder.Append(System.BitConverter.ToChar(this.Reader.ReadBytes(2), 0));
                     }
                 }
-                this.virtpathstring = ExcelHelperClass.parseVirtualPath(this.virtpathstring);
+                this.virtpathstring = ExcelHelperClass.parseVirtualPath(virtpathBuilder.ToString());
             }
 
             if (this.virtpathstring != null)
