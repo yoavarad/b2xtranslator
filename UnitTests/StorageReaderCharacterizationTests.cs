@@ -1,4 +1,4 @@
-﻿using b2xtranslator.StructuredStorage.Reader;
+using b2xtranslator.StructuredStorage.Reader;
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -49,7 +49,17 @@ namespace UnitTests
             Assert.That(Digest(file, 100000), Is.EqualTo(a));
             Assert.That(a, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void Skip_OnNonEmptyStreamWithoutSectorChain_Throws()
+        {
+            using var reader = new StructuredStorageReader(Path.Combine(RepoRoot(), "UnitTests", "files", "simple.doc"));
+            var s = reader.GetStream("WordDocument");
+            typeof(VirtualStream).GetField("_sectors", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.SetValue(s, null);
+#pragma warning disable CS0618
+            Assert.Throws<b2xtranslator.StructuredStorage.Common.ChainSizeMismatchException>(() => s.Skip(10));
+            Assert.That(s.Skip(0), Is.EqualTo(0));
+#pragma warning restore CS0618
+        }
     }
 }
-
-
