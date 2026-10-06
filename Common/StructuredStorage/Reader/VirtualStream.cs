@@ -140,6 +140,10 @@ namespace b2xtranslator.StructuredStorage.Reader
 
             this._position = position;
 
+            if (this._fat is Fat)
+            {
+                return this.ReadCoalesced(array, offset, count, position);
+            }
             int sectorInChain = (int)(position / this._fat.SectorSize);
             int bytesRead = 0;
             int totalBytesRead = 0;
@@ -196,6 +200,49 @@ namespace b2xtranslator.StructuredStorage.Reader
             return totalBytesRead;
         }
 
+        /// <summary>
+        /// Reads from a stream in the regular FAT. Physically contiguous sectors are read in one call.
+        /// Behaves like the per-sector loop: stops early if the underlying read returns fewer bytes than requested.
+        /// </summary>
+        private int ReadCoalesced(byte[] array, int offset, int count, long position)
+        {
+            int sectorSize = this._fat.SectorSize;
+            int sectorInChain = (int)(position / sectorSize);
+            int positionInSector = (int)(position % sectorSize);
+            int totalBytesRead = 0;
+            int positionInArray = offset;
+
+            while (totalBytesRead < count)
+            {
+                uint first = this._sectors[sectorInChain];
+                int runSectors = 1;
+                long runCapacity = sectorSize - positionInSector;
+                while (runCapacity < count - totalBytesRead
+                    && sectorInChain + runSectors < this._sectors.Count
+                    && this._sectors[sectorInChain + runSectors] == first + (uint)runSectors)
+                {
+                    runSectors++;
+                    runCapacity += sectorSize;
+                }
+
+                int bytesToRead = (int)Math.Min(runCapacity, count - totalBytesRead);
+                this._fat.SeekToPositionInSector(first, positionInSector);
+                int bytesRead = this._fat.UncheckedRead(array, positionInArray, bytesToRead);
+
+                this._position += bytesRead;
+                positionInArray += bytesRead;
+                totalBytesRead += bytesRead;
+                if (bytesRead != bytesToRead)
+                {
+                    return totalBytesRead;
+                }
+
+                sectorInChain += runSectors;
+                positionInSector = 0;
+            }
+
+            return totalBytesRead;
+        }
         [Obsolete("Use IStreamReader.ReadUInt16() instead.")]
         public ushort ReadUInt16()
         {
@@ -258,9 +305,11 @@ namespace b2xtranslator.StructuredStorage.Reader
         [Obsolete("Use Seek(count, SeekOrigin.Current) instead.")]
         public int Skip(uint count)
         {
-            // TODO: Someone more familiar with StructuredStorage.Reader
-            // than I am is free to do a more efficient implementation of this. -- flgr
-            return this.Read(new byte[count]);
+            // Equivalent to reading and discarding count bytes: advance position by what is available.
+            long available = Math.Max(0, this._length - this._position);
+            int skipped = (int)Math.Min(count, available);
+            this._position += skipped;
+            return skipped;
         }
 
 
