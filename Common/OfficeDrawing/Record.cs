@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using System.Collections;
 using System.Reflection;
+using System.Linq.Expressions;
 using b2xtranslator.CommonTranslatorLib;
 using b2xtranslator.Tools;
 
@@ -203,6 +204,29 @@ namespace b2xtranslator.OfficeDrawing
 
         private static Dictionary<ushort, Type> TypeToRecordClassMapping = new Dictionary<ushort, Type>();
 
+        private delegate Record RecordFactory(BinaryReader reader, uint size, uint typeCode, uint version, uint instance);
+
+        /// <summary>
+        /// Constructor delegates per TypeCode, built once at registration (null if the class has no matching constructor).
+        /// </summary>
+        private static Dictionary<ushort, RecordFactory> TypeToRecordFactoryMapping = new Dictionary<ushort, RecordFactory>();
+
+        private static RecordFactory CreateFactory(Type cls)
+        {
+            var constructor = cls.GetConstructor(new Type[] {
+                typeof(BinaryReader), typeof(uint), typeof(uint), typeof(uint), typeof(uint) });
+
+            if (constructor == null)
+                return null;
+
+            var parameters = new[] {
+                Expression.Parameter(typeof(BinaryReader)), Expression.Parameter(typeof(uint)),
+                Expression.Parameter(typeof(uint)), Expression.Parameter(typeof(uint)), Expression.Parameter(typeof(uint)) };
+
+            return Expression.Lambda<RecordFactory>(
+                Expression.Convert(Expression.New(constructor, parameters), typeof(Record)), parameters).Compile();
+        }
+
         static Record()
         {
             UpdateTypeToRecordClassMapping(Assembly.GetExecutingAssembly(), typeof(Record).Namespace);
@@ -241,6 +265,7 @@ namespace b2xtranslator.OfficeDrawing
                                     typeCode, t, TypeToRecordClassMapping[typeCode]));
                             }
                             TypeToRecordClassMapping.Add(typeCode, t);
+                            TypeToRecordFactoryMapping.Add(typeCode, CreateFactory(t));
                         }
                     }
                 }
@@ -270,10 +295,9 @@ namespace b2xtranslator.OfficeDrawing
 
                 if (TypeToRecordClassMapping.TryGetValue(typeCode, out cls))
                 {
-                    var constructor = cls.GetConstructor(new Type[] {
-                    typeof(BinaryReader), typeof(uint), typeof(uint), typeof(uint), typeof(uint) });
+                    var factory = TypeToRecordFactoryMapping[typeCode];
 
-                    if (constructor == null)
+                    if (factory == null)
                     {
                         throw new Exception(string.Format(
                             "Internal error: Could not find a matching constructor for class {0}",
@@ -284,16 +308,14 @@ namespace b2xtranslator.OfficeDrawing
 
                     try
                     {
-                        result = (Record)constructor.Invoke(new object[] {
-                        reader, size, typeCode, version, instance
-                    });
+                        result = factory(reader, size, typeCode, version, instance);
 
                         //TraceLogger.DebugInternal("Here it is: {0}", result);
                     }
-                    catch (TargetInvocationException e)
+                    catch (Exception e)
                     {
-                        TraceLogger.DebugInternal(e.InnerException.ToString());
-                        throw e.InnerException;
+                        TraceLogger.DebugInternal(e.ToString());
+                        throw;
                     }
                 }
                 else
