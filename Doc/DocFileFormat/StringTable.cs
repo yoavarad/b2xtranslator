@@ -78,6 +78,11 @@ namespace b2xtranslator.DocFileFormat
             //read cbExtra
             this.cbExtra = reader.ReadUInt16();
 
+            //look up the constructor once, not per element
+            var constructor = dataType == typeof(string) || this.cData <= 0
+                ? null
+                : dataType.GetConstructor(new Type[] { typeof(VirtualStreamReader), typeof(int) });
+
             //read the strings and extra datas
             for (int i = 0; i < this.cData; i++)
             {
@@ -104,7 +109,6 @@ namespace b2xtranslator.DocFileFormat
                 else
                 {
                     //It's a modified string table that contains custom data
-                    var constructor = dataType.GetConstructor(new Type[] { typeof(VirtualStreamReader), typeof(int) });
                     var data = (ByteStructure)constructor.Invoke(new object[] { reader, cbData });
                     this.Data.Add(data);
                 }
