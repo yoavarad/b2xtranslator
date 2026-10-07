@@ -21,6 +21,9 @@ namespace b2xtranslator.OpenXmlLib
         /// <summary>Hold the XML writer to populate the current ZIP entry.</summary>
         XmlWriter xmlEntryWriter;
 
+        /// <summary>Holds the XML of the current ZIP entry until the entry is closed.</summary>
+        MemoryStream xmlEntryBuffer;
+
         /// <summary>Hold an optional file output stream, only populated if opened on a file.</summary>
         FileStream fileOutputStream;
 
@@ -34,23 +37,40 @@ namespace b2xtranslator.OpenXmlLib
         Stream entryStream;
 
 
+        /// <summary>Compression level for every ZIP entry.</summary>
+        readonly CompressionLevel compressionLevel;
+
+        /// <summary>Settings for the XML written through this writer (rels, [Content_Types].xml).</summary>
+        readonly XmlWriterSettings entryWriterSettings;
+
         public OpenXmlWriter()
+            : this(CompressionLevel.Optimal, true)
         {
+        }
+
+        public OpenXmlWriter(CompressionLevel compressionLevel, bool indent)
+        {
+            this.compressionLevel = compressionLevel;
+            this.entryWriterSettings = xmlWriterSettings.Clone();
+            this.entryWriterSettings.Indent = indent;
         }
 
         public void Dispose() => this.Close();
 
+        // ZipArchiveMode.Create streams each entry straight to the output; Update mode would
+        // buffer every entry's uncompressed bytes in memory until the archive is disposed.
         public void Open(string fileName)
         {
             this.Close();
-            this.fileOutputStream = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            this.outputArchive = new ZipArchive(this.fileOutputStream, ZipArchiveMode.Update);
+            this.fileOutputStream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
+            this.outputArchive = new ZipArchive(this.fileOutputStream, ZipArchiveMode.Create);
         }
 
+        /// <summary>Writes a new package from <paramref name="output"/>'s current position; pass an empty stream.</summary>
         public void Open(Stream output)
         {
             this.Close();
-            this.outputArchive = new ZipArchive(output, ZipArchiveMode.Update);
+            this.outputArchive = new ZipArchive(output, ZipArchiveMode.Create);
         }
 
         public void Close()
@@ -60,6 +80,8 @@ namespace b2xtranslator.OpenXmlLib
             {
                 this.xmlEntryWriter.Close();
                 this.xmlEntryWriter = null;
+                this.xmlEntryBuffer.WriteTo(this.entryStream);
+                this.xmlEntryBuffer = null;
             }
 
             if (this.entryStream != null)
@@ -90,6 +112,8 @@ namespace b2xtranslator.OpenXmlLib
             {
                 this.xmlEntryWriter.Close();
                 this.xmlEntryWriter = null;
+                this.xmlEntryBuffer.WriteTo(this.entryStream);
+                this.xmlEntryBuffer = null;
             }
 
             if (this.entryStream != null)
@@ -99,27 +123,29 @@ namespace b2xtranslator.OpenXmlLib
             }
 
             // the path separator in the package should be a forward slash
-            this.currentEntry = this.outputArchive.CreateEntry(fullName.Replace('\\', '/'));
+            // Optimal goes through the parameterless overload so default output keeps today's entry headers.
+            string entryName = fullName.Replace('\\', '/');
+            this.currentEntry = this.compressionLevel == CompressionLevel.Optimal
+                ? this.outputArchive.CreateEntry(entryName)
+                : this.outputArchive.CreateEntry(entryName, this.compressionLevel);
 
             // Create the stream for the current entry
             this.entryStream = this.currentEntry.Open();
         }
 
-        /// <summary>Get or create an XML writer for the current ZIP entry.</summary>
+        /// <summary>
+        /// Get or create an XML writer for the current ZIP entry. It writes to <see cref="xmlEntryBuffer"/>
+        /// (copied to the entry when the entry is closed) because XmlWriter.Close flushes its stream, and
+        /// flushing the entry's deflate stream would add sync-flush bytes to the compressed output.
+        /// </summary>
         XmlWriter XmlWriter =>
-            this.xmlEntryWriter ?? (this.xmlEntryWriter = XmlWriter.Create(this.entryStream, xmlWriterSettings));
+            this.xmlEntryWriter ?? (this.xmlEntryWriter = XmlWriter.Create(this.xmlEntryBuffer = new MemoryStream(), this.entryWriterSettings));
 
         public void WriteRawBytes(byte[] buffer, int index, int count) =>
             this.entryStream.Write(buffer, index, count);
 
-        public void Write(Stream stream)
-        {
-            const int blockSize = 4096;
-            var buffer = new byte[blockSize];
-            int bytesRead;
-            while ((bytesRead = stream.Read(buffer, 0, blockSize)) > 0)
-                this.entryStream.Write(buffer, 0, bytesRead);
-        }
+        public void Write(Stream stream) =>
+            stream.CopyTo(this.entryStream);
 
         public void WriteStartElement(string prefix, string localName, string ns) =>
             this.XmlWriter.WriteStartElement(prefix, localName, ns);
