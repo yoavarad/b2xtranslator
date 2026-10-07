@@ -74,7 +74,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write properties
-            if (this._writer != null && (this._rPr.ChildNodes.Count > 0 || this._rPr.Attributes.Count > 0))
+            if (this._writer != null && (this._rPr.ChildNodes.Count > 0 || this._rPr.HasAttributes))
             {
                 this._rPr.WriteTo(this._writer);
             }
@@ -281,13 +281,13 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //apend lang
-            if (lang.Attributes.Count > 0)
+            if (lang.HasAttributes)
             {
                 parent.AppendChild(lang);
             }
 
             //append fonts
-            if (rFonts.Attributes.Count > 0)
+            if (rFonts.HasAttributes)
             {
                 parent.AppendChild(rFonts);
             }

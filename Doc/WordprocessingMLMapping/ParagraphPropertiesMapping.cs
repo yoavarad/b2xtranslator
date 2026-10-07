@@ -414,7 +414,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append frame properties
-            if (this._framePr.Attributes.Count > 0)
+            if (this._framePr.HasAttributes)
             {
                 this._pPr.AppendChild(this._framePr);
             }
@@ -428,11 +428,11 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append indent
-            if (ind.Attributes.Count > 0)
+            if (ind.HasAttributes)
                 this._pPr.AppendChild(ind);
 
             //append spacing
-            if (spacing.Attributes.Count > 0)
+            if (spacing.HasAttributes)
                 this._pPr.AppendChild(spacing);
 
             //append justification
@@ -458,7 +458,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 this._pPr.AppendChild(pBdr);
 
             //write Properties
-            if (this._pPr.ChildNodes.Count > 0 || this._pPr.Attributes.Count > 0)
+            if (this._pPr.ChildNodes.Count > 0 || this._pPr.HasAttributes)
             {
                 this._pPr.WriteTo(this._writer);
             }

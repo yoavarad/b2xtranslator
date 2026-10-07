@@ -256,7 +256,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append floating props
-            if (tblpPr.Attributes.Count > 0)
+            if (tblpPr.HasAttributes)
             {
                 this._tblPr.AppendChild(tblpPr);
             }
@@ -327,7 +327,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             this._tblPr.AppendChild(tblCellMar);
 
             //write Properties
-            if (this._tblPr.ChildNodes.Count > 0 || this._tblPr.Attributes.Count > 0)
+            if (this._tblPr.ChildNodes.Count > 0 || this._tblPr.HasAttributes)
             {
                 this._tblPr.WriteTo(this._writer);
             }

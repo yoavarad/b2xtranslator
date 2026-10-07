@@ -261,7 +261,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write Properties
-            if (this._tcPr.ChildNodes.Count > 0 || this._tcPr.Attributes.Count > 0)
+            if (this._tcPr.ChildNodes.Count > 0 || this._tcPr.HasAttributes)
             {
                 this._tcPr.WriteTo(this._writer);
             }

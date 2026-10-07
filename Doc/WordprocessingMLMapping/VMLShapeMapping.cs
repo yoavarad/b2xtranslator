@@ -604,14 +604,14 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write shadow
-            if (this._shadow.Attributes.Count > 0)
+            if (this._shadow.HasAttributes)
             {
                 appendValueAttribute(this._shadow, null, "on", "t", null);
                 this._shadow.WriteTo(this._writer);
             }
 
             //write 3d style 
-            if (this._3dstyle.Attributes.Count > 0)
+            if (this._3dstyle.HasAttributes)
             {
                 appendValueAttribute(this._3dstyle, "v", "ext", "view", OpenXmlNamespaces.VectorML);
                 appendValueAttribute(this._3dstyle, null, "on", "t", null);
@@ -670,26 +670,26 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write stroke
-            if (this._stroke.Attributes.Count > 0)
+            if (this._stroke.HasAttributes)
             {
                 this._stroke.WriteTo(this._writer);
             }
 
             //write fill
-            if (this._fill.Attributes.Count > 0)
+            if (this._fill.HasAttributes)
             {
                 this._fill.WriteTo(this._writer);
             }
 
             // text path
-            if (this._textpath.Attributes.Count > 0)
+            if (this._textpath.HasAttributes)
             {
                 appendValueAttribute(this._textpath, "", "style", this._textPathStyle.ToString(), "");
                 this._textpath.WriteTo(this._writer);
             }
 
             //write imagedata
-            if (this._imagedata.Attributes.Count > 0)
+            if (this._imagedata.HasAttributes)
             {
                 this._imagedata.WriteTo(this._writer);
             }
