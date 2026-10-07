@@ -84,6 +84,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             var shd = this._nodeFactory.CreateElement("w", "shd", OpenXmlNamespaces.WordprocessingML);
             var rFonts = this._nodeFactory.CreateElement("w", "rFonts", OpenXmlNamespaces.WordprocessingML);
+            var rFontsAttrs = rFonts.Attributes;
             var color = this._nodeFactory.CreateElement("w", "color", OpenXmlNamespaces.WordprocessingML);
             var colorVal = this._nodeFactory.CreateAttribute("w", "val", OpenXmlNamespaces.WordprocessingML);
             var lang = this._nodeFactory.CreateElement("w", "lang", OpenXmlNamespaces.WordprocessingML);
@@ -232,32 +233,32 @@ namespace b2xtranslator.WordprocessingMLMapping
                         var ascii = this._nodeFactory.CreateAttribute("w", "ascii", OpenXmlNamespaces.WordprocessingML);
                         var ffn = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         ascii.Value = ffn.xszFtn;
-                        rFonts.Attributes.Append(ascii);
+                        rFontsAttrs.Append(ascii);
                         break;
                     case 0x4A50:
                         var eastAsia = this._nodeFactory.CreateAttribute("w", "eastAsia", OpenXmlNamespaces.WordprocessingML);
                         var ffnAsia = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         eastAsia.Value = ffnAsia.xszFtn;
-                        rFonts.Attributes.Append(eastAsia);
+                        rFontsAttrs.Append(eastAsia);
                         break;
                     case 0x4A51:
                         var ansi = this._nodeFactory.CreateAttribute("w", "hAnsi", OpenXmlNamespaces.WordprocessingML);
                         var ffnAnsi = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         ansi.Value = ffnAnsi.xszFtn;
-                        rFonts.Attributes.Append(ansi);
+                        rFontsAttrs.Append(ansi);
                         break;
                     case (int)SinglePropertyModifier.OperationCode.sprmCIdctHint:
                         // it's complex script 
                         var hint = this._nodeFactory.CreateAttribute("w", "hint", OpenXmlNamespaces.WordprocessingML);
                         hint.Value = "cs";
-                        rFonts.Attributes.Append(hint);
+                        rFontsAttrs.Append(hint);
                         break;
                     case (int)SinglePropertyModifier.OperationCode.sprmCFtcBi:
                         // complex script font
                         var cs = this._nodeFactory.CreateAttribute("w", "cs", OpenXmlNamespaces.WordprocessingML);
                         var ffnCs = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         cs.Value = ffnCs.xszFtn;
-                        rFonts.Attributes.Append(cs);
+                        rFontsAttrs.Append(cs);
                         break;
 
                     //Underlining
@@ -287,7 +288,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append fonts
-            if (rFonts.Attributes.Count > 0)
+            if (rFontsAttrs.Count > 0)
             {
                 parent.AppendChild(rFonts);
             }
