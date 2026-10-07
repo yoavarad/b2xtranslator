@@ -2,8 +2,9 @@
 """Deterministically generate the large-tier perf corpus (stdlib only).
 
 Each large file is a small-tier fixture re-serialised as an OLE compound file
-with one extra stream "PerfPadding" of seeded pseudo-random bytes (~10 MB).
-Output is byte-identical on every OS.
+whose real content is scaled to ~10 MB: .doc gets 100k extra paragraphs,
+.xls 65k rows x 8 cells, .ppt 9k copies of the slide. Output is
+byte-identical on every OS.
 
     python generate.py            # write large/*, verify against manifest.json
     python generate.py --update   # regenerate and rewrite hashes in manifest.json
@@ -17,7 +18,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 SS, MS = 512, 64
 END, FREE, FATSECT, DIFSECT, NOSTREAM = 0xFFFFFFFE, 0xFFFFFFFF, 0xFFFFFFFD, 0xFFFFFFFC, 0xFFFFFFFF
-TARGET = 10 * 1024 * 1024
+DOC_PARAS = 100000
+XLS_ROWS, XLS_COLS = 65000, 8
+PPT_SLIDES = 9000
 LARGE = {"large.doc": "simple.doc", "large.xls": "simple.xls", "large.ppt": "simple.ppt"}
 
 
@@ -69,19 +72,6 @@ def read_cfb(data):
 
 def name_key(e):
     return (len(e["name"]), e["name"].upper())
-
-
-def insert(ents, new):
-    """Attach `new` as a leaf of the root's directory tree (ordering per CFB spec)."""
-    ents.append(new)
-    idx = len(ents) - 1
-    cur = ents[0]["child"]
-    while True:
-        side = "left" if name_key(new) < name_key(ents[cur]) else "right"
-        if ents[cur][side] == NOSTREAM:
-            ents[cur][side] = idx
-            return
-        cur = ents[cur][side]
 
 
 def write_cfb(ents):
@@ -159,12 +149,180 @@ def write_cfb(ents):
     return b"".join(out)
 
 
-def padding(nbytes, seed):
-    out, i = bytearray(), 0
-    while len(out) < nbytes:
-        out += hashlib.sha256(("%s:%d" % (seed, i)).encode()).digest()
-        i += 1
-    return bytes(out[:nbytes])
+def stream(ents, name):
+    return next(e for e in ents if e["name"] == name)
+
+
+def fkp_runs(wd, page, papx):
+    """Parse a CHPX/PAPX FKP page into [(start, end, bx_phe, payload)]."""
+    o = page * 512
+    n = wd[o + 511]
+    fc = struct.unpack_from("<%dI" % (n + 1), wd, o)
+    bxs = 13 if papx else 1
+    runs = []
+    for j in range(n):
+        bx = bytes(wd[o + 4 * (n + 1) + bxs * j:o + 4 * (n + 1) + bxs * (j + 1)])
+        pay = b""
+        if bx[0]:
+            at = o + bx[0] * 2
+            cb = wd[at]
+            size = (2 + 2 * wd[at + 1] if cb == 0 else 2 * cb) if papx else 1 + cb
+            pay = bytes(wd[at:at + size])
+        runs.append((fc[j], fc[j + 1], bx[1:], pay))
+    return runs
+
+
+def fkp_pages(runs, papx):
+    """Pack runs (start, end, phe, payload) into 512-byte FKP pages; yields (page, first_fc, last_fc)."""
+    bxs = 13 if papx else 1
+    i = 0
+    while i < len(runs):
+        c, ptr = 0, 511
+        while i + c < len(runs):
+            size = len(runs[i + c][3])
+            if 4 * (c + 2) + bxs * (c + 1) > ptr - size - (size & 1) and c:
+                break
+            ptr -= (size + 1) & ~1
+            c += 1
+        part = runs[i:i + c]
+        page, ptr = bytearray(512), 511
+        struct.pack_into("<%dI" % (c + 1), page, 0, *([r[0] for r in part] + [part[-1][1]]))
+        for j, (_, _, phe, pay) in enumerate(part):
+            if pay:
+                ptr = (ptr - len(pay)) & ~1
+                page[ptr:ptr + len(pay)] = pay
+            page[4 * (c + 1) + bxs * j] = ptr // 2 if pay else 0
+            if papx:
+                page[4 * (c + 1) + bxs * j + 1:4 * (c + 1) + bxs * (j + 1)] = phe
+        page[511] = c
+        yield bytes(page), part[0][0], part[-1][1]
+        i += c
+
+
+def scale_doc(ents):
+    """Insert DOC_PARAS paragraphs after the main text. The text is relocated as one contiguous
+    piece (the mapper assumes contiguous fcs) and the CHPX/PAPX FKPs are rebuilt with one run per paragraph."""
+    w, t = stream(ents, "WordDocument"), stream(ents, "1Table")
+    wd, td = bytearray(w["data"]), bytearray(t["data"])
+    csw = struct.unpack_from("<H", wd, 32)[0]
+    lw = 34 + csw * 2 + 2
+    fb = lw + struct.unpack_from("<H", wd, lw - 2)[0] * 4 + 2
+
+    def fib(i):
+        return struct.unpack_from("<II", wd, fb + 8 * i)
+
+    ccp = struct.unpack_from("<i", wd, lw + 12)[0]
+    text = b"".join(b"Perf paragraph %06d: the quick brown fox jumps over the lazy dog.\r" % i
+                    for i in range(DOC_PARAS))
+    n, para = len(text), len(text) // DOC_PARAS
+    clx_fc, _ = fib(33)
+    sed_fc = fib(6)[0]
+    assert fib(12)[1] == 12 and fib(13)[1] == 12 and td[clx_fc] == 2, "unexpected simple.doc layout"
+    pcd_fc = struct.unpack_from("<I", td, clx_fc + 5 + 8 + 2)[0]
+    total = struct.unpack_from("<I", td, clx_fc + 5 + 4)[0]
+    assert struct.unpack_from("<I", td, sed_fc + 4)[0] == total  # section end CP
+    a0 = (pcd_fc & 0x3FFFFFFF) // 2
+    x0 = a0 + ccp  # fc where the main text ends
+
+    base = -(-len(wd) // 512) * 512
+    wd += b"\0" * (base - len(wd)) + bytes(wd[a0:x0]) + text + bytes(wd[x0:a0 + total])
+    wd += b"\0" * (-len(wd) % 512)
+    new_x0 = base + ccp
+    plcs = {}
+    for idx, papx in ((12, False), (13, True)):
+        plc_fc = fib(idx)[0]
+        pn0 = struct.unpack_from("<I", td, plc_fc + 8)[0]
+        runs = []
+        for s, e, phe, pay in fkp_runs(wd, pn0, papx):
+            assert s >= a0 and e <= a0 + total
+            if e <= x0:
+                runs.append((s - a0 + base, e - a0 + base, phe, pay))
+        runs += [(new_x0 + i * para, new_x0 + (i + 1) * para, b"\0" * 12, b"") for i in range(DOC_PARAS)]
+        for s, e, phe, pay in fkp_runs(wd, pn0, papx):
+            if s >= x0:
+                runs.append((s - a0 + base + n, e - a0 + base + n, phe, pay))
+        assert runs[0][0] == base and all(r[1] == q[0] for r, q in zip(runs, runs[1:]))
+        afc, pns = [], []
+        for page, first, last in fkp_pages(runs, papx):
+            pns.append(len(wd) // 512)
+            wd += page
+            afc.append(first)
+        afc.append(last)
+        plcs[idx] = struct.pack("<%dI%dI" % (len(afc), len(pns)), *afc, *pns)
+    clx = (b"\x02" + struct.pack("<I", 4 * 2 + 8) + struct.pack("<II", 0, total + n)
+           + struct.pack("<HIH", 0x98, (base * 2) | 0x40000000, 0))
+    struct.pack_into("<I", td, sed_fc + 4, total + n)
+    for idx, plc in plcs.items():
+        struct.pack_into("<II", wd, fb + 8 * idx, len(td), len(plc))
+        td += plc
+    struct.pack_into("<II", wd, fb + 8 * 33, len(td), len(clx))
+    td += clx
+    struct.pack_into("<II", wd, 0x18, base, base + total + n)
+    struct.pack_into("<i", wd, lw, len(wd))
+    struct.pack_into("<i", wd, lw + 12, ccp + n)
+    w["data"], t["data"] = bytes(wd), bytes(td)
+
+
+def scale_xls(ents):
+    """Fill the empty last worksheet with XLS_ROWS rows of XLS_COLS NUMBER / LABELSST cells."""
+    e = stream(ents, "Workbook")
+    d = bytearray(e["data"])
+    p, nbof, dims, win = 0, 0, None, None
+    while p < len(d):
+        typ, ln = struct.unpack_from("<HH", d, p)
+        nbof += typ == 0x809
+        if nbof == 3 and typ == 0x200:
+            dims = p
+        if nbof == 3 and typ == 0x23E:
+            win = p
+        p += 4 + ln
+    assert dims and win, "unexpected simple.xls layout"
+    struct.pack_into("<IIHH", d, dims + 4, 0, XLS_ROWS, 0, XLS_COLS)
+    out = bytearray()
+    for r0 in range(0, XLS_ROWS, 32):
+        rows = range(r0, min(r0 + 32, XLS_ROWS))
+        for r in rows:
+            out += struct.pack("<HHHHHHHHHH", 0x208, 16, r, 0, XLS_COLS, 0xFF, 0, 0, 0, 0x0F)
+        for r in rows:
+            for c in range(XLS_COLS):
+                if c % 2:
+                    out += struct.pack("<HHHHHI", 0xFD, 10, r, c, 0x0F, (r + c) % 4)
+                else:
+                    out += struct.pack("<HHHHHd", 0x203, 14, r, c, 0x0F, r * 1.5 + c)
+    e["data"] = bytes(d[:win]) + bytes(out) + bytes(d[win:])
+
+
+def scale_ppt(ents):
+    """Append PPT_SLIDES-1 copies of the slide (own SlidePersistAtom + persist entry each)."""
+    e, cu = stream(ents, "PowerPoint Document"), stream(ents, "Current User")
+    d = e["data"]
+    SLIDE, SLIDES_END, PDIR, SPL = 0xD41, 0x11AC, 0x11AC, 0x471
+    assert struct.unpack_from("<HHI", d, SLIDE)[1:] == (0x3EE, 0x463)
+    assert struct.unpack_from("<HHI", d, SPL)[1:] == (0xFF0, 28) and struct.unpack_from("<HHI", d, PDIR)[1] == 0x1772
+    slide, k = d[SLIDE:SLIDES_END], PPT_SLIDES - 1
+    spas = b"".join(struct.pack("<HHIIIIII", 0, 0x3F3, 20, 4 + i, 4, 0, 257 + i, 0) for i in range(k))
+    head = bytearray(d[:SPL + 8 + 28])
+    struct.pack_into("<I", head, SPL + 4, 28 + len(spas))
+    struct.pack_into("<I", head, 4, struct.unpack_from("<I", d, 4)[0] + len(spas))
+    body = bytes(head) + spas + d[SPL + 8 + 28:SLIDES_END] + slide * k
+    first = SLIDES_END + len(spas)
+    offs = [0, 0x49D + len(spas), SLIDE + len(spas)] + [first + i * len(slide) for i in range(k)]
+    pdir_off = len(body)
+    ids = [(1, offs[:3])] + [(4 + j, offs[3 + j:3 + j + 4095]) for j in range(0, k, 4095)]
+    payload = b"".join(struct.pack("<I", pid | (len(o) << 20)) + b"".join(struct.pack("<I", x) for x in o)
+                       for pid, o in ids)
+    pda = struct.pack("<HHI", 0, 0x1772, len(payload)) + payload
+    uea = bytearray(d[PDIR + 8 + 16:])  # original UserEditAtom (header + payload)
+    struct.pack_into("<I", uea, 8, 256 + k)
+    struct.pack_into("<I", uea, 8 + 12, pdir_off)
+    struct.pack_into("<I", uea, 8 + 20, 3 + k)
+    e["data"] = body + pda + bytes(uea)
+    cud = bytearray(cu["data"])
+    struct.pack_into("<I", cud, 16, len(body) + len(pda))
+    cu["data"] = bytes(cud)
+
+
+SCALERS = {"large.doc": scale_doc, "large.xls": scale_xls, "large.ppt": scale_ppt}
 
 
 def sha(path):
@@ -182,9 +340,7 @@ def main():
     for out_name, src in LARGE.items():
         with open(os.path.join(HERE, "small", src), "rb") as f:
             ents = read_cfb(f.read())
-        insert(ents, dict(name="PerfPadding", type=2, color=0, left=NOSTREAM, right=NOSTREAM, child=NOSTREAM,
-                          clsid=b"\0" * 16, state=b"\0" * 4, times=b"\0" * 16, start=0, size=0,
-                          data=padding(TARGET, out_name)))
+        SCALERS[out_name](ents)
         path = os.path.join(HERE, "large", out_name)
         with open(path, "wb") as f:
             f.write(write_cfb(ents))

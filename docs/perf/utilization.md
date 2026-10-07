@@ -20,10 +20,29 @@ dotnet-trace collect --profile dotnet-sampled-thread-time -o doc.nettrace -- dot
 
 ## Important limitation
 
-The large tier is the small file plus a ~10 MB `PerfPadding` stream the translators ignore (see
-`perf/corpus/README.md`). Per-record work is that of the tiny small-tier document, repeated by the driver.
-Per-record findings are valid as ratios, but memory peaks are NOT representative of a real large document.
-Task #136 adds a content-scaled corpus.
+The tables and traces below were taken on the earlier padded large tier: the small file plus a
+~10 MB `PerfPadding` stream the translators ignore. Per-record findings there are valid as ratios,
+but memory peaks are NOT representative of a real large document. The content-scaled tier
+(task #136) is measured in the next section; the traces have not been re-collected.
+
+## Content-scaled large tier (task #136, 3 iterations, no allocation listener)
+
+| Metric | doc (+100k paragraphs) | xls (65k rows x 8) | ppt (9000 slides) |
+|---|---|---|---|
+| Wall per conversion | 30.8 s | 3.5 s | 5.4 s |
+| CPU per conversion | 22.2 s | 1.9 s | 5.0 s |
+| CPU utilization (cores) | 0.72 | 0.55 | 0.93 |
+| Peak working set | 1508 MB | 351 MB | 632 MB |
+| GC heap after run | 541 MB | 118 MB | 298 MB |
+| LOH size after run | 635 MB | 63 MB | 13 MB |
+| Allocated per conversion | 2.27 GB | 395 MB | 951 MB |
+| Gen0 / Gen1 / Gen2 (3 runs) | 319 / 18 / 6 | 80 / 34 / 7 | 245 / 124 / 9 |
+| GC pause share | 0.5% | 19.8% | 14.1% |
+
+Stage means (ms): doc parse 568, map 30164, write 58; xls parse 1564, map 950, write 947;
+ppt parse 803, map 3196, write 1381. The doc map stage dominates (10-30 s across runs, so noisy)
+and is the first thing to investigate; xls and ppt show 14-20% GC pause and large Gen1 counts,
+so peak memory, LOH and record copy costs are now measurable.
 
 ## Utilization (1000 iterations, no allocation listener)
 
