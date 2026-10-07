@@ -1,0 +1,59 @@
+name: Benchmarks
+
+# Non-gating: weekly + manual only. Never triggered by pull_request/push, so it
+# cannot be a required status check and does not slow PR CI.
+# Short job; results are for trend comparison against docs/perf/baseline.md.
+
+on:
+  schedule:
+    - cron: '0 3 * * 1' # Mondays 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bench-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  bench:
+    name: Benchmarks (ubuntu-latest, short job)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET (SDK from global.json)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Restore
+        run: dotnet restore Benchmarks --locked-mode
+
+      - name: Build
+        run: dotnet build Benchmarks -c Release --no-restore
+
+      # Large-tier inputs are git-ignored; generate them (Python 3 stdlib only).
+      - name: Generate perf corpus
+        run: python3 perf/corpus/generate.py
+
+      # Runs from the repo root so results land in ./BenchmarkDotNet.Artifacts.
+      - name: Run benchmarks
+        run: dotnet run -c Release --no-build --project Benchmarks -- --filter "*" --job short
+
+      - name: Upload BenchmarkDotNet results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: BenchmarkDotNet.Artifacts/results
+          if-no-files-found: warn
