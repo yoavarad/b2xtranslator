@@ -44,19 +44,24 @@ namespace b2xtranslator.PresentationMLMapping
 
         public void DynamicApply(Record record)
         {
-            // Call Apply(record) with dynamic dispatch (selection based on run-time type of record)
-            var method = this.GetType().GetMethod("Apply", new Type[] { record.GetType() });
-
-            //TraceLogger.DebugInternal(method.ToString());
-
+            // Call Apply(record) selected on the run-time type of record (most specific overload first)
             try
             {
-                method.Invoke(this, new object[] { record });
+                switch (record)
+                {
+                    case PPDrawing x: Apply(x); break;
+                    case DrawingContainer x: Apply(x); break;
+                    case GroupContainer x: Apply(x); break;
+                    case ShapeContainer x: Apply(x); break;
+                    case RegularContainer x: Apply(x); break;
+                    case ClientTextbox x: Apply(x); break;
+                    default: Apply(record); break;
+                }
             }
-            catch (TargetInvocationException e)
+            catch (Exception e)
             {
-                TraceLogger.DebugInternal(e.InnerException.ToString());
-                throw e.InnerException;
+                TraceLogger.DebugInternal(e.ToString());
+                throw;
             }
         }
 
