@@ -1,7 +1,8 @@
 # b2xtranslator
 
 .NET library translating legacy binary Office formats (.doc, .xls, .ppt) to OOXML.
-Projects: Common, Doc, Xls, Ppt, Shell, UnitTests (see `b2xtranslator.sln`).
+Projects: Common, Doc, Xls, Ppt, Shell, UnitTests, Benchmarks (see `b2xtranslator.sln`).
+Build/test: `dotnet build b2xtranslator.sln`, `dotnet test UnitTests`. Benchmarks: see `docs/perf/baseline.md`.
 
 ## Rules
 
