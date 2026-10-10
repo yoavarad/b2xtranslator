@@ -73,7 +73,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             var proofState = this._nodeFactory.CreateElement("w", "proofState", OpenXmlNamespaces.WordprocessingML);
             if (dop.fGramAllClean)
                 appendValueAttribute(proofState, "grammar", "clean");
-            if (proofState.Attributes.Count > 0)
+            if (proofState.HasAttributes)
                 proofState.WriteTo(this._writer);
 
             //stylePaneFormatFilter
@@ -123,7 +123,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 appendValueAttribute(footnotePr, "numRestart", dop.rncFtn.ToString());
             if (dop.Fpc != 0)
                 appendValueAttribute(footnotePr, "pos", ((FootnotePosition)dop.Fpc).ToString());
-            if (footnotePr.Attributes.Count > 0)
+            if (footnotePr.HasAttributes)
                 footnotePr.WriteTo(this._writer);
 
 

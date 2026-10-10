@@ -441,7 +441,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append page size
-            if (pgSz.Attributes.Count > 0)
+            if (pgSz.HasAttributes)
             {
                 this._sectPr.AppendChild(pgSz);
             }
@@ -453,32 +453,32 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append margin
-            if (pgMar.Attributes.Count > 0)
+            if (pgMar.HasAttributes)
             {
                 this._sectPr.AppendChild(pgMar);
             }
 
             //append paper info
-            if (paperSrc.Attributes.Count > 0)
+            if (paperSrc.HasAttributes)
             {
                 this._sectPr.AppendChild(paperSrc);
             }
 
             //append columns
 
-            if (cols.Attributes.Count > 0 || cols.ChildNodes.Count > 0)
+            if (cols.HasAttributes || cols.ChildNodes.Count > 0)
             {
                 this._sectPr.AppendChild(cols);
             }
 
             //append doc grid
-            if (docGrid.Attributes.Count > 0)
+            if (docGrid.HasAttributes)
             {
                 this._sectPr.AppendChild(docGrid);
             }
 
             //numType
-            if (pgNumType.Attributes.Count > 0)
+            if (pgNumType.HasAttributes)
             {
                 this._sectPr.AppendChild(pgNumType);
             }
