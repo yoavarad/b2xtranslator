@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v5
       - name: Install ydk
-        run: uv tool install git+https://github.com/yoavarad/ydk@7c088f57c75677169452c1da105022709613a24d
+        run: uv tool install --python 3.13 git+https://github.com/yoavarad/ydk@7c088f57c75677169452c1da105022709613a24d
       - name: Check PR body
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
