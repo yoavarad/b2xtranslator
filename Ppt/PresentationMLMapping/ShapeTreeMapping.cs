@@ -1147,12 +1147,7 @@ namespace b2xtranslator.PresentationMLMapping
                     {
                         var metroBlob = sndSo.OptionsByID[ShapeOptions.PropertyId.metroBlob];
                         var code = metroBlob.opComplex;
-                        string path = Path.GetTempFileName();
-                        var fs = new FileStream(path, FileMode.Create);
-                        fs.Write(code, 0, code.Length);
-                        fs.Close();
-
-                        reader = ZipFactory.OpenArchive(path);
+                        reader = ZipFactory.OpenArchive(new MemoryStream(code, false));
                         var mems = new StreamReader(reader.GetEntry("drs/shapexml.xml"));
                         string xml = mems.ReadToEnd();
                         xml = Tools.Utils.replaceOutdatedNamespaces(xml);
