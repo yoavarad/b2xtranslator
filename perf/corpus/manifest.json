@@ -1,12 +1,12 @@
 {
   "large/large.doc": {
-    "sha256": "5bd38f1a660831448351f6b66770ea149b9082b512edc53aa8aec2b1795c43a2"
+    "sha256": "29165ada1292673f311b31bfa6681b9b029e11b769f7680fbcece91bcc7c9bdf"
   },
   "large/large.ppt": {
-    "sha256": "48105a183e70fa7fd16dbad3357d21e7b4321260bf4c84140a84e536fd522d3d"
+    "sha256": "c0822a327a793eda12d02ae6b3ca1012b1617136fa56624c4a0cf7520f9e2514"
   },
   "large/large.xls": {
-    "sha256": "92c415f6e6ebf79a2e6e15f435789c587411dbf9b2397f8f91780a1adb4ac6ae"
+    "sha256": "71f3576dc8509def9a6989472ae915c8dedfaf0be0a3581feeca16ae6eb70e16"
   },
   "small/simple.doc": {
     "sha256": "9ba8d13d0b683c447c11ff439529f6bdb802cf5ee6eb98db6c834d02de10d414"

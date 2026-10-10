@@ -19,9 +19,9 @@ Notes:
 - The harness registers `CodePagesEncodingProvider` (as `UnitTests` do). Without it, xls
   parsing fails on code page 1252. The `xls2x` tool does not register it, which is why
   xls2x fails on the corpus today.
-- The large tier is the small file plus a ~10 MB `PerfPadding` stream that the translators
-  ignore (see `perf/corpus/README.md`). It measures OLE container handling at scale, not
-  document content scaling. That is why small and large are close.
+- The large tier is content-scaled (task #136): doc +100k paragraphs, xls 65k rows x 8 cells,
+  ppt 9000 slides (see `perf/corpus/README.md`). The earlier baseline below used a tier padded
+  with a ~10 MB stream the translators ignore, so its small and large rows were close.
 
 ## Running
 
@@ -37,7 +37,7 @@ dotnet run -c Release --project Benchmarks -- --filter "*" --job dry     # one p
 
 Results are written to `BenchmarkDotNet.Artifacts/` (git-ignored).
 
-## Baseline (2026-10-02)
+## Baseline (2026-10-02, padded large tier, superseded for large rows)
 
 - Commit: `067ae57e508ff317370afcacb967967dcacacecc` (origin/main), plus the `Benchmarks/` project. Library code was unchanged.
 - Machine: Intel Core Ultra 7 155H 1.40GHz, 1 CPU, 22 logical and 16 physical cores, 31.5 GB RAM
@@ -56,3 +56,19 @@ Results are written to `BenchmarkDotNet.Artifacts/` (git-ignored).
 | Convert | xls    | small | 1.394 ms | 0.0487 ms | 0.1389 ms | 1.360 ms | 42.9688 |       - |       - |  532.48 KB |
 
 Gen0/Gen1/Gen2 are GC collections per 1000 operations. "-" means none were observed.
+
+## Content-scaled large tier (2026-10-07)
+
+Same machine and runtime as above, base commit `75d4329`, `--job short` (3 warmup, 3 measured
+iterations, so the error columns are wide). The small rows match the baseline above within noise.
+
+| Method  | Format | Tier  | Mean         | Gen0        | Gen1       | Gen2      | Allocated     |
+|-------- |------- |------ |-------------:|------------:|-----------:|----------:|--------------:|
+| Convert | doc    | large | 11,919 ms    | 108000      | 6000       | 4000      | 2,322,939 KB  |
+| Convert | doc    | small | 2.635 ms     | 78          | 23         | -         | 985 KB        |
+| Convert | ppt    | large | 2,094 ms     | 85000       | 43000      | 5000      | 993,474 KB    |
+| Convert | ppt    | small | 4.342 ms     | 78          | 70         | -         | 969 KB        |
+| Convert | xls    | large | 992 ms       | 28000       | 14000      | 4000      | 403,983 KB    |
+| Convert | xls    | small | 1.806 ms     | 35          | 4          | -         | 450 KB        |
+
+The large doc takes 10-30 s per conversion depending on the run, so treat it as an order of magnitude.
