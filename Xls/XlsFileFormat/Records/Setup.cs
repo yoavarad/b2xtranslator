@@ -5,7 +5,7 @@ using b2xtranslator.Tools;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.Setup)] 
+    [BiffRecord(RecordType.Setup)]
     public class Setup : BiffRecord
     {
         public const RecordType ID = RecordType.Setup;
@@ -34,7 +34,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         public bool fUsePage;
 
         public bool fEndNotes;
-        public int iErrors; 
+        public int iErrors;
 
         public Setup(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -53,9 +53,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             this.iVRes = reader.ReadUInt16();
 
             this.numHdr = reader.ReadDouble();
-            this.numFtr = reader.ReadDouble(); 
+            this.numFtr = reader.ReadDouble();
 
-            this.iCopies = reader.ReadUInt16(); 
+            this.iCopies = reader.ReadUInt16();
 
             // set flags 
             this.fLeftToRight = Utils.BitmaskToBool(this.grbit, 0x01);

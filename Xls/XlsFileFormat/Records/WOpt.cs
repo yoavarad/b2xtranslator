@@ -4,7 +4,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.WOpt)] 
+    [BiffRecord(RecordType.WOpt)]
     public class WOpt : BiffRecord
     {
         public const RecordType ID = RecordType.WOpt;
@@ -17,9 +17,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             // TODO: place code here
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

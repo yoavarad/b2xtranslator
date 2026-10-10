@@ -48,9 +48,10 @@ namespace b2xtranslator.PresentationMLMapping
                                 {
                                     lang = System.Globalization.CultureInfo.GetCultureInfo(siea.si.lid).IetfLanguageTag;
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-                                    //ignore
+                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                    TraceLogger.Debug("CharacterRunPropsMapping: language id invalid, omitting lang: {0}", ex.Message);
                                 }
                                 break;
                         }
@@ -78,9 +79,10 @@ namespace b2xtranslator.PresentationMLMapping
                                 {
                                     altLang = System.Globalization.CultureInfo.GetCultureInfo(siea.si.altLid).IetfLanguageTag;
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-                                    //ignore
+                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                    TraceLogger.Debug("CharacterRunPropsMapping: alt language id invalid, omitting altLang: {0}", ex.Message);
                                 }
                                 break;
                         }
@@ -351,9 +353,10 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
             }
             else
@@ -379,9 +382,10 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
 
             }
@@ -406,9 +410,10 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //throw;
+                    // Best-effort: Optional font element; run is still written.
+                    TraceLogger.Debug("CharacterRunPropsMapping: font entity write failed, skipping font element: {0}", ex.Message);
                 }
 
 
@@ -469,28 +474,14 @@ namespace b2xtranslator.PresentationMLMapping
                     switch (run.Color.Index)
                     {
                         case 0x00:
-                            this._writer.WriteAttributeString("val", "bg1"); //background
-                            break;
                         case 0x01:
-                            this._writer.WriteAttributeString("val", "tx1"); //text
-                            break;
                         case 0x02:
-                            this._writer.WriteAttributeString("val", "dk1"); //shadow
-                            break;
                         case 0x03:
-                            this._writer.WriteAttributeString("val", "tx1"); //title text
-                            break;
                         case 0x04:
-                            this._writer.WriteAttributeString("val", "bg2"); //fill
-                            break;
                         case 0x05:
-                            this._writer.WriteAttributeString("val", "accent1"); //accent1
-                            break;
                         case 0x06:
-                            this._writer.WriteAttributeString("val", "accent2"); //accent2
-                            break;
                         case 0x07:
-                            this._writer.WriteAttributeString("val", "accent3"); //accent3
+                            this._writer.WriteAttributeString("val", Utils.getSchemeColorName(run.Color.Index));
                             break;
                         case 0xFE: //sRGB
                             lastColor = run.Color.Red.ToString("X").PadLeft(2, '0') + run.Color.Green.ToString("X").PadLeft(2, '0') + run.Color.Blue.ToString("X").PadLeft(2, '0');

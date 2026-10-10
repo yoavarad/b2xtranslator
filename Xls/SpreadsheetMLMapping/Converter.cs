@@ -1,4 +1,5 @@
-﻿using System;
+﻿using b2xtranslator.Tools;
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -39,8 +40,10 @@ namespace b2xtranslator.SpreadsheetMLMapping
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Best-effort: Detection is best-guess; default output type is safe.
+                TraceLogger.Debug("Converter: macro/template detection failed, defaulting output type: {0}", ex.Message);
             }
 
             return returnType;
@@ -81,6 +84,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
 
         public static void Convert(XlsDocument xls, SpreadsheetDocument spreadsheetDocument)
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("map")?.SetTag("b2x.format", "xls");
+
             //Setup the writer
             var xws = new XmlWriterSettings
             {

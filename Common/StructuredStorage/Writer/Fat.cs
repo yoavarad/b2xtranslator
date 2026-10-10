@@ -34,7 +34,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         uint _diFatStartSector;
         internal uint DiFatStartSector
         {
-            get { return this._diFatStartSector; }            
+            get { return this._diFatStartSector; }
         }
 
 
@@ -105,7 +105,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             // handle remaining difat entries 
 
             var greaterDiFatEntries = new List<uint>();
-            
+
             for (int i = 0; i < this._diFatEntries.Count - 109; i++)
             {
                 greaterDiFatEntries.Add(this._diFatEntries[i + 109]);
@@ -118,7 +118,7 @@ namespace b2xtranslator.StructuredStorage.Writer
             // split difat at sector boundary and add link to next difat sector
             while (greaterDiFatEntries.Count >= sectorSplit)
             {
-                greaterDiFatEntries.Insert(sectorSplit-1, diFatLink);
+                greaterDiFatEntries.Insert(sectorSplit - 1, diFatLink);
                 diFatLink++;
                 sectorSplit += addressesInSector;
             }
@@ -152,7 +152,7 @@ namespace b2xtranslator.StructuredStorage.Writer
         {
 
             // calculation of _numFatSectors and _numDiFatSectors (depending on each other)
-            this._numDiFatSectors = 0;            
+            this._numDiFatSectors = 0;
             while (true)
             {
                 uint numDiFatSectorsOld = this._numDiFatSectors;
@@ -161,13 +161,13 @@ namespace b2xtranslator.StructuredStorage.Writer
                 if (numDiFatSectorsOld == this._numDiFatSectors)
                 {
                     break;
-                }                
+                }
             }
 
             // writeDiFat
-            this._diFatStartSector = writeDiFatEntriesToFat(this._numDiFatSectors);           
+            this._diFatStartSector = writeDiFatEntriesToFat(this._numDiFatSectors);
             writeDiFatSectorsToStream(this._currentEntry);
-           
+
             // Denote Fat entries in Fat
             for (int i = 0; i < this._numFatSectors; i++)
             {

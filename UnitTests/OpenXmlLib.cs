@@ -12,7 +12,7 @@ namespace UnitTests
         [Test]
         public void DirectWriteTest()
         {
-            var doc = WordprocessingDocument.Create(@"files\testOpenXmlLib.docx", OpenXmlPackage.DocumentType.Document);
+            var doc = WordprocessingDocument.Create(@"files/testOpenXmlLib.docx", OpenXmlPackage.DocumentType.Document);
 
             var part = doc.MainDocumentPart;
 
@@ -25,12 +25,12 @@ namespace UnitTests
             var stream = part.GetStream();
             var buf = (new UTF8Encoding()).GetBytes(docXml);
             stream.Write(buf, 0, buf.Length);
-        
+
 
             doc.Close();
 
 
-            var presentation = PresentationDocument.Create(@"files\testOpenXmlLib.pptx", OpenXmlPackage.DocumentType.Document);
+            var presentation = PresentationDocument.Create(@"files/testOpenXmlLib.pptx", OpenXmlPackage.DocumentType.Document);
             var presentationPart = presentation.PresentationPart;
 
             var slide = presentationPart.AddSlidePart();

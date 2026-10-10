@@ -20,3 +20,16 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# YDK generated local state (machine-specific, not committed)
+.ydk/cache/
+.ydk/proofs/
+
+# perf corpus (generated large tier)
+perf/corpus/large/
+perf/corpus/small/*.docx
+perf/corpus/small/*.xlsx
+perf/corpus/small/*.pptx
+
+# BenchmarkDotNet output (Benchmarks/ project; baseline lives in docs/perf/baseline.md)
+BenchmarkDotNet.Artifacts/

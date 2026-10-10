@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Text;
 using System.IO;
@@ -58,8 +59,9 @@ namespace b2xtranslator.PptFileFormat
 
         public bool BulletColorPresent
         {
-            get {
-                    return (this.Mask & ParagraphMask.BulletColor) != 0;
+            get
+            {
+                return (this.Mask & ParagraphMask.BulletColor) != 0;
             }
         }
 
@@ -144,14 +146,16 @@ namespace b2xtranslator.PptFileFormat
         {
             try
             {
-            
+
                 this.IndentLevel = noIndentField ? (ushort)0 : reader.ReadUInt16();
                 this.Mask = (ParagraphMask)reader.ReadUInt32();
 
                 // Note: These appear in Mask as well -- there they are true
                 // when the flag differs from the Master style.
                 // The actual value for the differing flags is stored here.
-                // (TODO: This is still a guess. Verify.)
+                // Verified against [MS-PPT] PFMasks (bits A-Z match ParagraphMask) and TextPFException
+                // (field order/sizes): bulletFlags exists iff any of hasBullet/bulletHasFont/
+                // bulletHasColor/bulletHasSize is set, and holds the actual values.
                 if (this.BulletFlagsFieldPresent)
                     this.BulletFlags = reader.ReadUInt16();
 
@@ -209,9 +213,10 @@ namespace b2xtranslator.PptFileFormat
                     this.TextDirection = reader.ReadUInt16();
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                string s = e.ToString();
+                // Best-effort: Truncated run data is tolerated; earlier fields remain valid.
+                TraceLogger.Debug("ParagraphRun: paragraph properties truncated, keeping values read so far: {0}", ex.Message);
             }
             //if (this.TabStopsPresent)
             //{

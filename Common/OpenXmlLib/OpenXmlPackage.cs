@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 
 namespace b2xtranslator.OpenXmlLib
 {
@@ -47,14 +48,27 @@ namespace b2xtranslator.OpenXmlLib
 
         public virtual void Close()
         {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("write");
+
             // serialize the package on closing
-            var writer = new OpenXmlWriter();
+            var writer = new OpenXmlWriter(this.CompressionLevel, this.Indent);
             writer.Open(this.FileName);
 
             this.WritePackage(writer);
 
             writer.Close();
         }
+
+        /// <summary>ZIP compression level for every part. Default: <see cref="CompressionLevel.Optimal"/>.</summary>
+        public CompressionLevel CompressionLevel { get; set; } = CompressionLevel.Optimal;
+
+        /// <summary>
+        /// Indent the XML the library writes itself: relationship parts, [Content_Types].xml and
+        /// parts written through <see cref="OpenXmlPart.XmlWriter"/>. Set before the first write to a part.
+        /// Mappers that create their own XmlWriter on <see cref="OpenXmlPart.GetStream"/> use their own settings.
+        /// Default: true.
+        /// </summary>
+        public bool Indent { get; set; } = true;
 
         public string FileName
         {
@@ -79,7 +93,7 @@ namespace b2xtranslator.OpenXmlLib
             get { return this._appPropertiesPart; }
             set { this._appPropertiesPart = value; }
         }
-               
+
         public AppPropertiesPart AddAppPropertiesPart()
         {
             this.AppPropertiesPart = new AppPropertiesPart(this);

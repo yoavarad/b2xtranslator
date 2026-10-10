@@ -16,7 +16,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
         ExcelContext xlsContext;
 
 
-                /// <summary>
+        /// <summary>
         /// Ctor 
         /// </summary>
         /// <param name="xlsContext">The excel context object</param>
@@ -24,7 +24,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             : base(XmlWriter.Create(xlsContext.SpreadDoc.WorkbookPart.AddExternalLinkPart().GetStream(), xlsContext.WriterSettings))
         {
             this.xlsContext = xlsContext;
-            
+
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace b2xtranslator.SpreadsheetMLMapping
             {
                 this._writer.WriteStartElement("sheetName");
                 this._writer.WriteAttributeString("val", var);
-                this._writer.WriteEndElement(); 
+                this._writer.WriteEndElement();
             }
             this._writer.WriteEndElement();
 
@@ -124,8 +124,8 @@ namespace b2xtranslator.SpreadsheetMLMapping
             this._writer.WriteEndDocument();
 
 
-            
-            
+
+
             sbd.ExternalLinkId = this.xlsContext.SpreadDoc.WorkbookPart.GetExternalLinkPart().RelId;
             sbd.ExternalLinkRef = this.xlsContext.SpreadDoc.WorkbookPart.GetExternalLinkPart().RelIdToString;
 

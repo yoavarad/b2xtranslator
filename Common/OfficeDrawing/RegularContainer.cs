@@ -13,7 +13,7 @@ namespace b2xtranslator.OfficeDrawing
     /// </summary>
     public class RegularContainer : Record
     {
-        private const bool WRITE_DEBUG_DUMPS = false;
+        private static readonly bool WRITE_DEBUG_DUMPS = false;
         public List<Record> Children = new List<Record>();
 
         public RegularContainer(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
@@ -40,7 +40,7 @@ namespace b2xtranslator.OfficeDrawing
                     readSize += child.TotalSize;
                     idx++;
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     if (WRITE_DEBUG_DUMPS)
                     {
@@ -55,7 +55,7 @@ namespace b2xtranslator.OfficeDrawing
                         }
                     }
 
-                    throw e;
+                    throw;
                 }
             }
         }
@@ -90,9 +90,9 @@ namespace b2xtranslator.OfficeDrawing
         public List<T> AllChildrenWithType<T>() where T : Record
         {
             return (List<T>)this.Children.FindAll(
-                delegate(Record r) { return r is T; }
+                delegate (Record r) { return r is T; }
             ).ConvertAll<T>(
-                delegate(Record r) { return (T)r; }
+                delegate (Record r) { return (T)r; }
             );
         }
 
@@ -104,7 +104,7 @@ namespace b2xtranslator.OfficeDrawing
         public T FirstChildWithType<T>() where T : Record
         {
             return (T)this.Children.Find(
-                delegate(Record r) { return r is T; }
+                delegate (Record r) { return r is T; }
             );
         }
 

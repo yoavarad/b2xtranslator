@@ -1,4 +1,5 @@
-﻿using System;
+﻿using b2xtranslator.Tools;
+using System;
 using System.Text;
 using b2xtranslator.OpenXmlLib;
 using b2xtranslator.PptFileFormat;
@@ -22,8 +23,10 @@ namespace b2xtranslator.PresentationMLMapping
                     returnType = OpenXmlPackage.DocumentType.MacroEnabledDocument;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Best-effort: Detection is best-guess; default output type is safe.
+                TraceLogger.Debug("Converter: macro detection failed, defaulting to plain document: {0}", ex.Message);
             }
 
             return returnType;
@@ -77,6 +80,8 @@ namespace b2xtranslator.PresentationMLMapping
                 var context = new ConversionContext(ppt);
                 context.WriterSettings = xws;
                 context.Pptx = pptx;
+
+                using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("map")?.SetTag("b2x.format", "ppt");
 
                 // Write presentation.xml
                 ppt.Convert(new PresentationPartMapping(context));

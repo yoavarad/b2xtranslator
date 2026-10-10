@@ -17,7 +17,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <returns></returns>
         public override string getValue()
         {
-            return this.valueString; 
+            return this.valueString;
         }
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <param name="obj"></param>
         public override void setValue(object obj)
         {
-            if (obj is string) 
+            if (obj is string)
             {
-                this.valueString = (string) obj; 
+                this.valueString = (string)obj;
             }
             if (obj is uint)
             {
-                this.valueString = ((uint)obj).ToString(); 
+                this.valueString = ((uint)obj).ToString();
             }
         }
 

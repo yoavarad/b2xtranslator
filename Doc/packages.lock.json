@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "b2xtranslator": {
+        "type": "Project"
+      }
+    },
+    "net8.0": {
+      "b2xtranslator": {
+        "type": "Project"
+      }
+    }
+  }
+}

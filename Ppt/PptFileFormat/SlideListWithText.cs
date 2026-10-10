@@ -29,7 +29,7 @@ namespace b2xtranslator.PptFileFormat
         /// This dictionary is used for associating such text records with the slide they appear on.
         /// </summary>
         public Dictionary<SlidePersistAtom, List<TextHeaderAtom>> SlideToPlaceholderTextHeaders =
-            new Dictionary<SlidePersistAtom,List<TextHeaderAtom>>();
+            new Dictionary<SlidePersistAtom, List<TextHeaderAtom>>();
 
         public Dictionary<SlidePersistAtom, List<TextSpecialInfoAtom>> SlideToPlaceholderSpecialInfo =
            new Dictionary<SlidePersistAtom, List<TextSpecialInfoAtom>>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace b2xtranslator.OfficeDrawing.Shapetypes
 {
     [OfficeShapeType(67)]
-    public class DownArrowType :ShapeType
+    public class DownArrowType : ShapeType
     {
         public DownArrowType()
         {

@@ -49,15 +49,19 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The new position in the stream.</returns>
         override internal long SeekToPositionInSector(long sector, long position)
         {
-            int sectorInMiniStreamChain = (int)((sector * this._header.MiniSectorSize) / this._fat.SectorSize);
-            int offsetInSector = (int)((sector * this._header.MiniSectorSize) % this._fat.SectorSize);     
+            long sectorInMiniStreamChain = (sector * this._header.MiniSectorSize) / this._fat.SectorSize;
+            int offsetInSector = (int)((sector * this._header.MiniSectorSize) % this._fat.SectorSize);
 
             if (position < 0)
             {
                 throw new ArgumentOutOfRangeException("position");
             }
+            if (sector < 0 || sectorInMiniStreamChain < 0 || sectorInMiniStreamChain >= this._sectorsUsedByMiniStream.Count)
+            {
+                throw new InvalidSectorInChainException();
+            }
 
-            return this._fileHandler.SeekToPositionInSector(this._sectorsUsedByMiniStream[sectorInMiniStreamChain], offsetInSector + position);
+            return this._fileHandler.SeekToPositionInSector(this._sectorsUsedByMiniStream[(int)sectorInMiniStreamChain], offsetInSector + position);
         }
 
 
@@ -68,11 +72,16 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The next sector in the chain</returns>
         override protected uint GetNextSectorInChain(uint currentSector)
         {
-            uint sectorInFile = this._sectorsUsedByMiniFat[(int)(currentSector / this._addressesPerSector)];
+            uint miniFatIndex = currentSector / (uint)this._addressesPerSector;
+            if (miniFatIndex >= this._sectorsUsedByMiniFat.Count)
+            {
+                throw new InvalidSectorInChainException();
+            }
+            uint sectorInFile = this._sectorsUsedByMiniFat[(int)miniFatIndex];
             // calculation of position:
             // currentSector % _addressesPerSector = number of address in the sector address
             // address uses 32 bit = 4 bytes
-            this._fileHandler.SeekToPositionInSector(sectorInFile, 4 * ((int)currentSector % this._addressesPerSector));
+            this._fileHandler.SeekToPositionInSector(sectorInFile, 4 * (currentSector % (uint)this._addressesPerSector));
             return this._fileHandler.ReadUInt32();
         }
 

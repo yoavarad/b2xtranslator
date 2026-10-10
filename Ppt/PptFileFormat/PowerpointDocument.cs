@@ -1,4 +1,5 @@
 
+using b2xtranslator.Tools;
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace b2xtranslator.PptFileFormat
 {
     public class PowerpointDocument : BinaryDocument, IVisitable, IEnumerable<Record>
     {
-        static PowerpointDocument() {
+        static PowerpointDocument()
+        {
             Record.UpdateTypeToRecordClassMapping(Assembly.GetExecutingAssembly(), typeof(PowerpointDocument).Namespace);
         }
 
@@ -55,7 +57,7 @@ namespace b2xtranslator.PptFileFormat
         /// <summary>
         /// The persist object directory is used for mapping persist object identifiers to document stream offsets.
         /// </summary>
-        public Dictionary<uint, uint> PersistObjectDirectory = new Dictionary<uint,uint>();
+        public Dictionary<uint, uint> PersistObjectDirectory = new Dictionary<uint, uint>();
 
         /// <summary>
         /// The DocumentContainer record for this document.
@@ -107,8 +109,21 @@ namespace b2xtranslator.PptFileFormat
         /// The VBA Project Structured Storage
         /// </summary>
         public ExOleObjStgAtom VbaProject;
-        
+
         public PowerpointDocument(StructuredStorageReader file)
+        {
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("parse")?.SetTag("b2x.format", "ppt");
+            try
+            {
+                Parse(file);
+            }
+            catch (Exception ex) when (StructuredStorage.Common.MalformedInput.IsParseFault(ex))
+            {
+                throw new InvalidStreamException("The presentation is corrupt or not a valid PowerPoint 97-2003 file.", ex);
+            }
+        }
+
+        void Parse(StructuredStorageReader file)
         {
             try
             {
@@ -122,8 +137,8 @@ namespace b2xtranslator.PptFileFormat
                 {
                     this.CurrentUserStream.Position = 0;
                     var bytes = new byte[this.CurrentUserStream.Length];
-                    this.CurrentUserStream.Read(bytes);
-                    string s = Encoding.UTF8.GetString(bytes).Replace("\0","");
+                    this.CurrentUserStream.Read(bytes, 0, bytes.Length, 0);
+                    string s = Encoding.UTF8.GetString(bytes).Replace("\0", "");
                 }
             }
             catch (InvalidRecordException e)
@@ -132,11 +147,11 @@ namespace b2xtranslator.PptFileFormat
             }
 
             // Optional 'Pictures' stream
-            if (file.FullNameOfAllStreamEntries.Contains("\\Pictures"))
+            if (file.TryGetStream("Pictures", out var picturesStream))
             {
                 try
                 {
-                    this.PicturesStream = file.GetStream("Pictures");
+                    this.PicturesStream = picturesStream;
                     this.PicturesContainer = new Pictures(new BinaryReader(this.PicturesStream), (uint)this.PicturesStream.Length, 0, 0, 0);
                 }
                 catch (InvalidRecordException e)
@@ -145,19 +160,20 @@ namespace b2xtranslator.PptFileFormat
                 }
             }
 
-            
+
             this.PowerpointDocumentStream = file.GetStream("PowerPoint Document");
 
-            try
+            if (file.TryGetStream("DocumentSummaryInformation", out var dsiStream))
             {
-                this.DocumentSummaryInformationStream = file.GetStream("DocumentSummaryInformation");
+                this.DocumentSummaryInformationStream = dsiStream;
                 ScanDocumentSummaryInformation();
             }
-            catch (StructuredStorage.Common.StreamNotFoundException)
+            else
             {
-                //ignore
+                // Best-effort: Optional stream.
+                TraceLogger.Debug("PowerpointDocument: DocumentSummaryInformation stream not found, skipping.");
             }
-           
+
 
             if (this.CurrentUserAtom != null)
             {
@@ -222,10 +238,10 @@ namespace b2xtranslator.PptFileFormat
                 }
             }
 
-            foreach(uint idKey in Offsets.Keys)
+            foreach (uint idKey in Offsets.Keys)
             {
-                s.BaseStream.Seek(Offsets[idKey] + Offset0,0);
-                                
+                s.BaseStream.Seek(Offsets[idKey] + Offset0, 0);
+
                 int Type = s.ReadInt16();
                 int Padding = s.ReadInt16();
                 switch (Type)
@@ -418,9 +434,10 @@ namespace b2xtranslator.PptFileFormat
                 var vbaInfo = this.DocumentRecord.DocInfoListContainer.FirstChildWithType<VBAInfoContainer>();
                 this.VbaProject = GetPersistObject<ExOleObjStgAtom>(vbaInfo.objStgDataRef);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                // Best-effort: VBA project is optional; document converts without it.
+                TraceLogger.Debug("PowerpointDocument: VBA project not readable, treating as absent: {0}", ex.Message);
             }
         }
 
@@ -435,7 +452,7 @@ namespace b2xtranslator.PptFileFormat
                     {
                         var stgAtom = this.GetPersistObject<ExOleObjStgAtom>(atom.persistIdRef);
                         container.stgAtom = stgAtom;
-                        this.OleObjects.Add(atom.exObjId, container);                   
+                        this.OleObjects.Add(atom.exObjId, container);
                     }
                 }
             }
@@ -477,9 +494,13 @@ namespace b2xtranslator.PptFileFormat
             var result = new List<PersistDirectoryAtom>();
 
             var userEditAtom = this.LastUserEdit;
+            var visitedEditOffsets = new HashSet<uint>();
 
             while (userEditAtom != null)
             {
+                if (!visitedEditOffsets.Add(userEditAtom.OffsetLastEdit))
+                    throw new InvalidStreamException("UserEditAtom chain contains a cycle");
+
                 this.PowerpointDocumentStream.Seek(userEditAtom.OffsetPersistDirectory, SeekOrigin.Begin);
                 var pdAtom = (PersistDirectoryAtom)Record.ReadRecord(this.PowerpointDocumentStream);
                 result.Insert(0, pdAtom);

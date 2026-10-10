@@ -88,7 +88,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             //read the nullable double value (ChartNumNillable)
             this.numIntercept = new ChartNumNillable(reader).value;
-            
+
             this.fEquation = Utils.ByteToBool(reader.ReadByte());
             this.fRSquared = Utils.ByteToBool(reader.ReadByte());
             this.numForecast = reader.ReadDouble();

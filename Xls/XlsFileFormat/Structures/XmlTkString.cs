@@ -18,7 +18,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
             this.cchValue = reader.ReadUInt32();
 
-            this.rgbValue = reader.ReadBytes((int)this.cchValue * 2);       
+            this.rgbValue = reader.ReadBytes((int)this.cchValue * 2);
         }
     }
 }

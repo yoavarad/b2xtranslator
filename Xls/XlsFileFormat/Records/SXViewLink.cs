@@ -5,7 +5,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.SXViewLink)] 
+    [BiffRecord(RecordType.SXViewLink)]
     public class SXViewLink : BiffRecord
     {
         public const RecordType ID = RecordType.SXViewLink;
@@ -33,9 +33,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             {
                 this.XLUnicodeStringNoCch = new XLUnicodeStringNoCch(reader, this.cch);
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

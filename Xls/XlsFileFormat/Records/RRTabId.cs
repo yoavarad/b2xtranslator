@@ -16,7 +16,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// This record does not appear in BIFF5 files.
     /// </summary>
-    [BiffRecord(RecordType.RRTabId)] 
+    [BiffRecord(RecordType.RRTabId)]
     public class RRTabId : BiffRecord
     {
         public const RecordType ID = RecordType.RRTabId;
@@ -47,9 +47,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             {
                 this.rgiTab[i] = reader.ReadUInt16();
             }
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

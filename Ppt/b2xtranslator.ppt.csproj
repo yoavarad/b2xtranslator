@@ -1,8 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <AssemblyOriginatorKeyFile>..\..\key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <!-- Utils.GetDefaultDocument loads "b2xtranslator.PresentationMLMapping.Defaults.*.xml" -->
+    <RootNamespace>b2xtranslator</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PresentationMLMapping\Defaults\**\*.xml" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\b2xtranslator.csproj" />
   </ItemGroup>

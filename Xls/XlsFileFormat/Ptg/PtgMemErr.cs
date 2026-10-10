@@ -14,7 +14,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
             Debug.Assert(this.Id == ID);
             this.Length = 7;
 
-            this.Reader.ReadBytes(6); 
+            this.Reader.ReadBytes(6);
 
             this.type = PtgType.Operand;
             this.popSize = 1;

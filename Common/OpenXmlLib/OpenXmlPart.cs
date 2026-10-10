@@ -16,23 +16,12 @@ namespace b2xtranslator.OpenXmlLib
             this._parent = parent;
             this._partIndex = partIndex;
             this._stream = new MemoryStream();
-
-            var xws = new XmlWriterSettings
-            {
-                OmitXmlDeclaration = false,
-                CloseOutput = false,
-                Encoding = Encoding.UTF8,
-                Indent = true,
-                ConformanceLevel = ConformanceLevel.Document
-            };
-
-            this._xmlWriter = XmlWriter.Create(this._stream, xws);
         }
 
         public override string TargetExt { get { return ".xml"; } }
         public abstract string ContentType { get; }
         public abstract string RelationshipType { get; }
-        
+
         internal virtual bool HasDefaultContentType { get { return false; } }
 
         public Stream GetStream()
@@ -41,10 +30,31 @@ namespace b2xtranslator.OpenXmlLib
             return this._stream;
         }
 
+        /// <summary>
+        /// Writer on this part's stream. Created on first use so it picks up
+        /// <see cref="OpenXmlPackage.Indent"/> set after the package was created.
+        /// </summary>
         public XmlWriter XmlWriter
         {
             get
             {
+                if (this._xmlWriter == null)
+                {
+                    OpenXmlPartContainer root = this;
+                    while (root.Parent != null)
+                        root = root.Parent;
+
+                    var xws = new XmlWriterSettings
+                    {
+                        OmitXmlDeclaration = false,
+                        CloseOutput = false,
+                        Encoding = Encoding.UTF8,
+                        Indent = (root as OpenXmlPackage)?.Indent ?? true,
+                        ConformanceLevel = ConformanceLevel.Document
+                    };
+
+                    this._xmlWriter = XmlWriter.Create(this._stream, xws);
+                }
                 return this._xmlWriter;
             }
         }
@@ -84,12 +94,12 @@ namespace b2xtranslator.OpenXmlLib
             {
                 part.WritePart(writer);
             }
-            
+
             writer.AddPart(this.TargetFullName);
 
 
             writer.Write(this.GetStream());
-            
+
             this.WriteRelationshipPart(writer);
         }
     }

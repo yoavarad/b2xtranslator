@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
         public bool fGXHide;
 
         public PivotChartBits(IStreamReader reader, RecordType id, ushort length)
-            :base(reader, id, length)
+            : base(reader, id, length)
         {
             // assert that the correct record type is instantiated
             Debug.Assert(this.Id == ID);

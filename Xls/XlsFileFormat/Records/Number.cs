@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// <summary>
     /// This class is used to read data from a NUMBER BiffRecord 
     /// </summary>
-    [BiffRecord(RecordType.Number)] 
+    [BiffRecord(RecordType.Number)]
     public class Number : AbstractCellContent
     {
         public const RecordType ID = RecordType.Number;
@@ -33,9 +33,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
             // NOTE: cell fields are parsed by base class
 
             this.num = new ChartNumNillable(reader).value;
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

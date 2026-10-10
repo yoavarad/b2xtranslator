@@ -13,7 +13,7 @@ namespace b2xtranslator.StructuredStorage.Writer
     internal class Header : AbstractHeader
     {
         List<byte> _diFatSectors = new List<byte>();
-        int _diFatSectorCount = 0; 
+        int _diFatSectorCount = 0;
         StructuredStorageContext _context;
 
         /// <summary>

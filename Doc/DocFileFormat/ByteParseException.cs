@@ -8,7 +8,7 @@ namespace b2xtranslator.DocFileFormat
         {
         }
 
-        public ByteParseException(string message) 
+        public ByteParseException(string message)
             : base(message)
         {
         }

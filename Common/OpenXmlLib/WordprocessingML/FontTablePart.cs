@@ -6,7 +6,7 @@
             : base(parent, 0)
         {
         }
-        
+
         public override string ContentType
         {
             get { return WordprocessingMLContentTypes.FontTable; }

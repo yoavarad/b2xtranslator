@@ -12,7 +12,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public AttachedLabelSequence AttachedLabelSequence;
 
         //public EndObject EndObject;
-        
+
         public AxmSequence(IStreamReader reader)
             : base(reader)
         {
@@ -23,7 +23,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             //StartObject 
             //this.StartObject = (StartObject)BiffRecord.ReadRecord(reader);
-            
+
             //ATTACHEDLABEL 
             this.AttachedLabelSequence = new AttachedLabelSequence(reader);
 

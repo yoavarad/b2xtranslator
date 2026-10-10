@@ -25,7 +25,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <summary>
         /// Ctor 
         /// </summary>
-        public MergeCellData(): this(0,0,0,0) { }
+        public MergeCellData() : this(0, 0, 0, 0) { }
 
         /// <summary>
         /// Ctor 
@@ -39,7 +39,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
             this.rwFirst = rwFirst;
             this.rwLast = rwLast;
             this.colFirst = colFirst;
-            this.colLast = colLast; 
+            this.colLast = colLast;
         }
 
         /// <summary>
@@ -52,10 +52,10 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         public string getOXMLFormatedData()
         {
             string returnvalue = "";
-            returnvalue += ExcelHelperClass.intToABCString(this.colFirst, (this.rwFirst+1).ToString());
+            returnvalue += ExcelHelperClass.intToABCString(this.colFirst, (this.rwFirst + 1).ToString());
             returnvalue += ":";
-            returnvalue += ExcelHelperClass.intToABCString(this.colLast, (this.rwLast+1).ToString());
-            return returnvalue; 
+            returnvalue += ExcelHelperClass.intToABCString(this.colLast, (this.rwLast + 1).ToString());
+            return returnvalue;
         }
     }
 }

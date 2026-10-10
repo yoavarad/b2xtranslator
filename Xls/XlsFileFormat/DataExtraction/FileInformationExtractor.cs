@@ -15,7 +15,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
         public string Title;
 
-        public string buffer; 
+        public string buffer;
 
         struct BiffHeader
         {
@@ -29,14 +29,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// <param name="sum">Summary stream </param>
         public FileInformationExtractor(VirtualStream sum)
         {
-            this.Title = null; 
+            this.Title = null;
             if (sum == null)
             {
-                throw new ExtractorException(ExtractorException.NULLPOINTEREXCEPTION); 
+                throw new ExtractorException(ExtractorException.NULLPOINTEREXCEPTION);
             }
-            this.summaryStream = sum; 
+            this.summaryStream = sum;
             this.SummaryStream = new VirtualStreamReader(sum);
-            this.extractData(); 
+            this.extractData();
 
 
         }
@@ -80,7 +80,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                 TraceLogger.Debug(ex.ToString());
             }
             this.buffer = sw.ToString();
-         }
+        }
 
         /// <summary>
         /// A normal overload ToString Method 
@@ -89,7 +89,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public override string ToString()
         {
             string returnvalue = "Title: " + this.Title;
-            return returnvalue; 
+            return returnvalue;
         }
     }
 }

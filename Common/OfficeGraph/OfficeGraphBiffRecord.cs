@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 using b2xtranslator.StructuredStorage.Reader;
 
@@ -30,10 +31,32 @@ namespace b2xtranslator.OfficeGraph
 
         private static Dictionary<ushort, Type> TypeToRecordClassMapping = new Dictionary<ushort, Type>();
 
+        /// <summary>
+        /// Constructor delegates per record id, built once at registration (null if the class has no matching constructor).
+        /// </summary>
+        private static Dictionary<ushort, Func<IStreamReader, GraphRecordNumber, ushort, OfficeGraphBiffRecord>> TypeToRecordFactoryMapping =
+            new Dictionary<ushort, Func<IStreamReader, GraphRecordNumber, ushort, OfficeGraphBiffRecord>>();
+
+        private static Func<IStreamReader, GraphRecordNumber, ushort, OfficeGraphBiffRecord> CreateFactory(Type cls)
+        {
+            var constructor = cls.GetConstructor(
+                new Type[] { typeof(IStreamReader), typeof(GraphRecordNumber), typeof(ushort) }
+                );
+
+            if (constructor == null)
+                return null;
+
+            var parameters = new[] {
+                Expression.Parameter(typeof(IStreamReader)), Expression.Parameter(typeof(GraphRecordNumber)), Expression.Parameter(typeof(ushort)) };
+
+            return Expression.Lambda<Func<IStreamReader, GraphRecordNumber, ushort, OfficeGraphBiffRecord>>(
+                Expression.Convert(Expression.New(constructor, parameters), typeof(OfficeGraphBiffRecord)), parameters).Compile();
+        }
+
         static OfficeGraphBiffRecord()
         {
             UpdateTypeToRecordClassMapping(
-                Assembly.GetExecutingAssembly(), 
+                Assembly.GetExecutingAssembly(),
                 typeof(OfficeGraphBiffRecord).Namespace);
         }
 
@@ -62,6 +85,7 @@ namespace b2xtranslator.OfficeGraph
                                     typeCode, t, TypeToRecordClassMapping[typeCode]));
                             }
                             TypeToRecordClassMapping.Add(typeCode, t);
+                            TypeToRecordFactoryMapping.Add(typeCode, CreateFactory(t));
                         }
                     }
                 }
@@ -88,23 +112,11 @@ namespace b2xtranslator.OfficeGraph
             {
                 ushort id = reader.ReadUInt16();
                 ushort size = reader.ReadUInt16();
-                Type cls;
-                if (TypeToRecordClassMapping.TryGetValue(id, out cls))
+                Func<IStreamReader, GraphRecordNumber, ushort, OfficeGraphBiffRecord> factory;
+                if (TypeToRecordFactoryMapping.TryGetValue(id, out factory))
                 {
-                    var constructor = cls.GetConstructor(
-                        new Type[] { typeof(IStreamReader), typeof(GraphRecordNumber), typeof(ushort) }
-                        );
-
-                    try
-                    {
-                        result = (OfficeGraphBiffRecord)constructor.Invoke(
-                            new object[] {reader, id, size }
-                            );
-                    }
-                    catch (TargetInvocationException e)
-                    {
-                        throw e.InnerException;
-                    }
+                    // a null factory (no matching constructor) throws NullReferenceException, as the reflection call did
+                    result = factory(reader, (GraphRecordNumber)id, size);
                 }
                 else
                 {

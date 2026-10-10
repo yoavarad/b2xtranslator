@@ -1,4 +1,5 @@
 
+using b2xtranslator.Tools;
 
 using System;
 using System.Collections.Generic;
@@ -143,16 +144,16 @@ namespace b2xtranslator.PresentationMLMapping
 
             var parentSlide = textbox.FirstAncestorWithType<Slide>();
             if (parentSlide != null)
-            foreach (var container in this._ctx.Ppt.DocumentRecord.AllChildrenWithType<SlideListWithText>())
-            {
-                if (container.Instance == 0)
+                foreach (var container in this._ctx.Ppt.DocumentRecord.AllChildrenWithType<SlideListWithText>())
                 {
-                    if (container.SlideToPlaceholderSpecialInfo.ContainsKey(parentSlide.PersistAtom))
+                    if (container.Instance == 0)
                     {
-                        siaDefaults = container.SlideToPlaceholderSpecialInfo[parentSlide.PersistAtom][0];
+                        if (container.SlideToPlaceholderSpecialInfo.ContainsKey(parentSlide.PersistAtom))
+                        {
+                            siaDefaults = container.SlideToPlaceholderSpecialInfo[parentSlide.PersistAtom][0];
+                        }
                     }
                 }
-            }
 
             switch (rec.TypeCode)
             {
@@ -208,7 +209,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 mciics.Add((MouseClickInteractiveInfoContainer)rec);
                                 break;
                             case 0xfdf: //MouseClickTextInteractiveInfoAtom
-                                mciics[mciics.Count-1].Range = (MouseClickTextInteractiveInfoAtom)rec;
+                                mciics[mciics.Count - 1].Range = (MouseClickTextInteractiveInfoAtom)rec;
                                 break;
                             case 0xff7: //DateTimeMCAtom
                                 var d = (DateTimeMCAtom)rec;
@@ -219,7 +220,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 int runCount = 0;
                                 var p = GetParagraphRun(style, 0, ref runCount);
                                 var tp = GetMasterTextPropRun(masterTextProp, 0);
-                                writeP(p, tp, so, ruler, defaultStyle,0);
+                                writeP(p, tp, so, ruler, defaultStyle, 0);
 
                                 this._writer.WriteStartElement("a", "fld", OpenXmlNamespaces.DrawingML);
                                 this._writer.WriteAttributeString("id", "{1023E2E8-AA53-4FEA-8F5C-1FABD68F61AB}");
@@ -234,7 +235,7 @@ namespace b2xtranslator.PresentationMLMapping
                                     RegularContainer slide = textbox.FirstAncestorWithType<Slide>();
                                     if (slide == null) slide = textbox.FirstAncestorWithType<Note>();
                                     if (slide == null) slide = textbox.FirstAncestorWithType<Handout>();
-                                    new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle,lvl,mciics,pparentShapeTreeMapping,0, insideTable);
+                                    new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle, lvl, mciics, pparentShapeTreeMapping, 0, insideTable);
                                 }
 
                                 this._writer.WriteElementString("a", "t", OpenXmlNamespaces.DrawingML, date);
@@ -288,7 +289,7 @@ namespace b2xtranslator.PresentationMLMapping
                 case 3998:
                     var otrAtom = (OutlineTextRefAtom)rec;
                     var slideListWithText = this._ctx.Ppt.DocumentRecord.RegularSlideListWithText;
-                                  
+
                     var thAtoms = slideListWithText.SlideToPlaceholderTextHeaders[textbox.FirstAncestorWithType<Slide>().PersistAtom];
                     thAtom = thAtoms[otrAtom.Index];
 
@@ -313,10 +314,10 @@ namespace b2xtranslator.PresentationMLMapping
                     throw new NotSupportedException("Can't find text for ClientTextbox without TextHeaderAtom and OutlineTextRefAtom");
             }
 
-            uint idx = 0;                      
+            uint idx = 0;
 
             var s = textbox.FirstAncestorWithType<Slide>();
-           
+
             if (s != null)
             {
                 try
@@ -335,29 +336,29 @@ namespace b2xtranslator.PresentationMLMapping
                     }
                 }
                 catch (Exception)
-                {                    
+                {
                     throw;
                 }
-                
+
             }
 
             //combine sia and siaDefaults
             var lstSIRuns = new Dictionary<TextSIRun, uint>();
             uint pos = 0;
             if (siaDefaults != null)
-            foreach (var sirun in siaDefaults.Runs)
-            {
-                lstSIRuns.Add(sirun,pos);
-                pos += sirun.count;
-            }
+                foreach (var sirun in siaDefaults.Runs)
+                {
+                    lstSIRuns.Add(sirun, pos);
+                    pos += sirun.count;
+                }
             pos = 0;
             if (sia != null)
-            foreach (var sirun in sia.Runs)
-            {
-                lstSIRuns.Add(sirun, pos);
-                pos += sirun.count;
-            }
-            
+                foreach (var sirun in sia.Runs)
+                {
+                    lstSIRuns.Add(sirun, pos);
+                    pos += sirun.count;
+                }
+
             if (so.OptionsByID.ContainsKey(ShapeOptions.PropertyId.hspMaster))
             {
                 uint MasterID = so.OptionsByID[ShapeOptions.PropertyId.hspMaster].op;
@@ -367,7 +368,7 @@ namespace b2xtranslator.PresentationMLMapping
             {
                 this._writer.WriteStartElement("a", "p", OpenXmlNamespaces.DrawingML);
                 this._writer.WriteStartElement("a", "endParaRPr", OpenXmlNamespaces.DrawingML);
-                // TODO...
+                // Empty paragraph: no text, so no run properties to emit; endParaRPr is intentionally empty.
                 this._writer.WriteEndElement();
                 this._writer.WriteEndElement();
             }
@@ -381,7 +382,7 @@ namespace b2xtranslator.PresentationMLMapping
 
                     //each parline forms a paragraph
                     //each runline forms a run
-                    
+
                     int runCount = 0;
                     var p = GetParagraphRun(style, idx, ref runCount);
                     var tp = GetMasterTextPropRun(masterTextProp, idx);
@@ -413,21 +414,21 @@ namespace b2xtranslator.PresentationMLMapping
                                 RegularContainer slide = textbox.FirstAncestorWithType<Slide>();
                                 if (slide == null) slide = textbox.FirstAncestorWithType<Note>();
                                 if (slide == null) slide = textbox.FirstAncestorWithType<Handout>();
-                                new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle,lvl,mciics,pparentShapeTreeMapping,idx, insideTable);
+                                new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle, lvl, mciics, pparentShapeTreeMapping, idx, insideTable);
                             }
 
                             this._writer.WriteEndElement();
                             if (line.Length == 0)
                             {
-                               idx++;
-                               internalOffset -= 1;
+                                idx++;
+                                internalOffset -= 1;
                             }
-                            
+
                             internalOffset += 1;
-                            
+
                         }
 
-                        
+
 
                         while (idx < offset + line.Length)
                         {
@@ -446,7 +447,7 @@ namespace b2xtranslator.PresentationMLMapping
                             }
 
                             if (r != null)
-                            {                                
+                            {
                                 len = (int)(CharacterRunStart + r.Length - idx - internalOffset);
                                 if (len > line.Length - idx + offset) len = (int)(line.Length - idx + offset);
                                 if (len < 0) len = (int)(line.Length - idx + offset);
@@ -456,9 +457,9 @@ namespace b2xtranslator.PresentationMLMapping
                             {
                                 runText = line.Substring((int)(idx - offset));
                                 len = runText.Length;
-                            }           
-                            
-                             //split runlines that partly contain a link
+                            }
+
+                            //split runlines that partly contain a link
                             foreach (var mccic in mciics)
                             {
                                 if (mccic.Range.begin <= idx + internalOffset && mccic.Range.end > idx + internalOffset)
@@ -466,7 +467,7 @@ namespace b2xtranslator.PresentationMLMapping
                                     //link end before text ends
                                     if (mccic.Range.end < idx + internalOffset + len)
                                     {
-                                        runText = line.Substring((int)(idx - offset),(int)(mccic.Range.end - mccic.Range.begin));
+                                        runText = line.Substring((int)(idx - offset), (int)(mccic.Range.end - mccic.Range.begin));
                                     }
                                 }
                                 else if (mccic.Range.begin >= idx + internalOffset && mccic.Range.end <= idx + internalOffset + len)
@@ -506,9 +507,10 @@ namespace b2xtranslator.PresentationMLMapping
                                                 {
                                                     this.lang = System.Globalization.CultureInfo.GetCultureInfo(sirun.si.lid).IetfLanguageTag;
                                                 }
-                                                catch (Exception)
+                                                catch (Exception ex)
                                                 {
-                                                    //ignore
+                                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                                    TraceLogger.Debug("TextMapping: language id invalid, omitting lang: {0}", ex.Message);
                                                 }
                                                 break;
                                         }
@@ -528,14 +530,15 @@ namespace b2xtranslator.PresentationMLMapping
                                                 {
                                                     this.altLang = System.Globalization.CultureInfo.GetCultureInfo(sirun.si.altLid).IetfLanguageTag;
                                                 }
-                                                catch (Exception)
+                                                catch (Exception ex)
                                                 {
-                                                    //ignore
+                                                    // Best-effort: Invalid language id is tolerated; attribute is optional.
+                                                    TraceLogger.Debug("TextMapping: alt language id invalid, omitting altLang: {0}", ex.Message);
                                                 }
                                                 break;
                                         }
                                     }
-                                                         
+
                                 }
                             }
 
@@ -551,13 +554,13 @@ namespace b2xtranslator.PresentationMLMapping
 
                             if (r != null || defaultStyle != null)
                             {
-                                new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide,ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle,lvl, mciics, pparentShapeTreeMapping, idx, insideTable);
+                                new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "rPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle, lvl, mciics, pparentShapeTreeMapping, idx, insideTable);
                             }
                             else
                             {
                                 this._writer.WriteStartElement("a", "rPr", OpenXmlNamespaces.DrawingML);
                                 this._writer.WriteAttributeString("lang", this.lang);
-                                this._writer.WriteEndElement(); 
+                                this._writer.WriteEndElement();
                             }
 
                             this._writer.WriteStartElement("a", "t", OpenXmlNamespaces.DrawingML);
@@ -569,12 +572,12 @@ namespace b2xtranslator.PresentationMLMapping
                             this._writer.WriteEndElement();
 
                             idx += (uint)runText.Length; // +1;
-                           
+
                         }
 
                         first = false;
 
-                       
+
                     }
 
                     if (!textwritten)
@@ -588,7 +591,7 @@ namespace b2xtranslator.PresentationMLMapping
                             RegularContainer slide = textbox.FirstAncestorWithType<Slide>();
                             if (slide == null) slide = textbox.FirstAncestorWithType<Note>();
                             if (slide == null) slide = textbox.FirstAncestorWithType<Handout>();
-                            new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "endParaRPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle,lvl,mciics,pparentShapeTreeMapping,idx, insideTable);
+                            new CharacterRunPropsMapping(this._ctx, this._writer).Apply(r, "endParaRPr", slide, ref dummy, ref dummy2, ref dummy3, this.lang, this.altLang, defaultStyle, lvl, mciics, pparentShapeTreeMapping, idx, insideTable);
                         }
 
                     }
@@ -616,7 +619,7 @@ namespace b2xtranslator.PresentationMLMapping
             if (p == null)
             {
                 this._writer.WriteAttributeString("lvl", tp.indentLevel.ToString());
-                               
+
 
                 if (defaultStyle != null && defaultStyle.PRuns.Count > tp.indentLevel)
                 {
@@ -684,9 +687,12 @@ namespace b2xtranslator.PresentationMLMapping
                                     this._writer.WriteAttributeString("val", (defaultStyle.PRuns[tp.indentLevel].BulletSize * 1000).ToString());
                                     this._writer.WriteEndElement(); //buSzPct
                                 }
-                                else
+                                else if (defaultStyle.PRuns[tp.indentLevel].BulletSize < 0)
                                 {
-                                    //TODO
+                                    // [MS-PPT] BulletSize: -4000..-1 = absolute size in points; a:buSzPts is in 1/100 pt.
+                                    this._writer.WriteStartElement("a", "buSzPts", OpenXmlNamespaces.DrawingML);
+                                    this._writer.WriteAttributeString("val", (-defaultStyle.PRuns[tp.indentLevel].BulletSize * 100).ToString());
+                                    this._writer.WriteEndElement(); //buSzPts
                                 }
                             }
                             if (defaultStyle.PRuns[tp.indentLevel].BulletFontPresent)
@@ -736,8 +742,9 @@ namespace b2xtranslator.PresentationMLMapping
                 {
                     this._writer.WriteAttributeString("marL", Utils.MasterCoordToEMU((int)p.LeftMargin).ToString());
                     writtenLeftMargin = (int)p.LeftMargin;
-                } 
-                else if (ruler != null && ruler.fLeftMargin1 && p.IndentLevel == 0){
+                }
+                else if (ruler != null && ruler.fLeftMargin1 && p.IndentLevel == 0)
+                {
                     this._writer.WriteAttributeString("marL", Utils.MasterCoordToEMU(ruler.leftMargin1).ToString());
                     writtenLeftMargin = ruler.leftMargin1;
                     if (!(p.IndentPresent || (defaultStyle != null && defaultStyle.PRuns.Count > p.IndentLevel && defaultStyle.PRuns[p.IndentLevel].IndentPresent) || (ruler != null && ruler.fIndent1 && p.IndentLevel == 0)))
@@ -785,11 +792,11 @@ namespace b2xtranslator.PresentationMLMapping
                 {
                     var props = new TextBooleanProperties(so.OptionsByID[ShapeOptions.PropertyId.TextBooleanProperties].op);
                     if (props.fUsefAutoTextMargin && (props.fAutoTextMargin == false))
-                    if (so.OptionsByID[ShapeOptions.PropertyId.dxTextLeft].op > 0)
+                        if (so.OptionsByID[ShapeOptions.PropertyId.dxTextLeft].op > 0)
                             this._writer.WriteAttributeString("marL", so.OptionsByID[ShapeOptions.PropertyId.dxTextLeft].op.ToString());
                     //writtenLeftMargin = Utils.EMUToMasterCoord((int)so.OptionsByID[ShapeOptions.PropertyId.dxTextLeft].op);
                 }
-                
+
 
                 if (p.IndentPresent)
                 {
@@ -817,13 +824,13 @@ namespace b2xtranslator.PresentationMLMapping
                 }
                 else if (defaultStyle != null && defaultStyle.PRuns.Count > p.IndentLevel && defaultStyle.PRuns[p.IndentLevel].IndentPresent)
                 {
-                    if (writtenLeftMargin == -1 )
+                    if (writtenLeftMargin == -1)
                     {
                         writtenLeftMargin = (int)(defaultStyle.PRuns[p.IndentLevel].LeftMargin);
                     }
                     this._writer.WriteAttributeString("indent", (-1 * (Utils.MasterCoordToEMU((int)(writtenLeftMargin - defaultStyle.PRuns[p.IndentLevel].Indent)))).ToString());
                 }
-              
+
                 if (p.AlignmentPresent)
                 {
                     switch (p.Alignment)
@@ -901,55 +908,21 @@ namespace b2xtranslator.PresentationMLMapping
                     //_writer.WriteAttributeString("val", (p.LineSpacing * 1000).ToString());
                     //_writer.WriteEndElement(); //spcPct
 
-                    if (p.LineSpacing < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * p.LineSpacing * 12).ToString()); //TODO: this has to be verified!
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.LineSpacing).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-
+                    Utils.WriteSpacing(this._writer, p.LineSpacing.GetValueOrDefault());
 
                     this._writer.WriteEndElement(); //lnSpc
                 }
                 if (p.SpaceBeforePresent)
                 {
                     this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                    if (p.SpaceBefore < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * p.SpaceBefore).ToString()); //TODO: the 12 is wrong: find correct value
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.SpaceBefore).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, p.SpaceBefore.GetValueOrDefault());
                     this._writer.WriteEndElement(); //spcBef
                 }
 
                 if (p.SpaceAfterPresent)
                 {
                     this._writer.WriteStartElement("a", "spcAft", OpenXmlNamespaces.DrawingML);
-                    if (p.SpaceAfter < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * p.SpaceAfter).ToString()); //TODO: the 12 is wrong: find correct value
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * p.SpaceAfter).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, p.SpaceAfter.GetValueOrDefault());
                     this._writer.WriteEndElement(); //spcAft
                 }
 
@@ -961,11 +934,11 @@ namespace b2xtranslator.PresentationMLMapping
                     }
                     else
                     {
-                                                
+
                         if (p.BulletColorPresent)
                         {
                             this._writer.WriteStartElement("a", "buClr", OpenXmlNamespaces.DrawingML);
-                            
+
                             string s = p.BulletColor.Red.ToString("X").PadLeft(2, '0') + p.BulletColor.Green.ToString("X").PadLeft(2, '0') + p.BulletColor.Blue.ToString("X").PadLeft(2, '0');
                             switch (p.BulletColor.Index)
                             {
@@ -1011,9 +984,12 @@ namespace b2xtranslator.PresentationMLMapping
                                 this._writer.WriteAttributeString("val", (p.BulletSize * 1000).ToString());
                                 this._writer.WriteEndElement(); //buSzPct
                             }
-                            else
+                            else if (p.BulletSize < 0)
                             {
-                                //TODO
+                                // [MS-PPT] BulletSize: -4000..-1 = absolute size in points; a:buSzPts is in 1/100 pt.
+                                this._writer.WriteStartElement("a", "buSzPts", OpenXmlNamespaces.DrawingML);
+                                this._writer.WriteAttributeString("val", (-p.BulletSize * 100).ToString());
+                                this._writer.WriteEndElement(); //buSzPts
                             }
                         }
                         else if (p.BulletFlagsFieldPresent && (p.BulletFlags & 0x1 << 3) > 0)
@@ -1054,73 +1030,73 @@ namespace b2xtranslator.PresentationMLMapping
                             var slide = so.FirstAncestorWithType<Slide>();
 
                             if (slide != null)
-                            foreach (var entry in c.OutlineTextProps9Entries)
-                            {
-                                if (slide.PersistAtom.SlideId == entry.outlineTextHeaderAtom.slideIdRef)
+                                foreach (var entry in c.OutlineTextProps9Entries)
                                 {
-                                    if (entry.styleTextProp9Atom.P9Runs.Count > runCount && entry.styleTextProp9Atom.P9Runs[runCount].fBulletHasAutoNumber == 1)
+                                    if (slide.PersistAtom.SlideId == entry.outlineTextHeaderAtom.slideIdRef)
                                     {
-                                        switch (entry.styleTextProp9Atom.P9Runs[runCount].bulletAutoNumberScheme)
+                                        if (entry.styleTextProp9Atom.P9Runs.Count > runCount && entry.styleTextProp9Atom.P9Runs[runCount].fBulletHasAutoNumber == 1)
                                         {
-                                            case -1:
-                                            case 3:
+                                            switch (entry.styleTextProp9Atom.P9Runs[runCount].bulletAutoNumberScheme)
+                                            {
+                                                case -1:
+                                                case 3:
                                                     this._writer.WriteStartElement("a", "buAutoNum", OpenXmlNamespaces.DrawingML);
                                                     this._writer.WriteAttributeString("type", "arabicPeriod");
-                                                if (entry.styleTextProp9Atom.P9Runs[runCount].startAt != -1)
-                                                {
+                                                    if (entry.styleTextProp9Atom.P9Runs[runCount].startAt != -1)
+                                                    {
                                                         this._writer.WriteAttributeString("startAt", entry.styleTextProp9Atom.P9Runs[runCount].startAt.ToString());
-                                                }
+                                                    }
                                                     this._writer.WriteEndElement();
-                                                autoNumberingWritten = true;
-                                                break;
-                                            case 1:
+                                                    autoNumberingWritten = true;
+                                                    break;
+                                                case 1:
                                                     this._writer.WriteStartElement("a", "buAutoNum", OpenXmlNamespaces.DrawingML);
                                                     this._writer.WriteAttributeString("type", "alphaUcPeriod");
-                                                if (entry.styleTextProp9Atom.P9Runs[runCount].startAt != -1)
-                                                {
+                                                    if (entry.styleTextProp9Atom.P9Runs[runCount].startAt != -1)
+                                                    {
                                                         this._writer.WriteAttributeString("startAt", entry.styleTextProp9Atom.P9Runs[runCount].startAt.ToString());
-                                                }
+                                                    }
                                                     this._writer.WriteEndElement();
-                                                autoNumberingWritten = true;
-                                                break;
+                                                    autoNumberingWritten = true;
+                                                    break;
+                                            }
                                         }
-                                    }
-                                    else if (entry.styleTextProp9Atom.P9Runs.Count > runCount && entry.styleTextProp9Atom.P9Runs[runCount].BulletBlipReferencePresent)
-                                    {
-                                       var blips = ((RegularContainer)c.ParentRecord).FirstChildWithType<BlipCollection9Container>();
-                                        if (blips != null && blips.Children.Count > 0)
+                                        else if (entry.styleTextProp9Atom.P9Runs.Count > runCount && entry.styleTextProp9Atom.P9Runs[runCount].BulletBlipReferencePresent)
                                         {
-                                            ImagePart imgPart = null;
-
-                                            var b = ((BlipEntityAtom)blips.Children[entry.styleTextProp9Atom.P9Runs[runCount].bulletblipref]).blip;
-
-                                            if (b == null)
+                                            var blips = ((RegularContainer)c.ParentRecord).FirstChildWithType<BlipCollection9Container>();
+                                            if (blips != null && blips.Children.Count > 0)
                                             {
-                                                var mb = ((BlipEntityAtom)blips.Children[0]).mblip;
-                                                imgPart = this.parentShapeTreeMapping.parentSlideMapping.targetPart.AddImagePart(ShapeTreeMapping.getImageType(mb.TypeCode));
-                                                imgPart.TargetDirectory = "..\\media";
-                                                var outStream = imgPart.GetStream();
-                                                var decompressed = mb.Decrompress();
-                                                outStream.Write(decompressed, 0, decompressed.Length);
-                                            }
-                                            else
-                                            {
-                                                imgPart = this.parentShapeTreeMapping.parentSlideMapping.targetPart.AddImagePart(ShapeTreeMapping.getImageType(b.TypeCode));
-                                                imgPart.TargetDirectory = "..\\media";
-                                                var outStream = imgPart.GetStream();
-                                                outStream.Write(b.m_pvBits, 0, b.m_pvBits.Length);
-                                            }
+                                                ImagePart imgPart = null;
+
+                                                var b = ((BlipEntityAtom)blips.Children[entry.styleTextProp9Atom.P9Runs[runCount].bulletblipref]).blip;
+
+                                                if (b == null)
+                                                {
+                                                    var mb = ((BlipEntityAtom)blips.Children[0]).mblip;
+                                                    imgPart = this.parentShapeTreeMapping.parentSlideMapping.targetPart.AddImagePart(ShapeTreeMapping.getImageType(mb.TypeCode));
+                                                    imgPart.TargetDirectory = "..\\media";
+                                                    var outStream = imgPart.GetStream();
+                                                    var decompressed = mb.Decrompress();
+                                                    outStream.Write(decompressed, 0, decompressed.Length);
+                                                }
+                                                else
+                                                {
+                                                    imgPart = this.parentShapeTreeMapping.parentSlideMapping.targetPart.AddImagePart(ShapeTreeMapping.getImageType(b.TypeCode));
+                                                    imgPart.TargetDirectory = "..\\media";
+                                                    var outStream = imgPart.GetStream();
+                                                    outStream.Write(b.m_pvBits, 0, b.m_pvBits.Length);
+                                                }
 
                                                 this._writer.WriteStartElement("a", "buBlip", OpenXmlNamespaces.DrawingML);
                                                 this._writer.WriteStartElement("a", "blip", OpenXmlNamespaces.DrawingML);
                                                 this._writer.WriteAttributeString("r", "embed", OpenXmlNamespaces.Relationships, imgPart.RelIdToString);
                                                 this._writer.WriteEndElement(); //blip
                                                 this._writer.WriteEndElement(); //buBlip
-                                            bulletWritten = true;
+                                                bulletWritten = true;
+                                            }
                                         }
                                     }
                                 }
-                            }
 
                             //OutlineTextPropsHeader9Atom a = c.FirstChildWithType<OutlineTextPropsHeader9Atom>();
                             //Slide slide = so.FirstAncestorWithType<Slide>();
@@ -1152,7 +1128,7 @@ namespace b2xtranslator.PresentationMLMapping
                         {
                             if (this.parentShapeTreeMapping != null && this.parentShapeTreeMapping.ShapeStyleTextProp9Atom != null && this.parentShapeTreeMapping.ShapeStyleTextProp9Atom.P9Runs.Count > runCount && this.parentShapeTreeMapping.ShapeStyleTextProp9Atom.P9Runs[runCount].fBulletHasAutoNumber == 1)
                             {
-                                switch(this.parentShapeTreeMapping.ShapeStyleTextProp9Atom.P9Runs[runCount].bulletAutoNumberScheme)
+                                switch (this.parentShapeTreeMapping.ShapeStyleTextProp9Atom.P9Runs[runCount].bulletAutoNumberScheme)
                                 {
                                     case -1:
                                     case 3:
@@ -1196,6 +1172,6 @@ namespace b2xtranslator.PresentationMLMapping
 
             this._writer.WriteEndElement(); //pPr
         }
-                
+
     }
 }

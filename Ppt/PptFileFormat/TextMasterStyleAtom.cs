@@ -25,9 +25,9 @@ namespace b2xtranslator.PptFileFormat
 
                 if ((this.Instance >= 5)) // & (this.Instance < this.IndentLevelCount))
                 {
-                    ushort level = this.Reader.ReadUInt16(); 
-                }                
-             
+                    ushort level = this.Reader.ReadUInt16();
+                }
+
                 this.PRuns.Add(new ParagraphRun(this.Reader, true));
 
                 TraceLogger.DebugInternal("Read paragraph run. Before pos = {0}, after pos = {1} of {2}: {3}",
@@ -45,7 +45,7 @@ namespace b2xtranslator.PptFileFormat
             //// XXX: I'm not sure why but in some cases there is trailing garbage -- flgr
             if (this.Reader.BaseStream.Position != this.Reader.BaseStream.Length)
             {
-               this.Reader.BaseStream.Position = this.Reader.BaseStream.Length;
+                this.Reader.BaseStream.Position = this.Reader.BaseStream.Length;
             }
         }
 

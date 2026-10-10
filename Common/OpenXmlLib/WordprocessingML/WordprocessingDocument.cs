@@ -34,11 +34,11 @@
         public static WordprocessingDocument Create(string fileName, OpenXmlPackage.DocumentType type)
         {
             var doc = new WordprocessingDocument(fileName, type);
-            
+
             return doc;
         }
 
-        public OpenXmlPackage.DocumentType DocumentType
+        public new OpenXmlPackage.DocumentType DocumentType
         {
             get { return this._documentType; }
             set { this._documentType = value; }
@@ -49,7 +49,7 @@
             get { return this._customFilePropertiesPart; }
         }
 
-        
+
         public MainDocumentPart MainDocumentPart
         {
             get { return this._mainDocumentPart; }

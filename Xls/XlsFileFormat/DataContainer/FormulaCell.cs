@@ -9,11 +9,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
     /// </summary>
     public class FormulaCell : AbstractCellData
     {
-        /// <summary>
-        /// String which stores the index to the sharedstringtable 
-        /// </summary>
-        private string valueString;
-
         ///
 
         private Stack<AbstractPtg> ptgStack;
@@ -27,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
 
         public bool isSharedFormula = false;
 
-        public bool alwaysCalculated = false; 
+        public bool alwaysCalculated = false;
 
         /// <summary>
         /// This method is used to get the Value from this cell 
@@ -35,7 +30,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         /// <returns></returns>
         public override string getValue()
         {
-            return this.valueString;
+            return null;
         }
 
         /// <summary>
@@ -46,12 +41,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer
         {
             if (obj is Stack<AbstractPtg>)
             {
-                this.ptgStack = (Stack<AbstractPtg>)obj; 
+                this.ptgStack = (Stack<AbstractPtg>)obj;
             }
         }
 
 
-        public object calculatedValue; 
+        public object calculatedValue;
 
-     }
+    }
 }

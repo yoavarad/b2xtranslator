@@ -90,7 +90,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             var writer = new StructuredStorageWriter();
 
             // Word will not open embedded charts if a CLSID is set.
-            if(ole.Program.StartsWith("Excel.Chart") == false)
+            if (ole.Program.StartsWith("Excel.Chart") == false)
             {
                 writer.RootDirectoryEntry.setClsId(ole.ClassId);
             }
@@ -101,8 +101,8 @@ namespace b2xtranslator.WordprocessingMLMapping
                 writer.RootDirectoryEntry.AddStreamDirectoryEntry(oleStream, ole.Streams[oleStream]);
             }
 
-           //write the storage to the xml part
-           writer.write(part.GetStream());
+            //write the storage to the xml part
+            writer.write(part.GetStream());
         }
     }
 }

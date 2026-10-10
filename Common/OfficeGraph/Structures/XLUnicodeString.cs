@@ -34,7 +34,7 @@ namespace b2xtranslator.OfficeGraph
         /// If fHighByte is 0x0, the size of the array MUST be equal to the count of characters in the string. 
         /// If fHighByte is 0x1, the size of the array MUST be equal to 2 times the count of characters in the string.
         /// </summary>
-        public byte[] rgb;        
+        public byte[] rgb;
 
 
         public XLUnicodeString(IStreamReader reader)

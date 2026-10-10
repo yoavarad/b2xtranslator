@@ -10,7 +10,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Structures
 
         public XmlTkPieComboFrom12Frt(IStreamReader reader)
         {
-            this.fPieCombo = new XmlTkBool(reader);   
+            this.fPieCombo = new XmlTkBool(reader);
         }
     }
 }

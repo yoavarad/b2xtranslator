@@ -7,7 +7,7 @@ namespace b2xtranslator.PptFileFormat
 {
 
     [OfficeRecord(4090)]
-    public class FooterMCAtom: Record
+    public class FooterMCAtom : Record
     {
         public int Position;
         public FooterMCAtom(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)

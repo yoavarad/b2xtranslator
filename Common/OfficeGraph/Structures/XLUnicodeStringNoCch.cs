@@ -32,7 +32,7 @@ namespace b2xtranslator.OfficeGraph
         /// </summary>
         public byte[] rgb;
 
-        
+
         public XLUnicodeStringNoCch(IStreamReader reader, ushort cch)
         {
             this.fHighByte = Utils.BitmaskToBool(reader.ReadByte(), 0x0001);
@@ -65,4 +65,3 @@ namespace b2xtranslator.OfficeGraph
         }
     }
 }
-    

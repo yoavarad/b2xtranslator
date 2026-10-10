@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Linq;
 using b2xtranslator.PptFileFormat;
 using b2xtranslator.CommonTranslatorLib;
 using System.Xml;
@@ -40,14 +41,14 @@ namespace b2xtranslator.PresentationMLMapping
         {
             this._Master = Master;
 
-            var atoms = Master.AllChildrenWithType<TextMasterStyleAtom>();            
+            var atoms = Master.AllChildrenWithType<TextMasterStyleAtom>();
 
             var body9atoms = new List<TextMasterStyle9Atom>();
             var title9atoms = new List<TextMasterStyle9Atom>();
             foreach (var progtags in Master.AllChildrenWithType<ProgTags>())
-	        {
-        		foreach (var progbinarytag in progtags.AllChildrenWithType<ProgBinaryTag>())
-	            {
+            {
+                foreach (var progbinarytag in progtags.AllChildrenWithType<ProgBinaryTag>())
+                {
                     foreach (var blob in progbinarytag.AllChildrenWithType<ProgBinaryTagDataBlob>())
                     {
                         foreach (var atom in blob.AllChildrenWithType<TextMasterStyle9Atom>())
@@ -55,13 +56,13 @@ namespace b2xtranslator.PresentationMLMapping
                             if (atom.Instance == 0) title9atoms.Add(atom);
                             if (atom.Instance == 1) body9atoms.Add(atom);
                         }
-                    }            		
-	            }
-	        }
-            
+                    }
+                }
+            }
+
             foreach (var atom in atoms)
             {
-                if (atom.Instance == 0) this.titleAtoms.Add(atom);   
+                if (atom.Instance == 0) this.titleAtoms.Add(atom);
                 if (atom.Instance == 1) this.bodyAtoms.Add(atom);
                 if (atom.Instance == 5) this.CenterBodyAtoms.Add(atom);
                 if (atom.Instance == 6) this.CenterTitleAtoms.Add(atom);
@@ -116,11 +117,30 @@ namespace b2xtranslator.PresentationMLMapping
                 {
                     pr9 = null;
                     if (body9atoms.Count > 0 && body9atoms[0].pruns.Count > i) pr9 = body9atoms[0].pruns[i];
-                    writepPr(atom.CRuns[0], atom.PRuns[0],pr9, i, false);
+                    writepPr(atom.CRuns[0], atom.PRuns[0], pr9, i, false);
                 }
             }
 
             this._writer.WriteEndElement(); //bodyStyle
+
+            this._writer.WriteStartElement("p", "otherStyle", OpenXmlNamespaces.PresentationML);
+
+            foreach (var atom in atoms.Where(a => a.Instance == 4 && a.IndentLevelCount > 0))
+            {
+                this.lastSpaceBefore = 0;
+                this.lastColor = "";
+                this.lastBulletFont = "";
+                this.lastBulletChar = "";
+                this.lastBulletColor = "";
+                this.lastSize = "";
+                for (int i = 0; i < 9; i++)
+                {
+                    int src = i < atom.IndentLevelCount ? i : 0;
+                    writepPr(atom.CRuns[src], atom.PRuns[src], null, i, false);
+                }
+            }
+
+            this._writer.WriteEndElement(); //otherStyle
 
             this._writer.WriteEndElement(); //txStyles
         }
@@ -207,7 +227,7 @@ namespace b2xtranslator.PresentationMLMapping
 
             //TextMasterStyleAtom defaultStyle = _ctx.Ppt.DocumentRecord.FirstChildWithType<b2xtranslator.PptFileFormat.Environment>().FirstChildWithType<TextMasterStyleAtom>();
 
-            this._writer.WriteStartElement("a", "lvl" + (IndentLevel+1).ToString() + "pPr", OpenXmlNamespaces.DrawingML);
+            this._writer.WriteStartElement("a", "lvl" + (IndentLevel + 1).ToString() + "pPr", OpenXmlNamespaces.DrawingML);
 
             //marL
             if (pr.LeftMarginPresent && !isDefault) this._writer.WriteAttributeString("marL", Utils.MasterCoordToEMU((int)pr.LeftMargin).ToString());
@@ -295,18 +315,7 @@ namespace b2xtranslator.PresentationMLMapping
             if (pr.SpaceBeforePresent)
             {
                 this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                if (pr.SpaceBefore < 0)
-                {
-                    this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (-1 * 12 * pr.SpaceBefore).ToString()); //TODO: the 12 is wrong
-                    this._writer.WriteEndElement(); //spcPct
-                }
-                else
-                {
-                    this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (1000 * pr.SpaceBefore).ToString());
-                    this._writer.WriteEndElement(); //spcPct
-                }
+                Utils.WriteSpacing(this._writer, pr.SpaceBefore.GetValueOrDefault());
                 this._writer.WriteEndElement(); //spcBef
                 this.lastSpaceBefore = (int)pr.SpaceBefore;
             }
@@ -315,18 +324,7 @@ namespace b2xtranslator.PresentationMLMapping
                 if (this.lastSpaceBefore != 0)
                 {
                     this._writer.WriteStartElement("a", "spcBef", OpenXmlNamespaces.DrawingML);
-                    if (this.lastSpaceBefore < 0)
-                    {
-                        this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (-1 * 12 * this.lastSpaceBefore).ToString()); //TODO: the 12 is wrong
-                        this._writer.WriteEndElement(); //spcPct
-                    }
-                    else
-                    {
-                        this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                        this._writer.WriteAttributeString("val", (1000 * this.lastSpaceBefore).ToString());
-                        this._writer.WriteEndElement(); //spcPct
-                    }
+                    Utils.WriteSpacing(this._writer, this.lastSpaceBefore);
                     this._writer.WriteEndElement(); //spcBef
                 }
             }
@@ -334,18 +332,7 @@ namespace b2xtranslator.PresentationMLMapping
             if (pr.SpaceAfterPresent)
             {
                 this._writer.WriteStartElement("a", "spcAft", OpenXmlNamespaces.DrawingML);
-                if (pr.SpaceAfter < 0)
-                {
-                    this._writer.WriteStartElement("a", "spcPts", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", (-1 * pr.SpaceAfter).ToString()); //TODO: this has to be verified!
-                    this._writer.WriteEndElement(); //spcPct
-                }
-                else
-                {
-                    this._writer.WriteStartElement("a", "spcPct", OpenXmlNamespaces.DrawingML);
-                    this._writer.WriteAttributeString("val", pr.SpaceAfter.ToString());
-                    this._writer.WriteEndElement(); //spcPct
-                }
+                Utils.WriteSpacing(this._writer, pr.SpaceAfter.GetValueOrDefault());
                 this._writer.WriteEndElement(); //spcAft
             }
             //EG_TextBulletColor
@@ -436,12 +423,12 @@ namespace b2xtranslator.PresentationMLMapping
                         {
                             //TODO
                         }
-                     }
+                    }
 
 
 
-                     if (pr.BulletFontPresent)
-                     {
+                    if (pr.BulletFontPresent)
+                    {
                         this._writer.WriteStartElement("a", "buFont", OpenXmlNamespaces.DrawingML);
                         var fonts = this._ctx.Ppt.DocumentRecord.FirstChildWithType<b2xtranslator.PptFileFormat.Environment>().FirstChildWithType<FontCollection>();
                         var entity = fonts.entities[(int)pr.BulletTypefaceIdx];
@@ -455,41 +442,41 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         this._writer.WriteEndElement(); //buChar
                         this.lastBulletFont = entity.TypeFace;
-                     }
-                     else if (this.lastBulletFont.Length > 0)
-                     {
+                    }
+                    else if (this.lastBulletFont.Length > 0)
+                    {
                         this._writer.WriteStartElement("a", "buFont", OpenXmlNamespaces.DrawingML);
-                         if (this.lastBulletFont.IndexOf('\0') > 0)
-                         {
+                        if (this.lastBulletFont.IndexOf('\0') > 0)
+                        {
                             this._writer.WriteAttributeString("typeface", this.lastBulletFont.Substring(0, this.lastBulletFont.IndexOf('\0')));
-                         }
-                         else
-                         {
+                        }
+                        else
+                        {
                             this._writer.WriteAttributeString("typeface", this.lastBulletFont);
-                         }
+                        }
                         this._writer.WriteEndElement(); //buChar
-                     }
-                     if (pr.BulletCharPresent)
-                     {
+                    }
+                    if (pr.BulletCharPresent)
+                    {
                         this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteAttributeString("char", pr.BulletChar.ToString());
                         this._writer.WriteEndElement(); //buChar
                         this.lastBulletChar = pr.BulletChar.ToString();
-                     }
-                     else if (this.lastBulletChar.Length > 0)
-                     {
+                    }
+                    else if (this.lastBulletChar.Length > 0)
+                    {
                         this._writer.WriteStartElement("a", "buChar", OpenXmlNamespaces.DrawingML);
                         this._writer.WriteAttributeString("char", this.lastBulletChar);
                         this._writer.WriteEndElement(); //buChar
-                     }
-                 }
+                    }
+                }
             }
-            
+
             //tabLst
             //defRPr
             //extLst
 
-            new CharacterRunPropsMapping(this._ctx, this._writer).Apply(cr, "defRPr", (RegularContainer)this._Master, ref this.lastColor, ref this.lastSize, ref this.lastTypeface, "", "", null,IndentLevel,null,null,0, false);
+            new CharacterRunPropsMapping(this._ctx, this._writer).Apply(cr, "defRPr", (RegularContainer)this._Master, ref this.lastColor, ref this.lastSize, ref this.lastTypeface, "", "", null, IndentLevel, null, null, 0, false);
 
             this._writer.WriteEndElement(); //lvlXpPr
         }
@@ -512,28 +499,14 @@ namespace b2xtranslator.PresentationMLMapping
                     switch (color.Index)
                     {
                         case 0x00:
-                            this._writer.WriteAttributeString("val", "bg1"); //background
-                            break;
                         case 0x01:
-                            this._writer.WriteAttributeString("val", "tx1"); //text
-                            break;
                         case 0x02:
-                            this._writer.WriteAttributeString("val", "dk1"); //shadow
-                            break;
                         case 0x03:
-                            this._writer.WriteAttributeString("val", "tx1"); //title text
-                            break;
                         case 0x04:
-                            this._writer.WriteAttributeString("val", "bg2"); //fill
-                            break;
                         case 0x05:
-                            this._writer.WriteAttributeString("val", "accent1"); //accent1
-                            break;
                         case 0x06:
-                            this._writer.WriteAttributeString("val", "accent2"); //accent2
-                            break;
                         case 0x07:
-                            this._writer.WriteAttributeString("val", "accent3"); //accent3
+                            this._writer.WriteAttributeString("val", Utils.getSchemeColorName(color.Index));
                             break;
                         case 0xFE: //sRGB
                             lastColor = color.Red.ToString("X").PadLeft(2, '0') + color.Green.ToString("X").PadLeft(2, '0') + color.Blue.ToString("X").PadLeft(2, '0');
@@ -626,7 +599,7 @@ namespace b2xtranslator.PresentationMLMapping
                 this._writer.WriteEndElement();
                 this._writer.WriteEndElement();
             }
-            
+
         }
 
     }

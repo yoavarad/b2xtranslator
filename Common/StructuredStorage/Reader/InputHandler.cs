@@ -126,7 +126,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// Advances the stream pointer accordingly.
         /// </summary>
         /// <returns>The byte cast to an int, or -1 if reading from the end of the stream.</returns>
-        internal int UncheckedReadByte() => 
+        internal int UncheckedReadByte() =>
             this._stream.ReadByte();
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// <returns>The total number of bytes read into the buffer. 
         /// This might be less than the number of bytes requested if that number 
         /// of bytes are not currently available, or zero if the end of the stream is reached.</returns>
-        internal int UncheckedRead(byte[] array, int offset, int count) => 
+        internal int UncheckedRead(byte[] array, int offset, int count) =>
             this._stream.Read(array, offset, count);
 
         /// <summary>
@@ -159,6 +159,21 @@ namespace b2xtranslator.StructuredStorage.Reader
         }
 
 
+        private void Read(Span<byte> span)
+        {
+            int result = this._stream.Read(span);
+            if (result != span.Length)
+                throw new ReadBytesAmountMismatchException();
+        }
+
+        private void ReadPosition(Span<byte> span, long position)
+        {
+            if (position < 0)
+                throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
+
+            this._stream.Seek(position, 0);
+            this.Read(span);
+        }
         /// <summary>
         /// Reads a UInt16 at the current position of the file stream.
         /// May only be used after InitBitConverter() is called.
@@ -170,7 +185,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[2];
+            Span<byte> array = stackalloc byte[2];
             this.Read(array);
             return this._bitConverter.ToUInt16(array);
         }
@@ -187,7 +202,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[4];
+            Span<byte> array = stackalloc byte[4];
             this.Read(array);
             return this._bitConverter.ToUInt32(array);
         }
@@ -204,7 +219,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (this._bitConverter == null)
                 throw new FileHandlerNotCorrectlyInitializedException();
 
-            var array = new byte[8];
+            Span<byte> array = stackalloc byte[8];
             this.Read(array);
             return this._bitConverter.ToUInt64(array);
         }
@@ -224,7 +239,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[2];
+            Span<byte> array = stackalloc byte[2];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt16(array);
         }
@@ -244,7 +259,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[4];
+            Span<byte> array = stackalloc byte[4];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt32(array);
         }
@@ -264,7 +279,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             if (position < 0)
                 throw new ArgumentOutOfRangeException(nameof(position), position, "Position cannot be less than 0.");
 
-            var array = new byte[8];
+            Span<byte> array = stackalloc byte[8];
             this.ReadPosition(array, position);
             return this._bitConverter.ToUInt64(array);
         }

@@ -13,7 +13,7 @@ using b2xtranslator.OfficeDrawing.Shapetypes;
 
 namespace b2xtranslator.WordprocessingMLMapping
 {
-    public class VMLShapeMapping: PropertiesMapping,
+    public class VMLShapeMapping : PropertiesMapping,
           IMapping<ShapeContainer>
     {
         private BlipStoreContainer _blipStore = null;
@@ -27,9 +27,9 @@ namespace b2xtranslator.WordprocessingMLMapping
         private List<byte> pVertices = new List<byte>();
         private StringBuilder _textPathStyle;
 
-        public VMLShapeMapping(XmlWriter writer, 
-            ContentPart targetPart, 
-            FileShapeAddress fspa, 
+        public VMLShapeMapping(XmlWriter writer,
+            ContentPart targetPart,
+            FileShapeAddress fspa,
             PictureDescriptor pict,
             ConversionContext ctx)
             : base(writer)
@@ -64,7 +64,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 convertShape(container);
             }
             else if (firstRecord.GetType() == typeof(GroupShapeRecord))
-            { 
+            {
                 //Its a group of shapes
                 convertGroup((GroupContainer)container.ParentRecord);
             }
@@ -90,7 +90,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             this._writer.WriteAttributeString("style", buildStyle(shape, anchor, options, container.Index).ToString());
             this._writer.WriteAttributeString("coordorigin", _groupShapeRecord.rcgBounds.Left + "," + _groupShapeRecord.rcgBounds.Top);
             this._writer.WriteAttributeString("coordsize", _groupShapeRecord.rcgBounds.Width + "," + _groupShapeRecord.rcgBounds.Height);
-            
+
             //write wrap coords
             foreach (var entry in options)
             {
@@ -122,7 +122,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             if (this._fspa != null)
             {
                 string wrap = getWrapType(this._fspa);
-                if(wrap != "through")
+                if (wrap != "through")
                 {
                     this._writer.WriteStartElement("w10", "wrap", OpenXmlNamespaces.OfficeWord);
                     this._writer.WriteAttributeString("type", wrap);
@@ -188,7 +188,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case ShapeOptions.PropertyId.geometryBooleans:
                         var geometryBooleans = new GeometryBooleans(entry.op);
 
-                        if (geometryBooleans.fUsefLineOK && geometryBooleans.fLineOK==false)
+                        if (geometryBooleans.fUsefLineOK && geometryBooleans.fLineOK == false)
                         {
                             stroked = false;
                         }
@@ -232,7 +232,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
                     case ShapeOptions.PropertyId.adjustValue:
                         adjValues[0] = (((int)entry.op).ToString());
-                        numberAdjValues++; 
+                        numberAdjValues++;
                         break;
 
                     case ShapeOptions.PropertyId.adjust2Value:
@@ -381,7 +381,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         break;
 
                     case ShapeOptions.PropertyId.fillOpacity:
-                        appendValueAttribute(this._fill, null, "opacity", entry.op + "f" , null);
+                        appendValueAttribute(this._fill, null, "opacity", entry.op + "f", null);
                         break;
 
                     // SHADOW
@@ -425,7 +425,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         break;
 
                     // PICTURE
-                    
+
                     case ShapeOptions.PropertyId.Pib:
                         int index = (int)entry.op - 1;
                         var bse = (BlipStoreEntry)this._blipStore.Children[index];
@@ -451,7 +451,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case ShapeOptions.PropertyId.c3DExtrudeBackward:
                         var backwardValue = new EmuValue((int)entry.op);
                         appendValueAttribute(this._3dstyle, "backdepth", backwardValue.ToPoints().ToString());
-                        break; 
+                        break;
                     case ShapeOptions.PropertyId.c3DSkewAngle:
                         var skewAngle = new FixedPointNumber(entry.op);
                         appendValueAttribute(this._3dstyle, "", "skewangle", skewAngle.ToAngle().ToString(), "");
@@ -490,7 +490,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case ShapeOptions.PropertyId.gtextFont:
                         string font = Encoding.Unicode.GetString(entry.opComplex);
                         font = font.Replace("\0", "");
-                        appendStyleProperty(this._textPathStyle, "font-family", "\""+font+"\"");
+                        appendStyleProperty(this._textPathStyle, "font-family", "\"" + font + "\"");
                         break;
                     case ShapeOptions.PropertyId.GeometryTextBooleanProperties:
                         var props = new GeometryTextBooleanProperties(entry.op);
@@ -520,12 +520,12 @@ namespace b2xtranslator.WordprocessingMLMapping
                             appendStyleProperty(this._textPathStyle, "font-weight", "bold");
                         }
                         break;
-                    
+
 
                     // PATH
                     case ShapeOptions.PropertyId.shapePath:
                         string path = parsePath(options);
-                        if(!string.IsNullOrEmpty(path))
+                        if (!string.IsNullOrEmpty(path))
                         {
                             this._writer.WriteAttributeString("path", path);
                         }
@@ -629,7 +629,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         viewPoint.Append(",");
                         viewPoint.Append(viewPointY.Value);
                     }
-                    
+
                     if (viewPointZ != null)
                     {
                         viewPoint.Append(",");
@@ -661,7 +661,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             if (this._fspa != null)
             {
                 string wrap = getWrapType(this._fspa);
-                if(wrap != "through")
+                if (wrap != "through")
                 {
                     this._writer.WriteStartElement("w10", "wrap", OpenXmlNamespaces.OfficeWord);
                     this._writer.WriteAttributeString("type", wrap);
@@ -708,7 +708,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 textboxIndex--;
                 this._ctx.Doc.Convert(new TextboxMapping(this._ctx, textboxIndex, this._targetPart, this._writer));
             }
-            else if(hasTextbox)
+            else if (hasTextbox)
             {
                 //Open Office textbox
 
@@ -781,63 +781,62 @@ namespace b2xtranslator.WordprocessingMLMapping
             int valuePointer = 0;
             foreach (var seg in parser.Segments)
             {
-                try
-                {
-                    switch (seg.Type)
-                    {
-                        case PathSegment.SegmentType.msopathLineTo:
-                            VmlPath.Append("l");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            valuePointer += 1;
-                            break;
-                        case PathSegment.SegmentType.msopathCurveTo:
-                            VmlPath.Append("c");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 1].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 1].Y);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 2].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer + 2].Y);
-                            valuePointer += 3;
-                            break;
-                        case PathSegment.SegmentType.msopathMoveTo:
-                            VmlPath.Append("m");
-                            VmlPath.Append(parser.Values[valuePointer].X);
-                            VmlPath.Append(",");
-                            VmlPath.Append(parser.Values[valuePointer].Y);
-                            valuePointer += 1;
-                            break;
-                        case PathSegment.SegmentType.msopathClose:
-                            VmlPath.Append("x");
-                            break;
-                        case PathSegment.SegmentType.msopathEnd:
-                            VmlPath.Append("e");
-                            break;
-                        case PathSegment.SegmentType.msopathEscape:
-                        case PathSegment.SegmentType.msopathClientEscape:
-                        case PathSegment.SegmentType.msopathInvalid:
-                            //ignore escape segments and invalid segments
-                            break;
-
-                    }
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    // Sometimes there are more Segments than available Values.
-                    // Accordingly to the spec this should never happen :)
+                // Sometimes there are more Segments than available Values.
+                // Accordingly to the spec this should never happen :)
+                int needed = seg.Type == PathSegment.SegmentType.msopathCurveTo ? 3
+                    : (seg.Type == PathSegment.SegmentType.msopathLineTo || seg.Type == PathSegment.SegmentType.msopathMoveTo) ? 1
+                    : 0;
+                if (valuePointer + needed > parser.Values.Count)
                     break;
+
+                switch (seg.Type)
+                {
+                    case PathSegment.SegmentType.msopathLineTo:
+                        VmlPath.Append("l");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        valuePointer += 1;
+                        break;
+                    case PathSegment.SegmentType.msopathCurveTo:
+                        VmlPath.Append("c");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 1].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 1].Y);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 2].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer + 2].Y);
+                        valuePointer += 3;
+                        break;
+                    case PathSegment.SegmentType.msopathMoveTo:
+                        VmlPath.Append("m");
+                        VmlPath.Append(parser.Values[valuePointer].X);
+                        VmlPath.Append(",");
+                        VmlPath.Append(parser.Values[valuePointer].Y);
+                        valuePointer += 1;
+                        break;
+                    case PathSegment.SegmentType.msopathClose:
+                        VmlPath.Append("x");
+                        break;
+                    case PathSegment.SegmentType.msopathEnd:
+                        VmlPath.Append("e");
+                        break;
+                    case PathSegment.SegmentType.msopathEscape:
+                    case PathSegment.SegmentType.msopathClientEscape:
+                    case PathSegment.SegmentType.msopathInvalid:
+                        //ignore escape segments and invalid segments
+                        break;
+
                 }
             }
 
             // end the path
-            if (VmlPath[VmlPath.Length-1] != 'e')
+            if (VmlPath[VmlPath.Length - 1] != 'e')
             {
                 VmlPath.Append("e");
             }
@@ -911,7 +910,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
             //don't append the dimension info to lines, 
             // because they have "from" and "to" attributes to decline the dimension
-            if(!(shape.ShapeType is LineType))
+            if (!(shape.ShapeType is LineType))
             {
                 if (shape.fChild == false && this._fspa != null)
                 {
@@ -919,13 +918,13 @@ namespace b2xtranslator.WordprocessingMLMapping
                     //so use the FSPA to build the style
                     AppendDimensionToStyle(style, this._fspa, twistDimensions);
                 }
-                else if(anchor != null)
+                else if (anchor != null)
                 {
                     //the style is part of a group, 
                     //so use the anchor
                     AppendDimensionToStyle(style, anchor, twistDimensions);
                 }
-                else if(this._pict != null)
+                else if (this._pict != null)
                 {
                     // it is some kind of PICT shape (e.g. WordArt)
                     AppendDimensionToStyle(style, this._pict, twistDimensions);
@@ -1096,9 +1095,9 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case 4:
                 case 5:
                     return "tight";
-		        default:
+                default:
                     return "none";
-	        }
+            }
         }
 
         private string getArrowWidth(uint op)
@@ -1515,7 +1514,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
         private static string mapHorizontalPositionRelative(ShapeOptions.PositionHorizontalRelative hRel)
         {
-            switch (hRel) 
+            switch (hRel)
             {
                 case ShapeOptions.PositionHorizontalRelative.msoprhMargin:
                     return "margin";

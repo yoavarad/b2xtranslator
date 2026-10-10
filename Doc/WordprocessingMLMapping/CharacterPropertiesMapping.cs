@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using System.Collections.Generic;
 using b2xtranslator.CommonTranslatorLib;
@@ -73,7 +74,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //write properties
-            if (this._writer !=null && (this._rPr.ChildNodes.Count > 0 || this._rPr.Attributes.Count > 0))
+            if (this._writer != null && (this._rPr.ChildNodes.Count > 0 || this._rPr.Attributes.Count > 0))
             {
                 this._rPr.WriteTo(this._writer);
             }
@@ -83,6 +84,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             var shd = this._nodeFactory.CreateElement("w", "shd", OpenXmlNamespaces.WordprocessingML);
             var rFonts = this._nodeFactory.CreateElement("w", "rFonts", OpenXmlNamespaces.WordprocessingML);
+            var rFontsAttrs = rFonts.Attributes;
             var color = this._nodeFactory.CreateElement("w", "color", OpenXmlNamespaces.WordprocessingML);
             var colorVal = this._nodeFactory.CreateAttribute("w", "val", OpenXmlNamespaces.WordprocessingML);
             var lang = this._nodeFactory.CreateElement("w", "lang", OpenXmlNamespaces.WordprocessingML);
@@ -96,7 +98,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         this._currentIstd = System.BitConverter.ToUInt16(sprm.Arguments, 0);
                         appendValueElement(parent, "rStyle", StyleSheetMapping.MakeStyleId(this._doc.Styles.Styles[this._currentIstd]), true);
                         break;
-                    
+
                     //Element flags
                     case 0x085A:
                         appendFlagElement(parent, sprm, "rtl", true);
@@ -175,7 +177,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                         langid = new LanguageId(System.BitConverter.ToInt16(sprm.Arguments, 0));
                         langid.Convert(new LanguageIdMapping(lang, LanguageIdMapping.LanguageType.Complex));
                         break;
-                    
+
                     //borders
                     case 0x6865:
                     case 0xCA72:
@@ -225,38 +227,38 @@ namespace b2xtranslator.WordprocessingMLMapping
                     case 0x4A61:
                         appendValueElement(parent, "szCs", System.BitConverter.ToInt16(sprm.Arguments, 0).ToString(), true);
                         break;
-                    
+
                     //font family
                     case 0x4A4F:
                         var ascii = this._nodeFactory.CreateAttribute("w", "ascii", OpenXmlNamespaces.WordprocessingML);
                         var ffn = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         ascii.Value = ffn.xszFtn;
-                        rFonts.Attributes.Append(ascii);
+                        rFontsAttrs.Append(ascii);
                         break;
-                   case 0x4A50:
-                       var eastAsia = this._nodeFactory.CreateAttribute("w", "eastAsia", OpenXmlNamespaces.WordprocessingML);
-                       var ffnAsia = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
-                       eastAsia.Value = ffnAsia.xszFtn;
-                       rFonts.Attributes.Append(eastAsia);
-                       break;
+                    case 0x4A50:
+                        var eastAsia = this._nodeFactory.CreateAttribute("w", "eastAsia", OpenXmlNamespaces.WordprocessingML);
+                        var ffnAsia = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
+                        eastAsia.Value = ffnAsia.xszFtn;
+                        rFontsAttrs.Append(eastAsia);
+                        break;
                     case 0x4A51:
                         var ansi = this._nodeFactory.CreateAttribute("w", "hAnsi", OpenXmlNamespaces.WordprocessingML);
                         var ffnAnsi = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         ansi.Value = ffnAnsi.xszFtn;
-                        rFonts.Attributes.Append(ansi);
+                        rFontsAttrs.Append(ansi);
                         break;
                     case (int)SinglePropertyModifier.OperationCode.sprmCIdctHint:
                         // it's complex script 
                         var hint = this._nodeFactory.CreateAttribute("w", "hint", OpenXmlNamespaces.WordprocessingML);
                         hint.Value = "cs";
-                        rFonts.Attributes.Append(hint);
+                        rFontsAttrs.Append(hint);
                         break;
                     case (int)SinglePropertyModifier.OperationCode.sprmCFtcBi:
                         // complex script font
                         var cs = this._nodeFactory.CreateAttribute("w", "cs", OpenXmlNamespaces.WordprocessingML);
                         var ffnCs = (FontFamilyName)this._doc.FontTable.Data[System.BitConverter.ToUInt16(sprm.Arguments, 0)];
                         cs.Value = ffnCs.xszFtn;
-                        rFonts.Attributes.Append(cs);
+                        rFontsAttrs.Append(cs);
                         break;
 
                     //Underlining
@@ -286,7 +288,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //append fonts
-            if (rFonts.Attributes.Count > 0)
+            if (rFontsAttrs.Count > 0)
             {
                 parent.AppendChild(rFonts);
             }
@@ -306,7 +308,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         protected override void appendFlagElement(XmlElement node, SinglePropertyModifier sprm, string elementName, bool unique)
         {
             byte flag = sprm.Arguments[0];
-            if(flag != 128)
+            if (flag != 128)
             {
                 var ele = this._nodeFactory.CreateElement("w", elementName, OpenXmlNamespaces.WordprocessingML);
                 var val = this._nodeFactory.CreateAttribute("w", "val", OpenXmlNamespaces.WordprocessingML);
@@ -336,7 +338,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     //no attribute means true
                     node.AppendChild(ele);
                 }
-                else if(flag == 129)
+                else if (flag == 129)
                 {
                     //Invert the value of the style
 
@@ -346,7 +348,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     {
                         styleId = this._currentIstd;
                     }
-                    else if(this._currentPapx != null)
+                    else if (this._currentPapx != null)
                     {
                         styleId = this._currentPapx.istd;
                     }
@@ -366,7 +368,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     }
 
                     //apply the toggle values to get the real value of the style
-                    bool stylesVal = applyToggleHierachy(sprm); 
+                    bool stylesVal = applyToggleHierachy(sprm);
 
                     //invert it
                     if (stylesVal)
@@ -399,8 +401,10 @@ namespace b2xtranslator.WordprocessingMLMapping
                         goOn = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    // Best-effort: Loop-termination: any failure ends the walk and the hierarchy collected so far is used.
+                    TraceLogger.Debug("CharacterPropertiesMapping: style hierarchy walk failed, stopping walk: {0}", ex.Message);
                     goOn = false;
                 }
             }

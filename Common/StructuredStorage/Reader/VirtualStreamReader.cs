@@ -2,8 +2,8 @@ using System.IO;
 
 namespace b2xtranslator.StructuredStorage.Reader
 {
-    public class VirtualStreamReader : 
-        BinaryReader, 
+    public class VirtualStreamReader :
+        BinaryReader,
         IStreamReader
     {
         /// <summary>Create a StreamReader with a Stream.</summary>
@@ -34,7 +34,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// of bytes are not currently available, or zero if the end of the stream is reached.</returns>
         public int Read(byte[] buffer, int count) =>
             base.BaseStream.Read(buffer, 0, count);
-        
+
         /// <summary>
         /// Reads count bytes from the current stream into a byte array and advances
         ///     the current position by count bytes.

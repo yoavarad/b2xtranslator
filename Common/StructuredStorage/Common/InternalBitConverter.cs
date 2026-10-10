@@ -20,6 +20,21 @@ namespace b2xtranslator.StructuredStorage.Common
         }
 
 
+        internal ulong ToUInt64(ReadOnlySpan<byte> value) =>
+            this._IsLittleEndian
+                ? System.Buffers.Binary.BinaryPrimitives.ReadUInt64LittleEndian(value)
+                : System.Buffers.Binary.BinaryPrimitives.ReadUInt64BigEndian(value);
+
+        internal uint ToUInt32(ReadOnlySpan<byte> value) =>
+            this._IsLittleEndian
+                ? System.Buffers.Binary.BinaryPrimitives.ReadUInt32LittleEndian(value)
+                : System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(value);
+
+        internal ushort ToUInt16(ReadOnlySpan<byte> value) =>
+            this._IsLittleEndian
+                ? System.Buffers.Binary.BinaryPrimitives.ReadUInt16LittleEndian(value)
+                : System.Buffers.Binary.BinaryPrimitives.ReadUInt16BigEndian(value);
+
         internal ulong ToUInt64(byte[] value)
         {
             if (BitConverter.IsLittleEndian ^ this._IsLittleEndian)
@@ -107,15 +122,16 @@ namespace b2xtranslator.StructuredStorage.Common
             return result;
         }
 
-        internal List<byte> getBytes(List <uint> input)
+        internal List<byte> getBytes(List<uint> input)
         {
             var output = new List<byte>();
 
             foreach (uint entry in input)
-	        {
+            {
                 output.AddRange(getBytes(entry));
             }
             return output;
         }
     }
 }
+

@@ -27,11 +27,6 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         private byte grbit;
 
         /// <summary>
-        /// Array of string characters and formatting runs 
-        /// </summary>
-        private byte[] rgb;
-
-        /// <summary>
         /// =0 if all the characters in the string have a high byte of 00h 
         ///    and only the low bytes are saved in the file (compressed)
         /// =1 if at least one character in the string has a nonzero high byte and 
@@ -48,7 +43,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         /// Rich string follows
         /// </summary>
         private bool fRichSt;
-        
+
         public BiffString(IStreamReader reader)
         {
             this.cch = reader.ReadUInt16();

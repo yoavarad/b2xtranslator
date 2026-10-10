@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Looping driver for profiling (dotnet-trace / counters). Not in the solution. See docs/perf/utilization.md. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Doc\b2xtranslator.doc.csproj" />
+    <ProjectReference Include="..\..\Xls\b2xtranslator.xls.csproj" />
+    <ProjectReference Include="..\..\Ppt\b2xtranslator.ppt.csproj" />
+  </ItemGroup>
+</Project>
+
+

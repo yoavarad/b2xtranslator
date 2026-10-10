@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using b2xtranslator.CommonTranslatorLib;
 using System.Reflection;
+using System.Linq.Expressions;
 using b2xtranslator.Tools;
 
 namespace b2xtranslator.OfficeDrawing.Shapetypes
@@ -22,27 +23,27 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             public Handle()
             { }
 
-            
+
             [Obsolete("Use default constuctor")]
-            public Handle(string pos, string xRange) 
+            public Handle(string pos, string xRange)
             {
                 this.position = pos;
                 this.xrange = xRange;
             }
-  
-            
+
+
             public string position = null;
             public string xrange = null;
             public string switchHandle = null;
             public string yrange = null;
             public string polar = null;
-            public string radiusrange = null; 
+            public string radiusrange = null;
 
         }
 
         /// <summary>
-        /// This string describes a sequence of commands that define the shape’s path.<br/>
-        /// This string describes both the pSegmentInfo array and pVertices array in the shape’s geometry properties.
+        /// This string describes a sequence of commands that define the shapeï¿½s path.<br/>
+        /// This string describes both the pSegmentInfo array and pVertices array in the shapeï¿½s geometry properties.
         /// </summary>
         public string Path;
 
@@ -50,7 +51,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
         /// <summary>
         /// This specifies a list of formulas whose calculated values are referenced by other properties. <br/>
         /// Each formula is listed on a separate line. Formulas are ordered, with the first formula having index 0. <br/>
-        /// This section can be omitted if the shape doesn’t need any guides.
+        /// This section can be omitted if the shape doesnï¿½t need any guides.
         /// </summary>
         public List<string> Formulas;
 
@@ -65,7 +66,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
 
         /// <summary>
-        /// These values specify the location of connection points on the shape’s path. <br/>
+        /// These values specify the location of connection points on the shapeï¿½s path. <br/>
         /// The connection points are defined by a string consisting of pairs of x and y values, delimited by commas.
         /// </summary>
         public string ConnectorLocations;
@@ -81,7 +82,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
         /// This section specifies the properties of each adjust handle on the shape. <br/>
         /// One adjust handle is specified per line. <br/>
         /// The properties for each handle correspond to values of the ADJH structure 
-        /// contained in the pAdjustHandles array in the shape’s geometry properties.
+        /// contained in the pAdjustHandles array in the shapeï¿½s geometry properties.
         /// </summary>
         public List<Handle> Handles;
 
@@ -90,7 +91,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
         /// Specifies one or more text boxes inscribed inside the shape. <br/>
         /// A textbox is defined by one or more sets of numbers specifying (in order) the left, top, right, and bottom points of the rectangle. <br/>
         /// Multiple sets are delimited by a semicolon. <br/>
-        /// If omitted, the text box is the same as the geometry’s bounding box.
+        /// If omitted, the text box is the same as the geometryï¿½s bounding box.
         /// </summary>
         public string TextboxRectangle;
 
@@ -112,7 +113,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
         /// Some shapes that have portions that should be constrained to a fixed aspect ratio, are designed with limo-stretch to keep those portions at the fixed aspect ratio.<br/>
         /// </summary>
         public string Limo;
-     
+
         /// <summary>
         /// Associated with each connection site, there is a direction which specifies at what angle elbow and curved connectors should attach to it<br/>
         /// </summary>
@@ -142,7 +143,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
         public uint TypeCode
         {
-            get 
+            get
             {
                 uint ret = 0;
 
@@ -162,10 +163,26 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                 return ret;
             }
         }
-	
+
 
 
         private static Dictionary<uint, Type> TypeToShapeClassMapping = new Dictionary<uint, Type>();
+
+        /// <summary>
+        /// Constructor delegates per shape type code, built once at registration (null if the class has no public parameterless constructor).
+        /// </summary>
+        private static Dictionary<uint, Func<ShapeType>> TypeToShapeFactoryMapping = new Dictionary<uint, Func<ShapeType>>();
+
+        private static Func<ShapeType> CreateFactory(Type cls)
+        {
+            var constructor = cls.GetConstructor(new Type[] { });
+
+            if (constructor == null)
+                return null;
+
+            return Expression.Lambda<Func<ShapeType>>(
+                Expression.Convert(Expression.New(constructor), typeof(ShapeType))).Compile();
+        }
 
 
         static ShapeType()
@@ -181,9 +198,9 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             if (TypeToShapeClassMapping.TryGetValue(typeCode, out cls))
             {
-                var constructor = cls.GetConstructor(new Type[] {});
+                var factory = TypeToShapeFactoryMapping[typeCode];
 
-                if (constructor == null)
+                if (factory == null)
                 {
                     throw new Exception(string.Format(
                         "Internal error: Could not find a matching constructor for class {0}",
@@ -192,12 +209,12 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
                 try
                 {
-                    result = (ShapeType)constructor.Invoke(new object[] {});
+                    result = factory();
                 }
-                catch (TargetInvocationException e)
+                catch (Exception e)
                 {
-                    TraceLogger.DebugInternal(e.InnerException.ToString());
-                    throw e.InnerException;
+                    TraceLogger.DebugInternal(e.ToString());
+                    throw;
                 }
             }
             else
@@ -234,6 +251,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
                     if (attr != null)
                     {
                         TypeToShapeClassMapping.Add(attr.TypeCode, t);
+                        TypeToShapeFactoryMapping.Add(attr.TypeCode, CreateFactory(t));
                     }
                 }
             }

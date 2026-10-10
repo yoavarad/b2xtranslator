@@ -1,0 +1,92 @@
+name: CI
+
+# PR gate: build and test on ubuntu + windows.
+# SDK comes from global.json; the 8.0 runtime is needed for the net8.0 targets.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  SOLUTION: b2xtranslator.sln
+
+jobs:
+  build-test:
+    name: Build & test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET (SDK from global.json + net8.0 runtime)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          dotnet-version: 8.0.x
+          cache: true
+          cache-dependency-path: '**/packages.lock.json'
+
+      - name: Restore
+        run: dotnet restore ${{ env.SOLUTION }} --locked-mode
+
+      # PRs: build only UnitTests' dependency graph (net10.0); net8.0 is untested here.
+      # UnitTests cannot multi-target net8.0 (Shell projects are net10.0 only).
+      - name: "Build (PR: net10.0 only)"
+        if: github.event_name == 'pull_request'
+        run: dotnet build UnitTests -c Release --no-restore -f net10.0 -p:CiWarningsAsErrors=true
+
+      # main / manual: build every TFM so net8.0 stays verified.
+      - name: Build (all target frameworks)
+        if: github.event_name != 'pull_request'
+        run: dotnet build ${{ env.SOLUTION }} -c Release --no-restore -p:CiWarningsAsErrors=true
+
+      # Same target as the local ydk dotnet-format gate (the .sln). Windows only to avoid
+      # line-ending false positives.
+      - name: Format check
+        if: runner.os == 'Windows'
+        run: dotnet format ${{ env.SOLUTION }} --verify-no-changes --no-restore
+
+      - name: Test
+        run: dotnet test UnitTests -c Release --no-build --logger "trx;LogFileName=results.trx" --results-directory TestResults --blame-hang-timeout 5m
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: TestResults
+
+      # Fails on High/Critical advisories in direct or transitive packages.
+      - name: Vulnerable package check
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -o pipefail
+          status=0
+          for proj in Common/b2xtranslator.csproj Doc/b2xtranslator.doc.csproj Xls/b2xtranslator.xls.csproj Ppt/b2xtranslator.ppt.csproj Shell/doc2x/doc2x.csproj Shell/xls2x/xls2x.csproj Shell/ppt2x/ppt2x.csproj UnitTests/UnitTests.csproj; do
+            echo "::group::$proj"
+            out=$(dotnet list "$proj" package --vulnerable --include-transitive)
+            echo "$out"
+            echo "::endgroup::"
+            if echo "$out" | grep -Eq '\b(High|Critical)\b'; then
+              echo "::error::High/Critical vulnerable package in $proj"
+              status=1
+            fi
+          done
+          exit $status

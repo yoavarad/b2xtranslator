@@ -9,7 +9,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// The record specifies the protection state for scenarios in a sheet. 
     /// Scenarios are defined in Worksheet Substream.
     /// </summary>
-    [BiffRecord(RecordType.ScenarioProtect)] 
+    [BiffRecord(RecordType.ScenarioProtect)]
     public class ScenarioProtect : BiffRecord
     {
         public const RecordType ID = RecordType.ScenarioProtect;
@@ -27,9 +27,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fScenProtect = Utils.IntToBool(reader.ReadUInt16());
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

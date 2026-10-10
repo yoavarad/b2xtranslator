@@ -59,8 +59,11 @@ namespace b2xtranslator.StructuredStorage.Reader
         internal List<uint> GetSectorChain(uint startSector, ulong maxCount, string name, bool immediateCycleCheck)
         {
             var result = new List<uint>();
+            // always track visited sectors: a cycle would otherwise loop until maxCount, which comes from untrusted sizes
+            var visited = new HashSet<uint>();
 
             result.Add(startSector);
+            visited.Add(startSector);
             while (true)
             {
                 uint nextSectorInStream = this.GetNextSectorInChain(result[result.Count - 1]);
@@ -74,17 +77,14 @@ namespace b2xtranslator.StructuredStorage.Reader
                 {
                     break;
                 }
-                                
-                if (immediateCycleCheck)
+
+                if (!visited.Add(nextSectorInStream))
                 {
-                    if (result.Contains(nextSectorInStream))
-                    {
-                        throw new ChainCycleDetectedException(name);
-                    }
+                    throw new ChainCycleDetectedException(name);
                 }
 
                 result.Add(nextSectorInStream);
-                
+
                 // Chain too long
                 if ((ulong)(result.Count) > maxCount)
                 {

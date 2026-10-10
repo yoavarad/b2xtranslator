@@ -23,7 +23,7 @@ namespace b2xtranslator.PresentationMLMapping
         {
             this._targetPart = vmlPart;
         }
-        
+
         //public void Apply(BlipStoreEntry bse, Shape shape, ShapeOptions options, Rectangle bounds, ConversionContext ctx, string spid, ref Point size)
         public void Apply(List<ArrayList> VMLEntriesList, ConversionContext ctx)
         {
@@ -46,7 +46,7 @@ namespace b2xtranslator.PresentationMLMapping
             type.Convert(new VMLShapeTypeMapping(this._ctx, this._writer));
 
             foreach (var VMLEntry in VMLEntriesList)
-            {                
+            {
 
                 bse = (BlipStoreEntry)VMLEntry[0];
                 var options = (ShapeOptions)VMLEntry[2];
@@ -105,7 +105,7 @@ namespace b2xtranslator.PresentationMLMapping
                     this._writer.WriteEndElement(); //imagedata
 
                     //close v:shape
-                    this._writer.WriteEndElement();                   
+                    this._writer.WriteEndElement();
                 }
             }
 

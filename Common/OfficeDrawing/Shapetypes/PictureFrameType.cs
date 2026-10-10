@@ -36,8 +36,8 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
 
             this.ShapeConcentricFill = true;
             this.ConnectorType = "rect";
-        }   
-    }       
-}           
-            
+        }
+    }
+}
+
 

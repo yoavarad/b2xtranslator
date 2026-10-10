@@ -151,7 +151,7 @@ namespace b2xtranslator.DocFileFormat
 
             this.ilvlRestartLim = this._reader.ReadByte();
             this.grfhic = this._reader.ReadByte();
-            
+
             //parse the variable part
 
             //read the group of papx sprms

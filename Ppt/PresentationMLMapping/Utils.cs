@@ -6,24 +6,97 @@ using b2xtranslator.PptFileFormat;
 using System.Xml;
 using System.Reflection;
 using b2xtranslator.Tools;
+using b2xtranslator.OpenXmlLib;
 using b2xtranslator.OfficeDrawing;
 
 namespace b2xtranslator.PresentationMLMapping
 {
     public static class Utils
     {
+        // EMU per master coordinate: 914400 EMU/inch / 576 master units/inch = 1587.5.
+        // (Name kept for compatibility; the value is EMU per master unit.)
         private static readonly double MC_PER_EMU = 1587.5;
+
+        // Master units (1/576 inch) to DrawingML spcPts (1/100 pt):
+        // 1 pt = 1/72 inch = 8 master units, so 1 master unit = 100 / 8 = 12.5 hundredths of a point.
+        public const double CentipointsPerMasterUnit = 12.5;
+
+        // PPT percentages (100 = 100%) to DrawingML ST_TextSpacingPercent / ST_Percentage (100000 = 100%).
+        public const int OoxmlPercentPerPercent = 1000;
+
+        // Legacy (OfficeArt/VML) shape adjust values span 0..21600 across the shape's extent.
+        public const int LegacyAdjustRange = 21600;
+
+        /// <summary>
+        /// Converts a PPT TextPFException spacing value (lineSpacing, spaceBefore, spaceAfter) into a
+        /// DrawingML spacing child element name and value. Per [MS-PPT] a value >= 0 is a percentage
+        /// of the line height (-> a:spcPct in 1/1000 percent); a value &lt; 0 is an absolute spacing
+        /// in master units given by its absolute value (-> a:spcPts in 1/100 pt).
+        /// </summary>
+        public static int PptSpacingToOoxml(int value, out string element)
+        {
+            if (value < 0)
+            {
+                element = "spcPts";
+                return (int)Math.Round(-value * CentipointsPerMasterUnit, MidpointRounding.AwayFromZero);
+            }
+            element = "spcPct";
+            return value * OoxmlPercentPerPercent;
+        }
+
+        /// <summary>
+        /// Writes the a:spcPct or a:spcPts child of a:lnSpc / a:spcBef / a:spcAft for a PPT spacing value.
+        /// </summary>
+        public static void WriteSpacing(XmlWriter writer, int value)
+        {
+            int val = PptSpacingToOoxml(value, out string element);
+            writer.WriteStartElement("a", element, OpenXmlLib.OpenXmlNamespaces.DrawingML);
+            writer.WriteAttributeString("val", val.ToString());
+            writer.WriteEndElement();
+        }
+
+        /// <summary>
+        /// Converts a legacy callout adjust value (0..21600, 10800 = shape center) into a DrawingML
+        /// callout adj value, which is an offset from the shape center in 1/1000 percent of the
+        /// shape extent (0 = center, -50000 = left/top edge, 50000 = right/bottom edge).
+        /// </summary>
+        public static int LegacyCalloutAdjustToOoxml(int legacyValue)
+        {
+            decimal percent = (decimal)legacyValue / LegacyAdjustRange * 100;
+            return (int)Math.Round((percent - 50) * OoxmlPercentPerPercent, MidpointRounding.AwayFromZero);
+        }
+
+        /// <summary>
+        /// Presets whose single legacy adjust value (0..21600 of the shape extent) maps linearly onto the
+        /// DrawingML "adj" guide (1/100000 of the shape extent, see LegacyAdjustRange).
+        /// </summary>
+        private static readonly System.Collections.Generic.HashSet<string> LinearSingleAdjustPresets =
+            new System.Collections.Generic.HashSet<string>
+            {
+                "roundRect", "triangle", "octagon", "cube", "can", "donut", "plaque", "bevel", "parallelogram"
+            };
+
+        /// <summary>
+        /// Converts the legacy adjust value of a preset in LinearSingleAdjustPresets into the
+        /// DrawingML "adj" value. Returns null when the preset has no linear mapping.
+        /// </summary>
+        public static int? LegacyLinearAdjustToOoxml(string prst, int legacyValue)
+        {
+            if (!LinearSingleAdjustPresets.Contains(prst)) return null;
+            decimal v = Math.Round((decimal)legacyValue * 100000 / LegacyAdjustRange, MidpointRounding.AwayFromZero);
+            return (int)Math.Max(0, Math.Min(100000, v)); //clamp corrupt input; legacy adj is relative to width/height, OOXML to min(w,h): approximation
+        }
 
         public static int MasterCoordToEMU(int mc)
         {
-            return (int) (mc * MC_PER_EMU);
+            return (int)(mc * MC_PER_EMU);
         }
 
         public static int EMUToMasterCoord(int emu)
         {
-            return (int) (emu / MC_PER_EMU);
+            return (int)(emu / MC_PER_EMU);
         }
-                
+
         public static XmlDocument GetDefaultDocument(string filename)
         {
             var a = Assembly.GetExecutingAssembly();
@@ -37,7 +110,7 @@ namespace b2xtranslator.PresentationMLMapping
 
         public static string SlideSizeTypeToXMLValue(SlideSizeType sst)
         {
-            // OOXML Spec § 4.8.22
+            // OOXML Spec ï¿½ 4.8.22
             switch (sst)
             {
                 case SlideSizeType.A4Paper:
@@ -85,7 +158,11 @@ namespace b2xtranslator.PresentationMLMapping
 
                 case PlaceholderEnum.MasterTitle:
                 case PlaceholderEnum.Title:
+                case PlaceholderEnum.VerticalTextTitle:
                     return "title";
+
+                case PlaceholderEnum.VerticalTextBody:
+                    return "body";
 
                 case PlaceholderEnum.MasterBody:
                 case PlaceholderEnum.Body:
@@ -224,10 +301,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnLeftTwoRows with rightType = {0}",
-                                rightType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -245,10 +319,7 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoColumnRightTwoRows with leftType = {0}",
-                                leftType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
@@ -267,19 +338,100 @@ namespace b2xtranslator.PresentationMLMapping
                         }
                         else
                         {
-                            throw new NotImplementedException(string.Format(
-                                "Don't know how to map TwoRowsAndTitle with topType = {0} and bottomType = {1}",
-                                topType, bottomType
-                            ));
+                            return FallbackLayout(type, "obj");
                         }
                     }
 
                 case SlideLayoutType.TwoRowsTopTwoColumns:
                     return "twoObjOverTx";
 
+                case SlideLayoutType.VerticalTitleRightBodyLeft:
+                    return "vertTitleAndTx";
+
+                case SlideLayoutType.VerticalTitleRightBodyLeftTwoRows:
+                    return "vertTitleAndTxOverChart";
+
+                case SlideLayoutType.TwoRowsBottomTwoColumns:
+                    return FallbackLayout(type, "obj");
+
                 default:
-                    throw new NotImplementedException("Don't know how to map slide layout type " + type); 
+                    return FallbackLayout(type, "blank");
             }
+        }
+
+        /// <summary>
+        /// Layout types with no ECMA-376 slide layout counterpart fall back to a generic
+        /// layout instead of aborting the whole conversion (see docs/adr-unmapped-slide-layouts.md).
+        /// </summary>
+        private static string FallbackLayout(SlideLayoutType type, string filename)
+        {
+            System.Diagnostics.Trace.TraceWarning(
+                "No slide layout mapping for {0}; falling back to '{1}'", type, filename);
+            return filename;
+        }
+
+        /// <summary>
+        /// Maps a PPT color scheme index (0-7, field order of ColorSchemeAtom) to the
+        /// DrawingML scheme color name. Consistent with ColorSchemeMapping.writeScheme
+        /// (Background=lt1, TextAndLines=dk1, Shadows=lt2, TitleText=dk2, Fills=accent1,
+        /// Accent=accent2, hyperlink colors=hlink/folHlink) and the default p:clrMap.
+        /// Returns "" for indices outside 0-7.
+        /// </summary>
+        public static string getSchemeColorName(byte index)
+        {
+            switch (index)
+            {
+                case 0x00: return "bg1";      // Background
+                case 0x01: return "tx1";      // TextAndLines
+                case 0x02: return "bg2";      // Shadows
+                case 0x03: return "tx2";      // TitleText
+                case 0x04: return "accent1";  // Fills
+                case 0x05: return "accent2";  // Accent
+                case 0x06: return "hlink";    // AccentAndHyperlink
+                case 0x07: return "folHlink"; // AccentAndFollowedHyperlink
+                default: return "";
+            }
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterScheme (bit 1) clear means the page has its own color scheme.
+        /// </summary>
+        public static bool HasOwnColorScheme(ushort flags)
+        {
+            return (flags & 0x2) == 0;
+        }
+
+        /// <summary>
+        /// SlideAtom/NotesAtom flags: fMasterBackground (bit 2) clear means the page has its own background.
+        /// </summary>
+        public static bool HasOwnBackground(ushort flags)
+        {
+            return (flags & 0x4) == 0;
+        }
+
+        /// <summary>
+        /// Writes p:clrMapOvr. If the page has its own color scheme and a color mapping is available,
+        /// an overrideClrMapping is written (missing attributes filled with the identity mapping),
+        /// otherwise masterClrMapping.
+        /// </summary>
+        public static void WriteClrMapOvr(XmlWriter writer, bool ownColorScheme, XmlElement clrMap)
+        {
+            writer.WriteStartElement("p", "clrMapOvr", OpenXmlNamespaces.PresentationML);
+            if (ownColorScheme && clrMap != null)
+            {
+                writer.WriteStartElement("a", "overrideClrMapping", OpenXmlNamespaces.DrawingML);
+                foreach (var name in new[] { "bg1", "tx1", "bg2", "tx2", "accent1", "accent2", "accent3", "accent4", "accent5", "accent6", "hlink", "folHlink" })
+                {
+                    string identity = name == "bg1" ? "lt1" : name == "tx1" ? "dk1" : name == "bg2" ? "lt2" : name == "tx2" ? "dk2" : name;
+                    writer.WriteAttributeString(name, clrMap.HasAttribute(name) ? clrMap.GetAttribute(name) : identity);
+                }
+                writer.WriteEndElement();
+            }
+            else
+            {
+                writer.WriteElementString("a", "masterClrMapping", OpenXmlNamespaces.DrawingML, "");
+            }
+            writer.WriteEndElement();
         }
 
         public static string getRGBColorFromOfficeArtCOLORREF(uint value, RegularContainer slide, b2xtranslator.OfficeDrawing.ShapeOptions so)
@@ -315,8 +467,10 @@ namespace b2xtranslator.PresentationMLMapping
                     case 0xF0: //shape fill color
                         if (so.OptionsByID.ContainsKey(b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor))
                         {
-                            result = getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor].op,slide,so);
-                        } else {
+                            result = getRGBColorFromOfficeArtCOLORREF(so.OptionsByID[b2xtranslator.OfficeDrawing.ShapeOptions.PropertyId.fillColor].op, slide, so);
+                        }
+                        else
+                        {
                             result = new RGBColor(MasterScheme.Fills, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;  //TODO: find out which color to use in this case
                         }
                         break;
@@ -424,8 +578,8 @@ namespace b2xtranslator.PresentationMLMapping
                 //    default:
                 //        break;
                 //}
-            } 
-            
+            }
+
             if (fSchemeIndex)
             {
                 //red is the index to the color scheme
@@ -445,8 +599,10 @@ namespace b2xtranslator.PresentationMLMapping
                         SchemeType = "tx1";
                         return new RGBColor(MasterScheme.TextAndLines, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x02: //shadow
+                        SchemeType = "bg2";
                         return new RGBColor(MasterScheme.Shadows, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x03: //title
+                        SchemeType = "tx2";
                         return new RGBColor(MasterScheme.TitleText, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x04: //fill
                         SchemeType = "accent1";
@@ -458,12 +614,13 @@ namespace b2xtranslator.PresentationMLMapping
                         SchemeType = "hlink";
                         return new RGBColor(MasterScheme.AccentAndHyperlink, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0x07: //accent3
+                        SchemeType = "folHlink";
                         return new RGBColor(MasterScheme.AccentAndFollowedHyperlink, RGBColor.ByteOrder.RedFirst).SixDigitHexCode;
                     case 0xFE: //sRGB
                         return bytes[0].ToString("X").PadLeft(2, '0') + bytes[1].ToString("X").PadLeft(2, '0') + bytes[3].ToString("X").PadLeft(2, '0');
                     case 0xFF: //undefined
                         break;
-                }                
+                }
             }
             return bytes[0].ToString("X").PadLeft(2, '0') + bytes[1].ToString("X").PadLeft(2, '0') + bytes[2].ToString("X").PadLeft(2, '0');
         }

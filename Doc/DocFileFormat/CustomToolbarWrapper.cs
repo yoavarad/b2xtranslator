@@ -54,9 +54,9 @@ namespace b2xtranslator.DocFileFormat
 
             this.rCustomizations = new List<ToolbarCustomization>();
             for (int i = 0; i < this.cCust; i++)
-			{
-			  this.rCustomizations.Add(new ToolbarCustomization(reader));
-			}
+            {
+                this.rCustomizations.Add(new ToolbarCustomization(reader));
+            }
 
             long endPos = reader.BaseStream.Position;
 

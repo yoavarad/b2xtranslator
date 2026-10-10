@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using System;
 using b2xtranslator.DocFileFormat;
 using b2xtranslator.CommonTranslatorLib;
@@ -44,9 +45,10 @@ namespace b2xtranslator.WordprocessingMLMapping
                     var ci = new CultureInfo((int)lid.Code);
                     langcode = ci.ToString();
                 }
-                catch (Exception) 
+                catch (Exception ex)
                 {
-                    //langcode = getLanguageCode(lid);
+                    // Best-effort: Unknown language ids are common; default language is a valid fallback.
+                    TraceLogger.Debug("LanguageIdMapping: culture lookup failed, using default language: {0}", ex.Message);
                 }
 
                 XmlAttribute att;
@@ -144,7 +146,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Catalan:
                     return "ca-ES";
                 case LanguageId.LanguageCode.Cherokee:
-                    //there is no iso code fpr cherokee
+                //there is no iso code fpr cherokee
                 case LanguageId.LanguageCode.ChineseHongKong:
                     return "zh-HK";
                 case LanguageId.LanguageCode.ChineseMacao:
@@ -168,7 +170,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.DutchNetherlands:
                     return "nl-NL";
                 case LanguageId.LanguageCode.Edo:
-                    //there is no iso 639-1 code for edo
+                //there is no iso 639-1 code for edo
                 case LanguageId.LanguageCode.EnglishAustralia:
                     return "en-AU";
                 case LanguageId.LanguageCode.EnglishBelize:
@@ -212,9 +214,9 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Faeroese:
                     return "fo-FO";
                 case LanguageId.LanguageCode.Farsi:
-                    //there is no iso 639-1 code for farsi
+                //there is no iso 639-1 code for farsi
                 case LanguageId.LanguageCode.Filipino:
-                    //there is no iso 639-1 code for filipino
+                //there is no iso 639-1 code for filipino
                 case LanguageId.LanguageCode.Finnish:
                     return "fi-FI";
                 case LanguageId.LanguageCode.FrenchBelgium:
@@ -252,7 +254,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.FrisianNetherlands:
                     return "fy-NL";
                 case LanguageId.LanguageCode.Fulfulde:
-                    //there is no iso 639-1 code for fulfulde
+                //there is no iso 639-1 code for fulfulde
                 case LanguageId.LanguageCode.FYROMacedonian:
                     return "mk-MK";
                 case LanguageId.LanguageCode.GaelicIreland:
@@ -282,7 +284,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Hausa:
                     return "ha-NG";
                 case LanguageId.LanguageCode.Hawaiian:
-                    //there is no iso 639-1 language code for hawaiian
+                //there is no iso 639-1 language code for hawaiian
                 case LanguageId.LanguageCode.Hebrew:
                     return "he-IL";
                 case LanguageId.LanguageCode.Hindi:
@@ -290,11 +292,11 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Hungarian:
                     return "hu-HU";
                 case LanguageId.LanguageCode.Ibibio:
-                    //there is no iso 639-1 language code for ibibio
+                //there is no iso 639-1 language code for ibibio
                 case LanguageId.LanguageCode.Icelandic:
                     return "is-IS";
                 case LanguageId.LanguageCode.Igbo:
-                    //there is no iso 639-1 language code for ibibio
+                //there is no iso 639-1 language code for ibibio
                 case LanguageId.LanguageCode.Indonesian:
                     return "id-ID";
                 case LanguageId.LanguageCode.Inuktitut:
@@ -308,7 +310,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Kannada:
                     return "kn-ID";
                 case LanguageId.LanguageCode.Kanuri:
-                    //there is no iso 639-1 language code for kanuri
+                //there is no iso 639-1 language code for kanuri
                 case LanguageId.LanguageCode.Kashmiri:
                     return "ks-ID";
                 case LanguageId.LanguageCode.KashmiriArabic:
@@ -316,9 +318,9 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Kazakh:
                     return "kk-KZ";
                 case LanguageId.LanguageCode.Khmer:
-                    //there is no iso 639-1 language code for khmer
+                //there is no iso 639-1 language code for khmer
                 case LanguageId.LanguageCode.Konkani:
-                    //there is no iso 639-1 language code for konkani
+                //there is no iso 639-1 language code for konkani
                 case LanguageId.LanguageCode.Korean:
                     return "ko-KR";
                 case LanguageId.LanguageCode.Kyrgyz:
@@ -340,7 +342,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Maltese:
                     return "mt-MT";
                 case LanguageId.LanguageCode.Manipuri:
-                    //there is no iso 639-1 language code for manipuri
+                //there is no iso 639-1 language code for manipuri
                 case LanguageId.LanguageCode.Maori:
                     return "mi-NZ";
                 case LanguageId.LanguageCode.Marathi:
@@ -355,16 +357,16 @@ namespace b2xtranslator.WordprocessingMLMapping
                     return "ne-ID";
                 case LanguageId.LanguageCode.NorwegianBokmal:
                     return "nb-NO";
-                    //also possible: no-NO
+                //also possible: no-NO
                 case LanguageId.LanguageCode.NorwegianNynorsk:
                     return "nn-NO";
-                    //also possible: no-NO
+                //also possible: no-NO
                 case LanguageId.LanguageCode.Oriya:
                     return "or-ID";
                 case LanguageId.LanguageCode.Oromo:
-                    //there is no iso 639-1 language code for oromo
+                //there is no iso 639-1 language code for oromo
                 case LanguageId.LanguageCode.Papiamentu:
-                    //there is no iso 639-1 language code for papiamentu
+                //there is no iso 639-1 language code for papiamentu
                 case LanguageId.LanguageCode.Pashto:
                     return "ps-PK";
                 case LanguageId.LanguageCode.Polish:
@@ -398,7 +400,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Sanskrit:
                     return "sa-ID";
                 case LanguageId.LanguageCode.Sepedi:
-                    //there is no iso 639-1 language code for sepedi
+                //there is no iso 639-1 language code for sepedi
                 case LanguageId.LanguageCode.SerbianCyrillic:
                     return "sr-YU-cyrl";
                 case LanguageId.LanguageCode.SerbianLatin:
@@ -416,7 +418,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Somali:
                     return "so-SO";
                 case LanguageId.LanguageCode.Sorbian:
-                    //there is no iso 639-1 language code for sorbian
+                //there is no iso 639-1 language code for sorbian
                 case LanguageId.LanguageCode.SpanishArgentina:
                     return "es-AR";
                 case LanguageId.LanguageCode.SpanishBolivia:
@@ -458,7 +460,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.SpanishVenezuela:
                     return "es-VE";
                 case LanguageId.LanguageCode.Sutu:
-                    //there is no iso 639-1 language code for sutu
+                //there is no iso 639-1 language code for sutu
                 case LanguageId.LanguageCode.Swahili:
                     //Swahili is spoken in many east african countries, so we use tansania
                     return "sw-TZ";
@@ -467,13 +469,13 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.SwedishSweden:
                     return "sv-SE";
                 case LanguageId.LanguageCode.Syriac:
-                    //there is no iso 639-1 language code for syriac
+                //there is no iso 639-1 language code for syriac
                 case LanguageId.LanguageCode.Tajik:
                     return "tg-TJ";
                 case LanguageId.LanguageCode.Tamazight:
-                    //there is no iso 639-1 language code for tamazight
+                //there is no iso 639-1 language code for tamazight
                 case LanguageId.LanguageCode.TamazightLatin:
-                    //there is no iso 639-1 language code for tamazight
+                //there is no iso 639-1 language code for tamazight
                 case LanguageId.LanguageCode.Tamil:
                     return "ta-ID";
                 case LanguageId.LanguageCode.Tatar:
@@ -481,50 +483,50 @@ namespace b2xtranslator.WordprocessingMLMapping
                 case LanguageId.LanguageCode.Telugu:
                     return "te-ID";
                 //case LanguageId.LanguageCode.Thai:
-                    
+
                 //case LanguageId.LanguageCode.TibetanBhutan:
-                    
+
                 //case LanguageId.LanguageCode.TibetanPRC:
-                    
+
                 //case LanguageId.LanguageCode.TigrignaEritrea:
-                    
+
                 //case LanguageId.LanguageCode.TigrignaEthiopia:
-                    
+
                 //case LanguageId.LanguageCode.Tsonga:
-                    
+
                 //case LanguageId.LanguageCode.Tswana:
-                    
+
                 //case LanguageId.LanguageCode.Turkish:
-                    
+
                 //case LanguageId.LanguageCode.Turkmen:
-                    
+
                 //case LanguageId.LanguageCode.Ukrainian:
-                    
+
                 //case LanguageId.LanguageCode.Urdu:
-                    
+
                 //case LanguageId.LanguageCode.UzbekCyrillic:
-                    
+
                 //case LanguageId.LanguageCode.UzbekLatin:
-                    
+
                 //case LanguageId.LanguageCode.Venda:
-                    
+
                 //case LanguageId.LanguageCode.Vietnamese:
-                    
+
                 //case LanguageId.LanguageCode.Welsh:
-                    
+
                 //case LanguageId.LanguageCode.Xhosa:
-                    
+
                 //case LanguageId.LanguageCode.Yi:
-                    
+
                 //case LanguageId.LanguageCode.Yiddish:
-                    
+
                 //case LanguageId.LanguageCode.Yoruba:
-                    
+
                 //case LanguageId.LanguageCode.Zulu:
-                   
+
                 default:
                     return "en-US";
-                    
+
             }
 
 

@@ -1,3 +1,4 @@
+using b2xtranslator.Tools;
 using b2xtranslator.OfficeDrawing;
 using b2xtranslator.OpenXmlLib;
 using System;
@@ -11,7 +12,7 @@ namespace b2xtranslator.PptFileFormat
     {
         public Theme(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
             : base(_reader, size, typeCode, version, instance)
-        {}
+        { }
 
         /// <summary>
         /// Method that extracts the actual XmlElement that will be used as this XmlContainer's
@@ -38,12 +39,14 @@ namespace b2xtranslator.PptFileFormat
             {
                 managerRels = GetRelations(zipReader, managerPath);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                // Best-effort: Missing theme is a valid fallback (returns null).
+                TraceLogger.Debug("Theme: theme manager relations not readable, no theme: {0}", ex.Message);
                 this.XmlDocumentElement = null;
                 return null;
             }
-           
+
             if (managerRels.Count != 1)
                 throw new Exception("Expected actly one Relationship for Theme manager");
 
@@ -54,9 +57,9 @@ namespace b2xtranslator.PptFileFormat
             partDoc.Load(partStream);
 
             XmlNode e = partDoc.DocumentElement;
-            
+
             b2xtranslator.Tools.Utils.replaceOutdatedNamespaces(ref e);
-            
+
             return (XmlElement)e;
         }
 

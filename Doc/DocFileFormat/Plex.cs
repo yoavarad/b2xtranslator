@@ -17,7 +17,7 @@ namespace b2xtranslator.DocFileFormat
             var reader = new VirtualStreamReader(tableStream);
 
             int n = 0;
-            if(structureLength > 0)
+            if (structureLength > 0)
             {
                 //this PLEX contains CPs and Elements
                 n = ((int)lcb - CP_LENGTH) / (structureLength + CP_LENGTH);
@@ -48,17 +48,16 @@ namespace b2xtranslator.DocFileFormat
                     this.Elements.Add(genericValue);
                 }
             }
-            else if(structureLength > 0)
+            else if (structureLength > 0)
             {
+                //look up the constructor once, not per element
+                var constructor = n > 0 ? genericType.GetConstructor(new Type[] { typeof(VirtualStreamReader), typeof(int) }) : null;
                 for (int i = 0; i < n; i++)
                 {
-                    var constructor = genericType.GetConstructor(new Type[] { typeof(VirtualStreamReader), typeof(int) });
-                    object value = constructor.Invoke(new object[] { reader, structureLength });
-                    var genericValue = (T)Convert.ChangeType(value, typeof(T));
-                    this.Elements.Add(genericValue);
+                    this.Elements.Add((T)constructor.Invoke(new object[] { reader, structureLength }));
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -68,14 +67,11 @@ namespace b2xtranslator.DocFileFormat
         /// <returns>The matching struct</returns>
         public T GetStruct(int cp)
         {
-            int index = -1;
-            for (int i = 0; i < this.CharacterPositions.Count; i++)
+            //CPs are sorted; binary search, then step back to the first duplicate (matches the former linear scan)
+            int index = this.CharacterPositions.BinarySearch(cp);
+            while (index > 0 && this.CharacterPositions[index - 1] == cp)
             {
-                if (this.CharacterPositions[i] == cp)
-                {
-                    index = i;
-                    break;
-                }
+                index--;
             }
 
             if (index >= 0 && index < this.Elements.Count)

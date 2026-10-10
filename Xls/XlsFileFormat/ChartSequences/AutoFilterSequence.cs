@@ -22,7 +22,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
 
             // *(AutoFilter / (AutoFilter12 *ContinueFrt12))
             this.AutoFilterGroups = new List<AutoFilterGroup>();
-            while(BiffRecord.GetNextRecordType(reader) == RecordType.AutoFilter
+            while (BiffRecord.GetNextRecordType(reader) == RecordType.AutoFilter
                 || BiffRecord.GetNextRecordType(reader) == RecordType.AutoFilter12)
             {
                 this.AutoFilterGroups.Add(new AutoFilterGroup(reader));

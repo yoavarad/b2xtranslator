@@ -25,7 +25,7 @@
 
         public override string ContentType
         {
-            get 
+            get
             {
                 switch (this._type)
                 {

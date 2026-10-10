@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 using b2xtranslator.Spreadsheet.XlsFileFormat.Records;
 using b2xtranslator.StructuredStorage.Reader;
@@ -31,6 +32,28 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         }
 
         private static Dictionary<ushort, Type> TypeToRecordClassMapping = new Dictionary<ushort, Type>();
+
+        /// <summary>
+        /// Constructor delegates per record id, built once at registration (null if the class has no matching constructor).
+        /// </summary>
+        private static Dictionary<ushort, Func<IStreamReader, RecordType, ushort, BiffRecord>> TypeToRecordFactoryMapping =
+            new Dictionary<ushort, Func<IStreamReader, RecordType, ushort, BiffRecord>>();
+
+        private static Func<IStreamReader, RecordType, ushort, BiffRecord> CreateFactory(Type cls)
+        {
+            var constructor = cls.GetConstructor(
+                new Type[] { typeof(IStreamReader), typeof(RecordType), typeof(ushort) }
+                );
+
+            if (constructor == null)
+                return null;
+
+            var parameters = new[] {
+                Expression.Parameter(typeof(IStreamReader)), Expression.Parameter(typeof(RecordType)), Expression.Parameter(typeof(ushort)) };
+
+            return Expression.Lambda<Func<IStreamReader, RecordType, ushort, BiffRecord>>(
+                Expression.Convert(Expression.New(constructor, parameters), typeof(BiffRecord)), parameters).Compile();
+        }
 
         static BiffRecord()
         {
@@ -64,6 +87,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                                     typeCode, t, TypeToRecordClassMapping[typeCode]));
                             }
                             TypeToRecordClassMapping.Add(typeCode, t);
+                            TypeToRecordFactoryMapping.Add(typeCode, CreateFactory(t));
                         }
                     }
                 }
@@ -74,14 +98,14 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
         public static RecordType GetNextRecordType(IStreamReader reader)
         {
             long position = reader.BaseStream.Position;
-                
+
             // read type of the next record
             var nextRecord = (RecordType)reader.ReadUInt16();
             ushort length = reader.ReadUInt16();
 
             // skip leading StartBlock/EndBlock records
             if (nextRecord == RecordType.StartBlock
-                || nextRecord == RecordType.EndBlock 
+                || nextRecord == RecordType.EndBlock
                 || nextRecord == RecordType.StartObject
                 || nextRecord == RecordType.EndObject
                 || nextRecord == RecordType.ChartFrtInfo)
@@ -134,23 +158,11 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat
                     return frtWrapper.wrappedRecord;
                 }
 
-                Type cls;
-                if (TypeToRecordClassMapping.TryGetValue((ushort)id, out cls))
+                Func<IStreamReader, RecordType, ushort, BiffRecord> factory;
+                if (TypeToRecordFactoryMapping.TryGetValue((ushort)id, out factory))
                 {
-                    var constructor = cls.GetConstructor(
-                        new Type[] { typeof(IStreamReader), typeof(RecordType), typeof(ushort) }
-                        );
-
-                    try
-                    {
-                        result = (BiffRecord)constructor.Invoke(
-                            new object[] { reader, id, length }
-                            );
-                    }
-                    catch (TargetInvocationException e)
-                    {
-                        throw e.InnerException;
-                    }
+                    // a null factory (no matching constructor) throws NullReferenceException, as the reflection call did
+                    result = factory(reader, id, length);
                 }
                 else
                 {

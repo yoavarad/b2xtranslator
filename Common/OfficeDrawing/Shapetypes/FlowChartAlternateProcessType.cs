@@ -26,7 +26,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Formulas.Add("prod height 1 2");
 
             this.AdjustmentValues = "2700";
-            
+
             this.ConnectorLocations = "@8,0;0,@9;@8,@7;@6,@9";
 
             this.TextboxRectangle = "@3,@3,@4,@5";

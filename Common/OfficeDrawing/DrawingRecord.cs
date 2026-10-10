@@ -19,7 +19,7 @@ namespace b2xtranslator.OfficeDrawing
         public int spidCur;
 
         public DrawingRecord(BinaryReader _reader, uint size, uint typeCode, uint version, uint instance)
-            : base(_reader, size, typeCode, version, instance) 
+            : base(_reader, size, typeCode, version, instance)
         {
             this.csp = this.Reader.ReadUInt32();
             this.spidCur = this.Reader.ReadInt32();

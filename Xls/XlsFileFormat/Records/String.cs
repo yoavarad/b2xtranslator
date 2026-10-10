@@ -4,7 +4,7 @@ using b2xtranslator.StructuredStorage.Reader;
 
 namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 {
-    [BiffRecord(RecordType.String)] 
+    [BiffRecord(RecordType.String)]
     public class STRING : BiffRecord
     {
         public const RecordType ID = RecordType.String;
@@ -13,7 +13,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
         public int cch;
 
-        public int grbit; 
+        public int grbit;
 
         public STRING(IStreamReader reader, RecordType id, ushort length)
             : base(reader, id, length)
@@ -25,12 +25,12 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             this.grbit = reader.ReadByte();
 
-            this.value = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, this.grbit); 
-	
+            this.value = ExcelHelperClass.getStringFromBiffRecord(reader, this.cch, this.grbit);
 
-            
+
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

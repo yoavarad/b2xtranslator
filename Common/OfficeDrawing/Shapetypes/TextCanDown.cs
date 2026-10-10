@@ -28,7 +28,7 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             };
             this.Handles.Add(h1);
 
-            
+
         }
     }
 }

@@ -9,7 +9,7 @@ using b2xtranslator.OfficeDrawing;
 
 namespace b2xtranslator.WordprocessingMLMapping
 {
-    public abstract class DocumentMapping : 
+    public abstract class DocumentMapping :
         AbstractOpenXmlMapping,
         IMapping<WordDocument>
     {
@@ -205,7 +205,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
             //find cell end
             int cpCellEnd = findCellEndCp(initialCp, nestingLevel);
-            
+
             //convert the properties
             var mapping = new TableCellPropertiesMapping(this._writer, grid, gridIndex, cellIndex);
             if (tapx != null)
@@ -213,7 +213,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 tapx.Convert(mapping);
             }
             gridIndex = gridIndex + mapping.GridSpan;
-            
+
 
             //write the paragraphs of the cell
             while (cp < cpCellEnd)
@@ -295,7 +295,13 @@ namespace b2xtranslator.WordprocessingMLMapping
                 //get the next papx
                 papx = findValidPapx(fcRowEnd);
                 tai = new TableInfo(papx);
+                int previousCp = cp;
                 fcRowEnd = findRowEndFc(cp, out cp, nestingLevel);
+                if (cp <= previousCp)
+                {
+                    //no progress finding the next row end: avoid an infinite loop
+                    break;
+                }
             }
 
             //build the grid based on the boundaries
@@ -338,7 +344,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     cp++;
                 }
             }
-            else 
+            else
             {
                 //Its an outer table.
                 //Search the "table trailer paragraph"
@@ -428,7 +434,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                 }
                 cpCellEnd++;
             }
-            else 
+            else
             {
                 while (this._doc.Text[cpCellEnd] != TextMark.CellOrRowMark)
                 {
@@ -450,7 +456,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         /// ends at the next paragraph end mark or section end mark
         /// </summary>
         /// <param name="cp"></param>
-        protected int writeParagraph(int cp) 
+        protected int writeParagraph(int cp)
         {
             //search the paragraph end
             int cpParaEnd = cp;
@@ -497,7 +503,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             chpxFcs.Add(fcEnd);
 
             //the last of these CHPX formats the paragraph end mark
-            var paraEndChpx = chpxs[chpxs.Count-1];
+            var paraEndChpx = chpxs[chpxs.Count - 1];
 
             //start paragraph
             this._writer.WriteStartElement("w", "p", OpenXmlNamespaces.WordprocessingML);
@@ -694,11 +700,11 @@ namespace b2xtranslator.WordprocessingMLMapping
 
             //detect text type
             string textType = "t";
-            if(writeDeletedText)
+            if (writeDeletedText)
                 textType = "delText";
-            else if(this._writeInstrText)
+            else if (this._writeInstrText)
                 textType = "instrText";
- 
+
             //open a new w:t element
             writeTextStart(textType);
 
@@ -760,7 +766,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     int cpFieldEnd = searchNextTextMark(this._doc.Text, cpFieldStart, TextMark.FieldEndMark);
                     var f = new Field(this._doc.Text.GetRange(cpFieldStart, cpFieldEnd - cpFieldStart + 1));
 
-                    if(f.FieldCode.StartsWith(" FORM"))
+                    if (f.FieldCode.StartsWith(" FORM"))
                     {
                         this._writer.WriteStartElement("w", "fldChar", OpenXmlNamespaces.WordprocessingML);
                         this._writer.WriteAttributeString("w", "fldCharType", OpenXmlNamespaces.WordprocessingML, "begin");
@@ -907,7 +913,7 @@ namespace b2xtranslator.WordprocessingMLMapping
 
                         this._writer.WriteEndElement();
                         writeTextStart(textType);
-                    }                   
+                    }
                 }
                 else if (c == TextMark.AutoNumberedFootnoteReference && fSpec)
                 {
@@ -935,7 +941,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     else
                     {
                         // it's not the document, write the short ref
-                        if(this.GetType() != typeof(FootnotesMapping))
+                        if (this.GetType() != typeof(FootnotesMapping))
                         {
                             this._writer.WriteElementString("w", "footnoteRef", OpenXmlNamespaces.WordprocessingML, "");
                         }
@@ -1045,7 +1051,7 @@ namespace b2xtranslator.WordprocessingMLMapping
                     {
                         writeBookmarkEnd((BookmarkFirst)this._doc.BookmarkStartPlex.Elements[b]);
                     }
-                }     
+                }
             }
         }
 
@@ -1098,7 +1104,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             }
 
             //add the last part
-            ret.Add(chars.GetRange(startIndex, chars.Count-startIndex));
+            ret.Add(chars.GetRange(startIndex, chars.Count - startIndex));
 
             return ret;
         }
@@ -1155,7 +1161,7 @@ namespace b2xtranslator.WordprocessingMLMapping
             bool ret = false;
             foreach (var sprm in papx.grpprl)
             {
-                if(sprm.OpCode == SinglePropertyModifier.OperationCode.sprmPWall)
+                if (sprm.OpCode == SinglePropertyModifier.OperationCode.sprmPWall)
                 {
                     //sHasOldProps
                     ret = true;
@@ -1257,7 +1263,7 @@ namespace b2xtranslator.WordprocessingMLMapping
         {
             ParagraphPropertyExceptions ret = null;
 
-            if(this._doc.AllPapx.ContainsKey(fc))
+            if (this._doc.AllPapx.ContainsKey(fc))
             {
                 ret = this._doc.AllPapx[fc];
                 this._lastValidPapx = ret;
@@ -1277,14 +1283,11 @@ namespace b2xtranslator.WordprocessingMLMapping
         /// <returns></returns>
         protected SectionPropertyExceptions findValidSepx(int cp)
         {
-            SectionPropertyExceptions ret = null;
-
-            try
+            if (this._doc.AllSepx.TryGetValue(cp, out var ret))
             {
-                ret = this._doc.AllSepx[cp];
                 this._lastValidSepx = ret;
             }
-            catch (KeyNotFoundException)
+            else
             {
                 //there is no SEPX at this position, 
                 //so the previous SEPX is valid for this cp

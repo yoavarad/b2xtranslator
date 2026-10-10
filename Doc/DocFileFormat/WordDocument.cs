@@ -180,7 +180,15 @@ namespace b2xtranslator.DocFileFormat
 
         public WordDocument(StructuredStorageReader reader, int fibFC = 0)
         {
-            Parse(reader, fibFC);
+            using var activity = b2xtranslator.Tools.Instrumentation.Source.StartActivity("parse")?.SetTag("b2x.format", "doc");
+            try
+            {
+                Parse(reader, fibFC);
+            }
+            catch (Exception ex) when (MalformedInput.IsParseFault(ex))
+            {
+                throw new ByteParseException("The Word document is corrupt or not a valid Word 97-2003 file.", ex);
+            }
         }
 
         void Parse(StructuredStorageReader reader, int fibFC)
@@ -207,14 +215,8 @@ namespace b2xtranslator.DocFileFormat
             //get the streams
             this.TableStream = reader.GetStream(this.FIB.fWhichTblStm ? "1Table" : "0Table");
 
-            try
-            {
-                this.DataStream = reader.GetStream("Data");
-            }
-            catch (StreamNotFoundException)
-            {
-                this.DataStream = null;
-            }
+            reader.TryGetStream("Data", out var dataStream);
+            this.DataStream = dataStream;
 
             //Read all needed STTBs
             this.RevisionAuthorTable = new StringTable(typeof(string), this.TableStream, this.FIB.fcSttbfRMark, this.FIB.lcbSttbfRMark);

@@ -8,7 +8,7 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
     /// 
     /// The PRECISION record stores the Precision As Displayed option from the Options dialog box, Calculation tab.
     /// </summary>
-    [BiffRecord(RecordType.CalcPrecision)] 
+    [BiffRecord(RecordType.CalcPrecision)]
     public class CalcPrecision : BiffRecord
     {
         public const RecordType ID = RecordType.CalcPrecision;
@@ -26,9 +26,9 @@ namespace b2xtranslator.Spreadsheet.XlsFileFormat.Records
 
             // initialize class members from stream
             this.fFullPrec = reader.ReadUInt16();
-            
+
             // assert that the correct number of bytes has been read from the stream
-            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position); 
+            Debug.Assert(this.Offset + this.Length == this.Reader.BaseStream.Position);
         }
     }
 }

@@ -881,6 +881,21 @@ namespace b2xtranslator.DocFileFormat
         public bool fGrowAutofit;
 
         /// <summary>
+        /// Compatibility option: Do not autofit tables next to wrapped objects (fDontAutofitConstrainedTable).
+        /// </summary>
+        public bool fDontAutofitConstrainedTable;
+
+        /// <summary>
+        /// Compatibility option: Underline the tab character in numbered lists (fUnderlineTabInNumList).
+        /// </summary>
+        public bool fUnderlineTabInNumList;
+
+        /// <summary>
+        /// Compatibility option: Do not break constrained tables forced onto the page (fDontBreakConstrainedForcedTable).
+        /// </summary>
+        public bool fDontBreakConstrainedForcedTable;
+
+        /// <summary>
         /// HTML I/O compatibility level
         /// </summary>
         public ushort verCompatPreW10;
@@ -1509,7 +1524,9 @@ namespace b2xtranslator.DocFileFormat
                                 this.fDontUseAsianBreakRules = bits[15];
                                 this.fUseWord2002TableStyleRules = bits[16];
                                 this.fGrowAutofit = bits[17];
-                                //bits 18-31 are unused
+                                this.fDontAutofitConstrainedTable = bits[23];
+                                this.fUnderlineTabInNumList = bits[25];
+                                this.fDontBreakConstrainedForcedTable = bits[29];
 
                                 //bytes 516-539 are unused
 
@@ -1611,15 +1628,15 @@ namespace b2xtranslator.DocFileFormat
 
         private void setDefaultCompatibilityOptions(FileInformationBlock.FibVersion nFib)
         {
-            if(nFib == FileInformationBlock.FibVersion.Fib1997 || nFib == FileInformationBlock.FibVersion.Fib1997Beta)
+            if (nFib == FileInformationBlock.FibVersion.Fib1997 || nFib == FileInformationBlock.FibVersion.Fib1997Beta)
             {
                 //Word 97 default settings
                 this.fAlignTablesRowByRow = true;
                 this.fLayoutTableRowsApart = true;
                 this.fGrowAutofit = true;
                 this.fDontWrapTextWithPunct = true;
-                //ToDo: Don't autofit tables next to wrapped objects
-                //ToDo: Don't break constrained tables forced onto the page
+                this.fDontAutofitConstrainedTable = true;
+                this.fDontBreakConstrainedForcedTable = true;
                 this.fDontBreakWrappedTables = true;
                 this.fDontSnapToGridInCell = true;
                 this.fDontUseAsianBreakRules = true;
@@ -1630,7 +1647,7 @@ namespace b2xtranslator.DocFileFormat
                 this.fFtnLayoutLikeWW8 = true;
                 this.fLayoutRawTableWidth = true;
                 this.fDontAllowFieldEndSelect = true;
-                //ToDo: underline characters in numbered lists
+                this.fUnderlineTabInNumList = true;
                 this.fUseWord2002TableStyleRules = true;
                 this.fUserWord97LineBreakingRules = true;
             }
@@ -1640,21 +1657,21 @@ namespace b2xtranslator.DocFileFormat
 
                 this.fGrowAutofit = true;
                 this.fDontWrapTextWithPunct = true;
-                //ToDo: Don't autofit tables next to wrapped objects
+                this.fDontAutofitConstrainedTable = true;
                 this.fDontBreakWrappedTables = true;
                 this.fDontSnapToGridInCell = true;
                 this.fDontUseAsianBreakRules = true;
                 this.fNoTabForInd = true;
                 this.fDontAllowFieldEndSelect = true;
-                //ToDo: underline characters in numbered lists
+                this.fUnderlineTabInNumList = true;
                 this.fUseWord2002TableStyleRules = true;
             }
-            else if(nFib ==  FileInformationBlock.FibVersion.Fib2002)
+            else if (nFib == FileInformationBlock.FibVersion.Fib2002)
             {
                 //Word 2002 (XP)
 
                 this.fGrowAutofit = true;
-                //ToDo: Don't autofit tables next to wrapped objects
+                this.fDontAutofitConstrainedTable = true;
                 this.fDontBreakWrappedTables = true;
                 this.fNoTabForInd = true;
                 this.fUseWord2002TableStyleRules = true;
@@ -1663,7 +1680,7 @@ namespace b2xtranslator.DocFileFormat
             {
                 //Word 2003
 
-                //ToDo: Don't autofit tables next to wrapped objects
+                this.fDontAutofitConstrainedTable = true;
                 this.fDontBreakWrappedTables = true;
                 this.fNoTabForInd = true;
 

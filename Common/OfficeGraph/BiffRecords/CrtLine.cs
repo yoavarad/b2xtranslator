@@ -53,7 +53,7 @@ namespace b2xtranslator.OfficeGraph
         ///                     data point of pie and pie of pie chart groups.
         /// </summary>
         public LineType lineId;
-        
+
         public CrtLine(IStreamReader reader, GraphRecordNumber id, ushort length)
             : base(reader, id, length)
         {

@@ -13,7 +13,6 @@ namespace b2xtranslator.PresentationMLMapping
         AbstractOpenXmlMapping//,
     {
         protected ConversionContext _ctx;
-        private ShapeTreeMapping _stm;
         private List<Point> TextAreasForAnimation = new List<Point>();
 
         public SlideTransitionMapping(ConversionContext ctx, XmlWriter writer)
@@ -24,10 +23,18 @@ namespace b2xtranslator.PresentationMLMapping
 
         public void Apply(SlideShowSlideInfoAtom slideshow)
         {
-            if (slideshow.fAutoAdvance)
+            // effectType 0 is a cut; only "through black" (effectDirection 1) needs writing unless auto-advancing
+            if (slideshow.fAutoAdvance || slideshow.effectType != 0 || slideshow.effectDirection == 1)
             {
                 this._writer.WriteStartElement("p", "transition", OpenXmlNamespaces.PresentationML);
-                this._writer.WriteAttributeString("advTm", slideshow.slideTime.ToString());
+                if (!slideshow.fManualAdvance)
+                {
+                    this._writer.WriteAttributeString("advOnClick", "0");
+                }
+                if (slideshow.fAutoAdvance)
+                {
+                    this._writer.WriteAttributeString("advTm", slideshow.slideTime.ToString());
+                }
 
                 switch (slideshow.speed)
                 {
@@ -70,14 +77,14 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                         break;
                     case 3:
-                        this._writer.WriteStartElement("p","checker", OpenXmlNamespaces.PresentationML);
+                        this._writer.WriteStartElement("p", "checker", OpenXmlNamespaces.PresentationML);
                         switch (slideshow.effectDirection)
                         {
                             case 0:
                                 this._writer.WriteAttributeString("dir", "horz");
                                 break;
                             case 1:
-                                this._writer.WriteAttributeString("dir","vert");
+                                this._writer.WriteAttributeString("dir", "vert");
                                 break;
                         }
                         this._writer.WriteEndElement();
@@ -118,40 +125,40 @@ namespace b2xtranslator.PresentationMLMapping
                         break;
                     case 6: //fade
                         this._writer.WriteElementString("p", "fade", OpenXmlNamespaces.PresentationML, "");
-                         break;
-                    case 7: //uncover
-                        this._writer.WriteStartElement("p", "push", OpenXmlNamespaces.PresentationML); //TODO
-                         switch (slideshow.effectDirection)
-                         {
-                             case 0:
+                        break;
+                    case 7: //uncover (PresentationML "pull")
+                        this._writer.WriteStartElement("p", "pull", OpenXmlNamespaces.PresentationML);
+                        switch (slideshow.effectDirection)
+                        {
+                            case 0:
                                 this._writer.WriteAttributeString("dir", "l");
-                                 break;
-                             case 1:
+                                break;
+                            case 1:
                                 this._writer.WriteAttributeString("dir", "u");
-                                 break;
-                             case 2:
+                                break;
+                            case 2:
                                 this._writer.WriteAttributeString("dir", "r");
-                                 break;
-                             case 3:
+                                break;
+                            case 3:
                                 this._writer.WriteAttributeString("dir", "d");
-                                 break;
-                             case 4:
+                                break;
+                            case 4:
                                 this._writer.WriteAttributeString("dir", "lu");
-                                 break;
-                             case 5:
+                                break;
+                            case 5:
                                 this._writer.WriteAttributeString("dir", "ru");
-                                 break;
-                             case 6:
+                                break;
+                            case 6:
                                 this._writer.WriteAttributeString("dir", "ld");
-                                 break;
-                             case 7:
+                                break;
+                            case 7:
                                 this._writer.WriteAttributeString("dir", "rd");
-                                 break;
-                         }
+                                break;
+                        }
                         this._writer.WriteEndElement();
                         break;
                     case 8: //random bars
-                        this._writer.WriteStartElement("p", "randomBar", OpenXmlNamespaces.PresentationML); 
+                        this._writer.WriteStartElement("p", "randomBar", OpenXmlNamespaces.PresentationML);
                         switch (slideshow.effectDirection)
                         {
                             case 0:
@@ -159,7 +166,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 break;
                             case 1:
                                 this._writer.WriteAttributeString("dir", "vert");
-                                break;                            
+                                break;
                         }
                         this._writer.WriteEndElement();
                         break;
@@ -183,7 +190,7 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                         break;
                     case 10: //wipe
-                        this._writer.WriteStartElement("p", "wipe", OpenXmlNamespaces.PresentationML); 
+                        this._writer.WriteStartElement("p", "wipe", OpenXmlNamespaces.PresentationML);
                         switch (slideshow.effectDirection)
                         {
                             case 0:
@@ -197,7 +204,7 @@ namespace b2xtranslator.PresentationMLMapping
                                 break;
                             case 3:
                                 this._writer.WriteAttributeString("dir", "d");
-                                break;                         
+                                break;
                         }
                         this._writer.WriteEndElement();
                         break;
@@ -215,7 +222,7 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                         break;
                     case 13: //split
-                        this._writer.WriteStartElement("p", "split", OpenXmlNamespaces.PresentationML); 
+                        this._writer.WriteStartElement("p", "split", OpenXmlNamespaces.PresentationML);
                         switch (slideshow.effectDirection)
                         {
                             case 0:
@@ -238,7 +245,7 @@ namespace b2xtranslator.PresentationMLMapping
                         this._writer.WriteEndElement();
                         break;
                     case 17:
-                        this._writer.WriteElementString("p", "diamond", OpenXmlNamespaces.PresentationML,"");
+                        this._writer.WriteElementString("p", "diamond", OpenXmlNamespaces.PresentationML, "");
                         break;
                     case 18: //plus
                         this._writer.WriteElementString("p", "plus", OpenXmlNamespaces.PresentationML, "");
@@ -281,7 +288,8 @@ namespace b2xtranslator.PresentationMLMapping
                     case 22: //newsflash
                         this._writer.WriteElementString("p", "newsflash", OpenXmlNamespaces.PresentationML, "");
                         break;
-                    case 23: //alphafade TODO
+                    case 23: //alphafade (fade smoothly)
+                        this._writer.WriteElementString("p", "fade", OpenXmlNamespaces.PresentationML, "");
                         break;
                     case 26: //wheel
                         this._writer.WriteStartElement("p", "wheel", OpenXmlNamespaces.PresentationML); //TODO
@@ -299,6 +307,6 @@ namespace b2xtranslator.PresentationMLMapping
             }
         }
 
-        
+
     }
 }

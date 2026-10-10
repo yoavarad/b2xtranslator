@@ -14,7 +14,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         Fat _fat;
         Header _header;
         InputHandler _fileHandler;
-        List<uint> _sectorsUsedByDirectory;      
+        List<uint> _sectorsUsedByDirectory;
 
         List<DirectoryEntry> _directoryEntries = new List<DirectoryEntry>();
 
@@ -65,7 +65,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             //Console.WriteLine("{0:X02}: Left: {2:X02}, Right: {3:X02}, Child: {4:X02}, Name: {1}, Color: {5}", entry.Sid, entry.Name, (left > 0xFF)? 0xFF : left, (right > 0xFF)? 0xFF : right, (child > 0xFF)? 0xFF : child, entry.Color.ToString() );
 
             // Check for cycle
-            if (this._directoryEntries.Exists(delegate(DirectoryEntry x) { return x.Sid == entry.Sid; }))
+            if (this._directoryEntries.Exists(delegate (DirectoryEntry x) { return x.Sid == entry.Sid; }))
             {
                 throw new ChainCycleDetectedException("DirectoryEntries");
             }
@@ -86,7 +86,7 @@ namespace b2xtranslator.StructuredStorage.Reader
             // Child
             if (child != SectorId.NOSTREAM)
             {
-                GetAllDirectoryEntriesRecursive(child ,path + ((sid == 0) ? "" : entry.Name) + "\\");
+                GetAllDirectoryEntriesRecursive(child, path + ((sid == 0) ? "" : entry.Name) + "\\");
             }
         }
 
@@ -97,7 +97,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         private DirectoryEntry ReadDirectoryEntry(uint sid, string path)
         {
             SeekToDirectoryEntry(sid);
-            var result = new DirectoryEntry(this._header, this._fileHandler, sid, path);            
+            var result = new DirectoryEntry(this._header, this._fileHandler, sid, path);
             return result;
         }
 
@@ -107,12 +107,13 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// </summary>        
         private void SeekToDirectoryEntry(uint sid)
         {
-            int sectorInDirectoryChain = (int)(sid * Measures.DirectoryEntrySize) / this._header.SectorSize;
-            if (sectorInDirectoryChain < 0)
+            long offset = (long)sid * Measures.DirectoryEntrySize;
+            long sectorInDirectoryChain = offset / this._header.SectorSize;
+            if (sectorInDirectoryChain >= this._sectorsUsedByDirectory.Count)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new InvalidValueInDirectoryEntryException("sid " + sid);
             }
-            this._fileHandler.SeekToPositionInSector(this._sectorsUsedByDirectory[sectorInDirectoryChain], (sid * Measures.DirectoryEntrySize) % this._header.SectorSize);            
+            this._fileHandler.SeekToPositionInSector(this._sectorsUsedByDirectory[(int)sectorInDirectoryChain], offset % this._header.SectorSize);
         }
 
 
@@ -128,10 +129,10 @@ namespace b2xtranslator.StructuredStorage.Reader
 
             if (path[0] == '\\')
             {
-                return this._directoryEntries.Find(delegate(DirectoryEntry entry) { return entry.Path == path; });
+                return this._directoryEntries.Find(delegate (DirectoryEntry entry) { return entry.Path == path; });
             }
 
-            return this._directoryEntries.Find(delegate(DirectoryEntry entry) { return entry.Name == path; });
+            return this._directoryEntries.Find(delegate (DirectoryEntry entry) { return entry.Name == path; });
         }
 
 
@@ -140,7 +141,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         /// </summary>
         internal DirectoryEntry GetDirectoryEntry(uint sid)
         {
-            return this._directoryEntries.Find(delegate(DirectoryEntry entry) { return entry.Sid == sid; });
+            return this._directoryEntries.Find(delegate (DirectoryEntry entry) { return entry.Sid == sid; });
         }
 
 
@@ -182,7 +183,7 @@ namespace b2xtranslator.StructuredStorage.Reader
 
             foreach (var entry in this._directoryEntries)
             {
-                result.Add(entry.Name);                
+                result.Add(entry.Name);
             }
             return new ReadOnlyCollection<string>(result);
         }
@@ -254,7 +255,7 @@ namespace b2xtranslator.StructuredStorage.Reader
         internal ReadOnlyCollection<DirectoryEntry> GetAllStreamEntries()
         {
             return new ReadOnlyCollection<DirectoryEntry>(this._directoryEntries.FindAll(
-                delegate(DirectoryEntry entry) { return entry.Type == DirectoryEntryType.STGTY_STREAM; }
+                delegate (DirectoryEntry entry) { return entry.Type == DirectoryEntryType.STGTY_STREAM; }
                 ));
         }
     }

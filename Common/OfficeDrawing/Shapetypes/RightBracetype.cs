@@ -33,9 +33,9 @@ namespace b2xtranslator.OfficeDrawing.Shapetypes
             this.Handles = new List<Handle>();
             var HandleOne = new Handle();
             var HandleTwo = new Handle();
-            HandleOne.position="center,#0";
+            HandleOne.position = "center,#0";
             HandleOne.yrange = "0,@8";
-            HandleTwo.position="bottomRight,#1";
+            HandleTwo.position = "bottomRight,#1";
             HandleTwo.yrange = "@9,@10";
             this.Handles.Add(HandleOne);
             this.Handles.Add(HandleTwo);
