@@ -32,3 +32,5 @@ verification:
   - dotnet-format
   - dotnet-test
   - dotnet-tdd-guard
+ai:
+  provider: claude-cli
