@@ -196,6 +196,20 @@ namespace b2xtranslator.DocFileFormat
             this.Storage = reader;
             this.WordDocumentStream = reader.GetStream("WordDocument");
 
+            //FibBase (first 68 bytes) is never encrypted; check fEncrypted before parsing the enciphered rest of the FIB
+            if (this.WordDocumentStream.Length >= fibFC + 0x0C)
+            {
+                this.WordDocumentStream.Seek(fibFC + 0x0A, System.IO.SeekOrigin.Begin);
+                ushort fibFlags = new VirtualStreamReader(this.WordDocumentStream).ReadUInt16();
+                if ((fibFlags & 0x0100) != 0)   // FibBase.fEncrypted
+                {
+                    bool obfuscated = (fibFlags & 0x8000) != 0;   // FibBase.fObfuscated (FIB field fCrypto)
+                    throw new EncryptedDocumentException(obfuscated
+                        ? "The Word document is password-protected with XOR obfuscation; decryption is not supported."
+                        : "The Word document is password-protected with RC4 encryption; decryption is not supported.");
+                }
+            }
+
             //parse FIB
             this.WordDocumentStream.Seek(fibFC, System.IO.SeekOrigin.Begin);
             this.FIB = new FileInformationBlock(new VirtualStreamReader(this.WordDocumentStream));

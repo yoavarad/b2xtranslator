@@ -142,6 +142,17 @@ namespace b2xtranslator.StructuredStorage.Common
         }
     }
 
+    /// <summary>
+    /// The input is an encrypted (password-protected) Word or PowerPoint 97-2003 file.
+    /// b2xtranslator does not decrypt; the caller must decrypt first or report the file as protected.
+    /// </summary>
+    public class EncryptedDocumentException : Exception
+    {
+        public EncryptedDocumentException() { }
+        public EncryptedDocumentException(string message) : base(message) { }
+        public EncryptedDocumentException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
     public class InvalidSectorSizeException : Exception
     {
         public InvalidSectorSizeException()
