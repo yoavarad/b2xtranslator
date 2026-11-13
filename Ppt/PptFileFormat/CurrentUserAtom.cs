@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.IO;
 using b2xtranslator.OfficeDrawing;
+using b2xtranslator.StructuredStorage.Common;
 
 namespace b2xtranslator.PptFileFormat
 {
@@ -111,7 +112,7 @@ namespace b2xtranslator.PptFileFormat
                     break;
 
                 case 0xF3D1C4DF: /* encrypted PPT file */
-                    throw new NotSupportedException("Encryped PPT files aren't supported at this time");
+                    throw new EncryptedDocumentException("The PowerPoint presentation is password-protected with RC4 CryptoAPI encryption; decryption is not supported.");
 
                 default:
                     throw new InvalidStreamException(string.Format(
