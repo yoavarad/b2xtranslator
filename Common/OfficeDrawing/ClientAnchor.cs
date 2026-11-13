@@ -17,10 +17,13 @@ namespace b2xtranslator.OfficeDrawing
         }
 
         //these are only valid for Powerpoint
+        // 16-byte form is OfficeArt RectStruct: Int32 left, top, right, bottom (LibreOffice ProcessClientAnchor2)
         public int Top
         {
             get
             {
+                if (this.Bytes.Length == 16)
+                    return System.BitConverter.ToInt32(this.Bytes, 4);
                 return System.BitConverter.ToInt16(this.Bytes, 0);
             }
         }
@@ -28,6 +31,8 @@ namespace b2xtranslator.OfficeDrawing
         {
             get
             {
+                if (this.Bytes.Length == 16)
+                    return System.BitConverter.ToInt32(this.Bytes, 0);
                 return System.BitConverter.ToInt16(this.Bytes, 2);
             }
         }
@@ -35,6 +40,8 @@ namespace b2xtranslator.OfficeDrawing
         {
             get
             {
+                if (this.Bytes.Length == 16)
+                    return System.BitConverter.ToInt32(this.Bytes, 8);
                 return System.BitConverter.ToInt16(this.Bytes, 4);
             }
         }
@@ -42,6 +49,8 @@ namespace b2xtranslator.OfficeDrawing
         {
             get
             {
+                if (this.Bytes.Length == 16)
+                    return System.BitConverter.ToInt32(this.Bytes, 12);
                 return System.BitConverter.ToInt16(this.Bytes, 6);
             }
         }

@@ -2292,10 +2292,8 @@ namespace b2xtranslator.PresentationMLMapping
 
                 this._writer.WriteEndElement();
             }
-            else
+            else if (container.FirstChildWithType<ChildAnchor>() is ChildAnchor chanchor)
             {
-                var chanchor = container.FirstChildWithType<ChildAnchor>();
-
                 this._writer.WriteStartElement("a", "xfrm", OpenXmlNamespaces.DrawingML);
 
                 this._writer.WriteStartElement("a", "off", OpenXmlNamespaces.DrawingML);
