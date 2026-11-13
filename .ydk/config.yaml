@@ -32,5 +32,11 @@ verification:
   - dotnet-format
   - dotnet-test
   - dotnet-tdd-guard
+  - ai-code-review
+  - spec-alignment
 ai:
   provider: claude-cli
+  model_tiers:
+    fast: claude-haiku-4-5
+    review: claude-sonnet-5
+    deep: claude-opus-5-5
