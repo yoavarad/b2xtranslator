@@ -10,4 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\b2xtranslator.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="UnitTests" />
+  </ItemGroup>
 </Project>
