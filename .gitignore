@@ -25,6 +25,11 @@ bld/
 .ydk/cache/
 .ydk/proofs/
 
+# ydk transient
+.ydk/active-task.json
+.ydk/worktrees/
+.ydk/batch-mapping*.json
+
 # perf corpus (generated large tier)
 perf/corpus/large/
 perf/corpus/small/*.docx
