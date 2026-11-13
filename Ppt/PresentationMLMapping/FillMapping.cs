@@ -262,7 +262,6 @@ namespace b2xtranslator.PresentationMLMapping
                         {
 
                             useFillAndBack = false;
-                            var type = so.OptionsByID[ShapeOptions.PropertyId.fillShadeType];
 
                             ushort nElems = System.BitConverter.ToUInt16(colors, 0);
                             ushort nElemsAlloc = System.BitConverter.ToUInt16(colors, 2);
