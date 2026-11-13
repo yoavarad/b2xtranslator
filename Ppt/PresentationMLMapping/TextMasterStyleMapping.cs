@@ -235,7 +235,7 @@ namespace b2xtranslator.PresentationMLMapping
             //lvl
             if (pr.IndentLevel > 0) this._writer.WriteAttributeString("lvl", pr.IndentLevel.ToString());
             //indent
-            if (pr.IndentPresent && !isDefault) this._writer.WriteAttributeString("indent", (-1 * (Utils.MasterCoordToEMU((int)(pr.LeftMargin - pr.Indent)))).ToString());
+            if (pr.IndentPresent && pr.LeftMarginPresent && !isDefault) this._writer.WriteAttributeString("indent", (-1 * (Utils.MasterCoordToEMU((int)(pr.LeftMargin - pr.Indent)))).ToString());
             //algn
             if (pr.AlignmentPresent)
             {
