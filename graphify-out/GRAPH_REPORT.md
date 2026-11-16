@@ -1,17 +1,17 @@
-# Graph Report - 174  (2026-11-13)
+# Graph Report - b2xtranslator  (2026-11-16)
 
 ## Corpus Check
-- 1339 files · ~353,068 words
+- 1340 files · ~353,480 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 65 file(s) not represented in the graph (top: .xml 36, .ppt 8, .doc 6)
+- Unclassified: 64 file(s) not represented in the graph (top: .xml 36, .ppt 8, .doc 6)
 
 ## Summary
-- 9521 nodes · 19379 edges · 427 communities (341 shown, 86 thin omitted)
+- 9556 nodes · 19413 edges · 434 communities (355 shown, 79 thin omitted)
 - Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 2006 edges (avg confidence: 0.84)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ab5a7a4f`
+- Built from commit: `a91ed844`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,24 +30,24 @@
 - StyleIdentifier
 - system_io
 - Record
-- Attribute
+- AbstractFat
 - .Apply
 - RegularContainer
-- b2xtranslator.OpenXmlLib
+- b2xtranslator.DocFileFormat
 - PropertyType
 - ShapeType
-- SectionPropertiesMapping
+- SectionType
 - VirtualStream
-- NumberingMapping
-- ConversionContext
+- steps
+- RegularContainer
 - PowerpointDocument
 - CrtSequence
 - ShadingPattern
-- List
-- TxO
+- .checkHeaderFooter
+- RGBColor
 - PtgNumber
 - WorkSheetData
-- ConversionContext
+- ExcelContext
 - IStreamReader
 - XmlElement
 - AbstractPtg
@@ -55,18 +55,19 @@
 - Dml
 - AxisMultiplier
 - ParagraphRun
+- .Apply
 - PageNumberFormatCode
 - LineStyle
-- TablePropertyExceptions
-- .Apply
-- b2xtranslator.Tools
+- OleObject
+- .Parse
+- Utils
 - List
 - system_text
 - OpenXmlWriter
 - VMLShapeMapping
-- .Debug
-- .SlideLayoutTypeToFilename
-- FrtHeaderOld
+- .Main
+- ADR: Unmapped PPT slide layout types
+- ObjectKind
 - WorkBookData
 - b2xtranslator.Spreadsheet.XlsFileFormat.Ptg
 - b2xtranslator.sln
@@ -91,22 +92,22 @@
 - AbstractHeader
 - StructuredStorageContext
 - PlaceholderEnum
-- StyleData
-- SerAuxErrBar
+- Profiling conversions
+- ErrorAmoutType
 - fields
-- Header
+- AbstractCellData
 - .OpenArchive
-- AbstractOpenXmlMapping
-- WordDocument
+- Stack
+- VirtualStreamReader
 - SegmentType
 - PictureDescriptor
 - ObjectType
 - fields
 - Sml
-- IMapping
-- BopPop
+- .extractData
+- SplitType
 - PresentationPart
-- .GetStream
+- StorageDirectoryEntry
 - OutputHandler
 - UnderlineCode
 - fields
@@ -116,14 +117,14 @@
 - OpenXmlPartContainer
 - with
 - ToolbarControlType
-- IVisitable
+- NormalViewSetInfoContainer.cs
 - ObjectType
 - ColorIdentifier
 - TimePropertyID4TimeNode
 - Ptg0x19Sub
 - FunctionCategory
 - StylesMapping
-- WorkbookPart
+- .AddPart
 - Ptg0x18Sub
 - AutoLayoutType
 - id
@@ -152,43 +153,43 @@
 - steps
 - SlideLayoutType
 - LineDashing
-- Font
-- LayoutType
+- .ReadByte
+- SupBookData
 - EmptyCellPlotMode
 - VerticalAlignment
 - n01.yaml
 - DashStyle
 - StructuredStorageReader
 - JustificationCode
-- Chart3DBarShape
-- XLUnicodeString
+- AxisType
+- Series
 - ExtractorException
 - DocumentType
 - AxesUsed
 - n02.yaml
-- FrameStyle
+- SST
 - Utils
-- WinDoc
+- ChartContext
 - ContentTypes.cs
 - Benchmarks/packages.lock.json
 - AnimationFlagsMask
 - Test
 - FormFieldData
-- .Apply
+- ADR 0001: Parallel mapping of independent parts (slides / sheets)
 - b2xtranslator (Binary to OpenXML Translator)
 - SlideSizeType
-- ZipArchive
+- .ConvertAndInspect
 - LineEnd
 - FontFamily
 - n03.yaml
-- TwipsValue
-- .extractData
+- XCTData
+- BoundSheet8
 - n04.yaml
 - n05.yaml
 - PptEndToEndTests
 - HyphenationRule
 - TextAnimation
-- FillData
+- StyleData
 - n06.yaml
 - n10.yaml
 - CustomViewSequence
@@ -200,11 +201,11 @@
 - net10.0
 - steps
 - fields
-- FooterPart
+- LoggingLevel
 - items
 - KeyMapCustomizationsPart
 - responses
-- InternalBitConverter
+- FtCf
 - request
 - TabLeader
 - TextFrameWrapping
@@ -212,11 +213,11 @@
 - HomePlateType.cs
 - DocType
 - DocumentMapping
-- VirtualStream
+- ObjectKind
 - MarkerType
 - OriginatorVersion
 - props
-- FontTablePart
+- TrendlineType
 - LanguageIdMapping
 - StyleMask
 - Handle
@@ -225,56 +226,56 @@
 - FarEastLayout
 - TextFlow
 - WarichuBracket
-- DocumentType
+- .Convert
 - items
 - description
 - HorizontalAlignment
 - entity
 - HorizontalAlignment
 - VerticalAlignment
-- BorderPartType
+- StyleEnum.cs
 - PositionHorizontalRelative
 - fields
 - JoinStyle
-- PathParser
+- PositionVerticalRelative
 - CellWidthType
 - HorizontalPositionCode
-- BkHim
+- BraiId
 - AnimAfterEffectEnum
 - TimeNodeTypeEnum
 - TriggerObjectEnum
 - items
 - ChartFormatIdGenerator
-- ParallelogramType.cs
+- DocGridType
 - AI Analysis
-- Tick
+- MarkLocation
 - items
-- ThemePart
+- WidthType
 - TextRotation
 - .ReadUInt16
 - ViewPropertiesPart
 - ProtectionBooleans
-- Fat
+- AxisPart
 - ValueProperty.cs
-- FontFamily
+- SplitType
 - FixedPointNumber
 - TextBuildSubEffectEnum
 - generate.py
 - fields
 - fields
-- QuadArrowType.cs
+- BraiId
 - ObjectType
 - VerticalAlignment
-- SprmType
+- CharacterPropertiesMapping
 - PositionMode
 - ObjectType
 - type
-- RightBracketType.cs
+- LineType
 - AxisMultiplier
 - LineWeight
 - ErrorBarDirection
-- CidType
-- RevisionType
+- DefaultTextType
+- SizeMode
 - LineWeight
 - description
 - framework
@@ -295,7 +296,7 @@
 - level
 - Microsoft.CodeAnalysis.Analyzers
 - Microsoft.Extensions.Primitives
-- SuperscriptIndex
+- ErrorAmoutType
 - WedgeRoundedRectCalloutType.cs
 - b2xtranslator
 - DrawingsPart
@@ -306,11 +307,11 @@
 - CrtLayout12Mode
 - task.md
 - manifest.json
-- LayoutType
-- EmptyCellPlotMode
+- ErrorBarDirection
+- TextRotation
 - PULL_REQUEST_TEMPLATE.md
 - ReadingOrder
-- system_collections_generic
+- system
 - Microsoft.CodeAnalysis.Common
 - component.yaml
 - data_source
@@ -334,11 +335,11 @@
 - then
 - when
 - doc2x/packages.lock.json
-- ByteOrder
-- BackgroundMode
+- Alignment
+- FontWeight
 - ppt2x/packages.lock.json
-- BackgroundMode
-- AccentBorderCallout3Type.cs
+- ScriptStyle
+- UnderlineStyle
 - default_sort
 - constraints
 - default
@@ -349,9 +350,9 @@
 - ConversionBenchmarks
 - AccentCallout90Type
 - BevelType
-- Callout2Type
-- CloudCalloutType
-- CubeType
+- ActionType
+- FootnoteRestartCode
+- .getSchemeColorName
 - CurvedRightArrowType
 - DownArrowType
 - FoldedCornerType
@@ -363,49 +364,57 @@
 - b2xtranslator
 - TextPlainText
 - UpArrowCalloutType
-- BorderCallout1Type.cs
-- WedgeEllipseCalloutType
+- Alignment
+- FontWeight
+- UnderlineStyle
+- AccentCallout1Type
 - BorderCallout2Type.cs
-- BorderCallout90Type.cs
+- AccentCallout2Type
+- ActionButtonBlank
+- BorderCallout3Type
+- BracketPairType
+- ChevronType
 - TimeVisualElementEnum
+- CircularArrowType
+- CurvedDownArrowType
+- CurvedLeftArrowType
 - BracePairType.cs
 - TextType
-- Callout1Type.cs
+- IsoscelesTriangleType
+- LeftArrowCalloutType
+- LeftRightUpArrow
 - b2xtranslator
+- OctagonType
 - Contributor Covenant (v1.4)
+- PlaqueType
+- PlusType
 - .AppendOptionsToStyle
+- RibbonDownType
 - LineStyle
+- RightArrowType
+- SmileyFaceType
+- StripedRightArrowType
+- TextDeflate
 - ImageType
 - CurvedUpArrowType.cs
 - DonutType.cs
 - DoubleWaveType.cs
 - EllipseRibbonType.cs
 - dependencies
-- HexagonType.cs
 - LeftArrowType.cs
 - LeftBraceType.cs
-- LeftRightArrowCalloutType.cs
 - LeftRightArrowType.cs
 - LeftUpArrowType.cs
 - MoonType.cs
-- NoSmokingType.cs
-- QuadArrowCalloutType.cs
 - AllocListener
-- RightArrowCalloutType.cs
-- Seal16Type.cs
-- Seal24Type.cs
 - TextCanDown.cs
 - TextCascadeUp.cs
-- TextDeflateBottom.cs
 - TextFadeUp.cs
 - dependencies
-- TextTriangle.cs
 - TrapezoidType.cs
 - dependencies
 - UpArrowType.cs
-- UpDownArrowCalloutType.cs
 - UpDownArrowType.cs
-- VerticalScrollType.cs
 - WedgeRectCalloutType.cs
 - story.md
 - net10.0
@@ -416,14 +425,13 @@
 - Microsoft.Diagnostics.NETCore.Client
 - Perfolizer
 - System.Management
-- SettingsPart
 - NETStandard.Library
 - MarkLabelLocation
 - MarkLocation
 - dependencies
 - NUnit3TestAdapter
 - MarkLabelLocation
-- ConversionBenchmarks.cs
+- Corpus.cs
 - CommandLineParser
 - Iced
 - Microsoft.DotNet.PlatformAbstractions
@@ -470,7 +478,7 @@
 - **Reference documentation set for binary and Open XML file formats** — readme_b2xtranslator, readme_office_binary_docs, readme_open_xml_standard, readme_microsoft_article [INFERRED 0.80]
 - **b2xtranslator fork/port lineage (DIaLOGIKa Mono original to Evolution .NET Core port)** — readme_b2xtranslator, readme_net2_mono_implementation, readme_dialogika, readme_evolution [INFERRED 0.85]
 
-## Communities (427 total, 86 thin omitted)
+## Communities (434 total, 79 thin omitted)
 
 ### Community 0 - "PropertyId"
 Cohesion: 0.00
@@ -485,16 +493,20 @@ Cohesion: 0.01
 Nodes (361): FtabValues, ABS, ABSREF, ACOS, ACOSH, ACTIVE_CELL, ADD_BAR, ADD_COMMAND (+353 more)
 
 ### Community 3 - "RecordType"
-Cohesion: 0.00
-Nodes (538): BiffRecord, Id, Length, Offset, Reader, AutoFilter12, AutoFilter, AutoFilterInfo (+530 more)
+Cohesion: 0.01
+Nodes (501): BiffRecord, Id, Length, Offset, Reader, AutoFilter12, AutoFilter, AutoFilterInfo (+493 more)
 
 ### Community 4 - "b2xtranslator.OfficeDrawing.Shapetypes"
-Cohesion: 0.04
-Nodes (29): AccentCallout3Type, ActionButtonBlank, DiamondType, EllipsedRibbon2Type, FlowChartAlternateProcessType, FlowChartConnectorType, FlowChartDelayType, FlowChartDisplayType (+21 more)
+Cohesion: 0.03
+Nodes (29): Callout3Type, DiamondType, FlowChartAlternateProcessType, FlowChartCollateType, FlowChartDecisionType, FlowChartDisplayType, FlowChartMagneticDiskType, FlowChartMagneticTapeType (+21 more)
+
+### Community 5 - "b2xtranslator.StructuredStorage.Reader"
+Cohesion: 0.03
+Nodes (3): b2xtranslator.Tools, b2xtranslator.OfficeGraph, b2xtranslator.StructuredStorage.Reader
 
 ### Community 7 - "b2xtranslator.Spreadsheet.XlsFileFormat.Structures"
 Cohesion: 0.02
-Nodes (41): b2xtranslator.Spreadsheet.XlsFileFormat.Structures, XmlTkBackWallThicknessFrt, XmlTkBaseTimeUnitFrt, XmlTkBlob, XmlTkBool, XmlTkChain, XmlTkColorMappingOverride, XmlTkDispBlanksAsFrt (+33 more)
+Nodes (42): b2xtranslator.Spreadsheet.XlsFileFormat.Structures, XmlTkBackWallThicknessFrt, XmlTkBaseTimeUnitFrt, XmlTkBlob, XmlTkBool, XmlTkChain, XmlTkColorMappingOverride, XmlTkDispBlanksAsFrt (+34 more)
 
 ### Community 8 - "LanguageCode"
 Cohesion: 0.01
@@ -502,39 +514,39 @@ Nodes (218): LanguageCode, Afrikaans, Albanian, Amharic, ArabicAlgeria, ArabicBa
 
 ### Community 9 - "GraphRecordNumber"
 Cohesion: 0.01
-Nodes (171): AlRuns, AxcExt, AxesUsed, AxisGroupsPresent, Primary, PrimaryAndSecondary, Begin, BopPopCustom (+163 more)
+Nodes (190): AlRuns, AxcExt, AxisLine, Bar, Begin, BopPopCustom, CatSerRange, Chart3D (+182 more)
 
 ### Community 10 - "b2xtranslator.Spreadsheet.XlsFileFormat"
-Cohesion: 0.05
-Nodes (7): b2xtranslator.OpenXmlLib.DrawingML, b2xtranslator.Spreadsheet.XlsFileFormat, b2xtranslator.OpenXmlLib.SpreadsheetML, b2xtranslator.CommonTranslatorLib, b2xtranslator.SpreadsheetMLMapping, b2xtranslator.xls2x, b2xtranslator.Spreadsheet.XlsFileFormat.StyleData
+Cohesion: 0.04
+Nodes (8): b2xtranslator.OpenXmlLib.DrawingML, b2xtranslator.Spreadsheet.XlsFileFormat, b2xtranslator.OpenXmlLib.SpreadsheetML, b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer, b2xtranslator.SpreadsheetMLMapping, b2xtranslator.xls2x, b2xtranslator.Spreadsheet.XlsFileFormat.StyleData, DataSheetSequence
 
 ### Community 11 - "StyleIdentifier"
 Cohesion: 0.01
 Nodes (160): StyleIdentifier, Acetate, AnnotationReference, AnnotationSubject, AnnotationText, AutoSignature, BlockQuote, BodyText (+152 more)
 
 ### Community 12 - "system_io"
-Cohesion: 0.05
-Nodes (4): b2xtranslator.PptFileFormat, b2xtranslator.ppt2x, b2xtranslator.Shell, b2xtranslator.OfficeDrawing
+Cohesion: 0.04
+Nodes (11): BlipBooleanProperties, b2xtranslator.PptFileFormat, b2xtranslator.OfficeDrawing, EndDocument, ExHyperlink9Container, ExObjListAtom, ExObjRefAtom, ExOleEmbedAtom (+3 more)
 
 ### Community 13 - "Record"
-Cohesion: 0.03
-Nodes (46): BitmapBlip, DrawingGroupRecord, FileIdCluster, DrawingRecord, InvalidRecordException, BlipCompression, Deflate, None (+38 more)
+Cohesion: 0.04
+Nodes (37): BitmapBlip, DrawingGroupRecord, FileIdCluster, DrawingRecord, InvalidRecordException, BlipCompression, Deflate, None (+29 more)
 
-### Community 14 - "Attribute"
-Cohesion: 0.17
-Nodes (7): OfficeRecordAttribute, TypeCodes, OfficeShapeTypeAttribute, OfficeGraphBiffRecordAttribute, TypeCodes, BiffRecordAttribute, TypeCodes
+### Community 14 - "AbstractFat"
+Cohesion: 0.10
+Nodes (10): ChainSizeMismatchException, InvalidSectorInChainException, AbstractFat, _InternalFileStream, SectorSize, Fat, SectorSize, MiniFat (+2 more)
 
 ### Community 15 - ".Apply"
-Cohesion: 0.08
-Nodes (32): BlipStoreContainer, ChildAnchor, ClientAnchor, Bottom, Left, Right, Top, ClientData (+24 more)
+Cohesion: 0.10
+Nodes (24): BlipStoreContainer, ChildAnchor, ClientAnchor, Bottom, Left, Right, Top, ClientData (+16 more)
 
 ### Community 16 - "RegularContainer"
-Cohesion: 0.10
-Nodes (48): RegularContainer, AnimationInfoAtom, AnimationInfoContainer, BuildListContainer, ClientVisualElementContainer, ColorStruct, ElementTypeEnum, ShapeType (+40 more)
-
-### Community 17 - "b2xtranslator.OpenXmlLib"
 Cohesion: 0.08
-Nodes (4): b2xtranslator.WordprocessingMLMapping, b2xtranslator.OpenXmlLib, b2xtranslator.OpenXmlLib.PresentationML, b2xtranslator.PresentationMLMapping
+Nodes (52): AnimationInfoAtom, BuildListContainer, ClientVisualElementContainer, ColorStruct, Comment10Atom, ElementTypeEnum, ShapeType, SoundType (+44 more)
+
+### Community 17 - "b2xtranslator.DocFileFormat"
+Cohesion: 0.04
+Nodes (6): b2xtranslator.WordprocessingMLMapping, b2xtranslator.OpenXmlLib, b2xtranslator.DocFileFormat, b2xtranslator.PresentationMLMapping, b2xtranslator.CommonTranslatorLib, TextMark
 
 ### Community 18 - "PropertyType"
 Cohesion: 0.03
@@ -542,63 +554,63 @@ Nodes (71): PropertyType, ArrayOfBoolean, ArrayOfCodePageString1, ArrayOfCurrenc
 
 ### Community 19 - "ShapeType"
 Cohesion: 0.04
-Nodes (26): AccentBorderCallout90Type, CurvedDownArrowType, DownArrowCalloutType, FlowChartCollateType, FlowChartDecisionType, FlowChartExtractType, FlowChartMagneticDrumType, FlowChartMultidocumentType (+18 more)
+Nodes (27): AccentBorderCallout2Type, AccentBorderCallout90Type, FlowChartConnectorType, FlowChartDelayType, FlowChartDocumentType, FlowChartExtractType, FlowChartInputOutputType, FlowChartInternalStorageType (+19 more)
 
-### Community 20 - "SectionPropertiesMapping"
-Cohesion: 0.10
-Nodes (19): DocGridType, Default, lines, linesAndChars, snapToChars, FootnoteRestartCode, continuous, eachPage (+11 more)
+### Community 20 - "SectionType"
+Cohesion: 0.33
+Nodes (6): SectionType, continuous, evenPage, nextColumn, nextPage, oddPage
 
 ### Community 21 - "VirtualStream"
 Cohesion: 0.06
 Nodes (19): ReadBytesAmountMismatchException, VirtualStream, CanRead, CanSeek, CanWrite, Length, Position, AuthorTable (+11 more)
 
-### Community 22 - "NumberingMapping"
-Cohesion: 0.16
-Nodes (12): ListData, FollowingChar, nothing, space, tab, ListLevel, ListTable, LevelJustification (+4 more)
+### Community 22 - "steps"
+Cohesion: 0.07
+Nodes (29): concurrency, cancel-in-progress, group, env, DEFAULT_BRANCH, GH_TOKEN, GRAPHIFY_BRANCH, if (+21 more)
 
-### Community 23 - "ConversionContext"
-Cohesion: 0.09
-Nodes (16): SlideLayoutPart, ContentType, RelationshipType, TargetDirectory, TargetName, RoundTripContentMasterInfo12, ConversionContext, Ppt (+8 more)
+### Community 23 - "RegularContainer"
+Cohesion: 0.06
+Nodes (43): AbstractOpenXmlMapping, DrawingContainer, RegularContainer, SlideLayoutPart, ContentType, RelationshipType, TargetDirectory, TargetName (+35 more)
 
 ### Community 24 - "PowerpointDocument"
 Cohesion: 0.07
-Nodes (19): DocumentAtom, DocumentContainer, InvalidStreamException, ExObjListContainer, ExOleEmbedContainer, ExOleObjAtom, ExOleObjStgAtom, GPointAtom (+11 more)
+Nodes (26): CurrentUserAtom, UserName, DocumentAtom, DocumentContainer, InvalidStreamException, ExObjListContainer, ExOleEmbedContainer, ExOleObjAtom (+18 more)
 
 ### Community 25 - "CrtSequence"
-Cohesion: 0.12
-Nodes (18): AbstractChartGroupMapping, Is3DChart, AreaChartMapping, AxisMapping, BarChartMapping, BubbleChartMapping, CatMapping, DataLabelMapping (+10 more)
+Cohesion: 0.07
+Nodes (31): IMapping, AbstractAxisMapping, AbstractChartGroupMapping, Is3DChart, AbstractChartMapping, ChartContext, ChartFormatsSequence, ChartPart (+23 more)
 
 ### Community 26 - "ShadingPattern"
 Cohesion: 0.04
 Nodes (55): ShadingPattern, Automatic, BackwardDiagonal, Cross, DarkBackwardDiagonal, DarkCross, DarkDiagonalCross, DarkForwardDiagonal (+47 more)
 
-### Community 27 - "List"
-Cohesion: 0.08
-Nodes (31): BlipCollection9Container, CharacterRun, ANSITypefacePresent, ColorPresent, FEOldTypefacePresent, PositionPresent, SizePresent, StyleFlagsFieldPresent (+23 more)
+### Community 27 - ".checkHeaderFooter"
+Cohesion: 0.26
+Nodes (6): CStringAtom, NotesAtom, SlideAtom, HeadersFootersAtom, SlideHeadersFootersContainer, SlideMapping
 
-### Community 28 - "TxO"
-Cohesion: 0.08
-Nodes (25): TxO, BackgroundMode, Opaque, Transparent, HorizontalAlignment, Center, Distributed, Justify (+17 more)
+### Community 28 - "RGBColor"
+Cohesion: 0.04
+Nodes (59): AreaFormat, ClrtClient, LineFormat, MarkerFormat, Palette, Text, Tick, TxO (+51 more)
 
 ### Community 29 - "PtgNumber"
 Cohesion: 0.04
 Nodes (49): PtgNumber, Ptg0x18Sub, Ptg0x19Sub, PtgAdd, PtgArea, PtgArea3d, PtgAreaErr, PtgAreaErr3d (+41 more)
 
 ### Community 30 - "WorkSheetData"
-Cohesion: 0.04
-Nodes (41): AbstractCellData, Col, Row, TemplateID, BlankCell, ColumnInfoData, FormulaCell, PtgStack (+33 more)
+Cohesion: 0.09
+Nodes (16): ColumnInfoData, FormulaCell, PtgStack, HyperlinkData, NumberCell, StringCell, WorkSheetData, PageSetup (+8 more)
 
-### Community 31 - "ConversionContext"
-Cohesion: 0.12
-Nodes (14): ConversionContext, Doc, Docx, WriterSettings, FootnotePosition, beneathText, docEnd, pageBottom (+6 more)
+### Community 31 - "ExcelContext"
+Cohesion: 0.22
+Nodes (8): b2xtranslator.xls, ExcelContext, CurrentSheet, SpreadDoc, WriterSettings, XlsDoc, ExcelMapping, XlsDocument
 
 ### Community 33 - "XmlElement"
 Cohesion: 0.10
-Nodes (13): BorderCode, ShadingDescriptor, SinglePropertyModifier, SprmTDefTable, TC80, TabDescriptor, CharacterPropertiesMapping, PropertiesMapping (+5 more)
+Nodes (17): BorderCode, ShadingDescriptor, SprmTDefTable, TC80, TabDescriptor, TablePropertyExceptions, PropertiesMapping, PageOrientation (+9 more)
 
 ### Community 34 - "AbstractPtg"
 Cohesion: 0.07
-Nodes (46): AbstractPtg, Data, Id, Length, Offset, Reader, PtgAdd, PtgArea3d (+38 more)
+Nodes (50): AbstractPtg, Data, Id, Length, Offset, Reader, PtgAdd, PtgArea3d (+42 more)
 
 ### Community 36 - "Dml"
 Cohesion: 0.05
@@ -609,8 +621,12 @@ Cohesion: 0.17
 Nodes (12): AxisMultiplier, Custom, Factor1, Factor100, Factor1000, Factor10000, Factor100000, Factor1000000 (+4 more)
 
 ### Community 38 - "ParagraphRun"
+Cohesion: 0.04
+Nodes (45): ClientTextbox, TextBooleanProperties, PPT: placeholder/partial output, CharacterRun, ANSITypefacePresent, ColorPresent, FEOldTypefacePresent, PositionPresent (+37 more)
+
+### Community 39 - ".Apply"
 Cohesion: 0.06
-Nodes (33): DefaultRulerAtom, ParagraphRun, AlignmentPresent, BulletCharPresent, BulletColorPresent, BulletFlagsFieldPresent, BulletFontPresent, BulletHasColor (+25 more)
+Nodes (5): BinaryDocument, Field, AppMapping, CoreMapping, TextBodyMapping
 
 ### Community 40 - "PageNumberFormatCode"
 Cohesion: 0.05
@@ -620,65 +636,61 @@ Nodes (43): PageNumberFormatCode, Aiueo, aiueoFullWidth, bullet, cardinalText, c
 Cohesion: 0.20
 Nodes (10): LineStyle, DarkGrayPattern, Dash, DashDot, DashDotDot, Dot, LightGrayPattern, MediumGrayPattern (+2 more)
 
-### Community 42 - "TablePropertyExceptions"
-Cohesion: 0.18
-Nodes (8): CharacterRange, TablePropertyExceptions, EndnotesMapping, FooterMapping, FootnotesMapping, HeaderMapping, TableInfo, TableRowPropertiesMapping
+### Community 42 - "OleObject"
+Cohesion: 0.13
+Nodes (12): EmptyDirectoryEntry, StructuredStorageWriter, RootDirectoryEntry, LinkUpdateOption, Always, NoLink, OnCall, OleObject (+4 more)
 
-### Community 43 - ".Apply"
-Cohesion: 0.07
-Nodes (32): ClientTextbox, FillStyleBooleanProperties, PieceDescriptor, Doc, Doc/PPT stub inventory (task #37), PPT: crash paths (`throw NotImplementedException`), PPT: placeholder/partial output, CStringAtom (+24 more)
-
-### Community 44 - "b2xtranslator.Tools"
-Cohesion: 0.05
-Nodes (3): b2xtranslator.Tools, b2xtranslator.DocFileFormat, TextMark
+### Community 43 - ".Parse"
+Cohesion: 0.06
+Nodes (35): DrawingGroup, AnnotationOwnerList, AnnotationReferenceExtraTable, HeaderAndFooterTable, DrawingType, Header, MainDocument, OfficeArtContent (+27 more)
 
 ### Community 45 - "List"
-Cohesion: 0.13
-Nodes (51): AiSequence, AttachedLabelSequence, AutoFilterGroup, AutoFilterSequence, AxesSequence, AxisParentSequence, AxmSequence, AxisLineFormatGroup (+43 more)
+Cohesion: 0.11
+Nodes (66): IVisitable, ChartsheetMapping, WindowMapping, AiSequence, AttachedLabelSequence, AutoFilterGroup, AutoFilterSequence, AxesSequence (+58 more)
 
 ### Community 46 - "system_text"
-Cohesion: 0.08
-Nodes (3): UnitTests, b2xtranslator.OpenXmlLib.WordprocessingML, Converter
+Cohesion: 0.10
+Nodes (5): b2xtranslator.OpenXmlLib.PresentationML, UnitTests, b2xtranslator.OpenXmlLib.WordprocessingML, AnnotationReferenceDescriptor, PptParagraphRunTests
 
 ### Community 47 - "OpenXmlWriter"
-Cohesion: 0.04
-Nodes (18): OpenXmlWriter, WriteState, XmlWriter, Instrumentation, Install the tools, Profiling conversions, Runtime counters: dotnet-counters, Traces and stage activities: dotnet-trace (+10 more)
+Cohesion: 0.07
+Nodes (3): OpenXmlWriter, WriteState, XmlWriter
 
 ### Community 48 - "VMLShapeMapping"
-Cohesion: 0.20
-Nodes (3): DiagramBooleans, GeometryBooleans, VMLShapeMapping
+Cohesion: 0.12
+Nodes (4): DiagramBooleans, GeometryBooleans, GeometryTextBooleanProperties, VMLShapeMapping
 
-### Community 49 - ".Debug"
-Cohesion: 0.08
-Nodes (22): CommandLineTranslator, LoggingLevel, Debug, DebugInternal, Error, Info, None, Warning (+14 more)
+### Community 49 - ".Main"
+Cohesion: 0.10
+Nodes (12): CommandLineTranslator, ProcessingFile, TraceLogger, LogLevel, Converter, Thread safety (static review), Program, Program (+4 more)
 
-### Community 50 - ".SlideLayoutTypeToFilename"
-Cohesion: 0.23
-Nodes (5): ADR: Unmapped PPT slide layout types, Decision (recommended: b), Options, Problem, PptLayoutMappingTests
+### Community 50 - "ADR: Unmapped PPT slide layout types"
+Cohesion: 0.40
+Nodes (4): ADR: Unmapped PPT slide layout types, Decision (recommended: b), Options, Problem
 
-### Community 51 - "FrtHeaderOld"
-Cohesion: 0.08
-Nodes (24): EndBlock, ObjectKind, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet, EndObject (+16 more)
+### Community 51 - "ObjectKind"
+Cohesion: 0.33
+Nodes (6): ObjectKind, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet
 
 ### Community 52 - "WorkBookData"
-Cohesion: 0.05
-Nodes (24): SSTMapping, ChartSheetData, CRNData, ExternSheetData, SheetData, SSTData, StringFormatAssignment, SupBookData (+16 more)
+Cohesion: 0.16
+Nodes (6): ChartSheetData, SheetData, WorkBookData, SstData, Template, XTIData
 
 ### Community 54 - "b2xtranslator.sln"
 Cohesion: 0.06
 Nodes (34): b2xtranslator.Benchmarks, net10.0, Microsoft.NET.Sdk, b2xtranslator, net10.0, net8.0, Microsoft.NET.Sdk, net10.0 (+26 more)
 
 ### Community 55 - "Exception"
-Cohesion: 0.05
-Nodes (31): ChainCycleDetectedException, ChainSizeMismatchException, DiFatInconsistentException, DirectoryEntryNotFoundException, EncryptedDocumentException, InvalidSectorInChainException, InvalidSectorSizeException, InvalidValueInDirectoryEntryException (+23 more)
+Cohesion: 0.08
+Nodes (22): ChainCycleDetectedException, DiFatInconsistentException, DirectoryEntryNotFoundException, EncryptedDocumentException, InvalidSectorSizeException, InvalidValueInDirectoryEntryException, InvalidValueInHeaderException, MagicNumberException (+14 more)
 
 ### Community 56 - "fields"
 Cohesion: 0.04
 Nodes (47): description, items, required, type, description, required, type, description (+39 more)
 
 ### Community 57 - "ChartSheetContentSequence"
-Cohesion: 0.12
-Nodes (14): PtValue, ChartContext, ChartFormatsSequence, ChartPart, ChartSheetContentSequence, Location, ChartLocation, Chartsheet (+6 more)
+Cohesion: 0.06
+Nodes (29): PtValue, ChartMapping, DrawingMapping, ChartSheetContentSequence, FontFbiGroup, Fbi, Font, ProtectionSequence (+21 more)
 
 ### Community 59 - "CharacterMask"
 Cohesion: 0.07
@@ -689,32 +701,32 @@ Cohesion: 0.05
 Nodes (46): description, required, type, values, description, ref_type, type, description (+38 more)
 
 ### Community 61 - "ByteParseException"
-Cohesion: 0.10
-Nodes (15): AutoNumberedListDataDescriptor, AutoNumberLevelDescriptor, AutoSummaryInfo, ByteParseException, DateAndTime, DocumentProperties, DocumentTypographyInfo, DrawingObjectGrid (+7 more)
+Cohesion: 0.06
+Nodes (26): AnnotationReferenceDescriptorExtra, AutoNumberedListDataDescriptor, AutoNumberLevelDescriptor, AutoSummaryInfo, ByteParseException, DateAndTime, DocumentProperties, DocumentTypographyInfo (+18 more)
 
 ### Community 62 - "BlipStoreEntry"
-Cohesion: 0.11
-Nodes (15): BlipFilter, msofilterAdaptive, msofilterNone, msofilterTest, BlipStoreEntry, BlipUsage, msoblipUsageDefault, msoblipUsageMax (+7 more)
+Cohesion: 0.10
+Nodes (17): BlipFilter, msofilterAdaptive, msofilterNone, msofilterTest, BlipStoreEntry, BlipUsage, msoblipUsageDefault, msoblipUsageMax (+9 more)
 
 ### Community 63 - "ParagraphMask"
 Cohesion: 0.07
 Nodes (30): ParagraphMask, Align, BulletBlip, BulletChar, BulletColor, BulletFlagsFieldExists, BulletFont, BulletHasColor (+22 more)
 
 ### Community 64 - "BRAI"
-Cohesion: 0.04
-Nodes (44): BRAI, BraiId, BubbleSizeValues, SeriesCategory, SeriesNameOrLegendText, SeriesValues, Formatting, Custom (+36 more)
+Cohesion: 0.13
+Nodes (13): BRAI, Formatting, Custom, FromReference, BRAI, DataSource, Automatic, Literal (+5 more)
 
 ### Community 65 - "ContentPart"
 Cohesion: 0.13
 Nodes (13): VbaDataPart, ContentType, RelationshipType, TargetDirectory, TargetExt, TargetName, VbaProjectPart, ContentType (+5 more)
 
 ### Community 66 - "AbstractDirectoryEntry"
-Cohesion: 0.08
+Cohesion: 0.07
 Nodes (26): AbstractDirectoryEntry, ChildSiblingSid, ClsId, Color, LeftSiblingSid, LengthOfName, Name, Path (+18 more)
 
 ### Community 67 - "StyleSheet"
-Cohesion: 0.11
-Nodes (16): StyleSheet, StyleKind, character, list, paragraph, table, StyleSheetDescription, LatentStyleData (+8 more)
+Cohesion: 0.06
+Nodes (28): ListData, FollowingChar, nothing, space, tab, ListLevel, ListTable, ParagraphPropertyExceptions (+20 more)
 
 ### Community 68 - "fields"
 Cohesion: 0.05
@@ -737,48 +749,52 @@ Cohesion: 0.18
 Nodes (11): MarkerType, CircularMarkers, DiamondShapedMarkers, LongBarMarkers, NoMarker, ShortBarMarkers, SquareMarkers, SquareMarkersWithAsterisk (+3 more)
 
 ### Community 73 - "AbstractHeader"
-Cohesion: 0.12
-Nodes (15): AbstractHeader, DiFatStartSector, DirectoryStartSector, MiniFatStartSector, MiniSectorCutoff, MiniSectorShift, MiniSectorSize, NoSectorsInDiFatChain (+7 more)
+Cohesion: 0.08
+Nodes (16): AbstractHeader, DiFatStartSector, DirectoryStartSector, MiniFatStartSector, MiniSectorCutoff, MiniSectorShift, MiniSectorSize, NoSectorsInDiFatChain (+8 more)
 
 ### Community 74 - "StructuredStorageContext"
-Cohesion: 0.15
-Nodes (11): MiniFat, MiniFatStart, NumMiniFatSectors, StructuredStorageContext, DirectoryStream, Fat, Header, InternalBitConverter (+3 more)
+Cohesion: 0.10
+Nodes (16): AbstractFat, Fat, DiFatStartSector, NumDiFatSectors, NumFatSectors, MiniFat, MiniFatStart, NumMiniFatSectors (+8 more)
 
 ### Community 75 - "PlaceholderEnum"
 Cohesion: 0.07
 Nodes (27): PlaceholderEnum, Body, CenteredTitle, ClipArt, Graph, MasterBody, MasterCenteredTitle, MasterDate (+19 more)
 
-### Community 76 - "StyleData"
-Cohesion: 0.13
-Nodes (11): FormatData, StyleData, BorderDataList, ColorDataList, FillDataList, FontDataList, FormatDataList, StyleList (+3 more)
-
-### Community 77 - "SerAuxErrBar"
+### Community 76 - "Profiling conversions"
 Cohesion: 0.11
-Nodes (17): ErrorAmoutType, FixedValue, Percentage, StandardDeviation, StandardError, SerAuxErrBar, ErrorAmoutType, FixedValue (+9 more)
+Nodes (15): Instrumentation, Install the tools, Profiling conversions, Runtime counters: dotnet-counters, Traces and stage activities: dotnet-trace, Viewing the activities, Allocation breakdown (sampled by type, `--alloc`), Content-scaled large tier (task #136, 3 iterations, no allocation listener) (+7 more)
+
+### Community 77 - "ErrorAmoutType"
+Cohesion: 0.40
+Nodes (5): ErrorAmoutType, FixedValue, Percentage, StandardDeviation, StandardError
 
 ### Community 78 - "fields"
 Cohesion: 0.05
 Nodes (36): description, required, type, description, description, required, type, description (+28 more)
 
+### Community 79 - "AbstractCellData"
+Cohesion: 0.13
+Nodes (8): AbstractCellData, Col, Row, TemplateID, BlankCell, RowData, Cells, Row
+
 ### Community 80 - ".OpenArchive"
-Cohesion: 0.07
-Nodes (7): XmlContainer, IZipReader, ZipFactory, ZipReader, b2xtranslator.Common, Utils, ZipFactoryTests
+Cohesion: 0.14
+Nodes (6): XmlContainer, IZipReader, ZipFactory, ZipReader, RoundTripContentMasterInfo12, ZipFactoryTests
 
-### Community 81 - "AbstractOpenXmlMapping"
-Cohesion: 0.07
-Nodes (23): AbstractOpenXmlMapping, b2xtranslator.xls, ChartsheetMapping, Converter, ExcelContext, CurrentSheet, SpreadDoc, WriterSettings (+15 more)
+### Community 81 - "Stack"
+Cohesion: 0.12
+Nodes (6): FormulaInfixMapping, MergeCellData, SharedFormulaData, PtgStack, PtgMemFunc, PtgStr
 
-### Community 82 - "WordDocument"
-Cohesion: 0.06
-Nodes (43): DrawingGroup, VirtualStreamReader, AnnotationOwnerList, AnnotationReferenceDescriptor, AnnotationReferenceDescriptorExtra, AnnotationReferenceExtraTable, ByteStructure, RawBytes (+35 more)
+### Community 82 - "VirtualStreamReader"
+Cohesion: 0.08
+Nodes (25): VirtualStreamReader, ByteStructure, RawBytes, CidType, cmtAllocated, cmtFci, cmtMacro, cmtNil (+17 more)
 
 ### Community 83 - "SegmentType"
-Cohesion: 0.13
-Nodes (14): PathSegment, Count, EscapeCode, Type, VertexCount, SegmentType, msopathClientEscape, msopathClose (+6 more)
+Cohesion: 0.10
+Nodes (19): GD, PathParser, Guides, Segments, Values, PathSegment, Count, EscapeCode (+11 more)
 
 ### Community 84 - "PictureDescriptor"
-Cohesion: 0.18
-Nodes (7): NilPicfAndBinData, MetafilePicture, PictureDescriptor, PictureType, jpg, png, wmf
+Cohesion: 0.25
+Nodes (6): MetafilePicture, PictureDescriptor, PictureType, jpg, png, wmf
 
 ### Community 85 - "ObjectType"
 Cohesion: 0.09
@@ -792,25 +808,25 @@ Nodes (36): description, type, description, required, type, values, description,
 Cohesion: 0.09
 Nodes (21): AutoFilter, BaseTypes, CalculationChain, Comments, CustomXmlMappings, ExternalConnections, PivotTable, PivotTableShared (+13 more)
 
-### Community 88 - "IMapping"
-Cohesion: 0.10
-Nodes (16): IMapping, AbstractAxisMapping, AbstractChartMapping, ChartContext, ChartFormatsSequence, ChartPart, ChartSheetContentSequence, Location (+8 more)
+### Community 88 - ".extractData"
+Cohesion: 0.20
+Nodes (6): ExternSheetData, WorkbookExtractor, CRN, ExternName, ExternSheet, SupBook
 
-### Community 89 - "BopPop"
-Cohesion: 0.11
-Nodes (18): BopPop, SplitType, Custom, Percent, Position, Value, Subtype, BarOfPie (+10 more)
+### Community 89 - "SplitType"
+Cohesion: 0.40
+Nodes (5): SplitType, Custom, Percent, Position, Value
 
 ### Community 90 - "PresentationPart"
-Cohesion: 0.09
-Nodes (21): HandoutMasterPart, ContentType, RelationshipType, TargetDirectory, TargetName, NotesMasterPart, ContentType, RelationshipType (+13 more)
+Cohesion: 0.07
+Nodes (26): HandoutMasterPart, ContentType, RelationshipType, TargetDirectory, TargetName, NotesMasterPart, ContentType, RelationshipType (+18 more)
 
-### Community 91 - ".GetStream"
-Cohesion: 0.09
-Nodes (13): BaseDirectoryEntry, Context, EmptyDirectoryEntry, StorageDirectoryEntry, StorageDirectoryEntries, StreamDirectoryEntries, StreamDirectoryEntry, StructuredStorageWriter (+5 more)
+### Community 91 - "StorageDirectoryEntry"
+Cohesion: 0.24
+Nodes (5): BaseDirectoryEntry, Context, StorageDirectoryEntry, StorageDirectoryEntries, StreamDirectoryEntries
 
 ### Community 92 - "OutputHandler"
-Cohesion: 0.18
-Nodes (5): OutputHandler, BaseStream, IOStreamSize, RootDirectoryEntry, MiniStream
+Cohesion: 0.10
+Nodes (11): Header, OutputHandler, BaseStream, IOStreamSize, RootDirectoryEntry, MiniStream, StreamDirectoryEntry, VirtualStream (+3 more)
 
 ### Community 93 - "UnderlineCode"
 Cohesion: 0.10
@@ -829,8 +845,8 @@ Cohesion: 0.10
 Nodes (20): StyleEnum, FLSDKDOWN, FLSDKGRAY, FLSDKGRID, FLSDKHOR, FLSDKTRELLIS, FLSDKUP, FLSDKVER (+12 more)
 
 ### Community 97 - ".ydk/config.yaml"
-Cohesion: 0.06
-Nodes (32): ai, provider, execution, max_parallel_agents, task_timeout_minutes, worktree_isolation, hooks, pre_push (+24 more)
+Cohesion: 0.05
+Nodes (36): ai, model_tiers, provider, execution, max_parallel_agents, task_timeout_minutes, worktree_isolation, hooks (+28 more)
 
 ### Community 98 - "OpenXmlPartContainer"
 Cohesion: 0.13
@@ -844,13 +860,13 @@ Nodes (30): name, runs-on, steps, timeout-minutes, concurrency, cancel-in-progre
 Cohesion: 0.11
 Nodes (19): ToolbarControlType, ActiveX, Button, ButtonPopup, ComboBox, Dropdown, Edit, ExpandingGrid (+11 more)
 
-### Community 101 - "IVisitable"
-Cohesion: 0.13
-Nodes (13): BinaryDocument, IVisitable, Field, NormalViewSetInfoAtom, NormalViewSetInfoContainer, PointStruct, RatioStruct, ScalingStruct (+5 more)
+### Community 101 - "NormalViewSetInfoContainer.cs"
+Cohesion: 0.36
+Nodes (7): NormalViewSetInfoAtom, NormalViewSetInfoContainer, PointStruct, RatioStruct, ScalingStruct, SlideViewInfoContainer, ZoomViewInfoAtom
 
 ### Community 102 - "ObjectType"
-Cohesion: 0.06
-Nodes (27): AxisPart, AxisLine, MajorGridlines, MinorGridlines, WallOrFloor3D, LineType, DropLines, HighLowLines (+19 more)
+Cohesion: 0.29
+Nodes (7): ObjectType, Chart, DisplayUnitsLabels, DVAxis, IVAxis, SeriesAxis, SeriesOrDataPoints
 
 ### Community 103 - "ColorIdentifier"
 Cohesion: 0.11
@@ -861,16 +877,16 @@ Cohesion: 0.11
 Nodes (18): TimePropertyID4TimeNode, AfterEffect, Display, EffectDir, EffectID, EffectNodeType, EffectType, EventFilter (+10 more)
 
 ### Community 105 - "Ptg0x19Sub"
-Cohesion: 0.11
-Nodes (18): PtgAttrChoose, PtgAttrGoto, PtgAttrIf, PtgAttrSemi, PtgAttrSpace, PtgAttrSum, PtgNotDocumented, Ptg0x19Sub (+10 more)
+Cohesion: 0.18
+Nodes (11): Ptg0x19Sub, PtgAttrBaxcel1, PtgAttrBaxcel2, PtgAttrChoose, PtgAttrGoto, PtgAttrIf, PtgAttrSemi, PtgAttrSpace (+3 more)
 
 ### Community 106 - "FunctionCategory"
 Cohesion: 0.11
 Nodes (18): FunctionCategory, All, Commands, Cube, Customize, Database, DateTime, DDEExternal (+10 more)
 
-### Community 108 - "WorkbookPart"
-Cohesion: 0.06
-Nodes (28): ExternalLinkPart, ContentType, RelationshipType, TargetDirectory, TargetName, SharedStringPart, ContentType, RelationshipType (+20 more)
+### Community 108 - ".AddPart"
+Cohesion: 0.05
+Nodes (33): ExternalLinkPart, ContentType, RelationshipType, TargetDirectory, TargetName, SharedStringPart, ContentType, RelationshipType (+25 more)
 
 ### Community 109 - "Ptg0x18Sub"
 Cohesion: 0.12
@@ -893,24 +909,24 @@ Cohesion: 0.33
 Nodes (6): TrendlineType, Exponential, Logarithmic, MovingAverage, Polynomial, Power
 
 ### Community 114 - "OpenXmlPackage"
-Cohesion: 0.06
-Nodes (26): AppPropertiesPart, ContentType, RelationshipType, TargetDirectory, TargetName, CorePropertiesPart, ContentType, RelationshipType (+18 more)
+Cohesion: 0.07
+Nodes (21): AppPropertiesPart, ContentType, RelationshipType, TargetDirectory, TargetName, CorePropertiesPart, ContentType, RelationshipType (+13 more)
 
 ### Community 115 - "OpenXmlPart"
-Cohesion: 0.07
-Nodes (25): CustomXmlPart, ContentType, RelationshipType, TargetDirectory, TargetName, OpenXmlPart, ContentType, HasDefaultContentType (+17 more)
+Cohesion: 0.06
+Nodes (30): CustomXmlPart, ContentType, RelationshipType, TargetDirectory, TargetName, OpenXmlPart, ContentType, HasDefaultContentType (+22 more)
 
 ### Community 116 - "MainDocumentPart"
-Cohesion: 0.07
-Nodes (23): GlossaryPart, RelationshipType, TargetDirectory, HeaderPart, ContentType, RelationshipType, TargetDirectory, TargetName (+15 more)
+Cohesion: 0.06
+Nodes (28): GlossaryPart, RelationshipType, TargetDirectory, HeaderPart, ContentType, RelationshipType, TargetDirectory, TargetName (+20 more)
 
 ### Community 117 - "InputHandler"
 Cohesion: 0.17
 Nodes (4): FileHandlerNotCorrectlyInitializedException, InputHandler, _InternalFileStream, IOStreamSize
 
 ### Community 118 - "UnderlineStyle"
-Cohesion: 0.12
-Nodes (14): FontData, FontElementType, NormalStyle, String, SuperSubScriptStyle, none, subscript, superscript (+6 more)
+Cohesion: 0.18
+Nodes (8): TwipsValue, FontData, UnderlineStyle, doubleAccounting, doubleLine, none, singleAccounting, singleLine
 
 ### Community 119 - "fields"
 Cohesion: 0.07
@@ -925,16 +941,16 @@ Cohesion: 0.13
 Nodes (14): Global, VerticalAlign, bottom, center, top, VerticalMergeFlag, fvmClear, fvmMerge (+6 more)
 
 ### Community 122 - "AxisLine"
-Cohesion: 0.25
-Nodes (7): AxisLine, AxisPart, AxisLine, MajorGridlines, MinorGridlines, WallOrFloor3D, AxisLine
+Cohesion: 0.40
+Nodes (5): AxisPart, AxisLine, MajorGridlines, MinorGridlines, WallOrFloor3D
 
 ### Community 123 - "CrtLine"
-Cohesion: 0.25
-Nodes (7): CrtLine, LineType, DropLines, HighLowLines, LeaderLines, SeriesLines, CrtLine
+Cohesion: 0.40
+Nodes (5): LineType, DropLines, HighLowLines, LeaderLines, SeriesLines
 
 ### Community 124 - "DefaultText"
-Cohesion: 0.25
-Nodes (7): DefaultText, DefaultTextType, NoShowPercentNoShowValue, ScalableFontInfo, ScalableNoFontInfo, ShowPercentNoShowValue, DefaultText
+Cohesion: 0.40
+Nodes (5): DefaultTextType, NoShowPercentNoShowValue, ScalableFontInfo, ScalableNoFontInfo, ShowPercentNoShowValue
 
 ### Community 125 - "SlidePart"
 Cohesion: 0.15
@@ -957,20 +973,20 @@ Cohesion: 0.29
 Nodes (7): FibVersion, Fib1997, Fib1997Beta, Fib2000, Fib2002, Fib2003, Fib2007
 
 ### Community 130 - "EmbeddedObjectPart"
-Cohesion: 0.10
-Nodes (18): EmbeddedObjectPart, ContentType, HasDefaultContentType, RelationshipType, TargetDirectory, TargetExt, TargetName, ObjectType (+10 more)
+Cohesion: 0.14
+Nodes (12): EmbeddedObjectPart, ContentType, HasDefaultContentType, RelationshipType, TargetDirectory, TargetExt, TargetName, ObjectType (+4 more)
 
 ### Community 131 - "AnimBuildTypeEnum"
 Cohesion: 0.15
 Nodes (13): AnimBuildTypeEnum, FollowMaster, GraphByCategory, GraphByElementInCategory, GraphByElementInSeries, GraphBySeries, Level1Build, Level2Build (+5 more)
 
 ### Community 132 - "List"
-Cohesion: 0.08
-Nodes (28): Environment, ExHyperlink9Container, ExHyperlinkAtom, ExHyperlinkContainer, FontCollection, FontEntityAtom, List, InteractiveInfoActionEnum (+20 more)
+Cohesion: 0.11
+Nodes (23): StyleTextProp9Atom, DefaultRulerAtom, List, OutlineTextProps9Container, OutlineTextProps9Entry, OutlineTextPropsHeader9Atom, PersistDirectoryAtom, PersistDirectoryEntry (+15 more)
 
 ### Community 133 - "Axis"
-Cohesion: 0.18
-Nodes (10): Axis, AxisType, HorizontalOrCategory, Series, VerticalOrValue, Axis, AxisType, HorizontalOrCategory (+2 more)
+Cohesion: 0.33
+Nodes (5): Axis, AxisType, HorizontalOrCategory, Series, VerticalOrValue
 
 ### Community 134 - "steps"
 Cohesion: 0.10
@@ -984,13 +1000,13 @@ Nodes (19): SlideLayoutType, BigObject, Blank, FourObjects, Handout, MasterNotes
 Cohesion: 0.17
 Nodes (12): LineDashing, DashDotDotSys, DashDotGEL, DashDotSys, DashGEL, DashSys, DotGEL, DotSys (+4 more)
 
-### Community 137 - "Font"
-Cohesion: 0.06
-Nodes (32): Font, FontWeight, Bold, Default, Normal, ScriptStyle, NormalScript, SubScript (+24 more)
+### Community 137 - ".ReadByte"
+Cohesion: 0.04
+Nodes (49): Font, Label, Number, Selection, ShtProps, WinDoc, WindowKind, ChartWindow (+41 more)
 
-### Community 138 - "LayoutType"
-Cohesion: 0.50
-Nodes (4): LayoutType, Stacked, StackedAndScaled, Stretched
+### Community 138 - "SupBookData"
+Cohesion: 0.20
+Nodes (7): ExternalLinkMapping, SupBookData, ExternNames, RGST, SelfRef, VirtPath, XCTDataList
 
 ### Community 139 - "EmptyCellPlotMode"
 Cohesion: 0.50
@@ -1009,48 +1025,48 @@ Cohesion: 0.17
 Nodes (12): DashStyle, dash, dashdot, dot, longdash, longdashdot, longdashdotdot, shortdash (+4 more)
 
 ### Community 143 - "StructuredStorageReader"
-Cohesion: 0.06
-Nodes (17): ProcessingFile, IStructuredStorageReader, AllEntries, AllStreamEntries, FullNameOfAllEntries, FullNameOfAllStreamEntries, RootDirectoryEntry, StructuredStorageReader (+9 more)
+Cohesion: 0.05
+Nodes (18): IStructuredStorageReader, AllEntries, AllStreamEntries, FullNameOfAllEntries, FullNameOfAllStreamEntries, RootDirectoryEntry, StructuredStorageReader, AllEntries (+10 more)
 
 ### Community 144 - "JustificationCode"
 Cohesion: 0.18
 Nodes (11): JustificationCode, both, center, distribute, highKashida, left, lowKashida, mediumKashida (+3 more)
 
-### Community 145 - "Chart3DBarShape"
-Cohesion: 0.20
-Nodes (8): Chart3DBarShape, RiserType, Ellipse, Rectangle, TaperType, None, TopEach, TopMax
+### Community 145 - "AxisType"
+Cohesion: 0.10
+Nodes (16): AxisType, HorizontalOrCategory, Series, VerticalOrValue, TaperType, None, TopEach, TopMax (+8 more)
 
-### Community 146 - "XLUnicodeString"
-Cohesion: 0.09
-Nodes (22): Series, SeriesDataType, Numeric, Text, SeriesDataSequence, SeriesGroup, AbstractCellContent, BoolErr (+14 more)
+### Community 146 - "Series"
+Cohesion: 0.20
+Nodes (9): Series, SeriesDataType, Numeric, Text, Series, SeriesDataType, Numeric, Text (+1 more)
 
 ### Community 147 - "ExtractorException"
-Cohesion: 0.22
-Nodes (5): BiffHeader, Extractor, BiffHeader, FileInformationExtractor, ExtractorException
+Cohesion: 0.40
+Nodes (3): BiffHeader, Extractor, ExtractorException
 
 ### Community 148 - "DocumentType"
 Cohesion: 0.25
 Nodes (8): DocumentType, Chart, ChartSheet, MacroSheet, VisualBasicModule, WorkbookGlobals, Worksheet, WorkspaceFile
 
 ### Community 149 - "AxesUsed"
-Cohesion: 0.50
-Nodes (4): AxesUsed, AxisGroupsPresent, Primary, PrimaryAndSecondary
+Cohesion: 0.22
+Nodes (8): AxesUsed, AxisGroupsPresent, Primary, PrimaryAndSecondary, AxesUsed, AxisGroupsPresent, Primary, PrimaryAndSecondary
 
 ### Community 150 - "n02.yaml"
 Cohesion: 0.10
 Nodes (20): fix, issue, text, examples, bad, good, text, group (+12 more)
 
-### Community 151 - "FrameStyle"
-Cohesion: 0.67
-Nodes (3): FrameStyle, NoShadow, Shadow
+### Community 151 - "SST"
+Cohesion: 0.27
+Nodes (4): SSTMapping, SSTData, StringFormatAssignment, SST
 
 ### Community 152 - "Utils"
-Cohesion: 0.13
-Nodes (3): Utils, PptColorSchemeTests, PptSpacingTests
+Cohesion: 0.12
+Nodes (3): Utils, PptLayoutMappingTests, PptSpacingTests
 
-### Community 153 - "WinDoc"
+### Community 153 - "ChartContext"
 Cohesion: 0.22
-Nodes (8): WinDoc, WindowKind, ChartWindow, DataSheet, WinDoc, WindowKind, ChartWindow, DataSheet
+Nodes (8): ChartContext, ChartFormatsSequence, ChartPart, ChartSheetContentSequence, Location, ChartLocation, Chartsheet, Embedded
 
 ### Community 154 - "ContentTypes.cs"
 Cohesion: 0.20
@@ -1065,12 +1081,16 @@ Cohesion: 0.20
 Nodes (10): AnimationFlagsMask, fAnimateBg, fAutomatic, fHide, fPlay, fReverse, fSound, fStopSound (+2 more)
 
 ### Community 157 - "Test"
-Cohesion: 0.06
-Nodes (10): b2xtranslator.doc, ClientAnchorTests, DocCompatOptionsTests, DocFileFormat, NoSilentCatchTests, OpenXmlLib, OpenXmlWriterOptionsTests, PlexGetStructTests (+2 more)
+Cohesion: 0.09
+Nodes (8): Plex, b2xtranslator.doc, ClientAnchorTests, DocFileFormat, NoSilentCatchTests, PlexGetStructTests, PptClrMapOvrTests, PptSlideTransitionTests
 
 ### Community 158 - "FormFieldData"
 Cohesion: 0.12
 Nodes (13): FormFieldData, FormFieldType, iTypeChck, iTypeDrop, iTypeText, TextboxType, calculated, currentDate (+5 more)
+
+### Community 159 - "ADR 0001: Parallel mapping of independent parts (slides / sheets)"
+Cohesion: 0.22
+Nodes (8): ADR 0001: Parallel mapping of independent parts (slides / sheets), Decision: NO-GO for intra-file parallel mapping, Findings, Follow-ups (only if re-evaluated), Measured: caller-level parallelism (separate conversions), Question, Recommendation: parallelise at the caller, Upper bound (Amdahl)
 
 ### Community 160 - "b2xtranslator (Binary to OpenXML Translator)"
 Cohesion: 0.22
@@ -1079,6 +1099,10 @@ Nodes (9): b2xtranslator (Binary to OpenXML Translator), BSD license, DIaLOGIKa,
 ### Community 161 - "SlideSizeType"
 Cohesion: 0.22
 Nodes (8): SlideSizeType, A4Paper, Banner, Custom, LetterSizedPaper, OnScreen, Overhead, Size35mm
+
+### Community 162 - ".ConvertAndInspect"
+Cohesion: 0.14
+Nodes (7): PresentationDocument, PresentationPart, Converter, PptMasterTxStylesTests, ShapeTreeMappingTests, FixturePath, TextMasterStyleMappingTests
 
 ### Community 163 - "LineEnd"
 Cohesion: 0.22
@@ -1092,9 +1116,13 @@ Nodes (7): FontFamily, Decorative, Modern, NotApplicable, Roman, Script, Swiss
 Cohesion: 0.10
 Nodes (20): fix, issue, text, examples, bad, good, text, group (+12 more)
 
-### Community 167 - ".extractData"
-Cohesion: 0.12
-Nodes (14): BoundSheet8, HiddenState, Hidden, VeryHidden, Visible, SheetType, Chartsheet, Macrosheet (+6 more)
+### Community 166 - "XCTData"
+Cohesion: 0.29
+Nodes (5): CRNData, XCTData, CRNDataList, ITab, XCT
+
+### Community 167 - "BoundSheet8"
+Cohesion: 0.15
+Nodes (10): BoundSheet8, HiddenState, Hidden, VeryHidden, Visible, SheetType, Chartsheet, Macrosheet (+2 more)
 
 ### Community 168 - "n04.yaml"
 Cohesion: 0.10
@@ -1112,9 +1140,9 @@ Nodes (8): HyphenationRule, addLetterBefore, changeLetterAfter, changeLetterBefo
 Cohesion: 0.25
 Nodes (8): TextAnimation, antsBlack, antsRed, blinkBackground, lights, none, shimmer, sparkle
 
-### Community 173 - "FillData"
-Cohesion: 0.12
-Nodes (6): BorderData, BorderPartData, FillData, Fillpatern, IcvBack, IcvFore
+### Community 173 - "StyleData"
+Cohesion: 0.07
+Nodes (17): BorderData, BorderPartData, FillData, Fillpatern, IcvBack, IcvFore, FormatData, StyleData (+9 more)
 
 ### Community 174 - "n06.yaml"
 Cohesion: 0.10
@@ -1125,8 +1153,8 @@ Cohesion: 0.10
 Nodes (20): fix, issue, text, examples, bad, good, text, group (+12 more)
 
 ### Community 176 - "CustomViewSequence"
-Cohesion: 0.16
-Nodes (16): CustomViewSequence, PageSetupSequence, BottomMargin, Footer, HCenter, LeftMargin, Pls, PrintSize (+8 more)
+Cohesion: 0.07
+Nodes (33): BopPop, Subtype, BarOfPie, PieOfPie, SerAuxErrBar, ValueRange, PageSetupMapping, CustomViewSequence (+25 more)
 
 ### Community 177 - "ChartAxisIdGenerator"
 Cohesion: 0.33
@@ -1141,8 +1169,8 @@ Cohesion: 0.29
 Nodes (7): PositionVertical, msopvAbs, msopvBottom, msopvCenter, msopvInside, msopvOutside, msopvTop
 
 ### Community 180 - "ContentPart"
-Cohesion: 0.07
-Nodes (23): ContentPart, VmlPart, ContentType, HasDefaultContentType, RelationshipType, TargetDirectory, TargetExt, TargetName (+15 more)
+Cohesion: 0.06
+Nodes (28): ContentPart, VmlPart, ContentType, HasDefaultContentType, RelationshipType, TargetDirectory, TargetExt, TargetName (+20 more)
 
 ### Community 181 - "delete-merged-branch.yml"
 Cohesion: 0.12
@@ -1153,16 +1181,16 @@ Cohesion: 0.10
 Nodes (20): type, contentHash, resolved, type, contentHash, requested, resolved, type (+12 more)
 
 ### Community 183 - "steps"
-Cohesion: 0.12
-Nodes (16): runs-on, steps, BASE_REF, PR_BODY, jobs, check-body, name, on (+8 more)
+Cohesion: 0.11
+Nodes (17): if, runs-on, steps, BASE_REF, PR_BODY, jobs, check-body, name (+9 more)
 
 ### Community 184 - "fields"
 Cohesion: 0.12
 Nodes (15): description, type, description, fields, crud, id, state_transitions, description (+7 more)
 
-### Community 185 - "FooterPart"
+### Community 185 - "LoggingLevel"
 Cohesion: 0.29
-Nodes (5): FooterPart, ContentType, RelationshipType, TargetDirectory, TargetName
+Nodes (7): LoggingLevel, Debug, DebugInternal, Error, Info, None, Warning
 
 ### Community 186 - "items"
 Cohesion: 0.12
@@ -1175,6 +1203,10 @@ Nodes (12): KeyMapCustomizationsPart, ContentType, RelationshipType, TargetDirec
 ### Community 188 - "responses"
 Cohesion: 0.14
 Nodes (14): responses, ref, refs, shape, description, type, description, type (+6 more)
+
+### Community 189 - "FtCf"
+Cohesion: 0.33
+Nodes (5): ClipboardFormat, Bitmap, EnhancedMetafile, Unknown, FtCf
 
 ### Community 190 - "request"
 Cohesion: 0.15
@@ -1197,12 +1229,12 @@ Cohesion: 0.67
 Nodes (3): DocType, ChartSheet, Workbook
 
 ### Community 196 - "DocumentMapping"
-Cohesion: 0.09
-Nodes (11): BookmarkFirst, CharacterPropertyExceptions, ParagraphPropertyExceptions, PropertyExceptions, SectionPropertyExceptions, DocumentMapping, Symbol, GlossaryMapping (+3 more)
+Cohesion: 0.08
+Nodes (16): BookmarkFirst, CharacterPropertyExceptions, CharacterRange, NilPicfAndBinData, SectionPropertyExceptions, CommentsMapping, DocumentMapping, Symbol (+8 more)
 
-### Community 197 - "VirtualStream"
-Cohesion: 0.24
-Nodes (5): AbstractFat, VirtualStream, Length, SectorCount, StartSector
+### Community 197 - "ObjectKind"
+Cohesion: 0.33
+Nodes (6): ObjectKind, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet
 
 ### Community 198 - "MarkerType"
 Cohesion: 0.18
@@ -1216,21 +1248,21 @@ Nodes (4): OriginatorVersion, Excel2000, Excel2002Excel2003, Excel2007
 Cohesion: 0.18
 Nodes (11): description, type, props, default, required, description, items, required (+3 more)
 
-### Community 201 - "FontTablePart"
+### Community 201 - "TrendlineType"
 Cohesion: 0.33
-Nodes (5): FontTablePart, ContentType, RelationshipType, TargetDirectory, TargetName
+Nodes (6): TrendlineType, Exponential, Logarithmic, MovingAverage, Polynomial, Power
 
 ### Community 202 - "LanguageIdMapping"
 Cohesion: 0.24
 Nodes (6): LanguageId, LanguageIdMapping, LanguageType, Complex, Default, EastAsian
 
 ### Community 203 - "StyleMask"
-Cohesion: 0.20
-Nodes (10): StyleMask, ExtensionNibble, HasAsianSmartQuotes, HasHorizonNumRendering, HasShadow, IsBold, IsEmbossed, IsItalic (+2 more)
+Cohesion: 0.10
+Nodes (19): StyleMask, ExtensionNibble, HasAsianSmartQuotes, HasHorizonNumRendering, HasShadow, IsBold, IsEmbossed, IsItalic (+11 more)
 
 ### Community 204 - "Handle"
 Cohesion: 0.03
-Nodes (32): AccentBorderCallout1Type, AccentBorderCallout2Type, AccentCallout1Type, AccentCallout2Type, BorderCallout3Type, BracketPairType, Callout3Type, Callout90Type (+24 more)
+Nodes (33): AccentBorderCallout1Type, AccentBorderCallout3Type, AccentCallout3Type, BorderCallout1Type, BorderCallout90Type, Callout1Type, Callout2Type, Callout90Type (+25 more)
 
 ### Community 206 - "fields"
 Cohesion: 0.20
@@ -1248,9 +1280,9 @@ Nodes (6): TextFlow, btLr, lrTb, lrTbV, tbRl, tbRlV
 Cohesion: 0.33
 Nodes (6): WarichuBracket, angledBrackets, braces, none, parentheses, squareBrackets
 
-### Community 210 - "DocumentType"
+### Community 210 - ".Convert"
 Cohesion: 0.10
-Nodes (7): Baseline (2026-10-02, padded large tier, superseded for large rows), Content-scaled large tier (2026-10-07), Performance baseline, Running, What is measured, ActivityTimingTests, WordDocumentTests
+Nodes (8): b2xtranslator.Common, Baseline (2026-10-02, padded large tier, superseded for large rows), Content-scaled large tier (2026-10-07), Performance baseline, Running, What is measured, OpenXmlLib, OpenXmlWriterOptionsTests
 
 ### Community 211 - "items"
 Cohesion: 0.20
@@ -1276,13 +1308,13 @@ Nodes (6): HorizontalAlignment, Centered, Justify, JustifyDistributed, Left, Rig
 Cohesion: 0.33
 Nodes (6): VerticalAlignment, Bottom, Justify, JustifyDistributed, Middle, Top
 
-### Community 217 - "BorderPartType"
-Cohesion: 0.33
-Nodes (6): BorderPartType, bottom, diagonal, left, right, top
+### Community 217 - "StyleEnum.cs"
+Cohesion: 0.14
+Nodes (13): BorderPartType, bottom, diagonal, left, right, top, FontElementType, NormalStyle (+5 more)
 
 ### Community 218 - "PositionHorizontalRelative"
-Cohesion: 0.18
-Nodes (10): PositionHorizontalRelative, msoprhChar, msoprhMargin, msoprhPage, msoprhText, PositionVerticalRelative, msoprvLine, msoprvMargin (+2 more)
+Cohesion: 0.40
+Nodes (5): PositionHorizontalRelative, msoprhChar, msoprhMargin, msoprhPage, msoprhText
 
 ### Community 219 - "fields"
 Cohesion: 0.22
@@ -1292,9 +1324,9 @@ Nodes (8): description, fields, retry_strategy, name, description, required, typ
 Cohesion: 0.40
 Nodes (5): JoinStyle, bevel, miter, none, round
 
-### Community 221 - "PathParser"
-Cohesion: 0.33
-Nodes (5): GD, PathParser, Guides, Segments, Values
+### Community 221 - "PositionVerticalRelative"
+Cohesion: 0.40
+Nodes (5): PositionVerticalRelative, msoprvLine, msoprvMargin, msoprvPage, msoprvText
 
 ### Community 222 - "CellWidthType"
 Cohesion: 0.40
@@ -1304,9 +1336,9 @@ Nodes (5): CellWidthType, auto, dxa, nil, pct
 Cohesion: 0.40
 Nodes (5): HorizontalPositionCode, margin, none, page, text
 
-### Community 224 - "BkHim"
+### Community 224 - "BraiId"
 Cohesion: 0.40
-Nodes (4): BkHim, ImageFormat, Bitmap, Native
+Nodes (5): BraiId, BubbleSizeValues, SeriesCategory, SeriesNameOrLegendText, SeriesValues
 
 ### Community 225 - "AnimAfterEffectEnum"
 Cohesion: 0.40
@@ -1324,21 +1356,25 @@ Nodes (5): TriggerObjectEnum, None, RuntimeNodeRef, TimeNode, VisualElement
 Cohesion: 0.22
 Nodes (9): items, description, required, type, given, name, description, required (+1 more)
 
+### Community 230 - "DocGridType"
+Cohesion: 0.40
+Nodes (5): DocGridType, Default, lines, linesAndChars, snapToChars
+
 ### Community 231 - "AI Analysis"
 Cohesion: 0.25
 Nodes (7): AI Analysis, Patterns, Retrospective: 24, Rule suggestions, Shipped, Summary, Template suggestions
 
-### Community 232 - "Tick"
-Cohesion: 0.12
-Nodes (14): MarkLocation, Crossing, Inside, None, Outside, ReadingOrder, Complex, LeftToRight (+6 more)
+### Community 232 - "MarkLocation"
+Cohesion: 0.40
+Nodes (5): MarkLocation, Crossing, Inside, None, Outside
 
 ### Community 233 - "items"
 Cohesion: 0.25
 Nodes (8): items, params, path, description, type, description, required, type
 
-### Community 234 - "ThemePart"
-Cohesion: 0.29
-Nodes (5): ThemePart, ContentType, RelationshipType, TargetDirectory, TargetName
+### Community 234 - "WidthType"
+Cohesion: 0.40
+Nodes (5): WidthType, auto, dxa, nil, pct
 
 ### Community 235 - "TextRotation"
 Cohesion: 0.40
@@ -1346,7 +1382,7 @@ Nodes (5): TextRotation, Clockwise, CounterClockwise, Custom, Stacked
 
 ### Community 236 - ".ReadUInt16"
 Cohesion: 0.02
-Nodes (170): BlipBooleanProperties, Area, AreaFormat, AttachedLabel, AxisParent, Bar, BOF, BOFDatasheet (+162 more)
+Nodes (159): Area, AttachedLabel, AxisParent, BOF, BOFDatasheet, CatLab, CatLabelType, Auto (+151 more)
 
 ### Community 237 - "ViewPropertiesPart"
 Cohesion: 0.29
@@ -1354,19 +1390,19 @@ Nodes (5): ViewPropertiesPart, ContentType, RelationshipType, TargetDirectory, T
 
 ### Community 238 - "ProtectionBooleans"
 Cohesion: 0.11
-Nodes (10): ProtectionBooleans, PictureFrameType, TextArchUpCurve, TextArchUpPour, TextCirclePour, TextCurveDown, TextDeflateInflate, TextRingInside (+2 more)
+Nodes (9): ProtectionBooleans, TextArchUpCurve, TextArchUpPour, TextCirclePour, TextCurveDown, TextDeflateInflate, TextRingInside, TextStop (+1 more)
 
-### Community 239 - "Fat"
-Cohesion: 0.38
-Nodes (4): Fat, DiFatStartSector, NumDiFatSectors, NumFatSectors
+### Community 239 - "AxisPart"
+Cohesion: 0.40
+Nodes (5): AxisPart, AxisLine, MajorGridlines, MinorGridlines, WallOrFloor3D
 
 ### Community 240 - "ValueProperty.cs"
 Cohesion: 0.40
 Nodes (3): PropertySet, ValueProperty, b2xtranslator.OlePropertySet
 
-### Community 241 - "FontFamily"
-Cohesion: 0.29
-Nodes (7): FontFamily, auto, decorative, modern, roman, script, swiss
+### Community 241 - "SplitType"
+Cohesion: 0.40
+Nodes (5): SplitType, Custom, Percent, Position, Value
 
 ### Community 243 - "TextBuildSubEffectEnum"
 Cohesion: 0.50
@@ -1384,6 +1420,10 @@ Nodes (7): fields, idempotency, rate_limit, description, type, description, type
 Cohesion: 0.29
 Nodes (7): fields, never_mock, stubs, description, type, description, type
 
+### Community 247 - "BraiId"
+Cohesion: 0.40
+Nodes (5): BraiId, BubbleSizeValues, SeriesCategory, SeriesNameOrLegendText, SeriesValues
+
 ### Community 248 - "ObjectType"
 Cohesion: 0.33
 Nodes (6): ObjectType, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet
@@ -1392,9 +1432,9 @@ Nodes (6): ObjectType, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet
 Cohesion: 0.33
 Nodes (6): VerticalAlignment, Bottom, Justify, JustifyDistributed, Middle, Top
 
-### Community 250 - "SprmType"
-Cohesion: 0.33
-Nodes (6): SprmType, CHP, PAP, PIC, SEP, TAP
+### Community 250 - "CharacterPropertiesMapping"
+Cohesion: 0.07
+Nodes (20): PropertyExceptions, SinglePropertyModifier, SprmType, CHP, PAP, PIC, SEP, TAP (+12 more)
 
 ### Community 251 - "PositionMode"
 Cohesion: 0.33
@@ -1408,6 +1448,10 @@ Nodes (6): ObjectType, AttachedLabel, Axis, AxisGroup, ChartGroup, Sheet
 Cohesion: 0.47
 Nodes (6): type, type, description, required, type, values
 
+### Community 254 - "LineType"
+Cohesion: 0.40
+Nodes (5): LineType, DropLines, HighLowLines, LeaderLines, SeriesLines
+
 ### Community 255 - "AxisMultiplier"
 Cohesion: 0.17
 Nodes (12): AxisMultiplier, Custom, Factor1, Factor100, Factor1000, Factor10000, Factor100000, Factor1000000 (+4 more)
@@ -1420,13 +1464,13 @@ Nodes (5): LineWeight, Hairline, Medium, Narrow, Wide
 Cohesion: 0.40
 Nodes (5): ErrorBarDirection, HorizontalNegative, HorizontalPositive, VerticalNegative, VerticalPositive
 
-### Community 258 - "CidType"
+### Community 258 - "DefaultTextType"
 Cohesion: 0.40
-Nodes (5): CidType, cmtAllocated, cmtFci, cmtMacro, cmtNil
+Nodes (5): DefaultTextType, NoShowPercentNoShowValue, ScalableFontInfo, ScalableNoFontInfo, ShowPercentNoShowValue
 
-### Community 259 - "RevisionType"
+### Community 259 - "SizeMode"
 Cohesion: 0.40
-Nodes (5): RevisionType, Changed, Deleted, Inserted, NoRevision
+Nodes (5): SizeMode, ChartSize, Default, EntirePageAspectRatio, EntirePageNoAspectRatio
 
 ### Community 260 - "LineWeight"
 Cohesion: 0.40
@@ -1508,9 +1552,9 @@ Nodes (4): contentHash, resolved, type, Microsoft.CodeAnalysis.Analyzers
 Cohesion: 0.50
 Nodes (4): contentHash, resolved, type, Microsoft.Extensions.Primitives
 
-### Community 280 - "SuperscriptIndex"
-Cohesion: 0.50
-Nodes (4): SuperscriptIndex, baseline, subscript, superscript
+### Community 280 - "ErrorAmoutType"
+Cohesion: 0.40
+Nodes (5): ErrorAmoutType, FixedValue, Percentage, StandardDeviation, StandardError
 
 ### Community 282 - "b2xtranslator"
 Cohesion: 0.50
@@ -1540,13 +1584,13 @@ Nodes (3): Acceptance Criteria, Description, Test Strategy
 Cohesion: 0.15
 Nodes (12): large/large.doc, sha256, large/large.ppt, sha256, large/large.xls, sha256, small/simple.doc, sha256 (+4 more)
 
-### Community 291 - "LayoutType"
-Cohesion: 0.50
-Nodes (4): LayoutType, Stacked, StackedAndScaled, Stretched
+### Community 291 - "ErrorBarDirection"
+Cohesion: 0.40
+Nodes (5): ErrorBarDirection, HorizontalNegative, HorizontalPositive, VerticalNegative, VerticalPositive
 
-### Community 292 - "EmptyCellPlotMode"
-Cohesion: 0.50
-Nodes (4): EmptyCellPlotMode, PlotAsInterpolated, PlotAsZero, PlotNothing
+### Community 292 - "TextRotation"
+Cohesion: 0.40
+Nodes (5): TextRotation, Clockwise, CounterClockwise, Custom, Stacked
 
 ### Community 293 - "PULL_REQUEST_TEMPLATE.md"
 Cohesion: 0.50
@@ -1556,9 +1600,9 @@ Nodes (3): Changes, Spec refs, Verification Proof
 Cohesion: 0.50
 Nodes (4): ReadingOrder, Complex, LeftToRight, RightToLeft
 
-### Community 295 - "system_collections_generic"
-Cohesion: 0.06
-Nodes (5): MaskingHandler, b2xtranslator.Spreadsheet.XlsFileFormat.DataContainer, b2xtranslator.StructuredStorage.Common, b2xtranslator.StructuredStorage.Writer, b2xtranslator.doc2x
+### Community 295 - "system"
+Cohesion: 0.05
+Nodes (13): OfficeRecordAttribute, TypeCodes, OfficeShapeTypeAttribute, OfficeGraphBiffRecordAttribute, TypeCodes, MaskingHandler, b2xtranslator.ppt2x, b2xtranslator.StructuredStorage.Common (+5 more)
 
 ### Community 296 - "Microsoft.CodeAnalysis.Common"
 Cohesion: 0.14
@@ -1640,21 +1684,25 @@ Nodes (4): when, description, required, type
 Cohesion: 0.20
 Nodes (10): dependencies, type, type, dependencies, b2xtranslator@[2.0.0, ), net10.0, b2xtranslator, b2xtranslator (+2 more)
 
-### Community 319 - "ByteOrder"
-Cohesion: 0.67
-Nodes (3): ByteOrder, RedFirst, RedLast
+### Community 319 - "Alignment"
+Cohesion: 0.50
+Nodes (4): Alignment, Bottom, Center, Top
 
-### Community 320 - "BackgroundMode"
-Cohesion: 0.67
-Nodes (3): BackgroundMode, Opaque, Transparent
+### Community 320 - "FontWeight"
+Cohesion: 0.50
+Nodes (4): FontWeight, Bold, Default, Normal
 
 ### Community 321 - "ppt2x/packages.lock.json"
 Cohesion: 0.20
 Nodes (10): dependencies, type, type, dependencies, b2xtranslator@[2.0.0, ), net10.0, b2xtranslator, b2xtranslator (+2 more)
 
-### Community 322 - "BackgroundMode"
-Cohesion: 0.67
-Nodes (3): BackgroundMode, Opaque, Transparent
+### Community 322 - "ScriptStyle"
+Cohesion: 0.50
+Nodes (4): ScriptStyle, NormalScript, SubScript, SuperScript
+
+### Community 323 - "UnderlineStyle"
+Cohesion: 0.50
+Nodes (4): UnderlineStyle, Double, None, Single
 
 ### Community 324 - "default_sort"
 Cohesion: 0.67
@@ -1688,9 +1736,29 @@ Nodes (3): values, description, type
 Cohesion: 0.22
 Nodes (4): ConversionBenchmarks, Format, Tier, Corpus
 
+### Community 334 - "ActionType"
+Cohesion: 0.50
+Nodes (4): ActionType, ktChar, ktCid, ktMask
+
+### Community 335 - "FootnoteRestartCode"
+Cohesion: 0.50
+Nodes (4): FootnoteRestartCode, continuous, eachPage, eachSect
+
 ### Community 345 - "b2xtranslator"
 Cohesion: 0.18
 Nodes (11): dependencies, type, dependencies, type, dependencies, type, b2xtranslator@[2.0.0, ), b2xtranslator (+3 more)
+
+### Community 348 - "Alignment"
+Cohesion: 0.50
+Nodes (4): Alignment, Bottom, Center, Top
+
+### Community 349 - "FontWeight"
+Cohesion: 0.50
+Nodes (4): FontWeight, Bold, Default, Normal
+
+### Community 350 - "UnderlineStyle"
+Cohesion: 0.50
+Nodes (4): UnderlineStyle, Double, None, Single
 
 ### Community 358 - "TimeVisualElementEnum"
 Cohesion: 0.20
@@ -1756,10 +1824,6 @@ Nodes (7): Pragmastat@3.2.4, Perfolizer, contentHash, dependencies, resolved, ty
 Cohesion: 0.29
 Nodes (7): System.CodeDom@9.0.5, System.Management, contentHash, dependencies, resolved, type, System.CodeDom
 
-### Community 502 - "SettingsPart"
-Cohesion: 0.33
-Nodes (5): SettingsPart, ContentType, RelationshipType, TargetDirectory, TargetName
-
 ### Community 510 - "NETStandard.Library"
 Cohesion: 0.29
 Nodes (7): Microsoft.NETCore.Platforms, Microsoft.NETCore.Platforms@1.1.0, NETStandard.Library, contentHash, dependencies, resolved, type
@@ -1813,7 +1877,7 @@ Cohesion: 0.50
 Nodes (4): System.Reflection.TypeExtensions, contentHash, resolved, type
 
 ### Community 554 - "FileShapeAddress"
-Cohesion: 0.25
+Cohesion: 0.29
 Nodes (5): AnchorType, margin, page, text, FileShapeAddress
 
 ### Community 555 - "doc2x"
@@ -1838,23 +1902,23 @@ Nodes (4): Newtonsoft.Json, contentHash, resolved, type
 
 ## Knowledge Gaps
 - **3799 isolated node(s):** `Format`, `Tier`, `net10.0`, `BenchmarkDotNet (0.15.8)`, `Microsoft.NET.Sdk` (+3794 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 5035 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **86 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 5058 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **79 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ShapeOptions` connect `.Apply` to `PropertyId`, `LineEnd`, `LineDashing`, `IMapping`, `.Apply`, `system_io`, `Record`, `.ReadUInt16`, `VMLShapeMapping`, `PositionHorizontal`, `PositionVertical`, `PowerpointDocument`, `PositionHorizontalRelative`, `List`?**
-  _High betweenness centrality (0.105) - this node is a cross-community bridge._
+- **Why does `b2xtranslator.StructuredStorage.Reader` connect `b2xtranslator.StructuredStorage.Reader` to `IStreamReader`, `DocumentMapping`, `b2xtranslator.StructuredStorage.Reader`, `system`, `b2xtranslator.Spreadsheet.XlsFileFormat.Structures`, `FileShapeAddress`, `b2xtranslator.Spreadsheet.XlsFileFormat`, `system_io`, `AbstractFat`, `system_text`, `ValueProperty.cs`, `b2xtranslator.DocFileFormat`, `VirtualStreamReader`, `ExtractorException`, `VirtualStream`, `b2xtranslator.Spreadsheet.XlsFileFormat.Ptg`, `Exception`, `ByteParseException`?**
+  _High betweenness centrality (0.099) - this node is a cross-community bridge._
 - **What connects `Format`, `Tier`, `net10.0` to the rest of the system?**
   _3799 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `PropertyId` be split into smaller, more focused modules?**
   _Cohesion score 0.004739336492890996 - nodes in this community are weakly interconnected._
-- **Why does `PropertyId` connect `PropertyId` to `.Apply`?**
-  _High betweenness centrality (0.093) - this node is a cross-community bridge._
+- **Why does `ShapeOptions` connect `.Apply` to `PropertyId`, `LineEnd`, `ParagraphRun`, `LineDashing`, `system_io`, `Record`, `.ReadUInt16`, `VMLShapeMapping`, `PositionHorizontal`, `PositionVertical`, `RegularContainer`, `PowerpointDocument`, `CrtSequence`, `PositionHorizontalRelative`, `.checkHeaderFooter`, `RGBColor`, `PositionVerticalRelative`?**
+  _High betweenness centrality (0.097) - this node is a cross-community bridge._
 - **Should `OperationCode` be split into smaller, more focused modules?**
   _Cohesion score 0.004750593824228029 - nodes in this community are weakly interconnected._
-- **Why does `OperationCode` connect `OperationCode` to `XmlElement`?**
-  _High betweenness centrality (0.085) - this node is a cross-community bridge._
+- **Why does `PropertyId` connect `PropertyId` to `.Apply`?**
+  _High betweenness centrality (0.094) - this node is a cross-community bridge._
 - **Should `FtabValues` be split into smaller, more focused modules?**
   _Cohesion score 0.0055248618784530384 - nodes in this community are weakly interconnected._
